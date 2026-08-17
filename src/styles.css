@@ -1,0 +1,323 @@
+/* Neo-Kyoto skin (see D:\Projects_D\neo-kyoto-design\design.md).
+   Hard pixels: radius 0, 2px borders, hard offset shadows. Dark is the native
+   theme (night indigo); light is a plain day variant with the same shapes.
+   Functional board motion (node transitions, camera) stays smooth by design —
+   the steps-only motion rule covers decorative effects only. */
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  font-family: "Cascadia Mono", Consolas, "JetBrains Mono", "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app { display: flex; flex-direction: column; height: 100%; }
+.app.theme-dark { background: #10142b; color: #e8ecff; }
+.app.theme-light { background: #f7f8fa; color: #1f2937; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 8px 16px; border-bottom: 2px solid;
+  font-size: 13px; flex: 0 0 auto;
+}
+.theme-light .topbar { background: #fff; border-color: #d3d9e3; }
+.theme-dark .topbar { background: #1b2038; border-color: #3a4066; }
+
+/* Neon sign: the brand element */
+.logo {
+  font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 9px; border: 3px solid;
+}
+.theme-dark .logo {
+  color: #45e0e6; border-color: #45e0e6; background: #10142b;
+  text-shadow: 0 0 8px rgba(69, 224, 230, 0.4);
+  box-shadow: 0 0 8px rgba(69, 224, 230, 0.25);
+}
+.theme-light .logo { color: #0891b2; border-color: #0891b2; background: #fff; }
+
+.folder-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 8px; font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; border: 2px solid;
+  cursor: pointer;
+}
+.theme-light .folder-chip { background: #eef2f7; border-color: #d3d9e3; color: #475569; }
+.theme-dark .folder-chip { background: #262c49; border-color: #3a4066; color: #9aa3c7; }
+.theme-dark .folder-chip:hover { border-color: #45e0e6; color: #e8ecff; }
+.theme-light .folder-chip:hover { border-color: #0891b2; color: #1f2937; }
+.theme-dark .folder-chip:focus-within {
+  border-color: #45e0e6; color: #e8ecff;
+  box-shadow: 0 0 8px rgba(69, 224, 230, 0.4);
+}
+.theme-light .folder-chip:focus-within { border-color: #0891b2; color: #1f2937; }
+
+/* Bare select inside the chip — the chip itself is the visible control */
+.folder-select {
+  font: inherit; font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: inherit; background: transparent;
+  border: 0; padding: 0; margin: 0; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+}
+.folder-select:focus { outline: none; }
+.theme-dark .folder-select option { background: #1b2038; color: #e8ecff; }
+.chip-caret { font-size: 9px; opacity: 0.7; }
+.folder-pixel { width: 4px; height: 4px; flex: 0 0 auto; }
+.theme-dark .folder-pixel { background: #52e05c; }
+.theme-light .folder-pixel { background: #16a34a; }
+.board-title { opacity: 0.72; font-size: 12px; }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.follow-label { display: flex; align-items: center; gap: 5px; opacity: 0.75; font-size: 12px; cursor: pointer; }
+.theme-dark .follow-label input { accent-color: #45e0e6; }
+.topbar select {
+  font: inherit; font-size: 12px; padding: 3px 7px;
+  border: 2px solid; background: transparent; color: inherit;
+}
+.theme-light .topbar select { border-color: #d3d9e3; }
+.theme-dark .topbar select { border-color: #3a4066; background: #262c49; }
+.theme-dark .topbar select:focus {
+  outline: none; border-color: #45e0e6;
+  box-shadow: 0 0 8px rgba(69, 224, 230, 0.4);
+}
+
+/* Status pixel: 8px square, neon semantics */
+.conn-dot { width: 8px; height: 8px; background: #9aa3c7; }
+.conn-dot.ready { background: #52e05c; box-shadow: 0 0 8px rgba(82, 224, 92, 0.5); }
+.conn-dot.connecting { background: #ffb347; }
+.conn-dot.disconnected { background: #ff5449; box-shadow: 0 0 8px rgba(255, 84, 73, 0.5); }
+
+/* Alerts: left neon band + panel body */
+.banner { padding: 7px 16px 7px 12px; font-size: 12.5px; flex: 0 0 auto; border-left: 8px solid; }
+.banner.warn { background: #fef3c7; color: #78350f; border-color: #f59e0b; }
+.banner.error { background: #fee2e2; color: #7f1d1d; border-color: #ef4444; }
+.theme-dark .banner.warn { background: #1b2038; color: #ffb347; border-color: #ffb347; }
+.theme-dark .banner.error { background: #1b2038; color: #ff5449; border-color: #ff5449; }
+
+.canvas-wrap { flex: 1 1 auto; position: relative; min-height: 0; }
+.react-flow__renderer { transition: none; }
+
+/* ---------- empty / error overlays ---------- */
+.overlay-state {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  pointer-events: none;
+}
+.overlay-state.static { position: static; flex: 1 1 auto; }
+.overlay-card {
+  text-align: center; max-width: 440px; padding: 26px 30px;
+  border: 2px solid;
+}
+.theme-dark .overlay-card { background: #1b2038; border-color: #3a4066; box-shadow: 4px 4px 0 #0a0c1a; }
+.theme-light .overlay-card { background: #fff; border-color: #d3d9e3; box-shadow: 4px 4px 0 #dde2ea; }
+.overlay-card h2 {
+  margin: 0 0 8px; font-size: 14px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+}
+.theme-dark .overlay-card h2 { color: #45e0e6; }
+.overlay-card p { margin: 0; font-size: 12.5px; line-height: 1.55; opacity: 0.75; }
+.overlay-card code {
+  display: inline-block; margin-top: 10px; padding: 5px 9px;
+  font-size: 12px; background: rgba(128, 128, 128, 0.15); border: 2px solid rgba(128, 128, 128, 0.25);
+}
+
+/* ---------- layout stability: animate position changes ----------
+   Functional motion — stays smooth (documented Neo-Kyoto exception). */
+.react-flow__node {
+  transition: transform 340ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+.react-flow__node.dragging { transition: none; }
+/* Sprite-style entry: stepped, not tweened */
+@keyframes node-enter {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.flow-node, .mind-node, .schema-node, .note-card,
+.table-card, .timeline-card, .quadrant-card {
+  animation: node-enter 120ms steps(3);
+}
+.hidden-handle { opacity: 0; width: 1px; height: 1px; min-width: 0; min-height: 0; border: 0; }
+
+/* ---------- widget frame ---------- */
+.widget-frame {
+  width: 100%; height: 100%; border: 2px dashed;
+}
+.widget-frame-title {
+  position: absolute; top: 11px; left: 16px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; display: flex; align-items: center; gap: 6px;
+}
+.widget-type-icon { font-size: 12px; opacity: 0.8; }
+
+.group-box { width: 100%; height: 100%; border: 2px solid; }
+.group-box-label {
+  position: absolute; top: 9px; left: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; opacity: 0.9;
+}
+
+/* ---------- flow nodes ---------- */
+.flow-node {
+  width: 100%; height: 100%; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; font-size: 12.5px; line-height: 1.3;
+}
+.flow-node.box { border: 2px solid; padding: 7px 11px; }
+.flow-label { font-weight: 520; }
+.flow-detail { font-size: 10.5px; opacity: 0.7; margin-top: 3px; }
+.flow-node.start, .flow-node.end { font-weight: 700; font-size: 12px; letter-spacing: 0.5px; }
+
+.decision .diamond-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.diamond-label {
+  position: relative; z-index: 1; font-size: 11.5px;
+  padding: 0 20px; font-weight: 520;
+}
+
+/* ---------- mindmap ---------- */
+.mind-node {
+  width: 100%; height: 100%; position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  border: 2px solid; padding: 5px 10px;
+  font-size: 12px; text-align: center;
+}
+.mind-node .flow-detail { font-weight: 400; }
+.mind-node.root { font-weight: 700; font-size: 13px; }
+.mind-label { line-height: 1.25; }
+.collapse-toggle {
+  position: absolute; right: -11px; top: 50%; transform: translateY(-50%);
+  min-width: 21px; height: 18px; padding: 0 4px;
+  border: 2px solid currentColor;
+  background: inherit; color: inherit; opacity: 0.75;
+  font-size: 9.5px; font-weight: 700; cursor: pointer; line-height: 1;
+  font-family: inherit;
+  display: grid; place-items: center;
+}
+.collapse-toggle:hover { opacity: 1; }
+
+/* ---------- schema ---------- */
+.schema-node {
+  width: 100%; height: 100%; border: 2px solid;
+  overflow: hidden; font-size: 11.5px; position: relative;
+}
+.schema-title {
+  padding: 7px 10px; font-weight: 700; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+  border-bottom: 2px solid;
+}
+.schema-fields { padding: 4px 0; }
+.schema-field {
+  display: flex; gap: 6px; align-items: baseline;
+  padding: 2px 10px; font-size: 11px;
+}
+.schema-key { width: 12px; font-size: 9px; opacity: 0.9; }
+.schema-type { margin-left: auto; opacity: 0.55; font-size: 10px; }
+
+/* ---------- cards ---------- */
+.note-card, .table-card, .timeline-card, .quadrant-card {
+  width: 100%; height: 100%; border: 2px solid;
+  padding: 12px 14px; overflow: hidden; display: flex; flex-direction: column;
+}
+.theme-dark .note-card, .theme-dark .table-card,
+.theme-dark .timeline-card, .theme-dark .quadrant-card { box-shadow: 4px 4px 0 #0a0c1a; }
+.theme-light .note-card, .theme-light .table-card,
+.theme-light .timeline-card, .theme-light .quadrant-card { box-shadow: 4px 4px 0 #dde2ea; }
+.card-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; opacity: 0.72; margin-bottom: 9px;
+  display: flex; align-items: center; gap: 6px; flex: 0 0 auto;
+}
+.note-content { font-size: 12.5px; line-height: 1.55; overflow: auto; flex: 1 1 auto; }
+.note-content > *:first-child { margin-top: 0; }
+.note-content > *:last-child { margin-bottom: 0; }
+.note-content h1, .note-content h2, .note-content h3 { font-size: 13.5px; margin: 10px 0 5px; }
+.note-content ul, .note-content ol { padding-left: 19px; margin: 5px 0; }
+.note-content code { background: rgba(128, 128, 128, 0.16); padding: 1px 4px; font-size: 11.5px; }
+
+.table-scroll { overflow: auto; flex: 1 1 auto; }
+.table-card table { border-collapse: collapse; width: 100%; font-size: 11.5px; }
+.table-card th, .table-card td {
+  border: 1px solid; padding: 5px 9px; text-align: left; vertical-align: top;
+}
+.table-card th {
+  font-weight: 700; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.5px; position: sticky; top: 0;
+}
+.suggestion-row td { border-style: dashed; opacity: 0.8; font-style: italic; }
+
+/* ---------- timeline ---------- */
+.timeline-track { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 22px 6px 6px; flex: 1 1 auto; }
+.timeline-line { position: absolute; left: 10px; right: 10px; top: 52px; height: 2px; opacity: 0.5; }
+.timeline-item { position: relative; flex: 1 1 0; min-width: 120px; text-align: center; }
+.timeline-marker { font-size: 10.5px; font-weight: 700; margin-bottom: 6px; height: 14px; }
+.timeline-dot {
+  width: 10px; height: 10px;
+  margin: 0 auto 12px; position: relative; z-index: 1;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.55);
+}
+.theme-dark .timeline-dot { box-shadow: 0 0 0 3px rgba(16, 20, 43, 0.8); }
+.timeline-label {
+  border: 2px solid; padding: 6px 8px;
+  font-size: 11.5px; line-height: 1.3; display: inline-block; max-width: 100%;
+}
+
+/* ---------- quadrant ---------- */
+.quad-grid-wrap { flex: 1 1 auto; display: flex; min-height: 0; }
+.quad-grid {
+  flex: 1 1 auto; display: grid;
+  grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+  border: 2px solid; overflow: hidden;
+}
+.quad-cell {
+  padding: 8px; display: flex; flex-direction: column; gap: 5px;
+  overflow: auto; border-right: 2px solid; border-bottom: 2px solid;
+}
+.quad-cell.tr, .quad-cell.br { border-right: none; }
+.quad-cell.bl, .quad-cell.br { border-bottom: none; }
+.quad-item {
+  border: 2px solid; padding: 5px 8px;
+  font-size: 11.5px; line-height: 1.3;
+}
+.quad-y-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+.quad-x-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px; text-align: right; }
+
+/* ---------- suggestions & flags ---------- */
+.suggestion-chip {
+  position: absolute; top: -9px; right: 6px;
+  font-size: 8.5px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 1px 5px;
+  border: 2px solid #8f7bff; background: #8f7bff; color: #0a0c1a; opacity: 0.95;
+}
+.suggestion-chip.inline { position: static; margin-left: 5px; }
+
+.flag-badge {
+  display: inline-grid; place-items: center;
+  width: 15px; height: 15px; margin-left: 5px; vertical-align: middle;
+  background: #ffb347; color: #0a0c1a;
+  font-size: 10px; font-weight: 800; cursor: help; position: relative;
+}
+.flag-pop {
+  display: none; position: absolute; bottom: 130%; left: 50%;
+  transform: translateX(-50%); z-index: 50;
+  background: #1b2038; color: #e8ecff; border: 2px solid #ffb347;
+  padding: 6px 9px;
+  font-size: 11px; font-weight: 500; line-height: 1.4; width: max-content;
+  max-width: 230px; text-align: left; box-shadow: 4px 4px 0 #0a0c1a;
+}
+.flag-badge:hover .flag-pop { display: block; }
+
+/* ---------- React Flow chrome (controls, minimap) ---------- */
+.react-flow__controls { box-shadow: none; }
+.react-flow__controls button { border-radius: 0; }
+.theme-dark .react-flow__controls button {
+  background: #1b2038; color: #e8ecff; border-bottom: 2px solid #3a4066;
+}
+.theme-dark .react-flow__controls button:hover { background: #262c49; }
+.theme-dark .react-flow__controls button svg { fill: #e8ecff; }
+.react-flow__minimap { border-radius: 0; }
+.theme-dark .react-flow__minimap { border: 2px solid #3a4066; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-node, .mind-node, .schema-node, .note-card,
+  .table-card, .timeline-card, .quadrant-card { animation: none; }
+  .react-flow__node { transition: none; }
+}

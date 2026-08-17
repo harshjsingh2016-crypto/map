@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.log
+
+# Boards and their exports are per-machine content, not code.
+# The server recreates boards/ on start; scripts/boards.mjs creates the rest.
+boards/*
+!boards/.gitkeep
+pdfs/
+
+# Machine-local Claude Code settings (launch.json is shared).
+.claude/settings.local.json
