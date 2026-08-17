@@ -7,7 +7,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const BOARD = 'logistics-escalations'
+// Pinned to the "test" folder so a fresh clone replays to the same board id
+// the golden test reads, rather than into whatever folder is currently active.
+const FOLDER = 'test'
+const NAME = 'logistics-escalations'
+const BOARD = `${FOLDER}/${NAME}`
 const delayArg = process.argv.indexOf('--delay')
 const DELAY = delayArg > -1 ? parseInt(process.argv[delayArg + 1], 10) : 900
 
@@ -20,7 +24,7 @@ function apply(label, ops) {
 }
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
 
-try { sh([path.join('scripts', 'boards.mjs'), 'create', BOARD]) } catch { /* already exists */ }
+try { sh([path.join('scripts', 'boards.mjs'), 'create', NAME, '--folder', FOLDER]) } catch { /* already exists */ }
 
 // --- Turn 1: the messy first description -> capture immediately ------------
 apply('Turn 1 - "we are getting customer escalations..." (partial capture, user voice)', [

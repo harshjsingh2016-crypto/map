@@ -6,7 +6,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const BOARD = 'sql-fundamentals'
+// Pinned to the "test" folder so a fresh clone replays deterministically
+// rather than into whatever folder is currently active.
+const FOLDER = 'test'
+const NAME = 'sql-fundamentals'
+const BOARD = `${FOLDER}/${NAME}`
 const delayArg = process.argv.indexOf('--delay')
 const DELAY = delayArg > -1 ? parseInt(process.argv[delayArg + 1], 10) : 800
 
@@ -17,7 +21,7 @@ function apply(label, ops) {
 }
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
 
-try { sh([path.join('scripts', 'boards.mjs'), 'create', BOARD]) } catch { /* exists */ }
+try { sh([path.join('scripts', 'boards.mjs'), 'create', NAME, '--folder', FOLDER]) } catch { /* exists */ }
 
 apply('Turn 1 - "Concept: Tables and Joins"', [
   { op: 'board_set_title', title: 'SQL and Data Fundamentals' },

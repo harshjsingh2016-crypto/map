@@ -259,7 +259,14 @@ check('rejected batch appends nothing', () => {
 console.log('\n--- markdown export golden ---')
 check('logistics-escalations markdown matches golden', () => {
   const bp = boardPath(ROOT, 'test/logistics-escalations')
-  if (!fs.existsSync(bp)) throw new Error('run: node scripts/demo-logistics.mjs --delay 0')
+  // Boards are gitignored, so a fresh clone has no demo board. Replay it,
+  // leaving the active board where the user had it.
+  if (!fs.existsSync(bp)) {
+    const activeBefore = getActiveBoard(ROOT)
+    execFileSync('node', [path.join('scripts', 'demo-logistics.mjs'), '--delay', '0'],
+      { cwd: ROOT, stdio: 'ignore' })
+    if (activeBefore) setActiveBoard(ROOT, activeBefore)
+  }
   const { state } = materialize(readBoardLog(bp).entries, { strict: false })
   const md = toMarkdown(state, 'logistics-escalations')
   const golden = path.join(ROOT, 'tests', 'logistics-escalations.expected.md')
