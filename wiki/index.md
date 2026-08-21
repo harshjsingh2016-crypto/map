@@ -15,6 +15,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Prompt templates](prompt-templates.md) — fixed structure, blanks filled per use case
 - [Grounding](grounding.md) — fencing the model to data an answer can be traced to
 - [Context persistence](context-persistence.md) — sessions forget; a persistent sandbox is what remembers
+- [AI safety failure modes](ai-safety-failure-modes.md) — four ways it breaks, told apart by whose rules give way
+- [Defensive prompt architecture](defensive-prompt-architecture.md) — role, refusal, safety and output rules, written against attack
 
 ## Prompt engineering
 

@@ -9,6 +9,8 @@ A reusable prompt structure with blanks filled in per use case. Write the scaffo
 
 A template is not the same thing as a system prompt, and the difference is scope. The system prompt sets up the broader application; a template serves one specific use case inside it — a particular query-and-answer job, say. One application, one system prompt, many templates.
 
+A concrete way to see the split is attribute versus sub-attribute. The system prompt carries what to do — the attribute level, broad and true for every call. The template narrows the user input down to the sub-attribute: the one specific thing being asked this time. What changes per request is the sub-attribute, and that is why it sits in the template rather than in the system prompt. Where the set of sub-attributes is fixed and known, it stops being free user input and becomes a parameter.
+
 A template has three parts:
 
 - **Base instructions** — establish the AI's role and behaviour. Fixed.
