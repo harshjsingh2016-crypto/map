@@ -2,10 +2,8 @@ node_modules/
 dist/
 *.log
 
-# Boards and their exports are per-machine content, not code.
-# The server recreates boards/ on start; scripts/boards.mjs creates the rest.
-boards/*
-!boards/.gitkeep
+# Boards and the wiki sync between machines via git (scripts/sync.mjs).
+# PDF exports are regenerable, so they stay local.
 pdfs/
 
 # Machine-local Claude Code settings (launch.json is shared).

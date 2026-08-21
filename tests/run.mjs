@@ -281,6 +281,12 @@ check('logistics-escalations markdown matches golden', () => {
   assert(md.includes('[suggestion]'), 'suggestions should be marked')
 })
 
+console.log('\n--- wiki ---')
+check('wiki check passes (links, index, frontmatter)', () => {
+  if (!fs.existsSync(path.join(ROOT, 'wiki'))) return // no wiki yet
+  execFileSync('node', [path.join('scripts', 'wiki.mjs'), 'check'], { cwd: ROOT, stdio: 'pipe' })
+})
+
 console.log(results.join('\n'))
 console.log(`\n${pass} passed, ${fail} failed\n`)
 process.exit(fail ? 1 : 0)

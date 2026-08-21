@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -k -n server,vite \"node server/index.mjs\" \"vite\"",
+    "dev": "node scripts/dev.mjs",
+    "dev:raw": "concurrently -k -n server,vite \"node server/index.mjs\" \"vite\"",
+    "sync": "node scripts/sync.mjs",
     "server": "node server/index.mjs",
     "build": "vite build",
     "preview": "vite preview",

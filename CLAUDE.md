@@ -43,6 +43,8 @@ Batches are **atomic**: if any op fails shape or referential validation, nothing
 
 **5. Stay oriented from the output.** Every successful apply prints a one-line board summary (widgets, counts, pending suggestions, open flags). That is your context — don't re-read the board each turn. `outline.mjs` is for cold starts only.
 
+**6. File it in the wiki.** After the reply, update `wiki/` from what you just drew — from context, not by re-reading the board. One article per *concept* (`chain-of-thought.md`), never per board or per turn. If the turn deepened an existing concept, edit that article; if it introduced a genuinely new one, create the article and add it to `wiki/index.md` in the same turn. Bump `updated` and append to `boards:` in frontmatter when a new board touches an article. Articles are prose synthesis — what the user concluded and why, not a dump of node labels. Only accepted and user content goes in; pending suggestions and open flags stay on the board until resolved. Wiki prose follows the `voice.md` hard bans (no emojis, no hype, never an invented number). Skip this step only when the turn changed no content — style-only tweaks, board switching, undo.
+
 ---
 
 ## Cold start on an existing board
@@ -52,6 +54,19 @@ node scripts/outline.mjs --board <name>
 ```
 
 Then open with a **≤2-line "where we left off"**: open suggestions, flagged questions, the area last worked on. Then wait for direction.
+
+---
+
+## Wiki
+
+`wiki/` holds concept articles distilled from the boards — the durable, cross-machine record. Flat folder, kebab-case filenames, standard relative links (`[Chain of Thought](chain-of-thought.md)`), never wikilinks. Each article: frontmatter with `boards:` (the `folder/name` ids it draws from) and `updated:` (YYYY-MM-DD), exactly one H1, prose, and a `## Related` section of links with a short why-clause each. `wiki/index.md` is the master index — grouped under editorial theme headings, one line per article with a ~12-word hook; it is edited in the same turn any article is added or renamed.
+
+```bash
+node scripts/wiki.mjs list    # articles + orphan flags
+node scripts/wiki.mjs check   # dead links, index drift, frontmatter — also runs in tests
+```
+
+**Two-laptop sync.** Boards and the wiki are committed and synced through git (`origin` on GitHub); the user alternates machines, never simultaneously. `npm run dev` handles it: `sync pull` before the servers start (first pushing any local unpushed work — a missed shutdown push is caught here), `sync push` when they exit. `npm run sync push` works any time; on divergence, sync stops and asks for manual resolution rather than merging board logs.
 
 ---
 
@@ -170,6 +185,10 @@ node scripts/shot.mjs --out shot.png                          # headless screens
 node scripts/export.mjs [--board <folder/name>]               # shareable PDF -> pdfs/<folder>/<name>.pdf
 node scripts/export.mjs --all                                 # every board
 node scripts/export.mjs --board <name> --theme light          # paper-friendly
+node scripts/wiki.mjs list                                    # wiki articles + orphan flags
+node scripts/wiki.mjs check                                   # wiki dead links / index drift
+npm run sync push                                             # commit + push boards and wiki now
+node scripts/sync.mjs status                                  # ahead/behind + dirty files
 ```
 
 ### Sharing a board
@@ -217,6 +236,8 @@ Append-only op log → chokidar watcher → SSE → React Flow client.
 - `server/index.mjs` — watcher, truncation detection, SSE fan-out
 - `src/layout.ts` — elkjs per widget + bottom-left-fill board packing
 - `src/store.ts` — SSE client, staggered op application (~50ms/op, ≤1.5s/batch)
+- `scripts/wiki.mjs` — wiki link/index checker (`list`, `check`)
+- `scripts/sync.mjs` + `scripts/dev.mjs` — two-laptop git sync (pull on start, push on exit)
 
 **elk lays out nodes; React Flow lays out edges.** Only elk's node coordinates survive into the client — its edge routing (`sections`, bend points) and its edge-label coordinates are discarded, because React Flow re-routes every edge itself with `getSmoothStepPath` and drops the label at *its own* path midpoint. So elk layout options can buy an edge label clearance but never placement: `layoutGraphWidget` passes `labels: [{text, width, height}]` so elk reserves room and the widget frame grows, yet the label still lands wherever React Flow's midpoint falls inside that room. This is why long labels on feedback edges can end up drawn over a node (edges render *below* nodes, so the text is occluded rather than clipped), and why the two branches off a `decision` node can print side by side mid-frame instead of beside their own lines. Fixing placement, not just clearance, means reading `g.edges[i].labels[0].x/y` back out of the elk result, offsetting it by the group container and the frame's packed position, and rendering it from a custom edge component via `EdgeLabelRenderer` — not more elk options.
 
