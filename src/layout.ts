@@ -24,6 +24,15 @@ function detailHeight(detail: string | undefined, width: number) {
   return Math.ceil(detail.length / perLine) * 14 + 4
 }
 
+// Lines the `label` wraps to at a given node width. The label renders at 12px
+// with 1.25 line-height inside ~10px side padding and a 2px border, so a box
+// sized for one line hides the rest — text overflows the frame and ends up
+// under the suggestion chip and the collapse toggle.
+function labelLines(label: string | undefined, width: number, pad: number) {
+  const perLine = Math.max(8, Math.floor((width - pad) / 7.2))
+  return Math.max(1, Math.ceil((label?.length || 0) / perLine))
+}
+
 // Edge labels draw as an 11px monospace `<text>` (0.6em advance) sitting in a
 // 5x3-padded background box. elk reserves no room for a label it has not been
 // given dimensions for, so long ones ended up drawn over the nodes around them
@@ -61,7 +70,8 @@ function flowNodeSize(n: any) {
   const wantsWide = n.detail ? Math.max(textW(n.label) + 36, 210) : textW(n.label) + 36
   const base = Math.min(Math.max(wantsWide, 130), 260)
   if (n.shape === 'start' || n.shape === 'end') return { width: Math.max(base * 0.8, 110), height: 42 }
-  return { width: base, height: 40 + detailHeight(n.detail, base) || 46 }
+  const labelH = (labelLines(n.label, base, 26) - 1) * 16
+  return { width: base, height: 40 + labelH + detailHeight(n.detail, base) || 46 }
 }
 
 function mindNodeSize(n: any) {
@@ -69,7 +79,10 @@ function mindNodeSize(n: any) {
   // lines rather than into a tall ribbon.
   const wantsWide = n.detail ? Math.max(textW(n.label) + 30, 230) : textW(n.label) + 30
   const width = Math.min(Math.max(wantsWide, 90), 270)
-  const height = n.detail ? 30 + detailHeight(n.detail, width) : 38
+  // Base heights below are the one-line values (15 + 15 = 30, 23 + 15 = 38);
+  // extra lines grow the box instead of overflowing it.
+  const labelH = labelLines(n.label, width, 24) * 15
+  const height = n.detail ? 15 + labelH + detailHeight(n.detail, width) : 23 + labelH
   return { width, height }
 }
 
