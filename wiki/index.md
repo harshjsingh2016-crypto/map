@@ -28,3 +28,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Model cards](model-cards.md) — the spec sheet read before choosing a model
 - [Data anonymization](data-anonymization.md) — strip what traces back to a person before the model sees it
 - [ML pipelines](ml-pipelines.md) — feature, training and prediction stages that improve independently
+
+## Solutioning
+
+- [Problem discovery frame](problem-discovery-frame.md) — starting point, goal, paths between, constraints below
+- [Base 1 — the year's plan](base-1-years-plan.md) — six areas the year is aimed at, success defined per area
