@@ -29,6 +29,13 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Data anonymization](data-anonymization.md) — strip what traces back to a person before the model sees it
 - [ML pipelines](ml-pipelines.md) — feature, training and prediction stages that improve independently
 
+## AI ecosystems
+
+- [Persistent context architecture](persistent-context-architecture.md) — the amnesia problem, answered by instructions, KB files and a sandbox
+- [Persistent sandbox tools](persistent-sandbox-tools.md) — Gems, Projects and AI Studio, told apart by who the sandbox serves
+- [Model dials](model-dials.md) — temperature and top-p narrow the same choice; move one at a time
+- [RAG](rag.md) — the plumbing that carries the right slice of the KB into the prompt
+
 ## Solutioning
 
 - [Problem discovery frame](problem-discovery-frame.md) — starting point, goal, paths between, constraints below

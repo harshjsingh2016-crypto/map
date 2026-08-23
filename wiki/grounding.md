@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability]
-updated: 2026-08-21
+boards: [scalar/ai-reliability, scalar/ai-ecosystems]
+updated: 2026-08-24
 ---
 
 # Grounding
@@ -15,3 +15,4 @@ Grounding lives in the same layer as the rest of the standing instructions: the 
 
 - [The prompt stack](prompt-stack.md) — where the grounding rule is declared
 - [Next-word prediction](next-word-prediction.md) — why ungrounded answers have no source to check
+- [RAG](rag.md) — the retrieval mechanism that actually supplies the grounded data

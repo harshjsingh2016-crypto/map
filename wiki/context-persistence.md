@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability]
-updated: 2026-08-21
+boards: [scalar/ai-reliability, scalar/ai-ecosystems]
+updated: 2026-08-24
 ---
 
 # Context persistence
@@ -13,6 +13,9 @@ A persistent sandbox is one answer: an environment that outlives the session, ho
 
 Products expose this as a first-class feature rather than a prompt field. Claude has Projects, where files and context are attached and carry across every conversation inside them; Cursor has rules files doing the same job for a codebase. Both are the system-prompt layer made durable and editable, which is the practical form of a persistent sandbox.
 
+The ecosystem board later gave this a name and a shape: [persistent context architecture](persistent-context-architecture.md), which splits the durable material into behaviour (instructions) and facts (KB files) and treats the sandbox as the third, non-portable piece that reattaches both.
+
 ## Related
 
+- [Persistent context architecture](persistent-context-architecture.md) — the same problem named as the amnesia problem, with its three-part answer
 - [Next-word prediction](next-word-prediction.md) — why nothing persists in the model itself; patterns are frozen in weights
