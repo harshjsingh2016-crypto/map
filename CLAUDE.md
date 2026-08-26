@@ -241,6 +241,16 @@ Append-only op log → chokidar watcher → SSE → React Flow client.
 
 **elk lays out nodes; React Flow lays out edges.** Only elk's node coordinates survive into the client — its edge routing (`sections`, bend points) and its edge-label coordinates are discarded, because React Flow re-routes every edge itself with `getSmoothStepPath` and drops the label at *its own* path midpoint. So elk layout options can buy an edge label clearance but never placement: `layoutGraphWidget` passes `labels: [{text, width, height}]` so elk reserves room and the widget frame grows, yet the label still lands wherever React Flow's midpoint falls inside that room. This is why long labels on feedback edges can end up drawn over a node (edges render *below* nodes, so the text is occluded rather than clipped), and why the two branches off a `decision` node can print side by side mid-frame instead of beside their own lines. Fixing placement, not just clearance, means reading `g.edges[i].labels[0].x/y` back out of the elk result, offsetting it by the group container and the frame's packed position, and rendering it from a custom edge component via `EdgeLabelRenderer` — not more elk options.
 
+**Banded flowcharts.** A flowchart whose groups are self-contained — every edge stays
+inside one group, no ungrouped nodes, more than one group — is laid out as horizontal
+**bands** stacked in `group_add` order instead of going through the shared hierarchical
+pass. Each band runs left to right and keeps its declared node order; a band with no
+edges of its own is placed as a plain row. This is what makes a start / paths / goal
+frame (or top-to-bottom swimlanes) come out as full-width strips. Add a single
+cross-group edge and the widget falls back to the hierarchical layout, where elk's
+model-order options do not survive `INCLUDE_CHILDREN` and in-layer order is elk's to
+choose.
+
 Boards are `boards/<folder>/<name>.board.jsonl`, one JSON batch per line, `v: 1`. Board ids are `<folder>/<name>` everywhere - scripts, SSE, and the client. A `{type: "snapshot"}` line format is reserved for future compaction; readers already skip to the last snapshot.
 
 Adding an op type means touching `shared/ops.mjs` (schema), `shared/reduce.mjs` (apply + validation), `shared/summary.mjs` (rendering), and the client node components — then this file.

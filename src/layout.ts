@@ -212,6 +212,118 @@ async function layoutGraphWidget(w: any, theme: ThemeName, viewCollapsed: Record
       if (g && w.groups[g]) (grouped[g] ||= []).push(nid)
       else ungrouped.push(nid)
     }
+    // Declaration order (group_add order), not the order nodes happened to be added in.
+    const groupIds = Object.keys(w.groups || {}).filter((gid: string) => grouped[gid])
+    const crossGroup = w.edgeOrder.some((eid: string) => {
+      const e = w.edges[eid]
+      return (w.nodes[e.source]?.groupId || null) !== (w.nodes[e.target]?.groupId || null)
+    })
+    const flowEdges = (): Edge[] => w.edgeOrder.map((eid: string) => {
+      const e = w.edges[eid]
+      return {
+        id: `e:${w.id}:${eid}`,
+        source: `n:${w.id}:${e.source}`,
+        target: `n:${w.id}:${e.target}`,
+        type: 'smoothstep',
+        label: e.label,
+        labelStyle: { fill: td.text, fontSize: 11, fontWeight: 600 },
+        labelBgStyle: { fill: td.cardBg, fillOpacity: 0.9 },
+        labelBgPadding: [5, 3] as [number, number],
+        labelBgBorderRadius: 4,
+        ...edgeStyleProps(e, theme, td.edge),
+      }
+    })
+
+    // Banded layout. When every edge stays inside its own group, the groups are not
+    // stages of one graph — they are independent bands (a start / paths / goal frame,
+    // swimlanes read top to bottom). Laying each one out on its own and stacking them
+    // in declaration order gives each band a horizontal row that keeps its declared
+    // sequence; the shared hierarchical pass below scrambles in-layer order instead,
+    // because elk's model-order options do not survive INCLUDE_CHILDREN.
+    if (groupIds.length > 1 && ungrouped.length === 0 && !crossGroup) {
+      const BAND_GAP = 30
+      const nodes: Node[] = []
+      let accY = 0
+      let maxW = 0
+      const PAD_L = 18, PAD_T = 44, PAD_B = 18, PAD_R = 18, ROW_GAP = 34
+      for (const gid of groupIds) {
+        const nids = grouped[gid]
+        const innerEdges = w.edgeOrder.filter((eid: string) => w.nodes[w.edges[eid].source].groupId === gid)
+        // A band with no edges of its own is a plain row — place it directly rather than
+        // handing it to elk, which spreads unconnected nodes down the layout axis.
+        const inner = innerEdges.length === 0
+          ? (() => {
+              let x = PAD_L
+              let h = 0
+              const children = nids.map((nid) => {
+                const size = sizeOf(nid)
+                const c = { id: nid, x, y: PAD_T, ...size }
+                x += size.width + ROW_GAP
+                h = Math.max(h, size.height)
+                return c
+              })
+              return { children, width: x - ROW_GAP + PAD_R, height: PAD_T + h + PAD_B }
+            })()
+          : await elk.layout({
+          id: `grp_${gid}`,
+          layoutOptions: {
+            'elk.algorithm': 'layered',
+            'elk.direction': 'RIGHT',
+            'elk.padding': '[top=44,left=18,bottom=18,right=18]',
+            'elk.layered.considerModelOrder.strategy': 'NODES_AND_EDGES',
+            'elk.layered.crossingMinimization.forceNodeModelOrder': 'true',
+            'elk.spacing.nodeNode': '34',
+            'elk.layered.spacing.nodeNodeBetweenLayers': '44',
+            ...EDGE_LABEL_OPTS,
+          },
+          children: nids.map((nid) => ({ id: nid, ...sizeOf(nid) })),
+          edges: innerEdges.map((eid: string) => ({
+            id: eid, sources: [w.edges[eid].source], targets: [w.edges[eid].target],
+            ...elkEdgeLabels(w.edges[eid].label),
+          })),
+        })
+        const gw = inner.width || 200
+        const gh = inner.height || 100
+        maxW = Math.max(maxW, gw)
+        const groupRF = `g:${w.id}:${gid}`
+        nodes.push({
+          id: groupRF,
+          type: 'groupBox',
+          position: { x: FRAME_PAD, y: FRAME_PAD + FRAME_TITLE + accY },
+          parentId: frameId,
+          draggable: false,
+          connectable: false,
+          selectable: false,
+          data: { group: w.groups[gid], theme },
+          width: gw, height: gh,
+          style: { width: gw, height: gh },
+        })
+        for (const c of inner.children || []) {
+          nodes.push({
+            id: `n:${w.id}:${c.id}`,
+            type: 'flowNode',
+            position: { x: c.x || 0, y: c.y || 0 },
+            parentId: groupRF,
+            draggable: false,
+            connectable: false,
+            data: { node: w.nodes[c.id], theme, widgetId: w.id },
+            width: c.width, height: c.height,
+            style: { width: c.width, height: c.height },
+          })
+        }
+        accY += gh + BAND_GAP
+      }
+      return {
+        size: {
+          width: maxW + FRAME_PAD * 2,
+          height: Math.max(0, accY - BAND_GAP) + FRAME_PAD * 2 + FRAME_TITLE,
+        },
+        nodes,
+        // Bands run left to right, so edges leave the right side and enter the left.
+        edges: flowEdges().map((e) => ({ ...e, sourceHandle: 'r', targetHandle: 'l' })),
+      }
+    }
+
     const children: any[] = [
       ...Object.entries(grouped).map(([gid, nids]) => ({
         id: `grp_${gid}`,
@@ -273,23 +385,7 @@ async function layoutGraphWidget(w: any, theme: ThemeName, viewCollapsed: Record
     }
     for (const c of g.children || []) place(c, frameId, FRAME_PAD, FRAME_PAD + FRAME_TITLE)
 
-    const edges: Edge[] = w.edgeOrder.map((eid: string) => {
-      const e = w.edges[eid]
-      const props = edgeStyleProps(e, theme, td.edge)
-      return {
-        id: `e:${w.id}:${eid}`,
-        source: `n:${w.id}:${e.source}`,
-        target: `n:${w.id}:${e.target}`,
-        type: 'smoothstep',
-        label: e.label,
-        labelStyle: { fill: td.text, fontSize: 11, fontWeight: 600 },
-        labelBgStyle: { fill: td.cardBg, fillOpacity: 0.9 },
-        labelBgPadding: [5, 3] as [number, number],
-        labelBgBorderRadius: 4,
-        ...props,
-      }
-    })
-    return { size: { width: (g.width || 200) + FRAME_PAD * 2, height: (g.height || 100) + FRAME_PAD * 2 + FRAME_TITLE }, nodes, edges }
+    return { size: { width: (g.width || 200) + FRAME_PAD * 2, height: (g.height || 100) + FRAME_PAD * 2 + FRAME_TITLE }, nodes, edges: flowEdges() }
   }
 
   // schema

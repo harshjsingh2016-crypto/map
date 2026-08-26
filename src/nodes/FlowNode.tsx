@@ -11,6 +11,8 @@ export default memo(function FlowNode({ data }: NodeProps) {
     <>
       <Handle type="target" position={Position.Top} className="hidden-handle" />
       <Handle type="source" position={Position.Bottom} className="hidden-handle" />
+      <Handle type="target" position={Position.Left} id="l" className="hidden-handle" />
+      <Handle type="source" position={Position.Right} id="r" className="hidden-handle" />
     </>
   )
 
