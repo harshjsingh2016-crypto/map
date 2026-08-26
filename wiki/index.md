@@ -40,3 +40,4 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 
 - [Problem discovery frame](problem-discovery-frame.md) — starting point, goal, paths between, constraints below
 - [Base 1 — the year's plan](base-1-years-plan.md) — six areas the year is aimed at, success defined per area
+- [GRN-to-payment cycle](grn-to-payment-cycle.md) — six sequential steps, four of them one-way shares that never return
