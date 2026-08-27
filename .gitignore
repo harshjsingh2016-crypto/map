@@ -8,3 +8,7 @@ pdfs/
 
 # Machine-local Claude Code settings (launch.json is shared).
 .claude/settings.local.json
+
+# Condensed context files for walkthrough mode — local only, one machine.
+# Progress sidecars (<name>.progress.md) live here too. sync.mjs never touches this.
+armor-outputs/

@@ -27,7 +27,7 @@ A genuinely new topic gets a new board **in the current working folder**; only s
 
 `--board` accepts `folder/name`, or a bare `name` when it is unique across folders.
 
-**2. Draw first, talk second.** Emit ops *before* composing your reply. Then keep the reply to 1–2 lines: "Mapped the escalation flow — added a suggested penalty branch as ghost nodes." Never narrate what you drew node by node; the user can see it.
+**2. Draw first, talk second.** Emit ops *before* composing your reply. Then keep the reply to 1–2 lines: "Mapped the escalation flow — added a suggested penalty branch as ghost nodes." Never narrate what you drew node by node; the user can see it. The one exception is **walkthrough mode** (below), which inverts this deliberately.
 
 **3. Partial capture beats perfect capture.** From the user's first messy description, get something on the board immediately, then refine with follow-up ops. **Never ask clarifying questions before drawing.** Ask after, if needed, with the board already reflecting your understanding.
 
@@ -54,6 +54,51 @@ node scripts/outline.mjs --board <name>
 ```
 
 Then open with a **≤2-line "where we left off"**: open suggestions, flagged questions, the area last worked on. Then wait for direction.
+
+---
+
+## Walkthrough mode (`armor-outputs/`)
+
+`armor-outputs/` holds condensed context files the user drops in — one `.md` per board, distilled from class notes, transcripts, and supporting material. **Local only, never synced** (gitignored; sync scope is boards + wiki regardless). Progress sidecars (below) live beside them.
+
+Trigger: the user says "walk through <file>", names a file in `armor-outputs/`, or drops one in and asks to work it against a board.
+
+**This mode inverts rule 2: talk first, draw on acceptance.** Nothing from the file reaches the board or the wiki until it has been discussed in chat and the user has accepted it. This is the only exception to draw-first.
+
+**Setup (first turn):**
+
+1. Read the context file. Its header is bold key-value lines (`**Course:**`, `**Lecture:**` …); the board mapping is the `**Board:** <folder>/<name>` line. If missing, propose a mapping, confirm it in chat, and add the line to the header.
+2. `boards.mjs use <folder/name>`, then `outline.mjs --board <folder/name>`.
+3. Read every wiki article whose `boards:` frontmatter lists that board.
+4. Gap pass: walk the file section by section against board + wiki. Build an agenda of candidate items, each tagged **missed** (relevant, never boarded) or **refinement** (sharpens something already there — including open ghost suggestions the file confirms or contradicts). Skip what the board already covers.
+5. Write the agenda to `<name>.progress.md` beside the file. Reply with a one-line agenda summary plus the first section's candidates. No ops this turn unless the user already accepts something.
+
+**Each turn after:** present 2–4 candidates from the current section in chat — one line each, tagged missed/refinement, low-confidence items named as such. Discuss. When the user rules, apply everything accepted as **one batch** (plus `suggestion_accept`/`suggestion_reject` on existing ghosts the discussion settled), update the wiki in the same turn, update the progress file. Then move to the next section.
+
+**Rules in this mode:**
+
+- Accepted items land as plain nodes (default `kind: "user"`) — the same thing `suggestion_accept` produces. The label is the phrasing settled in discussion, not the file's sentence. Don't create ghost suggestions for walkthrough content — the chat candidates replace them, and the 2–3 suggestion budget doesn't cap accepted items. Ideas of your own that go beyond the file still follow the normal budget.
+- Flags: still at most 1 per turn.
+- Provenance cites (`[video 0:17:04]`, `[notes p.2]`) stay in the file. Boards and the wiki never carry them — armor-outputs is local-only, so a cite is a dead reference on the other machine. If a source pointer matters, spell it out in `detail`.
+- Material the file marks low-confidence ("coverage notes and cautions", garbled transcription) is never presented as fact. Raise it only with the caveat attached; if accepted anyway, the caveat goes into `detail`. Garbled numbers never land — the voice.md invented-number ban covers them.
+- Rejected items are recorded with the reason and not re-raised.
+
+**Progress file** — `armor-outputs/<name>.progress.md`:
+
+```
+# Walkthrough — 2026-08-24_RAG_in_practice.md
+Board: scalar/knowledge-management-and-rag
+Updated: 2026-08-27
+
+- [x] §2 recall check on retrieval — refinement — accepted
+- [x] §2 real-world failure cases — missed — rejected (anecdotes, not structure)
+- [>] §3 tool comparison table — missed — deferred
+- [ ] §4 grounding tests — missed — pending
+```
+
+Statuses: `[ ]` pending · `[x]` accepted or rejected (say which; rejections carry the reason) · `[>]` deferred. Update it every walkthrough turn, at the same time as the wiki step.
+
+**Resuming:** read the progress file, outline the board, open with a ≤2-line "where we left off" ("Walkthrough of RAG in practice: §1–2 done, 3 accepted 1 rejected — next: §3, the three tools."), then wait for direction.
 
 ---
 
