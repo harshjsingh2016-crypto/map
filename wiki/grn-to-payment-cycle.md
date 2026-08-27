@@ -61,6 +61,39 @@ maps-to list of invoice numbers, and SKU details held as JSON meta. The CF track
 separate today; the final build replaces them with one view filtered per user or
 manually.
 
+The first schema decision is settled: factory invoices and CF invoices live in a single
+table, distinguished by a type field, with an interlink field recording the CF-to-factory
+invoice link. The alternative — the current tracker's wide layout, factory and CF invoice
+columns side by side in one record — was rejected as storage because the two sides arrive
+at different times and each carries its own full payment lifecycle, and because the wide
+layout is reproducible as a join view anyway. The tracker format survives as the default
+finance view, not as the schema.
+
+The same append-not-merge logic settled the second decision: dispatch detail, GRN, and
+GRN reconciliation stay separate tables rather than one combined record. Dispatch is the
+factory's claim (packing list, factory invoice × SKU); GRN and reconciliation are the
+warehouse's and Increff's observations (CF invoice × SKU) — and the CN/DN loop exists
+precisely because claim and observation disagree, so merging them would overwrite the
+claim. A recon row links back to its dispatch line, and an empty link is itself the
+signal that a SKU arrived which was never on the packing list, routing it into excess
+handling as a queryable state instead of a data problem. Shortage/excess against a
+dispatch is a comparison view over dispatch × recon through the invoice interlink, which
+can also recompute the delta independently and flag disagreement with what the warehouse
+reported. That makes five transaction tables — invoices, dispatch detail, GRN, GRN
+reconciliation, and the CN/DN excess invoice record — beside the factory reference
+table.
+
+The schema then filled out around the invoice lifecycle. The invoice table absorbed
+accounting and planning — the added-to-tracker flag, planned payment date, and locked
+status live as columns, history of slot movements deliberately not kept — and is now
+called the invoice accounting table. Final payment is its own table but still at invoice
+grain: it holds invoice-level TDS and shortage deductions, with batch-level values like
+UTR and payment date simply repeated across the rows of one payment. Two more supports:
+a week-budget table as the master plan's input, and an inventory table from DIVAS (SKU,
+DOH) with an as-of date per row since DOH is a daily snapshot. The GRN prioritization
+view derives from GRN, dispatch detail, and inventory — completed GRNs drop out of it as
+a join, not by manual removal.
+
 Alongside the transactional records the store needs auxiliary tables. The first is the
 factory table: factory, factory aliases, payment terms, and the emails used for sharing
 GRN reco and payment updates — the reference data the auto-share and planning steps read
