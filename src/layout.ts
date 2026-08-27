@@ -441,7 +441,13 @@ export async function computeBoardLayout(
   const run = ++runCounter
   const perWidget: { id: string; layout: WidgetLayout; widget: any }[] = []
 
-  for (const wid of model.widgetOrder) {
+  // The board's stage strip (widget id "w-status") always packs first so it
+  // holds the top-left slot even on boards where it was created late.
+  const widgetOrder: string[] = model.widgetOrder.includes('w-status')
+    ? ['w-status', ...model.widgetOrder.filter((id: string) => id !== 'w-status')]
+    : model.widgetOrder
+
+  for (const wid of widgetOrder) {
     const w = model.widgets[wid]
     if (['flowchart', 'mindmap', 'schema'].includes(w.type)) {
       perWidget.push({ id: wid, layout: await layoutGraphWidget(w, theme, viewCollapsed), widget: w })

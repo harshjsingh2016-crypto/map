@@ -59,7 +59,17 @@ Then open with a **≤2-line "where we left off"**: open suggestions, flagged qu
 
 ## Walkthrough mode (`armor-outputs/`)
 
-`armor-outputs/` holds condensed context files the user drops in — one `.md` per board, distilled from class notes, transcripts, and supporting material. **Local only, never synced** (gitignored; sync scope is boards + wiki regardless). Progress sidecars (below) live beside them.
+`armor-outputs/` holds condensed context files — one `.md` per board, produced by the Armor
+project's extraction pipeline (`D:\Projects_D\Armor`), which copies each deliverable here with its
+`**Board:**` line at close-out. **Local only, never synced** (gitignored; sync scope is boards +
+wiki regardless). Progress sidecars (below) live beside them.
+
+A walkthrough is the **Learning** stage of Armor's per-lecture loop:
+`Learning → Class Assignment → Internal QnA → Scaler QnA → Finished`. Armor's `INDEX.md` is the
+stage ledger and Armor sessions run the later stages; this project runs Learning and shows the
+stage on the board as a status strip (below). A walkthrough is **two jobs in one pass**: teach the
+user each concept until they confirm they understand it, and capture the settled understanding on
+the board. Teaching comes first — the board only ever records what the discussion settled.
 
 Trigger: the user says "walk through <file>", names a file in `armor-outputs/`, or drops one in and asks to work it against a board.
 
@@ -67,13 +77,31 @@ Trigger: the user says "walk through <file>", names a file in `armor-outputs/`, 
 
 **Setup (first turn):**
 
-1. Read the context file. Its header is bold key-value lines (`**Course:**`, `**Lecture:**` …); the board mapping is the `**Board:** <folder>/<name>` line. If missing, propose a mapping, confirm it in chat, and add the line to the header.
-2. `boards.mjs use <folder/name>`, then `outline.mjs --board <folder/name>`.
-3. Read every wiki article whose `boards:` frontmatter lists that board.
-4. Gap pass: walk the file section by section against board + wiki. Build an agenda of candidate items, each tagged **missed** (relevant, never boarded) or **refinement** (sharpens something already there — including open ghost suggestions the file confirms or contradicts). Skip what the board already covers.
-5. Write the agenda to `<name>.progress.md` beside the file. Reply with a one-line agenda summary plus the first section's candidates. No ops this turn unless the user already accepts something.
+1. Read the context file. Its header is bold key-value lines (`**Course:**`, `**Lecture:**` …); the board mapping is the `**Board:** <folder>/<name>` line. Armor inserts it at close-out; if missing, propose a mapping, confirm it in chat, and add the line to the header.
+2. `boards.mjs use <folder/name>` (create the board first — `boards.mjs create <name> --folder <folder>` — if it doesn't exist), then `outline.mjs --board <folder/name>`.
+3. Ensure the **status strip** exists: a `timeline` widget with id `w-status`, title `Status`, five nodes in stage order. `layout.ts` pins `w-status` to the top-left slot on every board. If the board predates it, add it now:
 
-**Each turn after:** present 2–4 candidates from the current section in chat — one line each, tagged missed/refinement, low-confidence items named as such. Discuss. When the user rules, apply everything accepted as **one batch** (plus `suggestion_accept`/`suggestion_reject` on existing ghosts the discussion settled), update the wiki in the same turn, update the progress file. Then move to the next section.
+   ```json
+   [{"op":"widget_create","id":"w-status","type":"timeline","title":"Status"},
+    {"op":"node_add","widgetId":"w-status","id":"n-learning","label":"Learning","order":1,"style":{"fill":"indigo","border":"indigo"}},
+    {"op":"node_add","widgetId":"w-status","id":"n-assignment","label":"Class Assignment","order":2},
+    {"op":"node_add","widgetId":"w-status","id":"n-internal-qna","label":"Internal QnA","order":3},
+    {"op":"node_add","widgetId":"w-status","id":"n-scaler-qna","label":"Scaler QnA","order":4},
+    {"op":"node_add","widgetId":"w-status","id":"n-finished","label":"Finished","order":5}]
+   ```
+
+   Convention: completed stages `{"fill":"green","border":"green"}`, the current stage `{"fill":"indigo","border":"indigo"}`, pending stages unstyled. **Set `fill` and `border` together** — `fill` colors the label chip, `border` colors the track dot, and a stage colored on only one reads as half-done. A stage skipped by the user's decision gets `marker: "skipped"` and stays unstyled. Stage changes are `node_update` style batches — Armor sessions also emit these (cross-repo) when their stages advance.
+4. Read every wiki article whose `boards:` frontmatter lists that board.
+5. Gap pass: walk the file section by section against board + wiki. Build an agenda of candidate items, each tagged **missed** (relevant, never boarded) or **refinement** (sharpens something already there — including open ghost suggestions the file confirms or contradicts). Skip what the board already covers.
+6. Write the agenda to `<name>.progress.md` beside the file. Then open with the **summary and glossary**: a short chat summary of what the lecture covered and the list of concepts the walkthrough will go through, drawn from the file's glossary section and the section map — this is the syllabus for the sessions ahead. End with the first section queued. No ops this turn beyond the status strip; teaching starts when the user confirms the agenda.
+
+**Each turn after — one section at a time, teach then draw:**
+
+1. **Teach the section's concept like a teacher**: definition first, then mechanism, then the instructor's examples where they clarify — grounded strictly in the file. This is the one place in this project where a multi-paragraph chat reply is the point, not a failure of brevity.
+2. **Discuss.** The user asks clarifying questions; answer from the file where it answers, and say plainly when a question goes beyond what the lecture covered (answering from general knowledge is fine, but label it as beyond the file). Don't move on until the user confirms the concept is clear.
+3. **Then the board**: present 2–4 candidates from the section — one line each, tagged missed/refinement, low-confidence items named as such. When the user rules, apply everything accepted as **one batch** (plus `suggestion_accept`/`suggestion_reject` on existing ghosts the discussion settled), update the wiki in the same turn, update the progress file (mark the section `discussed ✓`). Then queue the next section.
+
+**Completion:** when every section is discussed and ruled on, advance the status strip — Learning to green, Class Assignment to indigo — and hand back the next concrete action: complete the instructor's assignment, then run the Internal QnA drill in Armor. Everything after Learning is driven from Armor sessions.
 
 **Rules in this mode:**
 
@@ -82,6 +110,7 @@ Trigger: the user says "walk through <file>", names a file in `armor-outputs/`, 
 - Provenance cites (`[video 0:17:04]`, `[notes p.2]`) stay in the file. Boards and the wiki never carry them — armor-outputs is local-only, so a cite is a dead reference on the other machine. If a source pointer matters, spell it out in `detail`.
 - Material the file marks low-confidence ("coverage notes and cautions", garbled transcription) is never presented as fact. Raise it only with the caveat attached; if accepted anyway, the caveat goes into `detail`. Garbled numbers never land — the voice.md invented-number ban covers them.
 - Rejected items are recorded with the reason and not re-raised.
+- **The Internal QnA drill is Armor's, and it stays there.** The question sets, the user's answers, and Scaler corrections live in Armor's `QnA\<slug>.md` — none of it ever reaches the board or the wiki, in either direction. Boards and wiki carry the understood concepts; the drill record is a private learning log.
 
 **Progress file** — `armor-outputs/<name>.progress.md`:
 
@@ -89,16 +118,17 @@ Trigger: the user says "walk through <file>", names a file in `armor-outputs/`, 
 # Walkthrough — 2026-08-24_RAG_in_practice.md
 Board: scalar/knowledge-management-and-rag
 Updated: 2026-08-27
+Agenda confirmed: 2026-08-27 (summary + glossary presented)
 
-- [x] §2 recall check on retrieval — refinement — accepted
-- [x] §2 real-world failure cases — missed — rejected (anecdotes, not structure)
+- [x] §2 recall check on retrieval — refinement — discussed ✓ — accepted
+- [x] §2 real-world failure cases — missed — discussed ✓ — rejected (anecdotes, not structure)
 - [>] §3 tool comparison table — missed — deferred
 - [ ] §4 grounding tests — missed — pending
 ```
 
-Statuses: `[ ]` pending · `[x]` accepted or rejected (say which; rejections carry the reason) · `[>]` deferred. Update it every walkthrough turn, at the same time as the wiki step.
+Statuses: `[ ]` pending · `[x]` accepted or rejected (say which; rejections carry the reason) · `[>]` deferred. `discussed ✓` marks that the user confirmed understanding of that section's concept — a section isn't done without it. Update the file every walkthrough turn, at the same time as the wiki step.
 
-**Resuming:** read the progress file, outline the board, open with a ≤2-line "where we left off" ("Walkthrough of RAG in practice: §1–2 done, 3 accepted 1 rejected — next: §3, the three tools."), then wait for direction.
+**Resuming:** read the progress file, outline the board, open with a ≤2-line "where we left off" ("Walkthrough of RAG in practice: §1–2 discussed and boarded, 3 accepted 1 rejected — next: §3, the three tools."), then wait for direction.
 
 ---
 
@@ -279,7 +309,7 @@ Append-only op log → chokidar watcher → SSE → React Flow client.
 - `shared/log.mjs` — board files, complete-line reading (a watch event can fire mid-write)
 - `shared/summary.mjs` — summary / outline / markdown rendering
 - `server/index.mjs` — watcher, truncation detection, SSE fan-out
-- `src/layout.ts` — elkjs per widget + bottom-left-fill board packing
+- `src/layout.ts` — elkjs per widget + bottom-left-fill board packing (`w-status` always packs first)
 - `src/store.ts` — SSE client, staggered op application (~50ms/op, ≤1.5s/batch)
 - `scripts/wiki.mjs` — wiki link/index checker (`list`, `check`)
 - `scripts/sync.mjs` + `scripts/dev.mjs` — two-laptop git sync (pull on start, push on exit)
