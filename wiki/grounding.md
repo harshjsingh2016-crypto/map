@@ -1,6 +1,6 @@
 ---
 boards: [scalar/ai-reliability, scalar/ai-ecosystems, scalar/knowledge-management-and-rag]
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # Grounding
@@ -17,6 +17,12 @@ working from. Ten books may cover your question, but you want the answer out of 
 so you fence the model to it. Nothing is being given to the model that it lacked — what is
 being removed is its licence to answer from anywhere else.
 
+The mirror image is worth naming, because it is the default state rather than a broken one.
+An ungrounded model has no knowledge base at all: it answers from training, which means it
+is bounded by its cutoff and has nothing to check itself against. Both halves of that are
+failures waiting to happen, and they are different failures — the cutoff produces answers
+that were true once, and the absence of a source produces answers that were never true.
+
 ## It reduces hallucination, it does not end it
 
 Asked directly whether grounding finishes hallucination off, the answer is *never* — it can
@@ -30,6 +36,36 @@ correct sources is still generation — inference across supplied documents prod
 that was not written in any of them. That last case is not the failure, though it is often
 mistaken for one. Generating new content is what the model is for; the problem is
 *ungrounded* generation, where the content traces to nothing you supplied.
+
+## Over-restriction is the failure in the other direction
+
+Grounding is written as a defence, which makes it easy to read a refusal as a success. It
+is not. Across a set of CV chatbots built to the same brief, a common guardrail — anything
+outside the CV counts as personal information — made them refuse questions about hobbies,
+which the brief had explicitly said to answer. Nothing leaked and the tool was still wrong.
+
+The target is a tool that answers what it should and withholds what it shouldn't, and
+both halves of that sentence carry equal weight. Leakage is the visible failure and gets
+attention; over-restriction is invisible, because a refusal looks like the guardrail
+working. A fence tight enough to be certain of is a fence that has stopped being useful.
+
+## Testing whether the ground holds
+
+Because both failures are quiet, grounding is something to test rather than something to
+declare. Three questions settle it, and each one fails in a way that names its own cause.
+
+Ask about something that *is* in the knowledge base: a good answer means retrieval is
+working, and a poor one means retrieval is broken rather than the model being weak. Ask
+about something that *isn't*: the tool should decline, and if it answers anyway it is
+hallucinating — this is the test most people skip, and the one that actually proves the
+fence exists. Then ask something whose answer changed recently. A stale answer is proof
+that the model is working from training rather than from live data, which is the failure
+no amount of confident prose reveals on its own.
+
+The third test is the one that needs a moving target to work at all, which is why the
+comparison that exposes it is usually between two tools rather than inside one: the same
+question put to a model with grounding switched off and to a web-grounded one separates
+them immediately.
 
 ## Related
 

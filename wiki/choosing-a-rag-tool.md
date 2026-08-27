@@ -1,6 +1,6 @@
 ---
 boards: [scalar/knowledge-management-and-rag]
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # Choosing a RAG tool
@@ -88,6 +88,21 @@ which order. Capture with one, research with another, produce with a third: a vi
 a transcript, the transcript joins the documents in a notebook, and the notebook answers
 across all of it with citations. Reaching for a single tool that does everything is how the
 video gets dropped from the analysis, which is a worse outcome than using three.
+
+Capture, research, produce is the shape worth remembering, and the capture step is the one
+that turns out to be optional more often than it looks. Notebook takes a YouTube URL
+directly and will pull the transcript itself, so a separate capture tool earns its place
+only when you want a summary rather than the raw transcript, or when the video is a local
+file rather than a link. Either way the same limit applies underneath: a video whose content
+is genuinely visual rather than spoken loses most of itself in any transcript, and no
+chaining recovers it.
+
+The worked example is smaller than the committee case and makes the value clearer. A
+39-minute tutorial video plus a diagram of the setup, both loaded into one notebook,
+becomes an answer another person can act on in minutes — the notebook reasons over the
+image alongside the text and will draft the step-by-step guide. The gain is not that any
+one tool was clever. It is that the material nobody would sit through got converted into
+material a notebook could retrieve from.
 
 The rest reduces to matching the surface to the need. Parameters and API code point at AI
 Studio; a persona over a small knowledge base at Gems; deep research over documents you own

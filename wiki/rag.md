@@ -1,6 +1,6 @@
 ---
 boards: [scalar/ai-ecosystems, scalar/knowledge-management-and-rag]
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # RAG
@@ -35,6 +35,18 @@ point at.
 Reading it as three stages rather than one technique is what makes failures locatable. An
 answer that is wrong because the wrong files came back is a retrieval problem; an answer
 that ignores correct files is a generation problem. They do not have the same fix.
+
+The rule sharpens once you notice the middle stage never appears in it. Missing or wrong
+documents are always retrieval's fault. Wrong output from complete documents is
+generation's fault. Augmentation essentially never fails, because copying retrieved text
+into a prompt is mechanically trivial — there is nothing in it to get wrong. The
+three-stage model is really a two-suspect model, and one of the two is far more fragile
+than the other, so retrieval is where to look first every time.
+
+Retrieval is also less bounded than the word suggests. It can draw on the open web, a
+managed knowledge base, documents you uploaded, or a SQL database. RAG is not confined to
+files you hand over, and reading it as an upload feature understates what the retrieval
+step can reach.
 
 ## You are already using it
 
@@ -78,6 +90,13 @@ did not apply, because a rule the model never retrieved is a rule that is not in
 prompt. Anything you are relying on as a constraint sits in the same lottery as the
 content it is meant to constrain.
 
+That is what makes a retrieval miss more than an accuracy problem. Most misses cost you a
+weaker answer; the miss that matters is the one where the absent document held the security
+or legal constraint, because the output then reads exactly as well as a correct one while
+having quietly lost the thing that made it safe. The mitigation is not better retrieval,
+which cannot be guaranteed — it is a guardrail on the output, checked after generation
+rather than hoped for before it.
+
 ## Two reasons to reach for it
 
 The first is that your data may not be public knowledge. *PSP* inside one organisation
@@ -107,6 +126,33 @@ detection are two different jobs, and a system that only does the first has no w
 knowing when it failed — which is precisely the silent-failure problem. The levers are
 also empirical rather than guaranteed; naming files works cleanly at three documents and
 stops being available once the store is large enough that you cannot enumerate it.
+
+What replaces naming at that scale is not a fifth lever. It is the two remaining levers
+applied deliberately — document hygiene, meaning clear names, titles and structure, which
+is a retrieval intervention because it changes the embeddings; and explicit steering in the
+system prompt about which files must always be consulted and which are conditional — plus
+the acceptance that the rest is empirical. You cannot guarantee retrieval, so you test,
+observe and iterate. Tuning this for a single product is a months-long job, and starting a
+new product means starting over. Treating retrieval quality as something to be configured
+once is the mistake; it behaves more like a system to be tuned and re-tuned.
+
+Detection has a cheap complement worth keeping in reach: asking the tool directly to show
+its source of truth will generally surface the underlying documentation. That converts a
+claim you would otherwise have to take on trust into one you can check against the store.
+
+## A store does not refresh itself
+
+Retrieval quality is usually discussed as a matter of selection, which hides a slower
+failure: the store going out of date. A notebook holds whatever was uploaded and nothing
+more, and it will keep answering fluently from stale material long after the material stops
+being true. Nothing in the interface marks the difference.
+
+Two routes keep it current. A pipeline can push updated documents in through an API, or a
+source can be added that is itself live on the web, so freshness is a property of the source
+rather than of anyone's discipline. Absent one of those, the honest default is to treat the
+contents as stale and say so wherever the output is used. This is a manual problem today
+rather than a solved one — connectors and workflows are the answer, and they are a layer the
+tooling has not made routine yet.
 
 ## Related
 
