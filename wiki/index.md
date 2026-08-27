@@ -35,6 +35,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Persistent sandbox tools](persistent-sandbox-tools.md) — Gems, Projects and AI Studio, told apart by who the sandbox serves
 - [Model dials](model-dials.md) — temperature and top-p narrow the same choice; move one at a time
 - [RAG](rag.md) — the plumbing that carries the right slice of the KB into the prompt
+- [Choosing a RAG tool](choosing-a-rag-tool.md) — the surface a tool grounds in decides what it is for
 
 ## Solutioning
 
