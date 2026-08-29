@@ -39,6 +39,13 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [RAG](rag.md) — the plumbing that carries the right slice of the KB into the prompt
 - [Choosing a RAG tool](choosing-a-rag-tool.md) — the surface a tool grounds in decides what it is for
 
+## SQL foundations
+
+- [SQL as the extraction step](sql-extraction-step.md) — the precondition that gates every data role, whatever comes after
+- [DBMS](dbms.md) — not storage; the layer that knows the shape of what is stored
+- [RDBMS](rdbms.md) — the common field is the relationship; without it the question is unanswerable
+- [Why a database and not a spreadsheet](why-a-database-not-a-spreadsheet.md) — a sheet is not too small so much as unowned
+
 ## Solutioning
 
 - [Problem discovery frame](problem-discovery-frame.md) — starting point, goal, paths between, constraints below
