@@ -17,6 +17,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Context persistence](context-persistence.md) — sessions forget; a persistent sandbox is what remembers
 - [AI safety failure modes](ai-safety-failure-modes.md) — four ways it breaks, told apart by whose rules give way
 - [Defensive prompt architecture](defensive-prompt-architecture.md) — role, refusal, safety and output rules, written against attack
+- [Citation credibility](citation-credibility.md) — a source exists is not a source is good; the audit you lose on the open web
+- [Source-Quality Framework](source-quality-framework.md) — recency, authority, corroboration, relevance; recency runs first and overrides
 
 ## Prompt engineering
 

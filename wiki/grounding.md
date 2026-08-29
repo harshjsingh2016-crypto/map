@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/ai-ecosystems, scalar/knowledge-management-and-rag]
-updated: 2026-08-28
+boards: [scalar/ai-reliability, scalar/ai-ecosystems, scalar/knowledge-management-and-rag, scalar/web-grounding-citations]
+updated: 2026-08-29
 ---
 
 # Grounding
@@ -66,6 +66,13 @@ The third test is the one that needs a moving target to work at all, which is wh
 comparison that exposes it is usually between two tools rather than inside one: the same
 question put to a model with grounding switched off and to a web-grounded one separates
 them immediately.
+
+
+Worth noticing that the negative test sometimes runs itself. Put a question well outside a
+document-grounded tool's sources to it — a live news event, say, to a notebook built from
+three files on prompting — and its refusal is the test passing, unasked. The same words on
+screen from a tool whose web access is merely switched off mean nothing of the kind. The
+refusal only carries information if you know which configuration produced it.
 
 ## Related
 
