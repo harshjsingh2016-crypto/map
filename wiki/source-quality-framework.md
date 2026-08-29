@@ -100,6 +100,29 @@ excluding sources from a search — you may well want to know an argument exists
 governs what reaches the output: a source that fails the checks does not travel onward to a
 client or an end user. Search wide, publish narrow.
 
+## Stale is counterproductive, not merely useless
+
+Worth pushing the recency case one step further than "the answer is out of date". An article
+from March reporting an athlete perfectly fit cannot justify a claim about his fitness in
+July, because anything could have happened in between — and the instructor's word for that
+is *counterproductive* rather than useless.
+
+The distinction matters. A stale source does not leave you where you started. It leaves you
+worse off, holding a confident belief attributed to a real article, having stopped looking.
+Absence of information makes a person cautious; stale information makes them certain and
+wrong.
+
+There is a measured signal that this is the hard idea rather than the obvious one. Across a
+set of quizzes on this material, the recency question was the only one to score badly —
+roughly three quarters of a room, against near-universal scores on the rest — and it was the
+check that had been taught most emphatically. *Recency is relative to the question* resists
+being held, because every instinct says a good article is a good article. It is the failure
+where nothing looks wrong.
+
+The ordering shows up as procedure too. Working such a case by elimination, corroboration
+is never reached at all: the first question is whether it was even correct to pick this
+article. You do not corroborate a source that has not cleared recency.
+
 ## Related
 
 - [Citation credibility](citation-credibility.md) — why the check has to run on the source, and the three failure modes this inverts

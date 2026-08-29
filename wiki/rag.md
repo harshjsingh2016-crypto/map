@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-ecosystems, scalar/knowledge-management-and-rag]
-updated: 2026-08-28
+boards: [scalar/ai-ecosystems, scalar/knowledge-management-and-rag, scalar/web-grounding-citations]
+updated: 2026-08-29
 ---
 
 # RAG
@@ -153,6 +153,49 @@ rather than of anyone's discipline. Absent one of those, the honest default is t
 contents as stale and say so wherever the output is used. This is a manual problem today
 rather than a solved one — connectors and workflows are the answer, and they are a layer the
 tooling has not made routine yet.
+
+## Retrieval supplies material; comprehension stays the model's own
+
+The mental model worth correcting is the one where retrieval means the model goes and *gets
+the answer*. It does not. The analogy that fixes it: everything you learned at school, at
+college, in your own projects is known — you do not search the internet to know how to eat,
+or run, or write about a familiar subject. Then you join a new company with its own products
+and rules, and that is not known, so you go and learn it. You learn it using what you
+already know.
+
+Training is a model's left side. A question past its cutoff is the right side, so it fetches
+articles — and then reads, comprehends and summarises them with capability that was already
+there. Which is exactly why a worthless source produces a worthless answer with no error
+anywhere in the machinery. Nothing malfunctioned. The comprehension was applied faithfully
+to bad material.
+
+## Where the loop actually runs
+
+Retrieval, augmentation and generation are easier to picture as three stages in a line than
+they are in practice. In a web-grounded tool it is cyclic: decide what to read, fetch, assess
+whether it is even the right document, read, summarise, and loop as needed. Not one pass.
+
+And in a hosted tool none of it happens on your side. There is no augmentation performed on
+your prompt — your request has already left, and the retrieve-assess-read loop runs
+server-side. That, rather than deliberate secrecy, is why the search decision is
+unauditable: which searches get triggered, which engine, which sources are preferred, is a
+black box, and what returns to you is the output plus citation markers if a search ran at
+all.
+
+A related clarification that catches people out: turning off a model's web access refers to
+the model, not to you. Your request travels over the internet regardless. What varies is
+whether the model reaches further out from its own end.
+
+## Scope failures look like model failures
+
+A notebook built from a video aimed at one region could not answer the same question for
+another — asked about plants for Delhi, it offered Northern California, because that is what
+its source covered. Nothing malfunctioned. The store did not contain the answer and the tool
+did what a grounded tool should.
+
+The diagnosis matters because it names the fix. This is a retrieval-scope failure, and the
+remedy is a broader or better-matched document, not a better prompt. You cannot instruct
+your way out of a source that does not cover your case.
 
 ## Related
 

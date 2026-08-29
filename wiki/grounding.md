@@ -74,8 +74,30 @@ three files on prompting — and its refusal is the test passing, unasked. The s
 screen from a tool whose web access is merely switched off mean nothing of the kind. The
 refusal only carries information if you know which configuration produced it.
 
+## Traceable, not correct
+
+The analogy that settles it is a person describing a dream against the same person teaching
+a class. The dream is ungrounded — it is the brain working from its own thoughts, with
+nothing outside itself to check against. The teaching is grounded in a list of external
+things: course material, academic training, articles read, research done.
+
+What makes the pairing better than it first looks is the choice of the ungrounded side. A
+dream is not a lie, and is not necessarily even wrong; dreams are full of true material,
+recombined. What it lacks is a chain leading back out. So the distinction being drawn is not
+truth against falsehood but **traceable against untraceable**, and hearing "grounded" as a
+synonym for "correct" gets it wrong in both directions. A grounded answer built on stale
+sources is still wrong, and a model answering from training alone sometimes has the right
+answer sitting in its weights. Grounding does not buy correctness. It buys something to
+check correctness against.
+
+The hedging in the original phrasing is deliberate and worth preserving: answering from
+memory *could be* ungrounded, and ungrounded has *more potential* for hallucination.
+Ungrounded is not a verdict of wrongness, it is an absence of verification —
+[unverified is not false](source-quality-framework.md).
+
 ## Related
 
 - [The prompt stack](prompt-stack.md) — where the grounding rule is declared
 - [Next-word prediction](next-word-prediction.md) — why ungrounded answers have no source to check
 - [RAG](rag.md) — the retrieval mechanism that actually supplies the grounded data
+- [Citation credibility](citation-credibility.md) — what a citation does and does not certify once the ground is the open web

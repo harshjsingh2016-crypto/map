@@ -1,6 +1,6 @@
 ---
-boards: [scalar/knowledge-management-and-rag]
-updated: 2026-08-28
+boards: [scalar/knowledge-management-and-rag, scalar/web-grounding-citations]
+updated: 2026-08-29
 ---
 
 # Choosing a RAG tool
@@ -109,8 +109,74 @@ Studio; a persona over a small knowledge base at Gems; deep research over docume
 at Notebook; live or time-sensitive material that has to be cited at Perplexity; ordinary
 low-stakes search at a general assistant. None of this is about which is strongest.
 
+## The surface narrows the field; the shape of the work decides
+
+The grounding surface answers most selection questions on its own, and a worked set of five
+scenarios shows where it runs out. Three of them fall straight out of it — a pile of your own
+reports goes to the document-grounded tool, a recurring web brief to the web-grounded one, a
+long recording to the media-grounded one. No further thought needed.
+
+The interesting case is a one-off fact check that has to happen *inside a conversation you
+are already having*, and every reason the other tools lose is a non-grounding reason. The
+document tool is capped at its uploaded context — a surface argument, fair enough. The
+web tool would answer the fact perfectly well and is rejected anyway, because the fact check
+is a step inside something larger and a search-only tool cannot carry the larger thing. The
+developer console would also work and is rejected on audience.
+
+So three further axes sit under the surface question, and they are worth asking in order
+once the surface has narrowed things:
+
+**Scope** — is this a step inside a larger task, or the task itself? A tool that only does
+one thing cannot hold a multi-topic conversation around it, and the cost being minimised is
+context switching rather than retrieval quality.
+
+**Cadence** — will this run once or every week? "Reusable with one click" is what turns a
+web-search tool into a saved space, and it is a different requirement from depth.
+
+**Audience** — who reads the output? This is the same axis that orders tools by how much of
+their working they expose: the most visible tool is the developer path, and the reason it
+should never be put in front of a client is exactly the reason it is valuable to a builder.
+
+Together these make selection a procedure rather than a feature comparison. Surface first,
+then scope, cadence and audience.
+
+## The closest pair, separated by shape rather than strength
+
+Two of these tools are genuinely hard to tell apart on capability: a general assistant with
+a web-search tool, and a dedicated web-research tool. Both ground in the live web, both
+cite, both search well.
+
+The dividing line is whether searching *is* the task or a step inside it. The assistant will
+write a script that pulls a column out of a spreadsheet with no internet involved, then
+corroborate the news articles sitting in that column, reaching for the web partway through
+and dropping it again. The research tool goes deep across many articles on one topic and
+does nothing else. Neither is stronger. One holds a multi-topic task around a moment of
+grounding; the other is the moment of grounding, at depth.
+
+## Read the roster by defaults
+
+The most practically useful cut across a set of grounding tools is not what each can do but
+what each does when you have touched nothing — because configuration mistakes come from
+defaults, not from limitations.
+
+A general assistant searches by default, so disabling it is the deliberate act, and the
+setting can silently fail to apply until the page is hard-refreshed. A document-grounded
+notebook never reaches the web inside a grounded answer, and offers rather than doing it
+silently. A dedicated web tool always searches and cannot be switched off — no default to
+get wrong, and no ungrounded comparison available either. A developer console ships with
+grounding *off*, which is the reverse of what people assume about a search company's tool,
+and getting it wrong makes you conclude the tool does not ground at all. And an assistant
+that decides per turn is the one case where being correctly configured still does not tell
+you what happened.
+
+The two most dangerous are therefore not the least capable ones. They are the tool with the
+best transparency in the set, silently not grounding, and the tool that is switched on and
+may still not have searched. The failure is not weakness. It is confidence about a state
+that was never verified.
+
 ## Related
 
 - [RAG](rag.md) — the mechanism every one of these tools is implementing
 - [Grounding](grounding.md) — what the surface each tool retrieves from actually buys you
+- [Citation credibility](citation-credibility.md) — how much of its working each tool lets you see, and why that matters
 - [Persistent sandbox tools](persistent-sandbox-tools.md) — Gems and its siblings, told apart by who the sandbox serves

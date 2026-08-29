@@ -124,6 +124,64 @@ mark, a conditional, an attribution to an unnamed source — are load-bearing fo
 close to invisible to a system that scrapes the claim. Anything a publisher does to avoid
 committing to a statement is something retrieval is liable to strip.
 
+## The prior question: did it search at all?
+
+Before any of the four checks can run, you need to know whether there is anything to check.
+A tool that decides *per turn* whether to reach for the web makes that a live question — the
+capability being available does not mean it was used, and a confident, well-written answer
+reads identically either way.
+
+The signals are visible ones: citation markers in the text, and a source panel you can open.
+Both absent means the answer came from training alone. That is not a quality judgement and
+it does not say the answer is wrong — it says which regime you are in, gradeable or not yet
+gradeable. Run it before the framework, not alongside it.
+
+The failure it guards against is not a tool declining to search. It is you assuming a search
+happened.
+
+Three misconceptions cluster around that rule, and each is worth refusing explicitly. That
+a tool sometimes hides its citations — it does not; if it searched, it shows them, and the
+reliability of that signal is what the whole check rests on. That a factual question never
+needs a search — *factual* is not *static*, and a question turning on recent information
+should trigger one. And that a missing citation means the answer is wrong — sometimes the
+training data holds the correct answer.
+
+The last one cuts both ways, which is why it has to be stated rather than assumed. The
+purpose of the check is not to reject uncited answers. It is to know you have not checked
+one yet.
+
+
+## Visibility is the axis that separates the tools
+
+Two of the failures above are only diagnosable if you can see the step that chose the
+sources, and most tools do not show it. A web-search tool hands you sources and never says
+what it searched. An assistant that decides per turn whether to search shows you citations
+when it did, but not the decision or the query. In both cases you can grade what you were
+given and cannot inspect what you were not.
+
+One surface in the set closes that. A developer console offering grounding with search
+displays the search query it actually ran — and displaying it is a stated requirement of
+using the tool rather than a courtesy, which is a firmer basis for expecting it to stay.
+Take the query, run it yourself, and the sources it cited come back at the top. The
+retrieval is reproducible by hand.
+
+That is what converts a phrasing failure from invisible to legible. When a badly chosen
+phrase quietly steers retrieval, seeing the query is how you notice — you read what it
+searched for, recognise it is not what you needed, and fix the prompt rather than the
+output.
+
+The same surface exposes a per-source confidence score, between 0 and 1, in the raw
+response rather than the interface. It is worth being precise about what it measures: how
+useful the model judged a document for answering the question. That is the relevance check,
+automated — not authority, not recency, not corroboration. A recent, fluent, wholly
+unaccountable post that addresses your question directly can score high. So it is a filter
+to run before the four checks, at scale and in code, not a substitute for them.
+
+The pattern underneath is worth naming, because it explains the trade rather than just
+listing features: **more visibility, further from an end user.** The tool that shows the
+most is the developer console, and the reason it should not be put in front of a client is
+the same reason it is valuable to you.
+
 ## Related
 
 - [Source-Quality Framework](source-quality-framework.md) — the four checks this argument exists to justify
