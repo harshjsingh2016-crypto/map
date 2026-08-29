@@ -61,8 +61,10 @@ Then open with a **≤2-line "where we left off"**: open suggestions, flagged qu
 
 `armor-outputs/` holds condensed context files — one `.md` per board, produced by the Armor
 project's extraction pipeline (`D:\Projects_D\Armor`), which copies each deliverable here with its
-`**Board:**` line at close-out. **Local only, never synced** (gitignored; sync scope is boards +
-wiki regardless). Progress sidecars (below) live beside them.
+`**Board:**` line at close-out. The context files themselves are **local only** (gitignored) —
+they are large, and the same deliverable is already tracked in the Armor repo under `Output/`.
+**Progress sidecars (`<name>.progress.md`) do sync**, alongside the boards and wiki: a walkthrough
+cannot resume on the other laptop without the record of what was rejected and why.
 
 A walkthrough is the **Learning** stage of Armor's per-lecture loop:
 `Learning → Class Assignment → Internal QnA → Scaler QnA → Finished`. Armor's `INDEX.md` is the
@@ -127,6 +129,11 @@ Agenda confirmed: 2026-08-27 (summary + glossary presented)
 ```
 
 Statuses: `[ ]` pending · `[x]` accepted or rejected (say which; rejections carry the reason) · `[>]` deferred. `discussed ✓` marks that the user confirmed understanding of that section's concept — a section isn't done without it. Update the file every walkthrough turn, at the same time as the wiki step.
+
+**Resuming on the other laptop.** The board, the wiki and the progress sidecar arrive through
+`git pull` here. The context file does not — pull the Armor repo and copy
+`Output/<name>.md` into `armor-outputs/`. Its `**Board:**` line travels with it, so the mapping
+needs no reconstruction.
 
 **Resuming:** read the progress file, outline the board, open with a ≤2-line "where we left off" ("Walkthrough of RAG in practice: §1–2 discussed and boarded, 3 accepted 1 rejected — next: §3, the three tools."), then wait for direction.
 

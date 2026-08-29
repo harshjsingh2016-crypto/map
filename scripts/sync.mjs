@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-// Two-laptop sync for boards/ and wiki/ (the user alternates machines, never simultaneous).
+// Two-laptop sync for boards/, wiki/ and walkthrough progress sidecars (the user alternates
+// machines, never simultaneous).
 //
 //   node scripts/sync.mjs pull     reconcile: push local dirty work, then fast-forward pull
-//   node scripts/sync.mjs push     commit boards/ + wiki/ changes and push
+//   node scripts/sync.mjs push     commit boards/ + wiki/ + progress sidecar changes and push
 //   node scripts/sync.mjs status   ahead/behind + dirty sync-scope files
 //
 // pull runs before the dev server starts; push runs when it exits (see scripts/dev.mjs).
@@ -12,7 +13,9 @@ import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const SCOPE = ['boards', 'wiki']
+// armor-outputs/ is in scope only for <name>.progress.md — .gitignore excludes everything else
+// in that folder, so the bulky context files can never be staged by this.
+const SCOPE = ['boards', 'wiki', 'armor-outputs']
 const cmd = process.argv[2]
 
 const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim()
@@ -43,7 +46,7 @@ function commitAndPush(label) {
 
 switch (cmd) {
   case 'push': {
-    commitAndPush('boards + wiki')
+    commitAndPush('boards + wiki + progress')
     break
   }
 
