@@ -1,5 +1,6 @@
 # Walkthrough — 2026-08-24_RAG_in_practice.md
 Board: scalar/knowledge-management-and-rag
+Source: Armor/Output/2026-08-24_RAG_in_practice.md
 Updated: 2026-08-28
 Status: COMPLETE. Batches applied: 9 (S1-S7) - board now 38 mindmap nodes, 3 notes,
 4 tables, 1 flowchart, 0 open flags.

@@ -57,14 +57,17 @@ Then open with a **≤2-line "where we left off"**: open suggestions, flagged qu
 
 ---
 
-## Walkthrough mode (`armor-outputs/`)
+## Walkthrough mode (Armor deliverables)
 
-`armor-outputs/` holds condensed context files — one `.md` per board, produced by the Armor
-project's extraction pipeline (`D:\Projects_D\Armor`), which copies each deliverable here with its
-`**Board:**` line at close-out. The context files themselves are **local only** (gitignored) —
-they are large, and the same deliverable is already tracked in the Armor repo under `Output/`.
-**Progress sidecars (`<name>.progress.md`) do sync**, alongside the boards and wiki: a walkthrough
-cannot resume on the other laptop without the record of what was rejected and why.
+The condensed context files — one `.md` per board, produced by the Armor project's extraction
+pipeline — live **only** in `D:\Projects_D\Armor\Output\<slug>.md` and are read from there in
+place. Never copy one into this repo; a second copy drifts and Armor's own git already delivers
+the file to both laptops. Armor inserts the `**Board:** <folder>/<name>` line into that file at
+close-out, which is how a walkthrough finds its board.
+
+This repo keeps only the **progress sidecars** — `walkthroughs/<slug>.progress.md`, one per
+walkthrough — which sync alongside the boards and wiki: a walkthrough cannot resume on the other
+laptop without the record of what was rejected and why.
 
 A walkthrough is the **Learning** stage of Armor's per-lecture loop:
 `Learning → Class Assignment → Internal QnA → Scaler QnA → Finished`. Armor's `INDEX.md` is the
@@ -73,13 +76,13 @@ stage on the board as a status strip (below). A walkthrough is **two jobs in one
 user each concept until they confirm they understand it, and capture the settled understanding on
 the board. Teaching comes first — the board only ever records what the discussion settled.
 
-Trigger: the user says "walk through <file>", names a file in `armor-outputs/`, or drops one in and asks to work it against a board.
+Trigger: the user says "walk through <file>", names a file in `Armor\Output\`, or points at one and asks to work it against a board.
 
 **This mode inverts rule 2: talk first, draw on acceptance.** Nothing from the file reaches the board or the wiki until it has been discussed in chat and the user has accepted it. This is the only exception to draw-first.
 
 **Setup (first turn):**
 
-1. Read the context file. Its header is bold key-value lines (`**Course:**`, `**Lecture:**` …); the board mapping is the `**Board:** <folder>/<name>` line. Armor inserts it at close-out; if missing, propose a mapping, confirm it in chat, and add the line to the header.
+1. Read the context file at `D:\Projects_D\Armor\Output\<slug>.md`. Its header is bold key-value lines (`**Course:**`, `**Lecture:**` …); the board mapping is the `**Board:** <folder>/<name>` line. Armor inserts it at close-out; if missing, propose a mapping, confirm it in chat, and add the line to that file's header — in Armor, not a copy here.
 2. `boards.mjs use <folder/name>` (create the board first — `boards.mjs create <name> --folder <folder>` — if it doesn't exist), then `outline.mjs --board <folder/name>`.
 3. Ensure the **status strip** exists: a `timeline` widget with id `w-status`, title `Status`, five nodes in stage order. `layout.ts` pins `w-status` to the top-left slot on every board. If the board predates it, add it now:
 
@@ -109,16 +112,17 @@ Trigger: the user says "walk through <file>", names a file in `armor-outputs/`, 
 
 - Accepted items land as plain nodes (default `kind: "user"`) — the same thing `suggestion_accept` produces. The label is the phrasing settled in discussion, not the file's sentence. Don't create ghost suggestions for walkthrough content — the chat candidates replace them, and the 2–3 suggestion budget doesn't cap accepted items. Ideas of your own that go beyond the file still follow the normal budget.
 - Flags: still at most 1 per turn.
-- Provenance cites (`[video 0:17:04]`, `[notes p.2]`) stay in the file. Boards and the wiki never carry them — armor-outputs is local-only, so a cite is a dead reference on the other machine. If a source pointer matters, spell it out in `detail`.
+- Provenance cites (`[video 0:17:04]`, `[notes p.2]`) stay in the file. Boards and the wiki never carry them — the cite points into a file that lives in another repo, so on the board it is a dead reference. If a source pointer matters, spell it out in `detail`.
 - Material the file marks low-confidence ("coverage notes and cautions", garbled transcription) is never presented as fact. Raise it only with the caveat attached; if accepted anyway, the caveat goes into `detail`. Garbled numbers never land — the voice.md invented-number ban covers them.
 - Rejected items are recorded with the reason and not re-raised.
 - **The Internal QnA drill is Armor's, and it stays there.** The question sets, the user's answers, and Scaler corrections live in Armor's `QnA\<slug>.md` — none of it ever reaches the board or the wiki, in either direction. Boards and wiki carry the understood concepts; the drill record is a private learning log.
 
-**Progress file** — `armor-outputs/<name>.progress.md`:
+**Progress file** — `walkthroughs/<slug>.progress.md`:
 
 ```
 # Walkthrough — 2026-08-24_RAG_in_practice.md
 Board: scalar/knowledge-management-and-rag
+Source: Armor/Output/2026-08-24_RAG_in_practice.md
 Updated: 2026-08-27
 Agenda confirmed: 2026-08-27 (summary + glossary presented)
 
@@ -130,10 +134,12 @@ Agenda confirmed: 2026-08-27 (summary + glossary presented)
 
 Statuses: `[ ]` pending · `[x]` accepted or rejected (say which; rejections carry the reason) · `[>]` deferred. `discussed ✓` marks that the user confirmed understanding of that section's concept — a section isn't done without it. Update the file every walkthrough turn, at the same time as the wiki step.
 
-**Resuming on the other laptop.** The board, the wiki and the progress sidecar arrive through
-`git pull` here. The context file does not — pull the Armor repo and copy
-`Output/<name>.md` into `armor-outputs/`. Its `**Board:**` line travels with it, so the mapping
-needs no reconstruction.
+**Resuming on the other laptop.** `git pull` here brings the board, the wiki and the progress
+sidecar; `git pull` in `D:\Projects_D\Armor` brings the context file. Nothing is copied between
+the two, and the `**Board:**` line travels inside the Armor file, so the mapping needs no
+reconstruction. (One-off: a machine that predates this split still has a stale local
+`armor-outputs/` folder — git leaves it behind because the context files in it are untracked.
+Delete it.)
 
 **Resuming:** read the progress file, outline the board, open with a ≤2-line "where we left off" ("Walkthrough of RAG in practice: §1–2 discussed and boarded, 3 accepted 1 rejected — next: §3, the three tools."), then wait for direction.
 

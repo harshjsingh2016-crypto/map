@@ -1,5 +1,6 @@
 # Walkthrough — 2026-08-26_web_grounding_citations.md
 Board: scalar/web-grounding-citations
+Source: Armor/Output/2026-08-26_web_grounding_citations.md
 Updated: 2026-08-29
 Learning complete: 2026-08-29 — status strip advanced to Class Assignment
 Class Assignment complete: 2026-08-29 (8 assignment problems + 4 additional questions) — strip advanced to Internal QnA

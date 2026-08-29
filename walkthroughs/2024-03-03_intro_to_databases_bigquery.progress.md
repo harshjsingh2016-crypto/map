@@ -1,5 +1,6 @@
 # Walkthrough — 2024-03-03_intro_to_databases_bigquery.md
 Board: scalar-primers/sql-intro
+Source: Armor/Output/2024-03-03_intro_to_databases_bigquery.md
 Updated: 2026-08-29
 Agenda confirmed: 2026-08-29 (summary + glossary presented; §2 and §3 skipped by user)
 

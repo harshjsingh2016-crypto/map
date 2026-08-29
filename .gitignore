@@ -8,12 +8,3 @@ pdfs/
 
 # Machine-local Claude Code settings (launch.json is shared).
 .claude/settings.local.json
-
-# Condensed context files for walkthrough mode — local only, one machine.
-# The source .md files are large and already live in the Armor repo's Output/.
-# Progress sidecars (<name>.progress.md) DO sync — a walkthrough cannot resume on the
-# other laptop without the record of what was rejected and why.
-# Note: the pattern is armor-outputs/* not armor-outputs/ — git will not descend into an
-# excluded directory, so a negation cannot re-include anything beneath one.
-armor-outputs/*
-!armor-outputs/*.progress.md

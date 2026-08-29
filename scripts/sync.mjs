@@ -13,9 +13,9 @@ import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-// armor-outputs/ is in scope only for <name>.progress.md — .gitignore excludes everything else
-// in that folder, so the bulky context files can never be staged by this.
-const SCOPE = ['boards', 'wiki', 'armor-outputs']
+// walkthroughs/ holds only <name>.progress.md sidecars — the lecture context files they
+// point at live in the Armor repo (D:\Projects_D\Armor\Output\) and sync with it.
+const SCOPE = ['boards', 'wiki', 'walkthroughs']
 const cmd = process.argv[2]
 
 const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim()
