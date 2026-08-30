@@ -275,6 +275,9 @@ node scripts/export.mjs --all                                 # every board
 node scripts/export.mjs --board <name> --theme light          # paper-friendly
 node scripts/wiki.mjs list                                    # wiki articles + orphan flags
 node scripts/wiki.mjs check                                   # wiki dead links / index drift
+node scripts/view.mjs latest                                  # move the board window's camera
+node scripts/view.mjs focus <widgetId|nodeId>
+node scripts/view.mjs back [--count 2] | forward | fit
 npm run sync push                                             # commit + push boards and wiki now
 node scripts/sync.mjs status                                  # ahead/behind + dirty files
 ```
@@ -296,6 +299,20 @@ view to one board, `?theme=light|dark` overrides its theme. Neither writes to th
 both work as plain deep links.
 
 `undo.mjs` truncates the log; the server detects it and the client resets and replays automatically.
+
+### Moving the user's view
+
+`view.mjs` is how "take me back to that table" is answered. It posts to the running
+server, which fans the command out over SSE to whoever is watching that board right now.
+`focus` accepts a widget id, a bare node id, or a full layout node id. `back`/`forward`
+step the view history — the stops the camera has actually visited, which is also what the
+board's own back/forward controls and the mouse thumb buttons walk.
+
+**A view command is never an op.** The board log is append-only *content*; a camera
+command written there would replay on every load and permanently pollute the board's
+history. It is deliberately ephemeral: if no window is showing that board, the command is
+gone and the script says so. Use it when the user asks to be taken somewhere — not as a
+flourish after every batch, since follow-active already moves the camera to new content.
 
 ---
 

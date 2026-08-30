@@ -132,10 +132,13 @@ function sendEvent(res, event, data) {
 }
 
 function broadcast(event, data, boardFilter) {
+  let sent = 0
   for (const c of clients) {
     if (boardFilter && c.board !== boardFilter) continue
     sendEvent(c.res, event, data)
+    sent++
   }
+  return sent
 }
 
 function boardsPayload() {
@@ -195,9 +198,34 @@ watcher
 // HTTP API
 // ---------------------------------------------------------------------------
 const app = express()
+app.use(express.json({ limit: '8kb' }))
 
 app.get('/api/boards', (req, res) => {
   res.json(boardsPayload())
+})
+
+// Camera control, deliberately NOT an op. The board log is append-only
+// content: a view command written there would replay on every load and
+// permanently pollute the board's history. This is ephemeral — fanned out to
+// whoever is watching that board right now, and remembered nowhere.
+const VIEW_ACTIONS = new Set(['latest', 'back', 'forward', 'fit', 'focus'])
+let viewSeq = 0
+
+app.post('/api/view', (req, res) => {
+  const board = String(req.body?.board || '')
+  const action = String(req.body?.action || '')
+  const target = req.body?.target == null ? null : String(req.body.target)
+  const count = Number.isInteger(req.body?.count) ? req.body.count : 1
+  if (!board) return res.status(400).json({ error: 'board is required' })
+  if (!VIEW_ACTIONS.has(action)) {
+    return res.status(400).json({ error: `unknown view action "${action}" — expected one of ${[...VIEW_ACTIONS].join(', ')}` })
+  }
+  if (action === 'focus' && !target) {
+    return res.status(400).json({ error: 'focus needs a target widget or node id' })
+  }
+  if (count < 1 || count > 100) return res.status(400).json({ error: 'count must be between 1 and 100' })
+  const delivered = broadcast('view', { board, action, target, count, seq: ++viewSeq }, board)
+  res.json({ ok: true, delivered })
 })
 
 app.get('/api/events', (req, res) => {

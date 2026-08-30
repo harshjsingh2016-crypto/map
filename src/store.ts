@@ -13,6 +13,14 @@ export type Status =
   | 'no-board'     // no boards exist yet
   | 'disconnected' // SSE dropped, retrying
 
+/** Camera command pushed over SSE. Never persisted — see POST /api/view. */
+export interface ViewCommand {
+  action: 'latest' | 'back' | 'forward' | 'fit' | 'focus'
+  target: string | null
+  count: number
+  seq: number
+}
+
 export interface BoardRef {
   id: string        // "<folder>/<name>"
   folder: string | null
@@ -34,6 +42,7 @@ interface MapStore {
   boardStyle: { background?: string; theme?: ThemeName }
   newNodeIds: string[]       // set by the last layout pass — drives camera + pop-in
   layoutSeq: number          // bumps every time a layout lands (camera effect trigger)
+  viewCommand: ViewCommand | null  // ephemeral camera command from POST /api/view
 
   viewCollapsed: Record<string, boolean>
   toggleCollapsed: (rfNodeId: string, current: boolean) => void
@@ -82,6 +91,7 @@ export const useMapStore = create<MapStore>((set, get) => ({
   boardStyle: {},
   newNodeIds: [],
   layoutSeq: 0,
+  viewCommand: null,
   viewCollapsed: {},
   toggleCollapsed: (rfNodeId, current) => {
     set((s) => ({ viewCollapsed: { ...s.viewCollapsed, [rfNodeId]: !current } }))
@@ -177,14 +187,21 @@ function connect(set: any, get: any) {
   if (watchdog) clearInterval(watchdog)
   if (retryTimer) { clearTimeout(retryTimer); retryTimer = null }
   resetModel()
-  set({ nodes: [], edges: [], boardTitle: '', boardStyle: {}, status: 'connecting', newNodeIds: [] })
+  // Bump layoutSeq on the reset too. The camera effect is keyed on it, and it
+  // has to see the empty board: without that it never learns the board went
+  // away, and the reload that follows a reconnect reads as a burst of brand
+  // new content — touring widgets the user has already seen.
+  set({
+    nodes: [], edges: [], boardTitle: '', boardStyle: {}, status: 'connecting',
+    newNodeIds: [], layoutSeq: get().layoutSeq + 1,
+  })
 
   const board = get().selected
   es = new EventSource(`/api/events${board ? `?board=${encodeURIComponent(board)}` : ''}`)
 
   lastMessageAt = Date.now()
   const touch = () => { lastMessageAt = Date.now() }
-  for (const name of ['ping', 'message', 'boards', 'init', 'batch', 'snapshot', 'reset', 'logerror']) {
+  for (const name of ['ping', 'message', 'boards', 'init', 'batch', 'snapshot', 'reset', 'logerror', 'view']) {
     es.addEventListener(name, touch)
   }
   watchdog = setInterval(() => {
@@ -235,6 +252,14 @@ function connect(set: any, get: any) {
     model.lastBatchId = data.entry.data.batchId
     opQueue.push(...ops)
     pump(useMapStore.setState, useMapStore.getState)
+  })
+
+  // Camera command. The server already filters by board, but the client can
+  // be mid-switch, so check again before acting on it.
+  es.addEventListener('view', (ev) => {
+    const data = JSON.parse((ev as MessageEvent).data)
+    if (data.board !== get().selected) return
+    set({ viewCommand: { action: data.action, target: data.target, count: data.count ?? 1, seq: data.seq } })
   })
 
   es.addEventListener('reset', () => {
