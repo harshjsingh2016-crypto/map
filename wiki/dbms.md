@@ -37,3 +37,4 @@ decision, not a technical limit.
 ## Related
 
 - [SQL as the extraction step](sql-extraction-step.md) — why the data ended up in a database in the first place
+- [ER diagram](er-diagram.md) — this definition drawn: the same triple, one box per table

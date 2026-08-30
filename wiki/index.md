@@ -44,6 +44,9 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [SQL as the extraction step](sql-extraction-step.md) — the precondition that gates every data role, whatever comes after
 - [DBMS](dbms.md) — not storage; the layer that knows the shape of what is stored
 - [RDBMS](rdbms.md) — the common field is the relationship; without it the question is unanswerable
+- [ER diagram](er-diagram.md) — the map of the database, handed to you rather than drawn by you
+- [SQL data types](sql-data-types.md) — one column one type; counted takes decimal, measured takes float
+- [Database keys](database-keys.md) — the test is whether a value can ever repeat, not whether it has
 - [Why a database and not a spreadsheet](why-a-database-not-a-spreadsheet.md) — a sheet is not too small so much as unowned
 
 ## Solutioning

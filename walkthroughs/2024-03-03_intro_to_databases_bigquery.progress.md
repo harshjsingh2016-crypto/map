@@ -1,7 +1,9 @@
 # Walkthrough — 2024-03-03_intro_to_databases_bigquery.md
 Board: scalar-primers/sql-intro
 Source: Armor/Output/2024-03-03_intro_to_databases_bigquery.md
-Updated: 2026-08-29
+Updated: 2026-08-30
+Learning complete: 2026-08-30 — every section discussed and ruled on
+Class Assignment complete: 2026-08-30 (BigQuery setup, all 10 tables uploaded) — strip advanced two stages to Internal QnA
 Agenda confirmed: 2026-08-29 (summary + glossary presented; §2 and §3 skipped by user)
 
 Board was created fresh for this walkthrough — no prior coverage, so every item is **missed**.
@@ -13,10 +15,12 @@ Module-mechanics and logistics sections are proposed as skip; they are course ad
 - [x] §4 DBMS — what a management system adds over a file — missed — discussed ✓ — accepted (DBMS mindmap incl. access boundary + Excel analogy table; HR example folded into detail)
 - [x] §5 RDBMS, vendors, and the 90/10 rule — missed — discussed ✓ — accepted (RDBMS branch under DBMS + 90/10 note; career product-vs-skill node rejected; employee/salary example folded into detail, schema drawing left to §7)
 - [x] §6 why a database and not Excel — the five reasons — missed — discussed ✓ — accepted (five-reasons table with arguments + amber framing row + read-only node under access; security anecdotes rejected as rhetorical devices)
-- [ ] §7 the ER diagram and the farmer's-market schema — missed — pending
-- [ ] §8 data types — boolean, integer, decimal, CHAR/VARCHAR, dates — missed — pending
-- [ ] §9 keys — PK, UK, FK, CK — missed — pending
-- [ ] §10 quiz items — Aadhaar as PK, nulls in a FK — missed — pending
-- [ ] §11 BigQuery setup — what BigQuery is and is not — missed — pending
-- [ ] §12 doubt-session answers — fold into their parent sections — missed — pending
-- [ ] §14 cautions — DECIMAL(p,s), candidate vs composite key — missed — pending (carry as caveats)
+- [x] §7 the ER diagram and the farmer's-market schema — missed — discussed ✓ — accepted (9-table schema widget with PK/FK markers + ER-diagram note; relation edges accepted as an inference from shared columns, flagged as beyond the file in the note. Data types deferred to §8. The ten-vs-nine table gap carried as an open caveat, not guessed at)
+- [x] §8 data types — boolean, integer, decimal, CHAR/VARCHAR, dates — missed — discussed ✓ — accepted (data-types table with one-column-one-type framing row; CHAR(3)/VARCHAR(5) test-case table with the failing `An` highlighted; CHAR-or-VARCHAR choosing note with the can-you-aggregate-it test; DECIMAL(p,s) correction note — discharges §14 caution 1; DATETIME vs TIMESTAMP table at user's request; §7 type deferral discharged onto the schema for the five columns the instructor justified. User asked DECIMAL vs FLOAT — not in the lecture, answered from general knowledge and boarded as a note labelled beyond the file)
+- [x] §9 keys — PK, UK, FK, CK — missed — discussed ✓ — accepted (four-keys table with the ever-not-today test and an amber rules row; candidate-vs-composite note — discharges §14 caution 2; §7 FK inference closed on the schema, with the no-single-column-PK fact recorded on the three join tables. "Is this a primary key?" decision flowchart rejected — no reason given; the test is carried in the four-keys table instead. "Nulls are not unique" deliberately not carried — §14 caution 5, undeveloped in the lecture)
+- [x] §10 quiz items — Aadhaar as PK, nulls in a FK — missed — discussed ✓ — accepted (quiz-misconceptions note carrying both answers and the drops-a-clause / adds-a-clause diagnosis; the two missed cells on the four-keys table marked amber in place. Wiki: database-keys.md gained a misapplication section rather than a new article)
+- [x] §11 BigQuery setup — what BigQuery is and is not — missed — discussed ✓ — accepted (setup timeline with the Google-blocked blocker and line 10 flagged as the authority on the real table list — closes the §7 nine-vs-ten gap by pointing at the source rather than guessing; CHAR(1)-for-gender added to the CHAR-or-VARCHAR note and to sql-data-types.md. "BigQuery is not a database" note rejected — no reason given. Garbled quiz option letter not carried)
+- [x] §12 doubt-session answers — missed — discussed ✓ — accepted (only one item kept: "databases relate, but always table to table", added under the DBMS mindmap's relationships branch and to rdbms.md. Rejected, no reason given: the null-means-missing note (zero is a value / sales can be null / CK cannot be null), "personal tables yes, production never" under the access branch, the constrains-not-transforms note (no indexes in SQL; CHAR(3) rejects "India" rather than trimming it), and FK-joins-more-than-two-tables)
+- [x] §7 follow-up — the nine-vs-ten table gap CLOSED 2026-08-30 from the user's BigQuery setup list: the tenth is `datetime_demo`, absent from the ER diagram because it is not part of the farmer's-market model. Added to the schema with its field list (market_date, market_start_time, market_end_time, market_start_datetime, market_end_datetime) — the same events stored as DATE+TIME and as DATETIME, a worked demonstration of the §8 distinction. Types inferred from column names, marked as such. ER note and er-diagram.md updated
+- [x] §14 cautions — missed — discussed ✓ — skipped by user (corrections-index table and "what this lecture does not contain" note both declined). All six flagged claims are discharged in place: DECIMAL(4,3) and candidate-key have their own notes, "Entity Relations" is in the ER note, and the varchar ≥/≤ slip, "nulls are not unique" and the ten-lakh Excel figure are discharged by omission or explicit exclusion
+- [x] user correction — a primary key's job is to identify records in its own table, not to relate to other tables; relating is the foreign key's role. Boarded as its own note and used to reframe the opening of database-keys.md, which had inherited §9's relational framing

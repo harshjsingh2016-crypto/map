@@ -1,6 +1,6 @@
 ---
 boards: [scalar-primers/sql-intro]
-updated: 2026-08-29
+updated: 2026-08-30
 ---
 
 # RDBMS
@@ -22,6 +22,10 @@ gets called a key.
 
 Almost every database met in practice is relational, which makes the R close to assumed.
 
+The same mechanism is the only one available at larger scale. Databases can be related to each other, but the connection is always realised at table level — a sales table in one database joins an employees
+table in another. "Related databases" describes an arrangement; two tables and a shared column is what
+actually does the work, and there is no link that is not ultimately that.
+
 ## The vendor matters less than it looks
 
 Oracle, MySQL, SQLite, PostgreSQL. Around ninety percent of the syntax is shared across all of them;
@@ -40,3 +44,4 @@ the same. Answering no treats a question about a skill as a question about a pro
 
 - [DBMS](dbms.md) — the management layer this specialises; relationships realised as shared columns
 - [SQL as the extraction step](sql-extraction-step.md) — the language every one of these vendors speaks
+- [Database keys](database-keys.md) — the vocabulary for what that shared column is doing
