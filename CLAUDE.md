@@ -143,6 +143,32 @@ Delete it.)
 
 **Resuming:** read the progress file, outline the board, open with a ≤2-line "where we left off" ("Walkthrough of RAG in practice: §1–2 discussed and boarded, 3 accepted 1 rejected — next: §3, the three tools."), then wait for direction.
 
+### Primer express walk (`scalar-primers/` boards)
+
+Boards under `scalar-primers/` (SQL/Python skill lectures) get a compressed Learning stage — one
+sitting, ~15 minutes — instead of the section-by-section walkthrough. Decided 2026-09-01; Armor's
+CLAUDE.md ("Primer track — the sprint variant") holds the full loop. Everything not named here
+follows the walkthrough rules above.
+
+- **Setup:** steps 1–4 as above, except the status strip is **4 nodes** — `n-learning`,
+  `n-internal-qna`, `n-scaler-qna`, `n-finished`, order 1–4. Add `n-assignment` (after
+  `n-learning`) only if the lecture sets an actual assignment. **No gap pass, no agenda** — skip
+  steps 5–6.
+- **One teaching turn:** the whole lecture as a tight brief distilled live from the deliverable —
+  key syntax, the decision/operator tables, gotchas and quiz-caught traps, 2–3 worked patterns.
+  Course admin, the glossary and long worked examples are skimmed, not taught. Then doubts; depth
+  only where asked.
+- **One board batch, 2–4 widgets total** (typically a cheat-sheet `table` or `mindmap` plus a
+  gotchas `note`) — not a widget per concept. Talk-first still holds: the batch lands after the
+  discussion, containing what it settled.
+- **Wiki: unchanged.** One article per concept, exactly as rule 6 defines — the only difference
+  is that all of a lesson's wiki writing lands in this single turn. This is the flexible part of
+  the time budget; a dense primer may run a few minutes over.
+- **Progress sidecar, minimal:** the standard header plus `Brief delivered: <date>` and a short
+  list of the doubt topics raised — no per-section checkbox log.
+- **Completion:** advance the strip — Learning green, Internal QnA (or Class Assignment, if
+  present) indigo — and hand back: the next concrete action is the 10-question drill in Armor.
+
 ---
 
 ## Wiki
