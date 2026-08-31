@@ -48,6 +48,9 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [SQL data types](sql-data-types.md) — one column one type; counted takes decimal, measured takes float
 - [Database keys](database-keys.md) — the test is whether a value can ever repeat, not whether it has
 - [Why a database and not a spreadsheet](why-a-database-not-a-spreadsheet.md) — a sheet is not too small so much as unowned
+- [SQL string functions](sql-string-functions.md) — no + operator for text; separators are arguments like any other
+- [The WHERE clause](where-clause.md) — the same rows, fewer of them; and the name SELECT invented that it cannot see
+- [SQL order of execution](sql-order-of-execution.md) — the errand for two red spoons, and the rule you can derive from it
 
 ## Solutioning
 
