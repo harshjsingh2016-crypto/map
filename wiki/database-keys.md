@@ -1,6 +1,6 @@
 ---
-boards: [scalar-primers/sql-intro]
-updated: 2026-08-30
+boards: [scalar-primers/sql-intro, scalar-primers/sql-extraction]
+updated: 2026-09-01
 ---
 
 # Database keys
@@ -61,6 +61,11 @@ What they are for is joins. Putting customer names beside sales figures means jo
 on that shared column, and enabling that is the whole payoff of the primary-key/foreign-key
 relationship. Every other property is bookkeeping in service of it.
 
+The duplication that a foreign key is permitted turns out to carry information rather than merely
+being tolerated. A customer id that appears once in one table and repeats in another is describing a
+[one-to-many relationship](table-relationships.md) between them, and the repeating side is the many
+side. The cardinality is legible in the column itself.
+
 ## Candidate key — a name that means two things
 
 Where no single column is unique but a combination is, the combination is the key. The worked case is
@@ -110,3 +115,4 @@ is not recorded here as a rule.
 - [RDBMS](rdbms.md) — the shared column these name; the relationship is the field
 - [ER diagram](er-diagram.md) — where keys are marked, and where join tables become visible
 - [SQL data types](sql-data-types.md) — the other property set on a column at design time
+- [Table relationships](table-relationships.md) — the cardinality a PK/FK pair reduces to

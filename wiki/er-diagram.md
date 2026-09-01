@@ -1,6 +1,6 @@
 ---
-boards: [scalar-primers/sql-intro]
-updated: 2026-08-30
+boards: [scalar-primers/sql-intro, scalar-primers/sql-extraction]
+updated: 2026-09-01
 ---
 
 # ER diagram
@@ -59,3 +59,4 @@ why it was never on the diagram. The diagram was right and the count was loose, 
 - [SQL as the extraction step](sql-extraction-step.md) — reading the map is what precedes writing the query
 - [SQL data types](sql-data-types.md) — the right-hand side of every box, and how to choose it
 - [Database keys](database-keys.md) — what the PK and FK markers on a box mean
+- [Table relationships](table-relationships.md) — how to read the lines, the one component left over

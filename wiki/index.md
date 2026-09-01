@@ -45,9 +45,15 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [DBMS](dbms.md) — not storage; the layer that knows the shape of what is stored
 - [RDBMS](rdbms.md) — the common field is the relationship; without it the question is unanswerable
 - [ER diagram](er-diagram.md) — the map of the database, handed to you rather than drawn by you
+- [Table relationships](table-relationships.md) — read the line both ways; many-to-many is a path, not a line
+- [Database vs data warehouse](database-vs-data-warehouse.md) — the store and the godown, split by age and by grain
 - [SQL data types](sql-data-types.md) — one column one type; counted takes decimal, measured takes float
 - [Database keys](database-keys.md) — the test is whether a value can ever repeat, not whether it has
 - [Why a database and not a spreadsheet](why-a-database-not-a-spreadsheet.md) — a sheet is not too small so much as unowned
+- [The five sublanguages of SQL](sql-sublanguages.md) — a permission set, not a list; your share is the read-only one
+- [SELECT and FROM](select-and-from.md) — a query is instructions handed over, never a glance at the table
+- [Sorting and paging](sorting-and-paging.md) — ORDER BY chooses by value, OFFSET only counts positions
+- [Computed columns](computed-columns.md) — arithmetic per row, named by an alias, stored nowhere
 - [SQL string functions](sql-string-functions.md) — no + operator for text; separators are arguments like any other
 - [The WHERE clause](where-clause.md) — the same rows, fewer of them; and the name SELECT invented that it cannot see
 - [SQL order of execution](sql-order-of-execution.md) — the errand for two red spoons, and the rule you can derive from it

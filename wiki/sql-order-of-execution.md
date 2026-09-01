@@ -1,6 +1,6 @@
 ---
-boards: [scalar-primers/sql-filtering]
-updated: 2026-08-31
+boards: [scalar-primers/sql-filtering, scalar-primers/sql-extraction]
+updated: 2026-09-01
 ---
 
 # SQL order of execution
@@ -45,3 +45,4 @@ as trivia.
 ## Related
 
 - [The WHERE clause](where-clause.md) — the rule this explains, and where it is first met as an arbitrary restriction
+- [Sorting and paging](sorting-and-paging.md) — the clauses that move, and why OFFSET's ties depend on the sort
