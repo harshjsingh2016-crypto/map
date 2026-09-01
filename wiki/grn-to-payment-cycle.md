@@ -1,6 +1,6 @@
 ---
 boards: [damensch/tp-op-fin]
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # GRN-to-payment cycle
@@ -39,6 +39,9 @@ currently leak. Each loop is now drawn out as its own flow:
 - **Payment planning share loop** — a master plan is developed: upcoming due invoices
   slotted into it, its inputs (week budget) and payment slotting (invoice movement) kept
   updated, and invoices fixed for payment marked as locked.
+- **Finance and cashflow BI** — the DB powers BI views: a payment plan by factory, an
+  overall month pay plan, a long-term cashflow outlook, and an OTB-based simulation on
+  top of it.
 - **Payment updates to system** — locked payments tracked to completion, UTR and payment
   date updated for completed ones (both CF and factory), and the payment advice updated
   in the system against the payment with the final deductions — short, TDS, other — then
@@ -59,7 +62,16 @@ gets its own new table — the CN/DN excess invoice record, ingested from factor
 document number, date, qty, amount, a type discriminator (CN, DN or excess invoice), a
 maps-to list of invoice numbers, and SKU details held as JSON meta. The CF trackers are
 separate today; the final build replaces them with one view filtered per user or
-manually.
+manually. One source sits outside the cycle rather than inside it: open POs, ingested
+from the QVS Agent — PO, quantity, rate, expected delivery date, factory and CF. Nothing
+in the GRN-to-payment chain needs it, because a PO is an obligation that has not become
+an invoice yet; it exists in the ingestion list to advise the long-term cashflow BI,
+which is the one view that has to see money committed before it is billed. The OTB plan
+itself is the other such source, and the only one with no system behind it: month,
+category and open-to-buy budget in rupees, entered manually in Excel today and keyed into
+the system for the same long-term view. Open POs are the committed side of buying and the
+OTB plan is the ceiling it runs against — the simulation is the comparison, which is why
+both had to become ingested records rather than a spreadsheet held beside the BI.
 
 The first schema decision is settled: factory invoices and CF invoices live in a single
 table, distinguished by a type field, with an interlink field recording the CF-to-factory
@@ -119,8 +131,24 @@ re-enters the cycle
 through the same invoice-to-GRN front door instead of as an adjustment. The reasoning is that in a flow that is
 mostly financial, clean data flow basically guarantees the other requirements — get the
 records moving through one pipeline and the four closed loops fall out of views over it,
-rather than each loop needing its own mechanism. Whether that storage is a new store or a
-feed into the tracker the team already shares is still an open question on the board.
+rather than each loop needing its own mechanism.
+
+That storage is settled as a **fresh database**, not a feed into the tracker the team
+already shares. The trackers and the sheets around them are ported into it, which is what
+the retro-fitting step is for: the new tables are loaded with past data rather than
+starting empty at go-live. The consequence is that the tracker stops being a system of
+record and becomes one of the views over the store — the same conclusion the schema
+decisions kept arriving at from the other direction, now true of the whole layer rather
+than of one table's shape.
+
+The sixth loop is the one that pays for the store rather than fixing a handoff. The other
+five close a leak in an existing step; finance and cashflow BI is what becomes possible
+once the records are in one place — the same tables read forward instead of backward. A
+payment plan per factory aggregates into an overall month plan, which extends into a
+long-term cashflow outlook, which in turn supports an OTB-based simulation: what the
+buying capacity looks like under a given payment schedule. It is the argument for the
+pipeline being a data problem first — none of these views needs a new process, only the
+records already being ingested for the other loops.
 
 ## Related
 
