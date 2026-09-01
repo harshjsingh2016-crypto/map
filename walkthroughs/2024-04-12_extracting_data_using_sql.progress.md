@@ -4,8 +4,9 @@ Source: Armor/Output/2024-04-12_extracting_data_using_sql.md
 Updated: 2026-09-01
 Mode: primer express walk (compressed Learning stage, one sitting)
 Brief delivered: 2026-09-01
-Learning complete: 2026-09-01 — brief delivered, doubts cleared, board batch applied; strip advanced
-to Class Assignment
+Learning complete: 2026-09-01 — brief delivered, doubts cleared, board batch applied
+Class Assignment complete: 2026-09-01 — CEIL/FLOOR homework done in the BigQuery console, Scaler
+platform assignments done; strip and Armor's INDEX advanced to Internal QnA
 
 Board created fresh for this walkthrough — no prior coverage.
 Source is video-only: no class-notes PDF, so no second authority on identifier spelling.
