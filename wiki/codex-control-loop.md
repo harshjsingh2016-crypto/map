@@ -17,6 +17,8 @@ It is the Autonomous Ops Ladder applied to the operator: the ledger is L1 visibi
 
 The constraint that shaped the build: the loop must run from a phone. Everything it needs lives inside the repo, and every skill pulls first and commits last, so a session on the desktop and a session on the mobile app never drift by more than one run.
 
+The anchoring question, whether the day's list would actually get opened or needed to arrive on its own, was settled by making the morning step unattended: a cloud routine runs the morning skill against the repo every day at nine, commits the now file, and its output is the notification. The list reaches the operator rather than waiting for him. Because nobody is present when it runs, it never asks; hours come from the budget file or are assumed and marked as assumed.
+
 ## Related
 
 - [Problem discovery frame](problem-discovery-frame.md) — the same start, goal, paths-between shape, applied to a single problem rather than a life
