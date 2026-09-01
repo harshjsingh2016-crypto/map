@@ -9,8 +9,8 @@ The taxonomy is usually taught as a list to memorise. It is better taught as the
 question: **will you be given access to edit the production tables?** No — and once that is settled,
 the five sublanguages are just the division of a permission set, with your share at the bottom.
 
-**DDL**, Data Definition Language, changes the *structure* of a table: add a column, rename one,
-alter a data type, drop the table. **DML**, Data Manipulation Language, changes the *data* inside it:
+**DDL**, Data Definition Language, changes the *structure* of a table: create the table, add a
+column, rename one, alter a data type, drop the whole thing. **DML**, Data Manipulation Language, changes the *data* inside it:
 `UPDATE`, `INSERT`, `DELETE`. That structure-against-data line is the distinction the lecture keeps
 returning to, and it is the one that gets tested. **DCL**, Data Control Language, is `GRANT` and
 `REVOKE` — the database administrator's language, and the one that decides who holds the others.
