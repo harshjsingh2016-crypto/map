@@ -17,6 +17,8 @@ It is the Autonomous Ops Ladder applied to the operator: the ledger is L1 visibi
 
 The constraint that shaped the build: the loop must run from a phone. Everything it needs lives inside the repo, and every skill pulls first and commits last, so a session on the desktop and a session on the mobile app never drift by more than one run.
 
+The first path written for it was thrown out, and the reason is the most useful rule the system has. A list of good habits per domain reads well and converts nothing: it records what the operator thinks he should do, not what causes the horizon signal. A path event has to be a cause. For Work, whose signal is an offer or a mandate naming the framework, the only cause is a person with hiring power deciding the framework is worth paying for, so the chain is the artefacts that make it nameable, the numbers that make it credible, and the asks that put it in front of such people, in that order, with one defined goal per month. Habits that feed the signal without causing it, weekly posts for instance, are kept as habits and left off the path. The same test reshaped Money: no savings target could be on the path until monthly cashflow closed, because savings on autopilot is impossible while outflow exceeds inflow.
+
 The anchoring question, whether the day's list would actually get opened or needed to arrive on its own, was settled by making the morning step unattended: a cloud routine runs the morning skill against the repo every day at nine, commits the now file, and its output is the notification. The list reaches the operator rather than waiting for him. Because nobody is present when it runs, it never asks; hours come from the budget file or are assumed and marked as assumed.
 
 ## Related
