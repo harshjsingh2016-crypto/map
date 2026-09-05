@@ -39,6 +39,13 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [RAG](rag.md) — the plumbing that carries the right slice of the KB into the prompt
 - [Choosing a RAG tool](choosing-a-rag-tool.md) — the surface a tool grounds in decides what it is for
 
+## No-code chatbots
+
+- [Delivery, not accuracy](delivery-not-accuracy.md) — the answer is known; what you don't control is when it's asked
+- [The control dial](control-dial.md) — who decides what happens next; match the tool's shape to the risk's shape
+- [Dify](dify.md) — the model composes every reply; fastest to a bot, least say over it
+- [The competent-reader test](competent-reader-test.md) — is there anyone downstream who would notice a wrong answer?
+
 ## SQL foundations
 
 - [SQL as the extraction step](sql-extraction-step.md) — the precondition that gates every data role, whatever comes after

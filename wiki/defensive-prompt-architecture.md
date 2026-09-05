@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/web-grounding-citations]
-updated: 2026-08-29
+boards: [scalar/ai-reliability, scalar/web-grounding-citations, scalar/no-code-ai-bot]
+updated: 2026-09-05
 ---
 
 # Defensive prompt architecture
@@ -16,6 +16,42 @@ A system prompt written to hold up under adversarial input, rather than one writ
 **Output rules** enforce format constraints — always output in markdown. Constraints of this kind narrow the space the model is choosing from, which is worth something defensively as well as cosmetically: a response that has to fit a known shape has less room to wander.
 
 Worth noticing what the four cover and what they do not. Injection and format are addressed directly; hallucination and output bias are not, and need retrieval and review rather than instructions.
+
+## What the layers look like in a shipped bot
+
+A production system prompt for a customer-facing bot sharpens the refusal layer in two ways
+worth copying.
+
+The refusal is specified **down to the exact sentence** rather than as a behaviour. Not "say
+you don't know" but *say exactly this string*, quoted in the prompt. The reason is the same one
+behind stating a refusal at all: a refusal the model composes freely is a refusal that can
+drift into a hedge, and a hedge is a guess with softer wording.
+
+The refusal is also given **something to do next** — after the fixed sentence, ask for a name
+and a phone number. That turns a failure to answer into a captured contact, which is the
+difference between a dead end and a handoff. A refusal path is worth designing for its outcome,
+not only for its safety.
+
+The second addition is an escalation rule keyed to **emotional state rather than topic**: if
+the person sounds distressed, stuck, or is describing a problem already in progress, stop
+trying to solve it and route to a human. Every other rule in a prompt of this kind is about
+subject matter; this one is about the person, and it encodes the judgement that when someone is
+upset, being correct stops being the goal and getting to a human starts being it.
+
+Both are still instructions, and that is their ceiling. Compliance with a system prompt is
+probabilistic — a model can honour the refusal rule while quietly blurring a neighbouring one,
+obeying the letter of "never invent a number" by paraphrasing a real number into a vague
+quantifier instead. Where an answer is binding, the fix is structural rather than
+instructional: take the sentence away from the model, as the [control dial](control-dial.md)
+describes.
+
+There is a structural reason patching the prompt does not close the gap. Every rule added to a
+system prompt is written against a failure that has already happened — the vague-quantifier
+case is covered only after a customer has been given one. The failures still to come are the
+ones nobody has imagined, and they surface the same way the first did, from someone forwarding
+a screenshot. **Prompt fixes are reactive by construction and the failure surface is
+unbounded**, so the honest question about any prompt-level defence is not whether it works but
+how many more of them the next incident will require.
 
 ## It is not access control
 
@@ -43,3 +79,4 @@ a source, and no amount of instruction reaches it.
 - [The prompt stack](prompt-stack.md) — all four layers live in the system prompt
 - [RCTFC framework](rctfc-framework.md) — Role, Format and Constraints, restated defensively
 - [Grounding](grounding.md) — the missing-answer case the refusal rule also has to cover
+- [The control dial](control-dial.md) — what to do when instruction is not enough and the sentence has to leave the model

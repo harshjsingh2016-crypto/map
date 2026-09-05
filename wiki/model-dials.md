@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-ecosystems]
-updated: 2026-08-24
+boards: [scalar/ai-ecosystems, scalar/no-code-ai-bot]
+updated: 2026-09-05
 ---
 
 # Model dials
@@ -17,6 +17,17 @@ how adventurously it selects from that pool.
 
 Because both narrow the same choice, they are not adjusted simultaneously. Move one at a
 time — with both moving, an improvement or a regression cannot be attributed to either.
+
+## Temperature under retrieval
+
+One setting has an answer that does not need deriving. A bot answering from a fixed knowledge
+base runs at a **low** temperature — creativity drops, and hallucination drops with it.
+
+The reason is that the two settings contradict each other outright. Retrieval exists so the
+answer is determined by the documents; temperature is the dial that governs how far the model
+may wander from what is determined. Turning both up is asking for a grounded answer and paying
+for the licence to leave it. Wherever a [grounded](grounding.md) pipeline is involved, the
+temperature question is already settled.
 
 ## Related
 

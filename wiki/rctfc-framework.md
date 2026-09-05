@@ -1,6 +1,6 @@
 ---
-boards: [scalar/prompt-engineering]
-updated: 2026-08-21
+boards: [scalar/prompt-engineering, scalar/no-code-ai-bot]
+updated: 2026-09-05
 ---
 
 # RCTFC Framework
@@ -17,6 +17,22 @@ Two things about constraints worth keeping:
 
 - A word limit is a [cost lever](prompt-costs.md), not just a style one — it caps the expensive side of the bill.
 - Constraints can contradict the task. A word cap on an output that genuinely needs more words forces the model to choose which instruction to break. Watch for the contradiction rather than stacking constraints reflexively.
+
+## The block the framework has no slot for
+
+A shipped customer-facing system prompt maps onto the five almost cleanly — a role-and-context
+opening, a YOUR JOB block as the task, HARD RULES as constraints, a STYLE block as format. What
+does not map is a fifth block instructing the bot to collect, before the conversation ends, the
+travel month, the number of travellers and one contact detail.
+
+The mismatch is informative rather than a gap in the framework. RCTFC describes how to get a
+good *answer*, and every one of the five serves that. A bot deployed by a business has a second
+job running underneath the answering one, and that job is commercial: the conversation is worth
+something even when the answer is not. Nothing in a framework built around answering has a
+place to put it.
+
+Worth carrying as a check on any production prompt. If it only says how to answer well, it is
+an RCTFC prompt in a place where the business also wanted an outcome.
 
 ## Related
 

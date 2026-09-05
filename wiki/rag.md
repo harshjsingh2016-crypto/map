@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-ecosystems, scalar/knowledge-management-and-rag, scalar/web-grounding-citations]
-updated: 2026-08-29
+boards: [scalar/ai-ecosystems, scalar/knowledge-management-and-rag, scalar/web-grounding-citations, scalar/no-code-ai-bot]
+updated: 2026-09-05
 ---
 
 # RAG
@@ -196,6 +196,25 @@ did what a grounded tool should.
 The diagnosis matters because it names the fix. This is a retrieval-scope failure, and the
 remedy is a broader or better-matched document, not a better prompt. You cannot instruct
 your way out of a source that does not cover your case.
+
+## It is the technique, not the differentiator
+
+Because RAG is a technique rather than a product, every tool that grounds in documents runs it,
+and running it is therefore worthless as a point of comparison. Chatbot builders, notebook
+tools and app platforms all chunk the uploaded files on ingest, store them as embeddings, and
+retrieve against them at answer time. The instructor's version: RAG is a technique the way
+walking is a technique, and you walking, me walking and him walking are still three different
+people.
+
+Two things follow. First, a tool comparison drawn on "does it do RAG" separates nothing — which
+is why the useful axes are elsewhere, in what a tool grounds *against* and in who decides the
+next step. Second, "we use RAG" in a vendor pitch names the pipeline and says nothing about the
+quality of the retrieval inside it, which is where the actual engineering differences live.
+
+A related confusion worth clearing: a diagram showing *query + file* going into the prompt is
+not a different scheme from *query + chunks*. The file is shorthand for the retrieved pieces of
+it. Whole documents do not go into the prompt — that is the constraint retrieval exists to
+work around.
 
 ## Related
 
