@@ -50,6 +50,10 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Free-tier arithmetic](free-tier-arithmetic.md) — count messages, not conversations; volume bites before seats do
 - [The competent-reader test](competent-reader-test.md) — is there anyone downstream who would notice a wrong answer?
 
+## AI for content creation
+
+- [Diagnose the hard part](diagnose-the-hard-part.md) — structure, substance or style; the tool follows the diagnosis
+
 ## SQL foundations
 
 - [SQL as the extraction step](sql-extraction-step.md) — the precondition that gates every data role, whatever comes after
