@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/ai-ecosystems, scalar/knowledge-management-and-rag, scalar/web-grounding-citations]
-updated: 2026-08-29
+boards: [scalar/ai-reliability, scalar/ai-ecosystems, scalar/knowledge-management-and-rag, scalar/web-grounding-citations, scalar/no-code-ai-bot]
+updated: 2026-09-06
 ---
 
 # Grounding
@@ -94,6 +94,18 @@ The hedging in the original phrasing is deliberate and worth preserving: answeri
 memory *could be* ungrounded, and ungrounded has *more potential* for hallucination.
 Ungrounded is not a verdict of wrongness, it is an absence of verification —
 [unverified is not false](source-quality-framework.md).
+
+## The knowledge base is the unit of scoping
+
+A practical corollary once grounding is implemented as an attached document store. Asked to
+ground one agent in two of four uploaded files, the instinct is to disable the other two — and
+that is the wrong control. Disabling a file disables it **everywhere that knowledge base is
+used**, so file-level toggling is a global switch wearing the costume of a local one.
+
+Scope at the knowledge-base boundary instead. If two agents need different slices of the same
+folder, that is two knowledge bases rather than one with files switched off. Instructing the
+retrieval step in the prompt to prefer certain files works too, but it is an instruction and
+carries the usual ceiling; splitting the store is structural.
 
 ## Related
 

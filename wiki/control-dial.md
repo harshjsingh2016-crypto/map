@@ -1,6 +1,6 @@
 ---
 boards: [scalar/no-code-ai-bot]
-updated: 2026-09-05
+updated: 2026-09-06
 ---
 
 # The control dial
@@ -65,14 +65,81 @@ be unreliable. This is the same instinct as [grounding](grounding.md), moved up 
 grounding restricts what the model may draw on, and the dial restricts where it is permitted
 to speak at all.
 
+One clarification keeps the picture honest: moving right rarely removes the model, it demotes
+it. In a flow builder the branches are chosen by detected intent, and detecting intent is a
+model call — so on the risky path the model is still deciding something. What shrank is the
+size of the decision. Choosing which vetted text to return has a worst case the next message
+corrects; composing a binding number has a worst case that arrives in a screenshot. The
+mitigation is almost never removal, it is a smaller decision with a cheaper failure.
+
+The property being traded is **variance, not capability**. A model asked for a figure it holds
+is not unable to give it — it may give it, or may phrase it differently, on any particular run.
+The instructor's image is a five-year-old who has been taught a nursery rhyme: the child knows
+the song, and whether they sing it when a guest asks is a separate question. Scripted text has
+no such gap between knowing and doing, which is the entire reason binding answers are moved
+into it. Reliability questions of this kind are usually about consistency across runs rather
+than about what the system can do.
+
 The review step at the far end is a different kind of reduction and should not be filed with
 the other two. It is a design-time check, not a runtime one. Drawing the flow reduces what the
 model can say when a user is waiting; team review catches a badly designed conversation before
 anyone builds it.
+
+## Making the thesis operational: reader, sentence, org
+
+"Match the shape of the tool to the shape of the risk" stays a slogan until the risks are
+named. Three questions name them, and they are asked in order.
+
+**The reader.** Can whoever receives this answer tell if it is wrong? This is the
+[competent-reader test](competent-reader-test.md), and passing it is what makes the
+model-decides end viable rather than reckless — fast to build, wide coverage, and a verifier
+sitting downstream.
+
+**The sentence.** Does any answer this bot gives commit the business to something? If yes, that
+answer stops being generated and becomes scripted text. Note the unit: the question is asked of
+answer *types*, not of products. The same bot can be safe describing a route and unsafe quoting
+a cancellation slab, which is why a mixed build — autonomous for most of the conversation,
+scripted for the few sentences that commit you — is the sensible shape rather than a
+compromise. Choosing a tool per bot is what makes the decision feel like a ranking; choosing per
+answer type makes it a design.
+
+**The org.** Who has to say yes before this ships? If the honest answer is "just me", the
+review-and-approval end buys nothing and costs money. If it is the founder, CX and marketing,
+it buys the one thing the other options do not offer.
+
+Three different questions, three different rows — which is also why comparing the tools on any
+single criterion always picks the most elaborate one, and always picks wrong.
+
+## Each end has its own ceiling
+
+None of the three positions is free, and the costs are not the same kind.
+
+At the model-decides end, prompt fixes are reactive and do not converge: every rule is written
+against a failure already seen. In the middle, control means node handling — you own every
+branch, and each new edge case is another branch to draw and maintain, which is a cost paid
+continuously rather than once. At the reviewed end, the review loop and the price are both real:
+it is the most expensive of the options and the one whose free tier runs out fastest, which is
+worth remembering precisely because it is also the one that demonstrates best.
+
+## What these tools are not
+
+Two boundaries worth holding, because both come up constantly in the same conversations.
+
+**They are not general workflow automation.** Node-based automation platforms look nearly
+identical on screen — a canvas, nodes, connections — and the difference is what they are shaped
+for. Email and marketing automation belongs in the automation platform; a conversation belongs
+in these.
+
+**They are not the model.** A model provider is the LLM layer, and can sit underneath any of
+these as the API endpoint. What the tools supply is the knowledge base, the routing between
+steps, and the integration surface that puts the result on a channel. The model is a component
+of the product, not the product — which is also why "can I just build this in [model X]?"
+answers itself once the question is which layer you mean.
 
 ## Related
 
 - [Delivery, not accuracy](delivery-not-accuracy.md) — the reframe that makes a chatbot the tool in the first place; the dial is how you then pick one
 - [Grounding](grounding.md) — the same restriction instinct one level down, applied to what the model may read rather than where it may speak
 - [AI safety failure modes](ai-safety-failure-modes.md) — hallucination is the failure the dial is trading against
+- [Botpress](botpress.md) — the middle of the dial, where the branch you draw is the branch the model cannot rephrase
 - [Choosing a RAG tool](choosing-a-rag-tool.md) — the sibling selection rule, where the axis is the grounding surface rather than who decides the next step

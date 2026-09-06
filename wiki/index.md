@@ -44,6 +44,10 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Delivery, not accuracy](delivery-not-accuracy.md) — the answer is known; what you don't control is when it's asked
 - [The control dial](control-dial.md) — who decides what happens next; match the tool's shape to the risk's shape
 - [Dify](dify.md) — the model composes every reply; fastest to a bot, least say over it
+- [Botpress](botpress.md) — draw the branch and the model cannot rephrase it; the model picks the exit, not the words
+- [Voiceflow](voiceflow.md) — the same routing decision written as prose a whole team can argue with
+- [Vendor data diligence](vendor-data-diligence.md) — safety is a per-client requirement you verify, not a vendor property
+- [Free-tier arithmetic](free-tier-arithmetic.md) — count messages, not conversations; volume bites before seats do
 - [The competent-reader test](competent-reader-test.md) — is there anyone downstream who would notice a wrong answer?
 
 ## SQL foundations

@@ -1,6 +1,6 @@
 ---
 boards: [scalar/ai-reliability, scalar/no-code-ai-bot]
-updated: 2026-09-05
+updated: 2026-09-06
 ---
 
 # AI safety failure modes
@@ -10,6 +10,14 @@ Four distinct ways a model-backed application goes wrong. They are worth separat
 **Hallucination** is the model making it up — producing an answer that reads as confident but has no source behind it. This is the failure mode [grounding](grounding.md) exists to control: fence the model to data the answer can be traced back to, and there is less room to invent.
 
 Two examples make the shape of it clear. Asked for the total wickets a bowler took over a period of years, with no access to the internet, the model answered out of its own weights and hallucinated. In law, previous judgements have been fabricated the same way. The common pattern is that the question had a real, checkable answer and the model had no route to it — hallucination shows up most sharply on facts that could have been looked up.
+
+A third example shows the same failure in a generated artifact rather than a chat reply. An
+agent asked to build a company web page produced, unprompted, an emergency contact number that
+belonged to nobody — the page seemed to want one, and the source folder supplied none. The
+detail was never requested, cannot be checked by the reader, and looks exactly like the real
+thing. Generated output invents most freely in the gaps nobody specified, because that is where
+nothing in the material contradicts it, so the parts you did not ask for are the parts to
+review first.
 
 Grounding is not the only lever on it, though, and the second one is structural rather than
 instructional. Hallucination can only occur where the model is generating, so removing
