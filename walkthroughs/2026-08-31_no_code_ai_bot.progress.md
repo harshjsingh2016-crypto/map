@@ -5,6 +5,8 @@ Updated: 2026-09-06
 Agenda confirmed: 2026-09-01 (summary + glossary presented)
 Learning stage complete: 2026-09-06 — all 12 sections discussed and ruled on.
 Status strip advanced: Learning green, Class Assignment indigo.
+Class Assignment complete: 2026-09-06 (user confirmed the doubt-session Dify build).
+Status strip advanced: Class Assignment green, Internal QnA indigo — that stage runs in Armor.
 
 User addition: the Wanderline knowledge-base folder link is to go on the board as a note
 when §3b (the knowledge base) is reached —
