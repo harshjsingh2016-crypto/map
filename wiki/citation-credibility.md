@@ -1,6 +1,6 @@
 ---
-boards: [scalar/web-grounding-citations]
-updated: 2026-08-29
+boards: [scalar/web-grounding-citations, scalar/ai-content-creation]
+updated: 2026-09-09
 ---
 
 # Citation credibility
@@ -182,9 +182,25 @@ listing features: **more visibility, further from an end user.** The tool that s
 most is the developer console, and the reason it should not be put in front of a client is
 the same reason it is valuable to you.
 
+## A pointer, not a verification
+
+The compressed form, from a deck tool returning a confident growth statistic with a source
+attached: **a citation is a pointer, not a verification.** It says where the number came from. It
+does not say the source contains that number, or that the number means on the slide what it meant
+where it was published.
+
+Two responses are both wrong, and they fail in opposite directions. Trusting the number because
+it carries a citation treats the artefact being checked as the thing that settles the check.
+Deleting the slide on the grounds that AI numbers should never be used is an over-correction that
+gives up content the deck needs; so is thinning the stat count, which reduces exposure without
+making any remaining figure right. The move is to open the citation and read it against the
+claim — the only one of the three that changes what you know.
+
+
 ## Related
 
 - [Source-Quality Framework](source-quality-framework.md) — the four checks this argument exists to justify
+- [The editor's checklist](editors-checklist.md) — the pass that turns this into a step before anything ships
 - [Grounding](grounding.md) — the fence this assumes, and the audit test that stops working
 - [RAG](rag.md) — the retrieval step whose failures leave no visible mark on the web
 - [Choosing a RAG tool](choosing-a-rag-tool.md) — the grounding surface that decides whether you can audit at all
