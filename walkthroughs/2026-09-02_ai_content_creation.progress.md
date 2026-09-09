@@ -2,6 +2,7 @@
 Board: scalar/ai-content-creation
 Source: Armor/Output/2026-09-02_ai_content_creation.md
 Updated: 2026-09-09
+Walkthrough complete: 2026-09-09 — all 16 agenda items ruled on, no open flags, no pending suggestions
 Agenda confirmed: 2026-09-06 (summary + glossary presented)
 
 Board created empty this session, so every item is a first pass. Items marked
@@ -21,5 +22,5 @@ refinement sharpen a concept the wiki already carries from an earlier lecture.
 - [x] §7/§8 RAG's four retrieval failures, relevance the one that bites here — refinement (source-quality-framework) — discussed ✓ — accepted (four-failure table with a trailing row on why the ranking differs from the research case; the contrast with the recency-first ranking is board-derived, not the instructor's, and is labelled as such in discussion)
 - [x] §8 quiz reasoning: a citation is a pointer, not a verification — missed — discussed ✓ — accepted (note carrying the Quiz 2 case and both wrong moves; Quiz 4's "style is free, binding content is fixed" appended to the §7 paraphrase note rather than given its own widget)
 - [x] §8 the correct answer was the longest option in all four quizzes — missed — discussed ✓ — not boarded (about the quiz deck, not the subject; the instructor warned against learning the pattern). Kept here as a heads-up before the Scaler QnA.
-- [ ] §10 Gamma vs Copilot; the tool-to-use-case cheat sheet instead of memorising tools — missed — pending
-- [ ] §11 yak shaving — vocabulary only, low priority — missed — pending
+- [x] §10 Gamma vs Copilot; the tool-to-use-case cheat sheet instead of memorising tools — missed — discussed ✓ — accepted (cheat-sheet table indexed by use case with the principle as a trailing row; bolted-on-vs-built-for-it note carrying the ecosystem follow-up). The "Micro Slop" hearsay and the 800% convenience figure left off — hearsay and rhetoric respectively. Off-syllabus stretches (coding-agent subscriptions, SSO/OAuth/JWT) not boarded here; they belong to a different board if wanted.
+- [x] §11 yak shaving — vocabulary only, low priority — missed — discussed ✓ — accepted at the user's call against my recommendation to skip (short note, definition plus the nuance that a prerequisite chain may only look like the real work). Board-only: vocabulary, so no wiki article.

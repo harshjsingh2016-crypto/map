@@ -57,8 +57,25 @@ section bookmark on the lecture recording. The instructor never presents it as a
 and the class notes carry no trace of the section at all. The idea is load-bearing; the label is
 not something to cite.
 
+## The cheat sheet is built use case first
+
+Asked how anyone keeps up with the number of tools, the instructor's answer extends the diagnosis
+into a habit: you do not remember the tools, you remember the perfect fit. Keep a sheet mapping
+**use case to tool** — RAG over internal material to NotebookLM, a single-job chatbot to Gems, a
+deck to Gamma — rather than a list of tools with their features.
+
+The direction is what makes it work. A tool-first list has to be relearned every time the market
+moves, and it has no answer for a tool you have not met. A use-case-first sheet is indexed by
+something stable, because the jobs change far more slowly than the products that serve them, and a
+new arrival is filed against a job you already understand instead of studied as a fresh object.
+
+It is the same move as the triage itself, run on a longer timescale. Diagnose the job, then pick;
+and keep the record organised by job, so the picking stays cheap.
+
+
 ## Related
 
+- [Bolted on, or built for it](bolted-on-or-built-for-it.md) — how to judge a candidate tool once the job is diagnosed
 - [The do-not-guess constraint](do-not-guess-constraint.md) — what to write into the prompt once you have diagnosed a substance job
 - [Finished-looking is not checked](finished-looking-is-not-checked.md) — the second half of the skill; picking well does not remove the review
 - [The control dial](control-dial.md) — the same selection instinct for chatbots, where the axis is who decides the next step rather than what is hard
