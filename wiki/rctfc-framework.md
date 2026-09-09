@@ -1,6 +1,6 @@
 ---
-boards: [scalar/prompt-engineering, scalar/no-code-ai-bot]
-updated: 2026-09-05
+boards: [scalar/prompt-engineering, scalar/no-code-ai-bot, scalar/ai-content-creation]
+updated: 2026-09-09
 ---
 
 # RCTFC Framework
@@ -17,6 +17,33 @@ Two things about constraints worth keeping:
 
 - A word limit is a [cost lever](prompt-costs.md), not just a style one — it caps the expensive side of the bill.
 - Constraints can contradict the task. A word cap on an output that genuinely needs more words forces the model to choose which instruction to break. Watch for the contradiction rather than stacking constraints reflexively.
+
+## TAF — the same framework with two slots assumed
+
+Content work names its own version, **TAF: Tone, Audience, Format**. It is not a sixth thing to
+learn. Tone is the sound half of Format, Audience is Context under another name, and Format is
+Format. Role and Constraints have not been dropped — they are assumed, because in content work
+they are stable: you already know you are briefing a copywriter, and the constraint is nearly
+always "don't invent facts". That is the same constraint that carried the Gamma deck and the
+handbook rewrite, which is why the compression survives contact with real work.
+
+The compression is only safe while those two hold. A brief that carries a legal disclaimer, a
+mandated call to action, or a word cap that fights the task has a constraint worth writing down,
+and TAF has nowhere to put it — at which point you are back to spelling out all five.
+
+Format is also lighter here than anywhere else, and that is the substantive difference rather
+than a stylistic one. For an engineering prompt the format is a contract: the JSON keys the
+response must carry. For a caption it is "2-3 short lines, no hashtags", and the weight shifts
+onto tone and audience, because that is what content professionals actually lean on.
+
+The worked pair makes the cost of leaving a slot empty concrete. "Write something about our
+Kerala backwaters package" leaves the model guessing the medium, the reader and the length, and
+a guessing model goes safely bland. The specified version names an Instagram caption, a tone
+(warm, a little cheeky, one emoji max), an audience (young couples scrolling, not researching
+yet) and a format (2-3 short lines, one concrete sensory detail). The audience clause quietly
+does the most work: "not researching yet" rules out prices, dates and itineraries without any
+of them being mentioned. Every ambiguous choice was made by the writer rather than the model.
+
 
 ## The block the framework has no slot for
 
@@ -39,3 +66,5 @@ an RCTFC prompt in a place where the business also wanted an outcome.
 - [Prompt costs](prompt-costs.md) — why spending input tokens to narrow output pays
 - [Zero-shot and few-shot prompting](zero-and-few-shot-prompting.md) — examples as an alternative way to pin down format
 - [Iterative prompt refinement](iterative-prompt-refinement.md) — how a prompt like V2 actually gets written
+- [Diagnose the hard part](diagnose-the-hard-part.md) — TAF is worth reaching for once the job is known to be a style-and-volume one
+- [The do-not-guess constraint](do-not-guess-constraint.md) — the constraint TAF leaves unsaid, and what happens when it is

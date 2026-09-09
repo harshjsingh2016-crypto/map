@@ -1,6 +1,6 @@
 ---
-boards: [scalar/web-grounding-citations]
-updated: 2026-08-29
+boards: [scalar/web-grounding-citations, scalar/ai-content-creation]
+updated: 2026-09-09
 ---
 
 # Source-Quality Framework
@@ -123,8 +123,27 @@ The ordering shows up as procedure too. Working such a case by elimination, corr
 is never reached at all: the first question is whether it was even correct to pick this
 article. You do not corroborate a source that has not cleared recency.
 
+## The ranking is job-dependent, and content work reverses it
+
+Recency running first holds for research, where you put a question to the web and the answer
+comes back from it. Content work inverts the situation: you hand the tool your own notes and ask
+it to write, and the tool reaches the web anyway because a general assistant is not fenced to
+what you supplied. Nothing was asked of the web, so nothing arrives labelled as its answer.
+
+That makes **relevance** the check most likely to bite. What comes back is real material about
+the same subject — the same region, the same kind of trip — merged into a draft you believe was
+built from your notes. Recency, authority and corroboration can all pass on it, because there is
+nothing wrong with the source. It is simply answering a question nobody asked, and it renders the
+result obsolete without ever looking wrong.
+
+The generalisation worth keeping is that the four checks are not ranked once and for all. The one
+that bites is decided by how the material got in. When you queried, suspect staleness. When the
+tool reached out unasked, suspect a good source doing the wrong job.
+
+
 ## Related
 
+- [The editor's checklist](editors-checklist.md) — where the check lands in practice, once the draft exists
 - [Citation credibility](citation-credibility.md) — why the check has to run on the source, and the three failure modes this inverts
 - [Grounding](grounding.md) — the fence whose audit stops working on the open web
 - [Choosing a RAG tool](choosing-a-rag-tool.md) — which tools show you enough to run these checks

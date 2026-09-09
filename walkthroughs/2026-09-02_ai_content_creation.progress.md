@@ -2,6 +2,7 @@
 Board: scalar/ai-content-creation
 Source: Armor/Output/2026-09-02_ai_content_creation.md
 Updated: 2026-09-09
+Walkthrough complete: 2026-09-09 — all 16 agenda items ruled on, no open flags, no pending suggestions
 Agenda confirmed: 2026-09-06 (summary + glossary presented)
 
 Board created empty this session, so every item is a first pass. Items marked
@@ -13,12 +14,13 @@ refinement sharpen a concept the wiki already carries from an earlier lecture.
 - [x] §2 Gamma's specific credit and price figures — missed — discussed ✓ — rejected (perishable vendor figures; the wiki already rules they are worth nothing as remembered numbers)
 - [x] §3 Gamma: speed and temperature bought at the cost of invented content — missed — discussed ✓ — accepted (pipeline flowchart, invention+mechanism note merged at user's call, worth note)
 - [x] §4 Claude/ChatGPT: messy notes, the do-not-guess constraint, the artifact property — missed — discussed ✓ — accepted (constraint note, two-documents table, artifact note, substance-signals mindmap)
-- [>] §4 Claude vs ChatGPT, where the instructor declined to pick — missed — deferred (offered as detail on the triage table row, not taken up)
+- [x] §4 Claude vs ChatGPT, where the instructor declined to pick — missed — re-raised once at the user's request before §7 — rejected (the category is already carried by the triage table; a comparison would imply a verdict the instructor refused to give)
 - [x] §5 Canva Magic Studio: brand voice trained from examples; voice is per channel, not per brand — missed — discussed ✓ — accepted (voice-per-channel note, triage c-supply cell sharpened)
 - [x] §5 the LinkedIn pipeline — generation and proofread as separate steps — missed — discussed ✓ — accepted (Canva pipeline flowchart, proofread as its own node)
-- [ ] §6 TAF as RCTFC with role and constraints assumed — refinement (rctfc-framework) — pending
-- [ ] §7 editor's checklist, and why paraphrase is the specific danger — missed — pending
-- [ ] §7/§8 RAG's four retrieval failures, relevance the one that bites here — refinement (source-quality-framework) — pending
-- [ ] §8 quiz reasoning: a citation is a pointer, not a verification — missed — pending
-- [ ] §10 Gamma vs Copilot; the tool-to-use-case cheat sheet instead of memorising tools — missed — pending
-- [ ] §11 yak shaving — vocabulary only, low priority — missed — pending
+- [x] §6 TAF as RCTFC with role and constraints assumed — refinement (rctfc-framework) — discussed ✓ — accepted (mapping table with the two assumed slots as their own rows, vague-vs-TAF note; the "why format is lightest here" candidate folded into the Format row rather than a third widget). Offered beyond the file: TAF holds only while role and constraint stay stable — not taken up, recorded in the wiki only.
+- [x] §7 editor's checklist, and why paraphrase is the specific danger — missed — discussed ✓ — accepted (checklist table paired check-to-failure, paraphrase-vs-invention note, cross-verification note, plus one flag on the Canva proofread node — resolved after §8: the node now carries a detail saying it tightens phrasing and does not verify figures, and the flag is cleared). The 90-great-trips numbers left off the board at the user's call — the file marks them a constructed teaching illustration; the mechanism is stated as a count rewritten as a proportion, and the 25% refund case carries the point.
+- [x] §7/§8 RAG's four retrieval failures, relevance the one that bites here — refinement (source-quality-framework) — discussed ✓ — accepted (four-failure table with a trailing row on why the ranking differs from the research case; the contrast with the recency-first ranking is board-derived, not the instructor's, and is labelled as such in discussion)
+- [x] §8 quiz reasoning: a citation is a pointer, not a verification — missed — discussed ✓ — accepted (note carrying the Quiz 2 case and both wrong moves; Quiz 4's "style is free, binding content is fixed" appended to the §7 paraphrase note rather than given its own widget)
+- [x] §8 the correct answer was the longest option in all four quizzes — missed — discussed ✓ — not boarded (about the quiz deck, not the subject; the instructor warned against learning the pattern). Kept here as a heads-up before the Scaler QnA.
+- [x] §10 Gamma vs Copilot; the tool-to-use-case cheat sheet instead of memorising tools — missed — discussed ✓ — accepted (cheat-sheet table indexed by use case with the principle as a trailing row; bolted-on-vs-built-for-it note carrying the ecosystem follow-up). The "Micro Slop" hearsay and the 800% convenience figure left off — hearsay and rhetoric respectively. Off-syllabus stretches (coding-agent subscriptions, SSO/OAuth/JWT) not boarded here; they belong to a different board if wanted.
+- [x] §11 yak shaving — vocabulary only, low priority — missed — discussed ✓ — accepted at the user's call against my recommendation to skip (short note, definition plus the nuance that a prerequisite chain may only look like the real work). Board-only: vocabulary, so no wiki article.

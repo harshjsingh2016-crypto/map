@@ -37,6 +37,8 @@ the part of the job that stayed yours, and the reason the saving is worth anythi
 
 ## Related
 
+- [The editor's checklist](editors-checklist.md) — what the second half of the skill actually consists of
+- [Paraphrase is a different failure from invention](paraphrase-failure-mode.md) — the failure a skim is least likely to catch
 - [Diagnose the hard part](diagnose-the-hard-part.md) — the first half of the skill, where the second half is this one
 - [Canva Magic Studio](canva-magic-studio.md) — the pipeline that makes the checking pass explicit, because volume hides the need for it
 - [Gamma](gamma.md) — the bluntest demonstration: three commercial concessions invented onto a negotiation slide
