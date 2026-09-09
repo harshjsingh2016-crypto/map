@@ -1,7 +1,7 @@
 # Walkthrough — 2026-09-02_ai_content_creation.md
 Board: scalar/ai-content-creation
 Source: Armor/Output/2026-09-02_ai_content_creation.md
-Updated: 2026-09-07
+Updated: 2026-09-09
 Agenda confirmed: 2026-09-06 (summary + glossary presented)
 
 Board created empty this session, so every item is a first pass. Items marked
@@ -14,8 +14,8 @@ refinement sharpen a concept the wiki already carries from an earlier lecture.
 - [x] §3 Gamma: speed and temperature bought at the cost of invented content — missed — discussed ✓ — accepted (pipeline flowchart, invention+mechanism note merged at user's call, worth note)
 - [x] §4 Claude/ChatGPT: messy notes, the do-not-guess constraint, the artifact property — missed — discussed ✓ — accepted (constraint note, two-documents table, artifact note, substance-signals mindmap)
 - [>] §4 Claude vs ChatGPT, where the instructor declined to pick — missed — deferred (offered as detail on the triage table row, not taken up)
-- [ ] §5 Canva Magic Studio: brand voice trained from examples; voice is per channel, not per brand — missed — pending
-- [ ] §5 the LinkedIn pipeline — generation and proofread as separate steps — missed — pending
+- [x] §5 Canva Magic Studio: brand voice trained from examples; voice is per channel, not per brand — missed — discussed ✓ — accepted (voice-per-channel note, triage c-supply cell sharpened)
+- [x] §5 the LinkedIn pipeline — generation and proofread as separate steps — missed — discussed ✓ — accepted (Canva pipeline flowchart, proofread as its own node)
 - [ ] §6 TAF as RCTFC with role and constraints assumed — refinement (rctfc-framework) — pending
 - [ ] §7 editor's checklist, and why paraphrase is the specific danger — missed — pending
 - [ ] §7/§8 RAG's four retrieval failures, relevance the one that bites here — refinement (source-quality-framework) — pending
