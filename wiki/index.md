@@ -87,3 +87,4 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Codex control loop](codex-control-loop.md) — the now is the only lever; seven files and four skills point the hours at a written-down future
 - [Logistics agent — the goal](logistics-agent-goal.md) — eight regions of control, from SLAs to order movement
 - [Logistics agent — the data position](logistics-agent-data-position.md) — six sources; column count is not coverage, and cost is empty
+- [QVS agent — the project position](qvs-agent-position.md) — one engine, five read surfaces, and threads blocked on an account rather than on code
