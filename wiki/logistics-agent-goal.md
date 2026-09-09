@@ -55,6 +55,18 @@ Two supporting requirements sit under it: CS agents need current order status vi
 while they are on the call, and RTO-driven manual re-placement needs controlling. Metrics
 cut by status, type, and criticality.
 
+**Order movement** is the eighth region and the one with no measurement in it at all. An
+order crosses two system boundaries — Bettercommerce to Increff, then Increff to Clickpost
+— and orders have been lost in both transfers, sitting in the first system with no record
+in the second and nothing raising a hand. The requirement is a daily reconciliation of
+presence across the three sources rather than a new metric.
+
+Three of the requirements are migrations rather than capabilities: the Logisupport ticket
+tool and its Firestore data move into the new system, and the hand-maintained spreadsheets
+— zone map, partner-pincode assignment, rate cards, serviceability, invoice breakup —
+stop being spreadsheets. They are stated as goals because the end state is not reached
+while any of that lives outside the system.
+
 The open question the frame still holds is what "good" is for each requirement — the
 requirement table has a success column deliberately left empty, because a control target
 without a number is an intention.

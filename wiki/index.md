@@ -85,4 +85,5 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Base 1 — the year's plan](base-1-years-plan.md) — six areas the year is aimed at, success defined per area
 - [GRN-to-payment cycle](grn-to-payment-cycle.md) — six sequential steps, four of them one-way shares that never return
 - [Codex control loop](codex-control-loop.md) — the now is the only lever; seven files and four skills point the hours at a written-down future
-- [Logistics agent — the goal](logistics-agent-goal.md) — five regions of control: SLAs, BI, assignment, costs, escalations
+- [Logistics agent — the goal](logistics-agent-goal.md) — eight regions of control, from SLAs to order movement
+- [Logistics agent — the data position](logistics-agent-data-position.md) — six sources; column count is not coverage, and cost is empty
