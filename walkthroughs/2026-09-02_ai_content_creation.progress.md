@@ -16,7 +16,7 @@ refinement sharpen a concept the wiki already carries from an earlier lecture.
 - [>] §4 Claude vs ChatGPT, where the instructor declined to pick — missed — deferred (offered as detail on the triage table row, not taken up)
 - [x] §5 Canva Magic Studio: brand voice trained from examples; voice is per channel, not per brand — missed — discussed ✓ — accepted (voice-per-channel note, triage c-supply cell sharpened)
 - [x] §5 the LinkedIn pipeline — generation and proofread as separate steps — missed — discussed ✓ — accepted (Canva pipeline flowchart, proofread as its own node)
-- [ ] §6 TAF as RCTFC with role and constraints assumed — refinement (rctfc-framework) — pending
+- [x] §6 TAF as RCTFC with role and constraints assumed — refinement (rctfc-framework) — discussed ✓ — accepted (mapping table with the two assumed slots as their own rows, vague-vs-TAF note; the "why format is lightest here" candidate folded into the Format row rather than a third widget). Offered beyond the file: TAF holds only while role and constraint stay stable — not taken up, recorded in the wiki only.
 - [ ] §7 editor's checklist, and why paraphrase is the specific danger — missed — pending
 - [ ] §7/§8 RAG's four retrieval failures, relevance the one that bites here — refinement (source-quality-framework) — pending
 - [ ] §8 quiz reasoning: a citation is a pointer, not a verification — missed — pending
