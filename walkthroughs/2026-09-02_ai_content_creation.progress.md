@@ -1,17 +1,19 @@
 # Walkthrough — 2026-09-02_ai_content_creation.md
 Board: scalar/ai-content-creation
 Source: Armor/Output/2026-09-02_ai_content_creation.md
-Updated: 2026-09-06
+Updated: 2026-09-07
 Agenda confirmed: 2026-09-06 (summary + glossary presented)
 
 Board created empty this session, so every item is a first pass. Items marked
 refinement sharpen a concept the wiki already carries from an earlier lecture.
 
 - [x] §1 structure / substance / style — diagnose the hard part before the tool — missed — discussed ✓ — accepted (all 3 candidates: flowchart, briefs table, note)
-- [ ] §2 tool triage: hard part to tool, and none of them checks its own facts — missed — pending
-- [ ] §2 rationing: Gamma credits vs rate limiting on the other three — refinement (free-tier-arithmetic) — pending
-- [ ] §3 Gamma: speed and temperature bought at the cost of invented content — missed — pending
-- [ ] §4 Claude/ChatGPT: messy notes, the do-not-guess constraint, the artifact property — missed — pending
+- [x] §2 tool triage: hard part to tool, and none of them checks its own facts — missed — discussed ✓ — accepted (triage table, note, plus tool names folded into the §1 flowchart details)
+- [x] §2 rationing: Gamma credits vs rate limiting on the other three — refinement (free-tier-arithmetic) — discussed ✓ — accepted (rationing table, rate-limit note)
+- [x] §2 Gamma's specific credit and price figures — missed — discussed ✓ — rejected (perishable vendor figures; the wiki already rules they are worth nothing as remembered numbers)
+- [x] §3 Gamma: speed and temperature bought at the cost of invented content — missed — discussed ✓ — accepted (pipeline flowchart, invention+mechanism note merged at user's call, worth note)
+- [x] §4 Claude/ChatGPT: messy notes, the do-not-guess constraint, the artifact property — missed — discussed ✓ — accepted (constraint note, two-documents table, artifact note, substance-signals mindmap)
+- [>] §4 Claude vs ChatGPT, where the instructor declined to pick — missed — deferred (offered as detail on the triage table row, not taken up)
 - [ ] §5 Canva Magic Studio: brand voice trained from examples; voice is per channel, not per brand — missed — pending
 - [ ] §5 the LinkedIn pipeline — generation and proofread as separate steps — missed — pending
 - [ ] §6 TAF as RCTFC with role and constraints assumed — refinement (rctfc-framework) — pending

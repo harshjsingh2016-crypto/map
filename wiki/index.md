@@ -53,6 +53,10 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 ## AI for content creation
 
 - [Diagnose the hard part](diagnose-the-hard-part.md) — structure, substance or style; the tool follows the diagnosis
+- [Finished-looking is not checked](finished-looking-is-not-checked.md) — polish and accuracy are two processes; only one is running
+- [Gamma](gamma.md) — decks in under a minute; the speed and the invention are one setting
+- [The do-not-guess constraint](do-not-guess-constraint.md) — name what to do with a gap, or the tool decides for you
+- [Artifacts](artifacts.md) — one object per session; the version you fixed is the version they open
 
 ## SQL foundations
 

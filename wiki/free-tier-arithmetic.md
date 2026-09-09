@@ -1,6 +1,6 @@
 ---
-boards: [scalar/no-code-ai-bot]
-updated: 2026-09-06
+boards: [scalar/no-code-ai-bot, scalar/ai-content-creation]
+updated: 2026-09-07
 ---
 
 # Free-tier arithmetic
@@ -31,6 +31,26 @@ few hundred conversations a month — a small local business that does not reall
 product that depends on chat has to be priced as paid from the start. This is a modelling
 question rather than a recall question, which is why it is the one people get wrong even when
 they know all the numbers.
+
+## Two shapes of limit
+
+Before counting anything, work out which of two structures you are counting against, because
+they are planned for differently.
+
+A **credit budget** is a balance you spend down, metered per generated artefact rather than per
+token. It does not refill. Planning against it means counting artefacts — how many decks is this
+allowance worth — and the answer is often far larger than it first sounds, because a single
+artefact costs a small fraction of the balance rather than a meaningful share of it.
+
+A **rate limit** is a cap on how much you can do inside a time window, followed by a cool-off. It
+refills. Planning against it means spacing the work out, because waiting genuinely solves it,
+which is never true of a spent credit balance.
+
+The failure modes differ in a way that matters more than the arithmetic. A credit balance stops
+you cleanly, at the door, before work begins. A rate limit can stop you mid-generation: the
+window's budget is spent while the model is writing, so the *response* is what gets truncated,
+not the request that gets refused. You are left holding a half-finished output rather than a
+clear no.
 
 ## Treat the numbers as perishable
 

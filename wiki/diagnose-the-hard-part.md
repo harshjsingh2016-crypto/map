@@ -1,6 +1,6 @@
 ---
 boards: [scalar/ai-content-creation]
-updated: 2026-09-06
+updated: 2026-09-07
 ---
 
 # Diagnose the hard part
@@ -25,6 +25,27 @@ customers, which is a liability rather than a lost sale. Captions in the wrong v
 worst of the three to catch, because nothing breaks: the posts go out, they are scrolled past,
 and the enquiries simply never arrive. No error message is generated anywhere.
 
+Each answer has a tool attached to it. Organising it goes to Gamma, which makes decks, documents
+and simple web pages and wins on being fastest to something shareable. Depth and accuracy goes to
+Claude or ChatGPT, which draft prose from raw material and can think about it rather than only
+arrange it. Sounding like us at volume goes to Canva Magic Write, which is design-aware and built
+to produce many matching pieces at once.
+
+The column worth reading down is not the tool but **what each one expects you to supply**. Gamma
+wants a brief, which is a description of the thing you want made. Claude and ChatGPT want the raw
+material itself, unformatted and uncleaned. Canva wants examples of your own previous output,
+which is neither a description nor raw material but a demonstration of a target. Three genuinely
+different input shapes, and that is the concrete reason the tools are not interchangeable. Hand
+Gamma your messy notes and it reads them as a brief and builds a deck around them.
+
+A substance problem announces itself in the input rather than in the request. Three signals name
+it. The material **corrects itself mid-sentence**, so the tool has to follow the correction rather
+than average the two readings. It carries **non-standard shorthand**, company-specific in feel but
+common enough in general use that a model handles it. And at least **one figure is ambiguous**,
+readable only by someone who already knows the underlying policy. Notes with those properties are
+raw material, and handing them to a tool that expects a brief means having the whole pile read as
+one.
+
 So the diagnosis is not really about which tool writes best. It is about which failure you are
 choosing to spend your review time defending against. A tool optimised for speed and structure
 will fill a gap in your brief rather than flag it. A tool optimised for careful reading will not
@@ -38,6 +59,8 @@ not something to cite.
 
 ## Related
 
+- [The do-not-guess constraint](do-not-guess-constraint.md) — what to write into the prompt once you have diagnosed a substance job
+- [Finished-looking is not checked](finished-looking-is-not-checked.md) — the second half of the skill; picking well does not remove the review
 - [The control dial](control-dial.md) — the same selection instinct for chatbots, where the axis is who decides the next step rather than what is hard
 - [Choosing a RAG tool](choosing-a-rag-tool.md) — the sibling rule where the grounding surface decides what a tool is for
 - [The competent-reader test](competent-reader-test.md) — the downstream question that tells you how expensive each failure mode actually is
