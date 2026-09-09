@@ -17,7 +17,7 @@ refinement sharpen a concept the wiki already carries from an earlier lecture.
 - [x] §5 Canva Magic Studio: brand voice trained from examples; voice is per channel, not per brand — missed — discussed ✓ — accepted (voice-per-channel note, triage c-supply cell sharpened)
 - [x] §5 the LinkedIn pipeline — generation and proofread as separate steps — missed — discussed ✓ — accepted (Canva pipeline flowchart, proofread as its own node)
 - [x] §6 TAF as RCTFC with role and constraints assumed — refinement (rctfc-framework) — discussed ✓ — accepted (mapping table with the two assumed slots as their own rows, vague-vs-TAF note; the "why format is lightest here" candidate folded into the Format row rather than a third widget). Offered beyond the file: TAF holds only while role and constraint stay stable — not taken up, recorded in the wiki only.
-- [ ] §7 editor's checklist, and why paraphrase is the specific danger — missed — pending
+- [x] §7 editor's checklist, and why paraphrase is the specific danger — missed — discussed ✓ — accepted (checklist table paired check-to-failure, paraphrase-vs-invention note, cross-verification note, plus one flag on the Canva proofread node). The 90-great-trips numbers left off the board at the user's call — the file marks them a constructed teaching illustration; the mechanism is stated as a count rewritten as a proportion, and the 25% refund case carries the point.
 - [ ] §7/§8 RAG's four retrieval failures, relevance the one that bites here — refinement (source-quality-framework) — pending
 - [ ] §8 quiz reasoning: a citation is a pointer, not a verification — missed — pending
 - [ ] §10 Gamma vs Copilot; the tool-to-use-case cheat sheet instead of memorising tools — missed — pending
