@@ -1,6 +1,6 @@
 ---
 boards: [scalar/ai-content-creation]
-updated: 2026-09-07
+updated: 2026-09-09
 ---
 
 # Finished-looking is not checked
@@ -20,6 +20,12 @@ That is why fluency is the specific hazard rather than the reassurance it feels 
 reads badly gets read carefully. A draft that reads well gets skimmed and shipped, which means the
 better the tool gets at the surface, the more of the checking burden quietly moves onto you.
 
+Volume sharpens it. A batch of twenty social posts that all sound right is twenty pieces of
+unchecked copy, and the per-piece cost of reading them is what makes the pass feel skippable
+exactly when there is most to miss. This is why the proofread is drawn as its own step in the
+Canva pipeline rather than assumed: naming it as a step is the only thing that stops it being
+absorbed into the generation that precedes it.
+
 So the skill has two halves and they are equally weighted. Match the tool to the job, then read
 every draft before it ships. The second half is where people economise, because it looks like
 overhead attached to a task that was supposed to be automated.
@@ -32,6 +38,7 @@ the part of the job that stayed yours, and the reason the saving is worth anythi
 ## Related
 
 - [Diagnose the hard part](diagnose-the-hard-part.md) — the first half of the skill, where the second half is this one
+- [Canva Magic Studio](canva-magic-studio.md) — the pipeline that makes the checking pass explicit, because volume hides the need for it
 - [Gamma](gamma.md) — the bluntest demonstration: three commercial concessions invented onto a negotiation slide
 - [Grounding](grounding.md) — the upstream restriction that reduces how much gets invented, without removing the need to check
 - [Citation credibility](citation-credibility.md) — the same lesson applied to sources; a citation is a pointer, not a verification

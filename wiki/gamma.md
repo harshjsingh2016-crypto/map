@@ -1,6 +1,6 @@
 ---
 boards: [scalar/ai-content-creation]
-updated: 2026-09-07
+updated: 2026-09-09
 ---
 
 # Gamma
@@ -51,6 +51,7 @@ a documenting-and-sharing tool, not an automation tool.
 
 ## Related
 
+- [Canva Magic Studio](canva-magic-studio.md) — the other end of the triage: styling and volume rather than structure
 - [Diagnose the hard part](diagnose-the-hard-part.md) — the selection rule that sends a structure problem here in the first place
 - [Finished-looking is not checked](finished-looking-is-not-checked.md) — the principle this tool demonstrates most bluntly
 - [Model dials](model-dials.md) — temperature as a dial you set deliberately, which is what Gamma has set for you

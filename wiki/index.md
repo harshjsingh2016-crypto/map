@@ -57,6 +57,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Gamma](gamma.md) — decks in under a minute; the speed and the invention are one setting
 - [The do-not-guess constraint](do-not-guess-constraint.md) — name what to do with a gap, or the tool decides for you
 - [Artifacts](artifacts.md) — one object per session; the version you fixed is the version they open
+- [Canva Magic Studio](canva-magic-studio.md) — examples in, batch out; the proofread is a step, not a tidy-up
+- [Voice is per channel, not per brand](voice-is-per-channel.md) — the LinkedIn voice is not the Instagram voice
 
 ## SQL foundations
 
