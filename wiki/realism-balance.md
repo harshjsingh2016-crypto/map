@@ -44,9 +44,30 @@ Practical residue: check every spelling in generated text, including from the to
 it. Frequent misspellings are the visible half of this problem, and the invisible half is a
 plausible number nobody questioned.
 
+## The same ceiling, one level up
+
+The polish limit has a companion that operates on a whole asset rather than a single frame. A
+generated holiday ad for a soft-drink brand was shown to a class and picked over for faults; what
+they found were nitpicks — missing smoke, lighting on trees, an invented number on a truck — and
+the verdict was that there was nothing wrong with the concept. It was still a failure, because it
+was publicly criticised for being AI. The brand is a human-first one about bringing people
+together, the ad had animals and no humans, and the company apologised.
+
+The instructor did not accept the outrage as fair and drew the lesson anyway: **if people associate
+AI with your product, credibility drops.** That is a different failure from either an image nobody
+believes or a claim nobody checked — here the audience is not disbelieving the content, it is
+noticing the method, and noticing is enough.
+
+The instruction that follows is counter-intuitive and specific. Generation makes it cheap to add
+content, images and text, and the correct response is **not to**. A realistic asset carries *less*
+content and reads as more real; the work is getting the tool to produce something that restrained.
+The polish ceiling says do not exceed what will be believed. The density ceiling says do not
+exceed what a real production would have bothered to include.
+
 ## Related
 
 - [Unintended claims](unintended-claims.md) — the failure that starts where believability ends
 - [RCTFC Framework](rctfc-framework.md) — the Four S's, where the Style and Setting fields make this judgement
 - [Finished-looking is not checked](finished-looking-is-not-checked.md) — the text-side version, where polish and accuracy come apart
+- [Diffusion](diffusion.md) — how the frame you are judging was actually produced
 - [Delivery, not accuracy](delivery-not-accuracy.md) — the other case where the output's job is to land rather than to be right

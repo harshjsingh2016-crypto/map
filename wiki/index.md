@@ -7,6 +7,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Predictive vs Generative AI](predictive-vs-generative-ai.md) — one reads the puppy photo, the other rewrites it
 - [Next-word prediction](next-word-prediction.md) — tokens, confidence scores, and patterns stored as weights
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the chef, the restaurant, and the plan–act–check loop
+- [Diffusion](diffusion.md) — noise carved down everywhere at once, and why that gives you two trunks
 
 ## AI reliability
 
