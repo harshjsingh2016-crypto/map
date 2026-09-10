@@ -46,6 +46,12 @@ one cockroach in a café kitchen, and the repeat business quietly ends.
 None of these require the promise to have been made on purpose, which is why an unintended claim
 costs the same as a deliberate one.
 
+The presentation half of this is stated separately and is easy to lose. The rule attached to the
+modality panel is not only that the tools do not know what is true about your building, but that a
+generated frame must **never be allowed to pretend to be a photograph**. Accuracy and presentation
+are different obligations. A frame can be entirely accurate about a place and still mislead, purely
+by being offered as evidence of it rather than as a rendering of it.
+
 ## Where the line is drawn
 
 Two failures shipped by people with budgets set the standard. A 2025 Disney film used AI to fill a

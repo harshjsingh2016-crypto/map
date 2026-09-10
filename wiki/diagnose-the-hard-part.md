@@ -81,12 +81,19 @@ thirty-second Instagram teaser, and a narrated voice-over in two languages. Thre
 exist by Monday and do not exist at all, with the photographer not on site and the video crew
 booked for weeks.
 
-The classification here runs on output type rather than on what is hard — a still, a video, a
-piece of speech audio. That is a flatter axis than structure / substance / style, and it is worth
-being clear that it is doing less work: it tells you which family of tool to open, not what will
-go wrong. What survives from the earlier brief is the shape of the situation, not the axis. Each
-asset goes to a different tool and the pieces are stitched together afterwards, which means the
-selection question is asked three times in one job rather than once.
+The axis changes and the move survives. The question is no longer what is hard about the brief
+but **what are you actually trying to capture**, and the answers sit on a spectrum running from a
+single frozen moment through to sound with no picture at all. Frame is a still where nothing
+changes and nothing speaks. Motion is the asset where **time is the whole point** — something has
+to change across a duration or there is nothing being conveyed. Voice is the asset where
+**identity is the whole point** — the same person saying different words.
+
+Read as file types the three are just containers, and for the narrow purpose of deciding which
+tool to open that reading is sufficient. It stops being sufficient the moment the question becomes
+whether you may use a voice at all, because a container has nothing to say about consent and a
+claim about identity does. The spectrum reading tells you what each asset is for, and therefore
+what it costs to get wrong. Each asset goes to a different tool and the pieces are stitched
+together afterwards, so the selection question is asked three times in one job rather than once.
 
 The gap driving all of it is worth naming on its own, because it is the reason the lecture exists:
 the partner wants to move faster than the agency can shoot. Generation is being reached for as a
