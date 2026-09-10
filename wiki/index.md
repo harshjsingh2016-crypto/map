@@ -20,6 +20,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Citation credibility](citation-credibility.md) — a source exists is not a source is good; the audit you lose on the open web
 - [Source-Quality Framework](source-quality-framework.md) — recency, authority, corroboration, relevance; recency runs first and overrides
 - [Unintended claims](unintended-claims.md) — a generated detail promises something real, and nobody decided to promise it
+- [Personality rights](personality-rights.md) — style is appropriable; the legal question is the weaker one
 
 ## Prompt engineering
 

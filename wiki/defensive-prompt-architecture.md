@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/web-grounding-citations, scalar/no-code-ai-bot]
-updated: 2026-09-05
+boards: [scalar/ai-reliability, scalar/web-grounding-citations, scalar/no-code-ai-bot, scalar/multimodal-gen-ai]
+updated: 2026-09-10
 ---
 
 # Defensive prompt architecture
@@ -73,6 +73,22 @@ mirror case makes the same point from the other side: a knowledge base that does
 your question cannot be prompted into covering it. That is a source problem, fixed by adding
 a source, and no amount of instruction reaches it.
 
+## The negative prompt
+
+Image and video tools expose the same instinct as a field of its own. A **negative prompt** names
+what must not appear in the output — the instructor's own term for it is defensive prompting. Where
+a tool has no dedicated field, some accept the terms after a `--neg` flag.
+
+The obvious use is aesthetic: ugly, too unrealistic, too bright, too much content. The use that
+earns the field is **factual**. Negative-prompt "pool" and the tool ensures no pool appears
+anywhere in the frame — which is the invented-amenity problem addressed at the prompt rather than
+caught in the review afterwards.
+
+That is a real gain and a bounded one. It shrinks what the pre-ship look has to find; it does not
+remove the look, because the negative prompt can only exclude what you thought to name. The things
+that cost you are the ones nobody was looking for, and a list of prohibitions is written from the
+same memory that failed to notice them.
+
 ## Related
 
 - [AI safety failure modes](ai-safety-failure-modes.md) — the attacks this architecture is written against
@@ -80,3 +96,4 @@ a source, and no amount of instruction reaches it.
 - [RCTFC framework](rctfc-framework.md) — Role, Format and Constraints, restated defensively
 - [Grounding](grounding.md) — the missing-answer case the refusal rule also has to cover
 - [The control dial](control-dial.md) — what to do when instruction is not enough and the sentence has to leave the model
+- [Unintended claims](unintended-claims.md) — the failure a factual negative prompt is aimed at
