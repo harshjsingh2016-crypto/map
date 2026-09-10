@@ -1,8 +1,8 @@
 # Walkthrough — 2026-09-04_multimodal_genai.md
 Board: scalar/multimodal-gen-ai
 Source: Armor/Output/2026-09-04_multimodal_genai.md
-Updated: 2026-09-09
-Agenda confirmed: pending (summary + glossary presented 2026-09-09)
+Updated: 2026-09-10
+Agenda confirmed: 2026-09-10 (summary + glossary presented 2026-09-09, confirmed on resume)
 
 Board created empty this session — every item below is **missed** by definition; the tags note
 which are core structure vs. supporting cases.
