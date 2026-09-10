@@ -21,6 +21,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Source-Quality Framework](source-quality-framework.md) — recency, authority, corroboration, relevance; recency runs first and overrides
 - [Unintended claims](unintended-claims.md) — a generated detail promises something real, and nobody decided to promise it
 - [Personality rights](personality-rights.md) — style is appropriable; the legal question is the weaker one
+- [The realism balance](realism-balance.md) — a ceiling on polish set by belief, not by honesty
 
 ## Prompt engineering
 

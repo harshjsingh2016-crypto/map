@@ -52,6 +52,17 @@ generated frame must **never be allowed to pretend to be a photograph**. Accurac
 are different obligations. A frame can be entirely accurate about a place and still mislead, purely
 by being offered as evidence of it rather than as a rendering of it.
 
+Not every generated image asserts as much, and the distinction has a name. A mood image is not the
+subject; it suggests what will be there. A steaming cup of chai means chai is available, not that
+you will be handed that cup. The industry term is B-roll — supplementary content that is not the
+subject but shows what else is happening, and the working description is that it may not be
+literally real but it recommends that this is possible here.
+
+That licence is real and it is narrow. B-roll is allowed to be generic, because being generic is
+its job. It is not allowed to imply an amenity that does not exist, which is the invented pool
+again one notch softer — and the softness is exactly what gets it waved through, since a mood shot
+feels like decoration rather than a claim.
+
 ## Where the line is drawn
 
 Two failures shipped by people with budgets set the standard. A 2025 Disney film used AI to fill a
@@ -71,3 +82,4 @@ business, not without running the pre-ship check.
 - [The editor's checklist](editors-checklist.md) — the text-side version of the pre-ship pass
 - [AI safety failure modes](ai-safety-failure-modes.md) — hallucination named as a failure mode; an unintended claim is one that reached a customer
 - [Diagnose the hard part](diagnose-the-hard-part.md) — the brief this exposure attaches to, where generation stands in for a photographer who is not on site
+- [The realism balance](realism-balance.md) — the ceiling that sits below this one, where the image is disbelieved rather than wrong
