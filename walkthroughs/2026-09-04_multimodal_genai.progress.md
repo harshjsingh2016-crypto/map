@@ -8,7 +8,7 @@ Board created empty this session — every item below is **missed** by definitio
 which are core structure vs. supporting cases.
 
 - [x] §1 The brief — three assets, three modalities (frame / motion / voice) — missed — discussed ✓ — accepted (assets table, constraint note, hero-image note). User ruled frame/motion/voice reads as **output type, not a diagnostic**; boarded that way. Flagged that §3's spectrum framing ("time is the whole point", "identity is the whole point") argues the other way — left for §3 to settle. Velvet Sundown opener offered and skipped on my recommendation: register, no mechanism.
-- [ ] §2 The case against "just generate something" — failure cases, ad promises, three consequences — missed — pending
+- [x] §2 The case against "just generate something" — failure cases, ad promises, three consequences — missed — discussed ✓ — accepted (shipped-anyway table, three-consequences table, "you do not know what your fault is" note). Freedom 251 and Ola folded into the consequences table as example cells rather than given their own widget, at the user's call. Ola's legal-spend-exceeds-ad-spend figure left off the board — the file flags it as recalled from memory and unverified. New wiki article: unintended-claims.md.
 - [ ] §3 One question, three modalities — the FRAME/MOTION/VOICE spectrum and the tool landscape — missed — pending
 - [ ] §4 The Four S's — Subject, Style, Setting/Light, Shot; negative prompts; temperature; named living artists — missed — pending
 - [ ] §5 Frame tools — Ideogram vs OpenArt vs Gemini, and what each demo proved — missed — pending
