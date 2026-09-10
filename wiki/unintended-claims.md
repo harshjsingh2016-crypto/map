@@ -63,6 +63,40 @@ its job. It is not allowed to imply an amenity that does not exist, which is the
 again one notch softer — and the softness is exactly what gets it waved through, since a mood shot
 feels like decoration rather than a claim.
 
+## The label is about use, not about the asset
+
+The remedy the lecture actually teaches is not a better image. It is a **concept render label** —
+a clear, visible statement that what you are looking at is what a thing would look like, not what
+it is. The instructor's word for it is plot armor, and the framing is deliberately self-interested
+rather than ethical: having said it up front, you are shielded from action afterwards. That
+motivation is more durable than good intentions, because it survives not caring.
+
+What makes the rule usable is noticing when it fires. A set of concept interiors can sit inside a
+teaser as B-roll and need no label at all. The moment one of them is posted as a **preview** of a
+room somebody can book, it needs one — and nothing about the file has changed in between. The
+image did not become dishonest; the claim attached to it did. So the question to ask is never
+whether an image is honest, but **what it is being offered as**.
+
+Three wrong answers were put against it, and their shapes are worth recognising because they
+recur. Do nothing, on the grounds that nobody has complained — but the complaints arrive when the
+guest reaches the room, and by then it is a legal matter, so silence today is a timing artefact
+rather than evidence. Do everything, deleting the concept art on the grounds that generated
+imagery has no place in the work — an over-correction the lecture explicitly refuses, since these
+images collapse the cost of imagery and are recommended. Or do it later, labelling only if someone
+objects, which he dismissed outright: do not wait for a complaint, take a proactive standard. The
+right answer is the cheap, permanent, pre-emptive act.
+
+## What it looks like when nobody labels
+
+An event was promoted with generated images of an elaborate chocolate wonderland and delivered a
+half-decorated warehouse. Police were called and everyone was refunded. Nothing about the images
+was defective — they were good images, shown as a description of the event when they were a
+description of an aspiration.
+
+It is the whole cost structure firing at once, which is why it is the case worth remembering rather
+than one more anecdote. Trust went immediately, the legal consequence landed the same afternoon
+rather than over a season, and there was no churn to measure because there was no second event.
+
 ## Where the line is drawn
 
 Two failures shipped by people with budgets set the standard. A 2025 Disney film used AI to fill a
