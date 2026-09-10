@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-content-creation]
-updated: 2026-09-07
+boards: [scalar/ai-content-creation, scalar/multimodal-gen-ai]
+updated: 2026-09-10
 ---
 
 # Diagnose the hard part
@@ -72,6 +72,28 @@ new arrival is filed against a job you already understand instead of studied as 
 It is the same move as the triage itself, run on a longer timescale. Diagnose the job, then pick;
 and keep the record organised by job, so the picking stays cheap.
 
+
+## When the job is not words at all
+
+The next brief in the same story tests whether the move survives leaving text behind. The partner
+signs, and then wants a joint launch in a weekend: a hero image for the announcement post, a
+thirty-second Instagram teaser, and a narrated voice-over in two languages. Three things that must
+exist by Monday and do not exist at all, with the photographer not on site and the video crew
+booked for weeks.
+
+The classification here runs on output type rather than on what is hard — a still, a video, a
+piece of speech audio. That is a flatter axis than structure / substance / style, and it is worth
+being clear that it is doing less work: it tells you which family of tool to open, not what will
+go wrong. What survives from the earlier brief is the shape of the situation, not the axis. Each
+asset goes to a different tool and the pieces are stitched together afterwards, which means the
+selection question is asked three times in one job rather than once.
+
+The gap driving all of it is worth naming on its own, because it is the reason the lecture exists:
+the partner wants to move faster than the agency can shoot. Generation is being reached for as a
+substitute for a production capacity that is real and simply unavailable this week — not as a
+shortcut around work someone could otherwise do. That is a different justification from the
+content-creation case, and it carries a different obligation, since the thing being replaced is
+evidence about a real building.
 
 ## Related
 
