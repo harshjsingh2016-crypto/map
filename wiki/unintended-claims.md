@@ -1,0 +1,119 @@
+---
+boards: [scalar/multimodal-gen-ai]
+updated: 2026-09-10
+---
+
+# Unintended claims
+
+A generated asset can make a promise nobody in the company ever decided to make, and the promise
+is binding on the company anyway. That is the specific exposure multimodal generation adds, and it
+is a different problem from the model getting a fact wrong.
+
+The instructor's formulation is the whole idea: intentionally putting wrong things into an image is
+still fine, because you know your fault; when you do not even know what your fault is, it becomes
+a bigger issue. Deliberate false advertising is a risk that was priced and chosen — somebody
+weighed it, somebody can defend it, and somebody knows where to look when the complaint arrives.
+An unintended claim is the same legal exposure with the knowledge removed. The liability is
+identical and the decision never happened.
+
+The worked case is small on purpose. A drone shot of the estate comes back looking correct, and a
+pool the generator invented sits in one corner of it. Nobody notices, because nobody was looking
+for a pool. The image now advertises an amenity the property does not have, and the first person
+to discover this is a guest who booked because of it.
+
+What makes this specific to generated imagery rather than a general warning about carelessness is
+where the unchecked detail comes from. In a photograph, everything in the frame was there. The
+error a photographer can make is choosing a misleading angle, which is a decision, reviewable as a
+decision. A generated frame is assembled from nothing, so every element in it is an assertion the
+tool made on your behalf, and there is no list of them. Reviewing it is not checking one claim
+against a source; it is finding the claims first.
+
+## The cost does not care how the promise was made
+
+The consequences are borrowed from advertising failures that had no AI in them, which is the point
+of using them. Freedom 251 sold a phone on pre-booking that never existed and never returned the
+booking amounts, each loss too small for anyone to chase and thousands of them adding up. Ola
+promised heavily on electric scooters and delivered vehicles that caught fire and stopped
+randomly — not a scam, poor delivery, and a different failure with a similar ending.
+
+Three consequences follow, and they are worth separating because they arrive on different
+timescales. **Trust** goes first and shows up as people simply not buying. **Legal** is the one with
+a threshold: advertise a rooftop infinity pool the hotel does not have and complaints stop being
+complaints, becoming fraudulent-advertising cases. **Churn** is the slowest and the hardest to
+attribute, because customers who used to return just stop returning — one bad season at a hotel,
+one cockroach in a café kitchen, and the repeat business quietly ends.
+
+None of these require the promise to have been made on purpose, which is why an unintended claim
+costs the same as a deliberate one.
+
+The presentation half of this is stated separately and is easy to lose. The rule attached to the
+modality panel is not only that the tools do not know what is true about your building, but that a
+generated frame must **never be allowed to pretend to be a photograph**. Accuracy and presentation
+are different obligations. A frame can be entirely accurate about a place and still mislead, purely
+by being offered as evidence of it rather than as a rendering of it.
+
+Not every generated image asserts as much, and the distinction has a name. A mood image is not the
+subject; it suggests what will be there. A steaming cup of chai means chai is available, not that
+you will be handed that cup. The industry term is B-roll — supplementary content that is not the
+subject but shows what else is happening, and the working description is that it may not be
+literally real but it recommends that this is possible here.
+
+That licence is real and it is narrow. B-roll is allowed to be generic, because being generic is
+its job. It is not allowed to imply an amenity that does not exist, which is the invented pool
+again one notch softer — and the softness is exactly what gets it waved through, since a mood shot
+feels like decoration rather than a claim.
+
+## The label is about use, not about the asset
+
+The remedy the lecture actually teaches is not a better image. It is a **concept render label** —
+a clear, visible statement that what you are looking at is what a thing would look like, not what
+it is. The instructor's word for it is plot armor, and the framing is deliberately self-interested
+rather than ethical: having said it up front, you are shielded from action afterwards. That
+motivation is more durable than good intentions, because it survives not caring.
+
+What makes the rule usable is noticing when it fires. A set of concept interiors can sit inside a
+teaser as B-roll and need no label at all. The moment one of them is posted as a **preview** of a
+room somebody can book, it needs one — and nothing about the file has changed in between. The
+image did not become dishonest; the claim attached to it did. So the question to ask is never
+whether an image is honest, but **what it is being offered as**.
+
+Three wrong answers were put against it, and their shapes are worth recognising because they
+recur. Do nothing, on the grounds that nobody has complained — but the complaints arrive when the
+guest reaches the room, and by then it is a legal matter, so silence today is a timing artefact
+rather than evidence. Do everything, deleting the concept art on the grounds that generated
+imagery has no place in the work — an over-correction the lecture explicitly refuses, since these
+images collapse the cost of imagery and are recommended. Or do it later, labelling only if someone
+objects, which he dismissed outright: do not wait for a complaint, take a proactive standard. The
+right answer is the cheap, permanent, pre-emptive act.
+
+## What it looks like when nobody labels
+
+An event was promoted with generated images of an elaborate chocolate wonderland and delivered a
+half-decorated warehouse. Police were called and everyone was refunded. Nothing about the images
+was defective — they were good images, shown as a description of the event when they were a
+description of an aspiration.
+
+It is the whole cost structure firing at once, which is why it is the case worth remembering rather
+than one more anecdote. Trust went immediately, the legal consequence landed the same afternoon
+rather than over a season, and there was no churn to measure because there was no second event.
+
+## Where the line is drawn
+
+Two failures shipped by people with budgets set the standard. A 2025 Disney film used AI to fill a
+background crowd at a basketball game, and zoomed in, a clapping figure and her neighbour are
+visibly generated — the movement, the face, the hair. A film trailer shipped with a generator's
+watermark still sitting in the corner of one shot. Neither is a failure of the model. Both are
+failures of the look afterwards, which is the only place this class of error can be caught.
+
+So the bar for anything that ships: nobody can later zoom in and find a watermark, a wrong
+spelling, or something that is not real. And the split that follows — personal use, go ahead;
+business, not without running the pre-ship check.
+
+## Related
+
+- [Finished-looking is not checked](finished-looking-is-not-checked.md) — the sibling failure, where the polish hides a wrong fact rather than an invented one
+- [The competent-reader test](competent-reader-test.md) — the question that tells you whether anyone downstream would catch the claim
+- [The editor's checklist](editors-checklist.md) — the text-side version of the pre-ship pass
+- [AI safety failure modes](ai-safety-failure-modes.md) — hallucination named as a failure mode; an unintended claim is one that reached a customer
+- [Diagnose the hard part](diagnose-the-hard-part.md) — the brief this exposure attaches to, where generation stands in for a photographer who is not on site
+- [The realism balance](realism-balance.md) — the ceiling that sits below this one, where the image is disbelieved rather than wrong

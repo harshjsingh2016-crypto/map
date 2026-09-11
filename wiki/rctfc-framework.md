@@ -1,6 +1,6 @@
 ---
-boards: [scalar/prompt-engineering, scalar/no-code-ai-bot, scalar/ai-content-creation]
-updated: 2026-09-09
+boards: [scalar/prompt-engineering, scalar/no-code-ai-bot, scalar/ai-content-creation, scalar/multimodal-gen-ai]
+updated: 2026-09-10
 ---
 
 # RCTFC Framework
@@ -61,6 +61,28 @@ place to put it.
 Worth carrying as a check on any production prompt. If it only says how to answer well, it is
 an RCTFC prompt in a place where the business also wanted an outcome.
 
+## The Four S's, for pixels
+
+Image generation gets its own four-letter framework, and the framing that matters is that it is
+not a new skill. Subject, Style, Setting/Light, Shot — the same shape as RCTFC, aimed at pixels
+instead of words. Subject is what or who is actually in frame. Style is illustration, photoreal or
+painterly, and carries a prohibition of its own. Setting and Light is time of day, weather and
+light quality. Shot is angle, framing and aspect ratio.
+
+The teaching move is worth copying: all four were answered on a Coke Zero hero shot **before any
+tool was opened**. They are desk questions, not discoveries you make by generating and squinting,
+and answering them in order is what stops the prompt being a wish.
+
+Subject is the row that does the most work, and its discipline is exclusion rather than
+description — "very specifically about Coke Zero and nothing else". That is the same instruction
+the definition of a hero image carries, arriving from the other direction: a frame with the
+subject dead centre and in focus is a frame where you decided what was not in it.
+
+One dial is missing from the four and worth knowing about. Temperature — high for creative, low
+for restricted and grounded — is generally **no longer exposed by image tools**. The style field
+carries that hint instead, because creativity has to run higher for images than for text. The dial
+did not go away; it was folded into a field that does not look like a dial.
+
 ## Related
 
 - [Prompt costs](prompt-costs.md) — why spending input tokens to narrow output pays
@@ -68,3 +90,5 @@ an RCTFC prompt in a place where the business also wanted an outcome.
 - [Iterative prompt refinement](iterative-prompt-refinement.md) — how a prompt like V2 actually gets written
 - [Diagnose the hard part](diagnose-the-hard-part.md) — TAF is worth reaching for once the job is known to be a style-and-volume one
 - [The do-not-guess constraint](do-not-guess-constraint.md) — the constraint TAF leaves unsaid, and what happens when it is
+- [Defensive prompt architecture](defensive-prompt-architecture.md) — where the negative prompt sits, as the Four S's inverse
+- [Personality rights](personality-rights.md) — the prohibition inside the Style row, and why it is not a copyright question

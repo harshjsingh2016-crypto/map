@@ -7,6 +7,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Predictive vs Generative AI](predictive-vs-generative-ai.md) — one reads the puppy photo, the other rewrites it
 - [Next-word prediction](next-word-prediction.md) — tokens, confidence scores, and patterns stored as weights
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the chef, the restaurant, and the plan–act–check loop
+- [Diffusion](diffusion.md) — noise carved down everywhere at once, and why that gives you two trunks
 
 ## AI reliability
 
@@ -19,6 +20,9 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Defensive prompt architecture](defensive-prompt-architecture.md) — role, refusal, safety and output rules, written against attack
 - [Citation credibility](citation-credibility.md) — a source exists is not a source is good; the audit you lose on the open web
 - [Source-Quality Framework](source-quality-framework.md) — recency, authority, corroboration, relevance; recency runs first and overrides
+- [Unintended claims](unintended-claims.md) — a generated detail promises something real, and nobody decided to promise it
+- [Personality rights](personality-rights.md) — style, then voice; consent goes on record before cloning, not before publishing
+- [The realism balance](realism-balance.md) — a ceiling on polish set by belief, not by honesty
 
 ## Prompt engineering
 
@@ -59,7 +63,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Artifacts](artifacts.md) — one object per session; the version you fixed is the version they open
 - [Canva Magic Studio](canva-magic-studio.md) — examples in, batch out; the proofread is a step, not a tidy-up
 - [Voice is per channel, not per brand](voice-is-per-channel.md) — the LinkedIn voice is not the Instagram voice
-- [The editor's checklist](editors-checklist.md) — five checks before anything generated ships, whatever produced it
+- [The editor's checklist](editors-checklist.md) — five checks before anything ships, and six when the output is not words
 - [Paraphrase is a different failure from invention](paraphrase-failure-mode.md) — a real figure reworded into a different claim, past grounding
 - [Bolted on, or built for it](bolted-on-or-built-for-it.md) — product shape predicts AI quality; convenience is not capability
 
