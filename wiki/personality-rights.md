@@ -29,8 +29,43 @@ The shape of this reasoning is the reusable part. The legal question is the weak
 answer sits in what the output does to a real person. And "probably not illegal" is not the bar
 anywhere in this lecture — not for an invented amenity in a drone shot, and not here.
 
+## Voice is where it gets teeth
+
+The same principle applied to a voice reverses the legal position, and the reversal is the useful
+part. A style is a methodology, which is what made the copyright argument weak. **A voice is not a
+methodology — it identifies a specific person**, and it can be used to make that person appear to
+say things they never said. The ethical argument that had to stand on its own for style arrives
+here with enforcement behind it.
+
+The consent rule follows precisely. Publicly posted and consented-to-be-cloned-and-used-commercially
+are **two different permissions**, and conflating them is the whole error. The analogy offered
+against it: a film being on a streaming service is not an invitation to record it and republish it.
+People keep legal rights over what they post, so consent goes on record **before cloning**, not
+before publishing — the cloning is already the act that needs permission.
+
+Two failure shapes are worth naming because both feel like mitigations and neither is. Not naming
+the person does not reduce the exposure, it delays the discovery, which makes it worse rather than
+better. And waiting to see whether anyone objects inverts the standard entirely; the instructor's
+own answer there was that informally he would have said yes and that one should never do it. A
+public dispute over a synthetic voice that sounded like a well-known actor, used without her being
+asked and withdrawn afterwards, is the version of this that reached the news.
+
+## The far end
+
+A school athletic director cloned his own principal's voice from a recording and fabricated a clip
+of that principal making racist and antisemitic remarks. It circulated before anyone established it
+was fake; the principal received death threats and took leave, and the fabricator was arrested and
+charged.
+
+What makes it the right case to sit with is that the technology is identical to a legitimate
+production use. Every other hazard in generative work has a craft dimension — a better prompt, a
+more restrained output, a clearer label — and this one has none. **The entire moral distance is a
+permission you either have or do not**, which is why the case belongs before the demo rather than
+after it.
+
 ## Related
 
 - [RCTFC Framework](rctfc-framework.md) — the Four S's, where this prohibition lives in the Style row
 - [Unintended claims](unintended-claims.md) — the sibling case where the legal question is also the weaker one
 - [Diagnose the hard part](diagnose-the-hard-part.md) — the modality spectrum, where identity is what the voice column is actually about
+- [Data anonymization](data-anonymization.md) — the neighbouring duty, stripping what traces back to a person before a model sees it
