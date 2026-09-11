@@ -63,7 +63,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Artifacts](artifacts.md) — one object per session; the version you fixed is the version they open
 - [Canva Magic Studio](canva-magic-studio.md) — examples in, batch out; the proofread is a step, not a tidy-up
 - [Voice is per channel, not per brand](voice-is-per-channel.md) — the LinkedIn voice is not the Instagram voice
-- [The editor's checklist](editors-checklist.md) — five checks before anything generated ships, whatever produced it
+- [The editor's checklist](editors-checklist.md) — five checks before anything ships, and six when the output is not words
 - [Paraphrase is a different failure from invention](paraphrase-failure-mode.md) — a real figure reworded into a different claim, past grounding
 - [Bolted on, or built for it](bolted-on-or-built-for-it.md) — product shape predicts AI quality; convenience is not capability
 

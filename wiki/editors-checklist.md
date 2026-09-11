@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-content-creation]
-updated: 2026-09-09
+boards: [scalar/ai-content-creation, scalar/multimodal-gen-ai]
+updated: 2026-09-11
 ---
 
 # The editor's checklist
@@ -39,9 +39,49 @@ a claim with no visible basis — but it cannot tell you whether the number in t
 number you supplied, because it has never seen the number you supplied. Cross-verification is a
 smell test. The check is a comparison against the source, and only you are holding the source.
 
+## The multimodal version, and what it adds
+
+The same pass exists for generated images, video and voice, run before anything ships and
+regardless of which tool produced it. Six items rather than five, and the useful exercise is
+sorting them against the text-side list, because two transfer unchanged and four do not exist in
+text at all.
+
+Two transfer whole. **Any overlaid text or spoken number must match the verified source exactly** —
+nothing goes in that your own documentation and research do not corroborate, which is the numbers
+check word for word. And **the format must fit the destination channel**, where resolution, aspect
+ratio and duration stand in for length and structure.
+
+Four are new in kind, and they are new because the output now depicts things rather than describing
+them.
+
+**Does this output claim to represent something real?** If it does, it must be accurate; if it does
+not, it must be clearly labelled concept or illustrative. This is the sharpest of the four, and it
+has no text equivalent for a precise reason: a document does not claim to *be* the thing it
+describes, and an image does.
+
+**Do you have consent or rights** for any real person's likeness, voice or property shown or
+cloned? Someone's house, hotel, car or face is not yours to use because it is online. Text rarely
+depicts a person, so this obligation simply does not arise there.
+
+**Could the visible style or subject create a copyright or right-of-publicity risk?** A named living
+artist's style, a recognisable public figure, a copyrighted logo. The two examples offered — a
+voice-over in a famous actor's voice, and a caricature painted the way a named painter paints —
+are the identity half and the style half of the same argument, arriving as one line item.
+
+**Are there visible generation artifacts?** Garbled text, warped detail, an odd vocal cadence. The
+instruction attached to it is the justification for the whole pass: zoom in, listen closely,
+**assume someone else will** — which is not hypothetical, since the published failures this rule
+exists to prevent were all found by someone who did. It is also the only check on either list where
+the failure is **visible rather than inferential**. Every other item requires holding the source to
+run. This one you can simply look at, which makes it the cheapest to perform and, for that reason,
+the easiest to skip.
+
 ## Related
 
 - [Paraphrase is a different failure from invention](paraphrase-failure-mode.md) — why one of the five checks says untouched rather than accurate
 - [Finished-looking is not checked](finished-looking-is-not-checked.md) — why the pass feels skippable exactly when there is most to miss
 - [The do-not-guess constraint](do-not-guess-constraint.md) — the upstream half; the checklist is what survives it failing
 - [Gamma](gamma.md) — the demonstration that made the numbers check non-negotiable
+- [Unintended claims](unintended-claims.md) — the exposure the first multimodal item is written against
+- [Personality rights](personality-rights.md) — the consent and right-of-publicity items, argued out in full
+- [The realism balance](realism-balance.md) — the judgement the artifacts check cannot make for you
