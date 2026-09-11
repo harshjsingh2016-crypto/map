@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-content-creation]
-updated: 2026-09-09
+boards: [scalar/ai-content-creation, scalar/multimodal-gen-ai]
+updated: 2026-09-11
 ---
 
 # Bolted on, or built for it
@@ -31,6 +31,25 @@ Capability, no. Data living in a suite says nothing about how well that suite's 
 with it, and reports of poor data-fetching from inside the ecosystem are the direct evidence.
 Integration convenience and output quality are independent properties that vendors deliberately
 present as one, because only the first is something owning the data actually buys.
+
+## First establish which of the two you are holding
+
+Before the question can even be asked properly, a prior one has to be settled: is the thing in
+front of you a **model**, or a **product wrapped around a model**? A base generator and the
+interface plus agentic flow built on top of it are different objects, and the analogy offered for
+the difference is comparing a chat assistant to the model that powers it.
+
+Getting this wrong makes comparisons meaningless in both directions. A feature list and a
+capability are not the same claim, and a product can change the model underneath it without
+telling anyone, so a judgement formed about the output may not survive next month. The two
+questions to keep apart are whether the underlying generation is good and whether the thing built
+around it is good, because only the second is what the vendor actually controls.
+
+An honest footnote on where this came from: asked to place two specific video tools on that
+distinction, the instructor gave two answers that do not agree — one of them described first as a
+tool wrapped around a base model and then as running its own proprietary model — and the lecture
+never resolved it. The distinction is the durable part; that particular classification is not
+settled here.
 
 ## Related
 

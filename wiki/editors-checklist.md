@@ -76,6 +76,15 @@ the failure is **visible rather than inferential**. Every other item requires ho
 run. This one you can simply look at, which makes it the cheapest to perform and, for that reason,
 the easiest to skip.
 
+It also has a ceiling that the others do not, and it is worth knowing where it is. Detection is a
+hard industry problem: a good output from a capable tool will not show to the naked eye at all, and
+identifying one relies on software reading pixel-level signatures, with some generators embedding a
+watermark into the pixels themselves. On synthetic voices there was no answer to give — tools are
+being worked on. So **the better the generator gets, the less this check can protect you**, which
+is not an argument for skipping it but an argument about where the weight sits. The two items that
+do not degrade as models improve are the label and the consent, because neither depends on anyone
+being able to tell.
+
 ## Related
 
 - [Paraphrase is a different failure from invention](paraphrase-failure-mode.md) — why one of the five checks says untouched rather than accurate

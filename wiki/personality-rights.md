@@ -63,6 +63,19 @@ more restrained output, a clearer label — and this one has none. **The entire 
 permission you either have or do not**, which is why the case belongs before the demo rather than
 after it.
 
+## Pointed inward
+
+The same question arrives about your own material. Asked whether it is safe to upload personal
+photographs to a video generator, the answer was generally no, with the realist qualifier that most
+people's photographs are already public — and the test offered was whether you are that open on
+your own social accounts.
+
+What makes it worth recording is the framing rather than the verdict. It is not a question about
+whether the platform can be trusted. It is a question about whether **you have decided to make this
+public**, which is precisely what you are obliged to ask on someone else's behalf before cloning
+them. The rule does not change direction when the subject is you; only the person who gets to
+answer does.
+
 ## Related
 
 - [RCTFC Framework](rctfc-framework.md) — the Four S's, where this prohibition lives in the Style row
