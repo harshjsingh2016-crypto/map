@@ -54,6 +54,27 @@ of your known values**. A response outside the set is a failure the workflow can
 response inside the set but wrong is a routing error that only shows up downstream. Those are
 different failures with different costs, and only the first is catchable at the point it happens.
 
+## The grammar outside a canvas
+
+The claim that these words belong to workflows rather than to one product is testable, and the
+lecture tests it with an automation built on a phone rather than a canvas at all: a voice command
+dictates text, the text goes to a model's endpoint, the reply comes back and is sent on a messaging
+app. Trigger is the dictation, action is the send. The grammar holds with no canvas anywhere.
+
+What the same example shows is that **the three words are not a checklist where all three must
+appear**. That shortcut has no condition — it is a straight line, every step runs every time,
+nothing branches. A workflow with nothing to decide is still a workflow. It also places the model in
+the *action* rather than the condition, which is the first extension below arriving in practice
+before it is stated.
+
+The detail worth carrying is the step list. Of ten steps, one dictates, one names the endpoint, two
+fire and parse the request, one displays and one sends — and **four walk down the nested response to
+extract a single field**. Over half the automation is not calling a model; it is digging a string
+out of JSON. Those four steps do not vanish on a canvas. A node does them for you invisibly, hands
+you clean text, and the work still happened. That is the entire reason a course on visual workflow
+tools spends a section on HTTP: the abstraction is doing something real, and knowing what it hides
+is what lets you debug it on the day it hands you nothing.
+
 ## A grammar, not a template
 
 Two extensions keep the three words from hardening into a shape. A model can sit **in the action**
