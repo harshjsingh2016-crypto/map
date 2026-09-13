@@ -57,6 +57,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 ## Workflow automation
 
 - [When to automate](when-to-automate.md) — three questions and four vetoes, decided before either tool is opened
+- [The workflow grammar](workflow-grammar.md) — trigger, condition, action; and the model's job is normalisation
 
 ## AI for content creation
 
