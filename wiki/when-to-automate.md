@@ -69,6 +69,34 @@ aftermath rather than the task. The other three ask whether to build it; this on
 would find out when it broke. It is the same question the competent-reader test asks of a generated
 answer, arriving from the other direction.
 
+## A worked case, and what the screen catches
+
+The scenario the lecture runs on is a travel business drowning in inbound messages: thousands of
+Instagram DMs since a post went live, about a third of them answered in whatever order the app
+happened to open, and a separate WhatsApp inbox with its own backlog cross-checked against nothing.
+The same person can ask on both channels and get two different answers.
+
+**The diagnosis is speed, not quality** — *it's not about the quality of your answer, it's primarily
+about the speed of your answer* — and the case that carries it is one lost booking. An enquiry
+arrives at 11:04 in the morning asking about a specific discount code. The customer books with a
+competitor at 3:12 that afternoon. The message is seen at 9:47 that night. A perfect answer at 9:47
+was worth nothing, which is the whole point: **the entire failure is latency**, and latency is the
+kind of thing a machine fixes and a person does not.
+
+Run the four criteria over it and three pass comfortably — the volume is plainly past what a person
+can hold, the sorting rule is stable, and a misrouted enquiry commits nothing binding. The
+interesting one is the fourth. **Failure visibility is the weak criterion here, and the lost booking
+is exactly what an invisible failure looks like**: nothing errored, no queue showed red, no alert
+fired. The money went elsewhere and the only trace was an unread message. That is the criterion to
+design against rather than the one to be reassured by, and noticing it before the build is the
+difference between using the screen and reciting it.
+
+One detail from the same scenario is worth carrying into how the workflow gets built. The sorting
+rule is stable **without being mechanical**: bulk versus small is defined by intent — booking for a
+family against booking for fifteen or twenty colleagues — and there is no number in the message to
+threshold on. Rule clarity does not require that a rule be computable, only that it be consistent,
+which is precisely the gap a model fills in the middle of a workflow.
+
 ## Related
 
 - [The competent-reader test](competent-reader-test.md) — failure visibility for a generated answer: would anyone downstream notice?
