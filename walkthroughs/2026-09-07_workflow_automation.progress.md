@@ -1,8 +1,8 @@
 # Walkthrough — 2026-09-07_workflow_automation.md
 Board: scalar/workflow-automation
 Source: Armor/Output/2026-09-07_workflow_automation.md
-Updated: 2026-09-12
-Agenda confirmed: pending (summary + glossary presented 2026-09-12)
+Updated: 2026-09-13
+Agenda confirmed: 2026-09-13 (summary + glossary presented 2026-09-12)
 
 Board created empty this session, so every item is **missed** by definition; the tags below note
 which are core structure and which are supporting material. No wiki article cites this board yet,
@@ -13,7 +13,7 @@ diagnose-the-hard-part) are likely homes for what this lecture settles.
 depth, Day 14 covers Zapier end to end. Where the file says a topic was deferred, that is the
 lecture's design rather than a gap in the extraction.
 
-- [ ] §1 + §9 Why automate, and the Automation Mindset — the three-question test and four screening criteria — missed — pending
+- [x] §1 + §9 Why automate, and the Automation Mindset — the three-question test and four screening criteria — missed — discussed ✓ — accepted (four-criteria **mindmap** at the user's call rather than the table I proposed, three-question-test note, what-automation-is-for note). A fourth candidate — that the criteria are vetoes rather than a score, and that failure visibility is the only one about the aftermath — was offered **labelled as board-derived rather than the instructor's**, and **not boarded** on my recommendation; it went into the wiki article's own section instead, where the labelling is explicit. The résumé-asset aside left off: the file marks it as his read of the market, not a verified claim. New wiki article: when-to-automate.md.
 - [ ] §2 The Wanderline scenario and Kabir's solution sketch — missed — pending
 - [ ] §3 Parts of a canvas — the two vocabularies, the 5:00 PM analogy, where the AI node earns its place — missed — pending
 - [ ] §4 iOS Shortcuts as a worked non-canvas example — missed — pending

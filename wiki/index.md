@@ -54,6 +54,10 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Free-tier arithmetic](free-tier-arithmetic.md) — count messages, not conversations; volume bites before seats do
 - [The competent-reader test](competent-reader-test.md) — is there anyone downstream who would notice a wrong answer?
 
+## Workflow automation
+
+- [When to automate](when-to-automate.md) — three questions and four vetoes, decided before either tool is opened
+
 ## AI for content creation
 
 - [Diagnose the hard part](diagnose-the-hard-part.md) — structure, substance or style; the tool follows the diagnosis
