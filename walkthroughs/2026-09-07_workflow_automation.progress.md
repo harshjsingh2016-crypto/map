@@ -2,7 +2,8 @@
 Board: scalar/workflow-automation
 Source: Armor/Output/2026-09-07_workflow_automation.md
 Updated: 2026-09-14
-Walkthrough complete: 2026-09-14 — all 10 agenda items discussed and ruled on, the one flag folded in and resolved, no pending suggestions
+Walkthrough complete: 2026-09-14
+Mini build: completed and posted to Discord, confirmed 2026-09-14 (the brief was never in the recording or the deliverable — it existed only in the class Discord) — all 10 agenda items discussed and ruled on, the one flag folded in and resolved, no pending suggestions
 Agenda confirmed: 2026-09-13 (summary + glossary presented 2026-09-12)
 
 Board created empty this session, so every item is **missed** by definition; the tags below note
