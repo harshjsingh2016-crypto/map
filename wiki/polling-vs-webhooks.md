@@ -24,6 +24,24 @@ node hands you whichever mechanism the platform implemented for that integration
 visible sign is a poll-interval field being present or absent. A poll interval in a trigger's
 settings is a product decision surfacing as a configuration detail.
 
+## What a webhook actually sends
+
+Worth pinning down, because it is easy to get backwards. A webhook is **typically delivered as a
+POST request carrying a payload** — the message text, the sender, the timestamp, whatever the event
+was about. It is not a GET, and an off-the-cuff class answer describing it as using "the GET API
+behind the curtain" is the one thing in this material worth correcting outright.
+
+The correction fits the concept better than the original does. **A GET asks; a webhook tells.** The
+entire value of the arrangement is that the news arrives *with its content attached*, so the
+receiving workflow has what it needs without going back to fetch anything — and POST is the verb for
+arriving with something to be saved or acted on. Verify in a specific integration before relying on
+it either way, but that is the shape.
+
+The framing offered for the mechanism is a good one: a webhook is not an API sitting and listening
+to you, it is **wait-and-watch** — it costs nothing while nothing happens. The worked example is a
+chat space wired to a virtual machine, where posting a slash command fires the webhook and the
+machine turns on.
+
 ## When the gap matters
 
 It scales in two directions and they pull opposite ways. Shortening the poll interval buys

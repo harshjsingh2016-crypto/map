@@ -61,6 +61,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [API key hygiene](api-key-hygiene.md) — expire, rotate, name each one; and the model never sees it
 - [Fair-code](fair-code.md) — read, modify, self-run; resell the automations, not the tool
 - [Polling vs webhooks](polling-vs-webhooks.md) — asking repeatedly, or being told; a latency difference you rarely choose
+- [HTTP, for workflow builders](http-for-workflows.md) — the five methods, and the work a node hides rather than removes
 - [Choosing between workflow tools](choosing-a-workflow-tool.md) — six dimensions, and only one of them decides
 
 ## AI for content creation
