@@ -97,6 +97,27 @@ family against booking for fifteen or twenty colleagues — and there is no numb
 threshold on. Rule clarity does not require that a rule be computable, only that it be consistent,
 which is precisely the gap a model fills in the middle of a workflow.
 
+## What a silent failure actually looks like
+
+Failure visibility is the criterion easiest to nod along to and hardest to picture, so it is worth
+having two concrete cases where a workflow runs green and does the wrong thing.
+
+**A node in the wrong place.** A canvas where the notification step sits *before* the classification
+step rather than after it fires a notification for every incoming message, spam included. Nothing
+errors. Every node reports success. The quiz that poses this offers "the workflow would fail to run
+at all" as a distractor, and the reason that answer is wrong is the whole lesson: **order is the
+logic**, and a misplaced node is not a broken workflow but a working workflow computing something
+you did not ask for.
+
+**A classifier returning something outside its known set.** A prompt that numbered its options got
+back `2 small booking` instead of `small booking`. The downstream comparison matches nothing, every
+record takes the false branch, and again the run is clean.
+
+Both have the same shape — green run, wrong result, nothing raised — and in both cases the only
+thing that caught it was somebody reading the output. **A green run is not evidence.** Check what an
+automation did, not whether it finished, and prefer designs where a wrong result shows up somewhere
+a person will look.
+
 ## Related
 
 - [The competent-reader test](competent-reader-test.md) — failure visibility for a generated answer: would anyone downstream notice?

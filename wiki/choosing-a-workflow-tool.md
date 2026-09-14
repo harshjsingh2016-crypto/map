@@ -46,6 +46,14 @@ rule, a client agreement — rather than a default good practice. A tool that ca
 has exactly one answer to "this client's data may not leave our infrastructure", and the value of
 the option is that it lets you say yes.
 
+**And self-hosting has a limit that the hosting row hides.** Raised by a student and conceded
+immediately: if the workflow runs on your own hardware but still sends the query out to a hosted
+model, **the data leaves anyway**. Self-hosting moves where the records sit; it does nothing about
+where the payload goes, and in a classification workflow the customer's phone number and message
+text are in that payload either way. So "we self-host, therefore the client's data never leaves our
+infrastructure" holds only if the workflow contains no outbound model call — and the moment it does,
+the promise has to be re-checked against that one node. The implied fix is a local model.
+
 ## Related
 
 - [The workflow grammar](workflow-grammar.md) — the vocabulary both tools implement; only the nouns change
