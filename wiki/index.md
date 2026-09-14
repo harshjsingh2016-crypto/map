@@ -54,6 +54,16 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Free-tier arithmetic](free-tier-arithmetic.md) — count messages, not conversations; volume bites before seats do
 - [The competent-reader test](competent-reader-test.md) — is there anyone downstream who would notice a wrong answer?
 
+## Workflow automation
+
+- [When to automate](when-to-automate.md) — three questions and four vetoes, decided before either tool is opened
+- [The workflow grammar](workflow-grammar.md) — trigger, condition, action; and the model's job is normalisation
+- [API key hygiene](api-key-hygiene.md) — expire, rotate, name each one; and the model never sees it
+- [Fair-code](fair-code.md) — read, modify, self-run; resell the automations, not the tool
+- [Polling vs webhooks](polling-vs-webhooks.md) — asking repeatedly, or being told; a latency difference you rarely choose
+- [HTTP, for workflow builders](http-for-workflows.md) — the five methods, and the work a node hides rather than removes
+- [Choosing between workflow tools](choosing-a-workflow-tool.md) — six dimensions, and only one of them decides
+
 ## AI for content creation
 
 - [Diagnose the hard part](diagnose-the-hard-part.md) — structure, substance or style; the tool follows the diagnosis
