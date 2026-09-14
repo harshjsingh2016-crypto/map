@@ -58,6 +58,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 
 - [When to automate](when-to-automate.md) — three questions and four vetoes, decided before either tool is opened
 - [The workflow grammar](workflow-grammar.md) — trigger, condition, action; and the model's job is normalisation
+- [API key hygiene](api-key-hygiene.md) — expire, rotate, name each one; and the model never sees it
+- [Fair-code](fair-code.md) — read, modify, self-run; resell the automations, not the tool
 
 ## AI for content creation
 

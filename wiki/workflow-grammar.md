@@ -48,6 +48,17 @@ screening criteria. Bulk versus small is a **stable rule** — it passes rule cl
 **computable** from any field in the message. Rule clarity asks for consistency, not arithmetic, and
 the gap between the two is precisely the slot a model fills.
 
+**The failure has a name and a live example.** A classifier prompt that listed the three options as
+a numbered list came back with `2 small booking` — the model had echoed the list number. The
+downstream check is a **string comparison**, so that value matches nothing, the condition takes its
+false branch, and every record routes the same wrong way. No error is raised and the workflow runs
+green. It was caught because somebody read the output, not because anything reported it, and the
+fix was removing the numbering from the prompt.
+
+That is why the output **format** of a classifier node is not cosmetic, and why the guard on the
+other end — checking that the condition's literal spelling matches what the classifier actually
+emits — is worth doing at build time rather than discovering later.
+
 **A test follows from this, though the lecture does not state it.** If the model's job is
 normalisation, you are not testing whether it was *right*; you are testing whether it **returned one
 of your known values**. A response outside the set is a failure the workflow can detect by itself. A
