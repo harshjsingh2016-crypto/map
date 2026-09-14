@@ -54,6 +54,37 @@ text are in that payload either way. So "we self-host, therefore the client's da
 infrastructure" holds only if the workflow contains no outbound model call — and the moment it does,
 the promise has to be re-checked against that one node. The implied fix is a local model.
 
+## Splitting one process across tools
+
+The question arrives naturally once two platforms are on the table: can a large, complex process use
+different tools for different phases? The answer reframes it, and the reframing is the useful part.
+
+**A single long workflow is expected, not a smell.** These canvases are built assuming you will
+create a great many nodes and branch out of them; one can fill a spreadsheet, message three chat
+platforms and make a model call end to end. The instinct behind the question — decompose, separate
+concerns — is a good engineering instinct and the wrong one here.
+
+**Do not stack two paid platforms**, because you are then paying twice for the same category of
+thing. And the recommended split is **by context rather than by phase**: the self-hosted free option
+for personal and small projects, the hosted one for company work where connector coverage and ease
+matter. Which is to say the asker proposed splitting **one process** across tools, and the answer
+splits **classes of work** — same tool for the whole of any given job.
+
+**When a tool genuinely cannot reach the finish line, bridge with a data store rather than a second
+orchestrator.** If it does most of the job but cannot connect to the final destination, write the
+output to a spreadsheet or a SQL database and have the destination read from there — a presentation
+tool that cannot pull from the workflow platform can pull from a sheet the workflow platform writes.
+Both platforms can also run scripts, so a short script updating the destination directly is the
+other route.
+
+A shared store is a much cheaper seam than a second platform: no second subscription, no second set
+of credentials, **no second place for a workflow to fail silently**, and either end can be replaced
+without touching the other. It is also the HTTP lesson arriving as advice — when no connector
+exists, you are back to moving the data yourself, and a sheet is the least ceremonious way to do it.
+
+The deciding rule offered for all of this is unglamorous and right: look for **where the trade-off
+is lowest**.
+
 ## Related
 
 - [The workflow grammar](workflow-grammar.md) — the vocabulary both tools implement; only the nouns change
