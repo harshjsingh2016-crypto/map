@@ -14,7 +14,7 @@ api-key-hygiene, choosing-a-workflow-tool, fair-code.
 rather than topics. No quiz this session.
 
 - [x] §1 + §3 + §4 The build principle (start with three nodes), Basic LLM Chain vs AI Agent first pass, cloud vs local n8n — missed — discussed ✓ — accepted (build-principle flowchart, Chain vs Agent table, cloud vs local table; the Ollama and free-trial side answers folded into the cloud/local table as rows, the "build your own n8n is a nightmare" aside dropped)
-- [ ] §2 The scenario — Wanderline is still sad — missed — pending
+- [x] §2 The scenario — Wanderline is still sad — missed — discussed ✓ — accepted (scenario note with the goal sentence and the three-node mapping folded in; Gotchas note opened, first entry: unpublished workflows never trigger. The publish trap has no wiki home yet — fold it into the error-handling article when §9/§10 lands)
 - [ ] §5 Build 1 — form → Basic LLM Chain → Gmail, and what is wrong with it — missed — pending
 - [ ] §6 Build 2 — IF node for spam, Sheets for the log, and the substring false positive — missed — pending
 - [ ] §7.0–7.3 Build 3 — fixing the tagging, schedule trigger, Sheets get-rows, HTTP request — missed — pending

@@ -66,6 +66,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Building a workflow three nodes at a time](iterative-workflow-building.md) — the wrong-shape success that quietly misconfigures everything downstream
 - [The LLM chain and the agent node](llm-chain-vs-agent.md) — one prompt and an answer, or a task that needs lookups first
 - [Hosted or on your own machine](self-hosting-tradeoffs.md) — an operations choice, and only data privacy overturns it
+- [A showcase is not a use case](showcase-vs-use-case.md) — a time, a gap and a cost; and a spec that fits in one sentence
 
 ## AI for content creation
 
