@@ -2,7 +2,7 @@
 Board: scalar/n8n-automation
 Source: Armor/Output/2026-09-09_n8n_real_world_workflows.md
 Updated: 2026-09-14
-Agenda confirmed: pending (summary + glossary presented 2026-09-14)
+Agenda confirmed: 2026-09-17 (summary + glossary presented 2026-09-14)
 
 Board created empty this session, so every item is **missed** by definition. No wiki article cites
 this board yet, but seven cite the Day 12 board and are the likely homes for what this lecture
