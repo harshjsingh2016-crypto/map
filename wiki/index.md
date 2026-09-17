@@ -67,6 +67,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [The LLM chain and the agent node](llm-chain-vs-agent.md) — one prompt and an answer, or a task that needs lookups first
 - [Hosted or on your own machine](self-hosting-tradeoffs.md) — an operations choice, and only data privacy overturns it
 - [A showcase is not a use case](showcase-vs-use-case.md) — a time, a gap and a cost; and a spec that fits in one sentence
+- [Designing the form that feeds the flow](form-field-design.md) — pick the field type by what people will type, not by what the data is
+- [Right-sizing the model](right-sizing-the-model.md) — two readings of parameter count, and the cut-off date that cuts across both
 
 ## AI for content creation
 

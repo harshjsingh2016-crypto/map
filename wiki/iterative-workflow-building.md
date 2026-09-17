@@ -33,6 +33,17 @@ same automation are not three workflows — they are one workflow plus two incre
 increment is exactly where a particular class of bug surfaces. Small steps do not merely reduce
 risk; they sort the bugs into the step that caused them.
 
+There is an operational move that makes this concrete. Before configuring anything downstream, run
+the trigger once for real — submit the form, fire the webhook — so the node's actual output sits in
+front of you. You are then building against data you can see rather than a shape you assumed, which
+is the wrong-shape failure closed off at its source rather than caught later.
+
+The snapshot has one trap attached. Sample data is the output of the last successful execution, not
+a live connection to the trigger. Edit the trigger after capturing it — add a field, change an
+element — and the snapshot is stale while still looking perfectly valid; downstream nodes resolve
+against fields that no longer describe what the trigger emits. The rule is short: **change the
+trigger, re-run the trigger.**
+
 ## Related
 
 - [The workflow grammar](workflow-grammar.md) — trigger, condition, action: the three nodes you start with are usually one of each
