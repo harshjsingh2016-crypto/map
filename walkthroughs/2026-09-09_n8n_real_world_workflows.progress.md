@@ -1,7 +1,7 @@
 # Walkthrough — 2026-09-09_n8n_real_world_workflows.md
 Board: scalar/n8n-automation
 Source: Armor/Output/2026-09-09_n8n_real_world_workflows.md
-Updated: 2026-09-14
+Updated: 2026-09-17
 Agenda confirmed: 2026-09-17 (summary + glossary presented 2026-09-14)
 
 Board created empty this session, so every item is **missed** by definition. No wiki article cites
@@ -13,7 +13,7 @@ api-key-hygiene, choosing-a-workflow-tool, fair-code.
 **one live build, iterated three times** on the same scenario, so the agenda follows the builds
 rather than topics. No quiz this session.
 
-- [ ] §1 + §3 + §4 The build principle (start with three nodes), Basic LLM Chain vs AI Agent first pass, cloud vs local n8n — missed — pending
+- [x] §1 + §3 + §4 The build principle (start with three nodes), Basic LLM Chain vs AI Agent first pass, cloud vs local n8n — missed — discussed ✓ — accepted (build-principle flowchart, Chain vs Agent table, cloud vs local table; the Ollama and free-trial side answers folded into the cloud/local table as rows, the "build your own n8n is a nightmare" aside dropped)
 - [ ] §2 The scenario — Wanderline is still sad — missed — pending
 - [ ] §5 Build 1 — form → Basic LLM Chain → Gmail, and what is wrong with it — missed — pending
 - [ ] §6 Build 2 — IF node for spam, Sheets for the log, and the substring false positive — missed — pending

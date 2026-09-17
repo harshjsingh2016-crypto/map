@@ -63,6 +63,9 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Polling vs webhooks](polling-vs-webhooks.md) — asking repeatedly, or being told; a latency difference you rarely choose
 - [HTTP, for workflow builders](http-for-workflows.md) — the five methods, and the work a node hides rather than removes
 - [Choosing between workflow tools](choosing-a-workflow-tool.md) — six dimensions, and only one of them decides
+- [Building a workflow three nodes at a time](iterative-workflow-building.md) — the wrong-shape success that quietly misconfigures everything downstream
+- [The LLM chain and the agent node](llm-chain-vs-agent.md) — one prompt and an answer, or a task that needs lookups first
+- [Hosted or on your own machine](self-hosting-tradeoffs.md) — an operations choice, and only data privacy overturns it
 
 ## AI for content creation
 
