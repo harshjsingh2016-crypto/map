@@ -78,6 +78,14 @@ work, but the field is asking for the endpoint, and parameters entered as data a
 editable, individually expressible, and visible — which is what you need the moment one of them has
 to come from an upstream node.
 
+Two details about the values themselves. Know which parts of a request are fixed and which are
+live: coordinates typed into a query parameter are hard-coded, while the reading that comes back is
+fetched fresh on every run — the same call is both a constant and a variable, and confusing the two
+produces arguments about caching that are not about caching. And when an endpoint wants an
+identifier you do not have — coordinates, an account id, a product code — there is usually a
+companion endpoint that resolves it from something you do have, so you chain a lookup in front of
+the real call.
+
 The last step is knowing what to ask for. APIs commonly return a skeleton unless you name the fields
 you want: a weather endpoint called without its `current` parameter answers with latitude, longitude
 and elevation, and no temperature at all. Nothing errors. You asked a question that did not include

@@ -73,6 +73,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Make the answer a field, not a substring](structured-output-for-branching.md) — the classifier was right and the branch still read it wrong
 - [Scheduling, and when to reach for cron](scheduling-and-cron.md) — the meeting is at nine, so the report runs at eight
 - [The item model](the-item-model.md) — a node runs once per incoming item, and node order decides the call count
+- [Use the model for what only a model can do](what-only-an-llm-can-do.md) — faster and cheaper are optimisations; authoritative is the argument
 
 ## AI for content creation
 
