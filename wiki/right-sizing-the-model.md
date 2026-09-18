@@ -33,10 +33,18 @@ runtime you use.
 
 The second is that **"simple task" is a judgement, and you can get it wrong.** The lecture's own
 worked build chose a small model for exactly the right stated reason, and the choice held through
-two builds before the model began hallucinating facts in the third — where the task had quietly
-stopped being summarisation and started being synthesis over retrieved data. The failure did not
-announce itself as a sizing mistake; it announced itself as wrong content in an email. Right-sizing
-is correct as a default and needs re-checking every time the job the model is doing changes shape.
+two builds before failing in the third — where the task had quietly stopped being summarisation and
+started being synthesis over retrieved data. Handed two rows, the model reported a hundred bookings,
+then fifty, then five, and a temperature unrelated to the one the API returned. Instructing it not
+to invent numbers changed nothing; a stronger model was grounded on the first attempt. The failure
+did not announce itself as a sizing mistake, it announced itself as wrong content in an email.
+Right-sizing is correct as a default and needs re-checking every time the job changes shape.
+
+One side effect of the upgrade is worth knowing about in advance. The stronger model, being
+grounded, reported one of its inputs as *missing* — exposing a broken expression that the weak model
+had been covering with a plausible invented value. A model that fabricates does not only produce
+wrong output; it hides the defects upstream of it, and fixing the model is sometimes how you find
+out what else was broken.
 
 ## Related
 

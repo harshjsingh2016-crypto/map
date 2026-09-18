@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-content-creation]
-updated: 2026-09-07
+boards: [scalar/ai-content-creation, scalar/n8n-automation]
+updated: 2026-09-18
 ---
 
 # The do-not-guess constraint
@@ -34,6 +34,18 @@ The wider prompt this sat inside is worth copying too: use only facts, do not ro
 number, and the notes correct themselves in one place so follow the correction. Each is the same
 shape — a specific failure named in advance, with the wanted behaviour spelled out rather than
 implied.
+
+There is a limit to it, found the hard way in a later build. A small, cheap model was fed two rows
+of real data and reported a hundred bookings, then fifty, then five, and a temperature nowhere near
+the one the API had returned. The constraint was added — *strictly use the data given below, do not
+make your own numbers* — and **it did not help**. Swapping in a stronger model fixed it immediately.
+
+The reconciliation is worth stating precisely, because it does not weaken the constraint. An
+instruction redirects a default the model is capable of overriding; it cannot supply a capability
+the model does not have. Grounding a summary in supplied figures is something a capable model does
+when told to and a weak one cannot reliably do at all. So the clause remains the cheapest thing you
+can write — and when it has no effect, that is information: the next move is a different model, not
+a better sentence.
 
 ## Related
 
