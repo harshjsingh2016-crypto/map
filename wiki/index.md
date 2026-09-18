@@ -71,6 +71,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Right-sizing the model](right-sizing-the-model.md) — two readings of parameter count, and the cut-off date that cuts across both
 - [Classifying input you do not control](classifying-untrusted-input.md) — a list fails on coverage, a radio button fails on incentive
 - [Make the answer a field, not a substring](structured-output-for-branching.md) — the classifier was right and the branch still read it wrong
+- [Scheduling, and when to reach for cron](scheduling-and-cron.md) — the meeting is at nine, so the report runs at eight
 
 ## AI for content creation
 

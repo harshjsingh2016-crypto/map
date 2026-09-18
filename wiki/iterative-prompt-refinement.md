@@ -25,6 +25,13 @@ the model cannot do the thing being asked — and the move is to ask for less, n
 Three rounds of rewording is a reasonable signal that you are up against a capability ceiling rather
 than an ambiguity, and reducing the task is a legitimate fix rather than a retreat.
 
+One more attribution rule, from the same build. A submission with nothing ambiguous about it came
+back misclassified, and the builder's response was: *this is a fault on my system prompt side and
+not the message side.* That is the correct default. An unambiguous input that the model reads wrong
+is a specification you did not write, not a strange input you were unlucky to receive — and the fix
+that followed was pinning the **output format** (a new final line, exactly one word) rather than
+explaining the categories any further.
+
 ## Related
 
 - [Chain of thought](chain-of-thought.md) — the debugging signal each round reads

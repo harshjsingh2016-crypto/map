@@ -1,6 +1,6 @@
 ---
-boards: [scalar/workflow-automation]
-updated: 2026-09-14
+boards: [scalar/workflow-automation, scalar/n8n-automation]
+updated: 2026-09-18
 ---
 
 # HTTP, for workflow builders
@@ -59,6 +59,29 @@ Which is exactly what a canvas node is doing for you. A phone automation built w
 **four of its ten steps** walking down a nested response to reach a single string. Those four steps
 do not disappear behind an LLM node that hands you clean text; somebody wrote them once, and knowing
 they are there is what lets you debug the day the node hands you nothing.
+
+## Making the call, in practice
+
+The theory above has a working method attached, and the order of its steps is the point: **prove the
+request outside the workflow before it becomes a node.**
+
+Find the API and read its docs — a well-documented one hands you a ready-made curl request. Paste
+that curl straight into the URL box of a request client, which parses it into an endpoint plus
+separated query parameters rather than leaving you to read a string. Edit in your real values and
+run it. You now have a request you know returns what you want, and when the workflow later returns
+nothing you are not debugging two things at once.
+
+Only then translate it into the node, where one detail catches almost everyone: **the URL field
+takes only the part before the `?`**. The query parameters go in as separate key-value entries via
+the node's own switch for them. Pasting the whole query string into a field labelled URL may even
+work, but the field is asking for the endpoint, and parameters entered as data are individually
+editable, individually expressible, and visible — which is what you need the moment one of them has
+to come from an upstream node.
+
+The last step is knowing what to ask for. APIs commonly return a skeleton unless you name the fields
+you want: a weather endpoint called without its `current` parameter answers with latitude, longitude
+and elevation, and no temperature at all. Nothing errors. You asked a question that did not include
+the thing you wanted, and got a complete, correct, useless answer.
 
 ## Related
 
