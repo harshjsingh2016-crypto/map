@@ -69,6 +69,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [A showcase is not a use case](showcase-vs-use-case.md) — a time, a gap and a cost; and a spec that fits in one sentence
 - [Designing the form that feeds the flow](form-field-design.md) — pick the field type by what people will type, not by what the data is
 - [Right-sizing the model](right-sizing-the-model.md) — two readings of parameter count, and the cut-off date that cuts across both
+- [Classifying input you do not control](classifying-untrusted-input.md) — a list fails on coverage, a radio button fails on incentive
+- [Make the answer a field, not a substring](structured-output-for-branching.md) — the classifier was right and the branch still read it wrong
 
 ## AI for content creation
 
