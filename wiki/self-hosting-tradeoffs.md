@@ -1,6 +1,6 @@
 ---
 boards: [scalar/n8n-automation]
-updated: 2026-09-17
+updated: 2026-09-20
 ---
 
 # Hosted or on your own machine
@@ -34,6 +34,19 @@ Two practical notes attach to the local route. Usage limits from the hosted free
 to it — a local instance is unlimited. And local models work with it smoothly, which is the other
 reason a privacy-constrained engagement ends up entirely on your own hardware: not just the
 workflow data, but the inference too.
+
+In practice the local route is a container stack rather than an install: a get-script one-liner
+followed by a compose command brings up a handful of containers — the app, a sandbox API, a search
+service and a couple of runners — in a few hundred megabytes of memory, reachable on a local port.
+Two operational details catch people. Closing the terminal orphans the containers rather than
+stopping them, so they are stopped from the container manager. And the machine staying on is not a
+theoretical requirement: shut the laptop down and the triggers stop, which is the whole trade-off
+arriving as a consequence.
+
+One thing that is easy to conflate: **running the tool locally does not make the model local.** A
+hosted model's API key is still needed, and the flow still calls out to it. Where the tool runs and
+where inference runs are independent decisions, and only a local runtime collapses them — which is
+what makes it the real answer for a privacy-constrained engagement rather than self-hosting alone.
 
 ## Related
 

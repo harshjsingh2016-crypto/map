@@ -1,6 +1,6 @@
 ---
 boards: [scalar/n8n-automation]
-updated: 2026-09-18
+updated: 2026-09-20
 ---
 
 # The item model
@@ -34,6 +34,18 @@ to reason about, which is worth more than the parallelism on flows this size.
 
 The general habit: **count the items.** A node that ran twice was handed two items, and the fix is
 almost never in the node that misbehaved.
+
+This is also the answer to a question that comes up as soon as anyone with a programming background
+looks at a canvas: **where are the loops?** There is no while, no do-while. What exists is a small
+set of flow-control nodes — one that removes items, one that joins branches, one that branches two
+ways on a condition, one that routes on several — plus the aggregate step that fans many back into
+one.
+
+Read against the item model that is not a gap, it is the consequence. You do not write a loop over
+rows because iteration is already how execution works; what you need instead are ways to **shape the
+queue**. Those nodes are a loop body's contents, decomposed and made into separate steps. The one
+thing genuinely absent is repeat-until-a-condition-holds, which is a different construct and is
+usually handled elsewhere.
 
 ## Related
 

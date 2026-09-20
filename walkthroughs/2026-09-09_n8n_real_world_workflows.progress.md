@@ -1,7 +1,7 @@
 # Walkthrough — 2026-09-09_n8n_real_world_workflows.md
 Board: scalar/n8n-automation
 Source: Armor/Output/2026-09-09_n8n_real_world_workflows.md
-Updated: 2026-09-17
+Updated: 2026-09-20
 Agenda confirmed: 2026-09-17 (summary + glossary presented 2026-09-14)
 
 Board created empty this session, so every item is **missed** by definition. No wiki article cites
@@ -22,7 +22,7 @@ rather than topics. No quiz this session.
 - [x] §7.8–7.9 + §8 Formatting the brief, and why an HTTP call rather than the LLM for facts — missed — discussed ✓ — accepted (formatting note; where-facts-come-from note. Two refinements: the HTTP method flowchart gained a fixed-versus-live node carrying the geocoding chain pattern, and Build 3's start node now records his own two-item summary of what the build added)
 - [x] §9 + §10 Error handling — three settings and a safety net — and the debugging practices collected — missed — discussed ✓ — accepted (error handling table boarding the printed reference's reading of Always Output Data, with the live gloss recorded as the mismatch; degraded-output note; nine debugging practices as a mindmap grouped by habit. Retry's specific values kept off as low-confidence. Both parked items now have a wiki home in debugging-a-workflow: the schema/leaf rule and node-success-is-not-outcome)
 - [x] §11 AI Agent vs Basic LLM Chain — the diagram and two hotel cases — missed — discussed ✓ — accepted (two hotel cases table carrying the lookup-versus-authority split and the commitment-you-cannot-retract framing; two rows added to the §3 chain-vs-agent table for the canvas ports and cost; three-right-sizing-decisions note, flagged in its own text as a reading rather than something he said. Air Canada illustration raised with its caveat and kept off the board)
-- [ ] §12 + §13 Doubt session and the assignment — missed — pending
+- [x] §12 + §13 Doubt session and the assignment — missed — discussed ✓ — accepted (flow-control table carrying why there are no loops; running-it-locally note with the install URL left off as unrecoverable, and the database nodes folded in). Rejected: the VLOOKUP-to-schedule consulting story (an anecdote, not structure) and a separate Outstanding note (the take-home exercise is already recorded on the substring-trap note, and the platform assignment is tracked in Armor's INDEX)
 
 **Low-confidence material to raise with the caveat attached, never as fact** (file §15): the
 `temperature_2m` gloss (he read `2m` as a two-minute refresh rate; in that API's naming it is the
@@ -37,3 +37,7 @@ McDonald's kiosk and Air Canada illustrations (from memory, unsourced); the sign
 as "even if it's an error, we send it forward". **The table is right and the gloss is wrong** — it
 emits an empty item when a node legitimately returns nothing, which is a different case from error
 handling; the live gloss conflates it with *Continue (using error output)*. Board the table.
+
+**Walkthrough complete 2026-09-20.** All ten agenda items discussed and ruled on. Status strip advanced: Learning green,
+Class Assignment indigo. Next action: the instructor's assignment (6 platform problems plus 3 extra, and the feedback form),
+then the Internal QnA drill in Armor. The take-home JSON-key exercise from the build is recorded on the board.
