@@ -46,6 +46,12 @@ had been covering with a plausible invented value. A model that fabricates does 
 wrong output; it hides the defects upstream of it, and fixing the model is sometimes how you find
 out what else was broken.
 
+One last framing, which is a reading of the material rather than a line anyone said. Sizing is the
+*third* of three decisions, and it is usually asked first. Does this work need a model at all, or
+does something else own the answer? If it needs a model, does it need an agent with tools, or does a
+plain chain do it? Only then: how big? Asked in that order, a good deal of the sizing question
+dissolves — the expensive call was never the right shape of call.
+
 ## Related
 
 - [Model cards](model-cards.md) — the spec sheet where capability and training data are meant to be stated
