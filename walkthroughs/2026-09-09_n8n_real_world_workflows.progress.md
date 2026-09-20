@@ -20,7 +20,7 @@ rather than topics. No quiz this session.
 - [x] §7.0–7.3 Build 3 — fixing the tagging, schedule trigger, Sheets get-rows, HTTP request — missed — discussed ✓ — accepted (Build 3 spine flowchart with per-node item counts, Get rows amber as the cause of the next section's bug; tagging-fix note; schedule table; HTTP method flowchart carrying the temperature_2m correction — measurement height, not refresh rate. Build 3's Aggregate node is boarded as a placeholder and gets its detail at §7.7)
 - [x] §7.4–7.7 The debugging sequence — the item model, the chain's error states, hallucination and model size, `[object Object]` — missed — discussed ✓ — accepted (item model note; canvas/errors table; hallucination note; `[object Object]` note carrying the temporary-chat method. Two refinements applied: Build 3's Aggregate node detail filled in, and the model sizing table's cost row rewritten with the settled finding. The debugging method itself is boarded but still without a wiki home — fold it into the §10 practices article)
 - [x] §7.8–7.9 + §8 Formatting the brief, and why an HTTP call rather than the LLM for facts — missed — discussed ✓ — accepted (formatting note; where-facts-come-from note. Two refinements: the HTTP method flowchart gained a fixed-versus-live node carrying the geocoding chain pattern, and Build 3's start node now records his own two-item summary of what the build added)
-- [ ] §9 + §10 Error handling — three settings and a safety net — and the debugging practices collected — missed — pending
+- [x] §9 + §10 Error handling — three settings and a safety net — and the debugging practices collected — missed — discussed ✓ — accepted (error handling table boarding the printed reference's reading of Always Output Data, with the live gloss recorded as the mismatch; degraded-output note; nine debugging practices as a mindmap grouped by habit. Retry's specific values kept off as low-confidence. Both parked items now have a wiki home in debugging-a-workflow: the schema/leaf rule and node-success-is-not-outcome)
 - [ ] §11 AI Agent vs Basic LLM Chain — the diagram and two hotel cases — missed — pending
 - [ ] §12 + §13 Doubt session and the assignment — missed — pending
 
@@ -33,7 +33,7 @@ character cap (stated as a guess); the local install command (URL not recoverabl
 posted it in the class chat); the retry defaults (read off his screen, provenance unstated); the
 McDonald's kiosk and Air Canada illustrations (from memory, unsourced); the sign-off name spelling.
 
-**One place the video departs from the printed notes** (file §15): he glossed *Always Output Data*
+**One place the video departs from the printed notes** (file §15) — RESOLVED at §9, boarded the table's reading with the mismatch recorded: he glossed *Always Output Data*
 as "even if it's an error, we send it forward". **The table is right and the gloss is wrong** — it
 emits an empty item when a node legitimately returns nothing, which is a different case from error
 handling; the live gloss conflates it with *Continue (using error output)*. Board the table.
