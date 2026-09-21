@@ -63,6 +63,19 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Polling vs webhooks](polling-vs-webhooks.md) — asking repeatedly, or being told; a latency difference you rarely choose
 - [HTTP, for workflow builders](http-for-workflows.md) — the five methods, and the work a node hides rather than removes
 - [Choosing between workflow tools](choosing-a-workflow-tool.md) — six dimensions, and only one of them decides
+- [Building a workflow three nodes at a time](iterative-workflow-building.md) — the wrong-shape success that quietly misconfigures everything downstream
+- [The LLM chain and the agent node](llm-chain-vs-agent.md) — one prompt and an answer, or a task that needs lookups first
+- [Hosted or on your own machine](self-hosting-tradeoffs.md) — an operations choice, and only data privacy overturns it
+- [A showcase is not a use case](showcase-vs-use-case.md) — a time, a gap and a cost; and a spec that fits in one sentence
+- [Designing the form that feeds the flow](form-field-design.md) — pick the field type by what people will type, not by what the data is
+- [Right-sizing the model](right-sizing-the-model.md) — two readings of parameter count, and the cut-off date that cuts across both
+- [Classifying input you do not control](classifying-untrusted-input.md) — a list fails on coverage, a radio button fails on incentive
+- [Make the answer a field, not a substring](structured-output-for-branching.md) — the classifier was right and the branch still read it wrong
+- [Scheduling, and when to reach for cron](scheduling-and-cron.md) — the meeting is at nine, so the report runs at eight
+- [The item model](the-item-model.md) — a node runs once per incoming item, and node order decides the call count
+- [Use the model for what only a model can do](what-only-an-llm-can-do.md) — faster and cheaper are optimisations; authoritative is the argument
+- [Designing for partial failure](designing-for-partial-failure.md) — decide what the degraded output looks like, and make failure visible
+- [Debugging a workflow](debugging-a-workflow.md) — read what the system already tells you, and know which layer owns the symptom
 
 ## AI for content creation
 

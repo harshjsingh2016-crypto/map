@@ -1,6 +1,6 @@
 ---
-boards: [scalar/prompt-engineering, scalar/no-code-ai-bot, scalar/ai-content-creation, scalar/multimodal-gen-ai]
-updated: 2026-09-10
+boards: [scalar/prompt-engineering, scalar/no-code-ai-bot, scalar/ai-content-creation, scalar/multimodal-gen-ai, scalar/n8n-automation]
+updated: 2026-09-18
 ---
 
 # RCTFC Framework
@@ -82,6 +82,21 @@ One dial is missing from the four and worth knowing about. Temperature — high 
 for restricted and grounded — is generally **no longer exposed by image tools**. The style field
 carries that hint instead, because creativity has to run higher for images than for text. The dial
 did not go away; it was folded into a field that does not look like a dial.
+
+Two things about the **Format** element are easy to miss until a prompt's output is going somewhere
+automated rather than to a person reading it.
+
+The first is that format includes what the output must **not** contain. A prompt that supplies a
+template and nothing else gets the template wrapped in a preamble — *here's the email I've drafted
+for you* — which is friendly in a chat window and unacceptable when the string is being piped
+straight into an email body. The clause that fixes it is *the response should only contain the
+email body*, and it belongs in Format, not in the user's head.
+
+The second is where formatting should happen at all. When a model has generated the text, the
+formatting belongs in that same prompt rather than in whatever node transports the result
+afterwards. Splitting them means reassembling a string from pieces that were already assembled
+once, in a place that has less context than the model did. One step owns the output, and it is the
+step that produced it.
 
 ## Related
 

@@ -1,6 +1,6 @@
 ---
-boards: [scalar/workflow-automation]
-updated: 2026-09-13
+boards: [scalar/workflow-automation, scalar/n8n-automation]
+updated: 2026-09-17
 ---
 
 # When to automate
@@ -117,6 +117,13 @@ Both have the same shape — green run, wrong result, nothing raised — and in 
 thing that caught it was somebody reading the output. **A green run is not evidence.** Check what an
 automation did, not whether it finished, and prefer designs where a wrong result shows up somewhere
 a person will look.
+
+A later scenario sharpens the same boundary from the other side. Travel enquiries arrive at three
+or four in the morning, nobody acts on them, and clients are lost. Nothing here is a judgement
+failure — the work is not being done badly, it is not being done at all, because the people who
+would do it are asleep. Where the earlier test asks whether a task needs sympathy, this one asks
+what is actually causing the failure: when the answer is availability rather than discernment,
+automation is not a compromise on quality, it is the only thing that changes the outcome.
 
 ## Related
 
