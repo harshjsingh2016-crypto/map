@@ -11,7 +11,7 @@ platforms" and §9 of this lecture is the named comparison, so it is the likelie
 rather than duplicate.
 
 - [x] §1 + §2 Why Zapier at all — Wanderline's three complaints, the one-trigger structure — and Zap terminology including action vs task — missed — discussed ✓ — accepted (dependency-argument note keeping the export-versus-ownership distinction precise; terminology table with Filter carrying the shield emphasis; action-vs-task note boarded separately from the table, since filter placement and the cost quiz both attach to it)
-- [ ] §3 Zap 1 — two steps, one published Zap, and what watching it run revealed — missed — pending
+- [x] §3 Zap 1 — two steps, one published Zap, and what watching it run revealed — missed — discussed ✓ — accepted (Zap 1 flowchart ending on the any-change flaw; the delay accounted stage by stage as a table; Gotchas note opened. The account facts were folded into the trigger node's detail as agreed, with the plan numbers left off as unverified. One wiki correction fell out of this: polling-vs-webhooks said the poll interval was one you set — on this platform it is not, and the article now says so)
 - [ ] §4 + §4.1 Zap 2 — teach it to skip, the Filter; and proving it with Zap History — missed — pending
 - [ ] §5 Tasks — what actually costs money, filter placement, and the Digest aggregation pattern — missed — pending
 - [ ] §6 Zap 3 — make it fork: the AI action, Paths, the run, and when two paths match — missed — pending
