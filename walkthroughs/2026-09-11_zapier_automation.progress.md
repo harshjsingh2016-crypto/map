@@ -1,8 +1,8 @@
 # Walkthrough — 2026-09-11_zapier_automation.md
 Board: scalar/zapier-automation
 Source: Armor/Output/2026-09-11_zapier_automation.md
-Updated: 2026-09-21
-Agenda confirmed: pending (summary + glossary presented 2026-09-21)
+Updated: 2026-09-22
+Agenda confirmed: 2026-09-22 (summary + glossary presented 2026-09-21)
 
 Board created empty this session, so every item is **missed** by definition. No wiki article cites
 this board yet. The seven articles on the Day 12 board and the thirteen on the Day 13 board are the
@@ -10,7 +10,7 @@ prior context — `choosing-a-workflow-tool.md` in particular was written generi
 platforms" and §9 of this lecture is the named comparison, so it is the likeliest article to deepen
 rather than duplicate.
 
-- [ ] §1 + §2 Why Zapier at all — Wanderline's three complaints, the one-trigger structure — and Zap terminology including action vs task — missed — pending
+- [x] §1 + §2 Why Zapier at all — Wanderline's three complaints, the one-trigger structure — and Zap terminology including action vs task — missed — discussed ✓ — accepted (dependency-argument note keeping the export-versus-ownership distinction precise; terminology table with Filter carrying the shield emphasis; action-vs-task note boarded separately from the table, since filter placement and the cost quiz both attach to it)
 - [ ] §3 Zap 1 — two steps, one published Zap, and what watching it run revealed — missed — pending
 - [ ] §4 + §4.1 Zap 2 — teach it to skip, the Filter; and proving it with Zap History — missed — pending
 - [ ] §5 Tasks — what actually costs money, filter placement, and the Digest aggregation pattern — missed — pending

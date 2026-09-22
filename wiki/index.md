@@ -76,6 +76,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Use the model for what only a model can do](what-only-an-llm-can-do.md) — faster and cheaper are optimisations; authoritative is the argument
 - [Designing for partial failure](designing-for-partial-failure.md) — decide what the degraded output looks like, and make failure visible
 - [Debugging a workflow](debugging-a-workflow.md) — read what the system already tells you, and know which layer owns the symptom
+- [Creating dependency](creating-dependency.md) — a workflow can be correct, efficient and still a liability nobody dares touch
+- [Tasks, and what an automation actually costs](tasks-as-the-billing-unit.md) — cost scales with steps times runs, and a wasted step bills the same
 
 ## AI for content creation
 
