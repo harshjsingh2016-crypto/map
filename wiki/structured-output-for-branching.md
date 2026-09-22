@@ -1,6 +1,6 @@
 ---
-boards: [scalar/n8n-automation]
-updated: 2026-09-18
+boards: [scalar/n8n-automation, scalar/zapier-automation]
+updated: 2026-09-22
 ---
 
 # Make the answer a field, not a substring
@@ -31,6 +31,17 @@ almost-valid JSON turns a classification bug into a parsing bug.
 The general rule underneath: **any value a branch depends on should live somewhere a human could
 point at.** If you cannot name the field holding the decision, the decision is being inferred from
 text, and text has other authors.
+
+A second, humbler version of the same fragility is worth naming, because it does not need a model to
+appear. A filter reading a status column with *exactly matches* is **case-sensitive**: `New` does not
+match `new`. In a spreadsheet where a person types that column by hand, one capitalised entry skips
+a row that should have gone through — and it fails silently, because a filtered run is not an error
+and nothing flags it.
+
+The pattern is the same as the substring case. **The branch condition is the fragile component**,
+not the logic on either side of it. A value that a human types freely, or that a model writes into
+prose, is not a reliable key to branch on; a value that comes from a fixed set, in a field of its
+own, is.
 
 ## Related
 
