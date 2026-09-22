@@ -66,6 +66,25 @@ shared file is doing a job an internal table cannot — being something people c
 question is per-integration: does *this* dependency carry risk worth removing? That is the same
 discipline as evaluating a trigger's suitability rather than the platform's.
 
+## Readability is not portability
+
+One detail from the same lecture's homework quietly revises the argument above, and the revision is
+a reading of the material rather than something the instructor said. Flows on the self-hosted tool
+**export** — as JSON, copyable, pasteable anywhere. Flows on the hosted one **cannot be exported at
+all**; they get shared as screenshots.
+
+So "maintainability" was two properties the whole time, and each tool wins one:
+
+- **Readability** — can someone who did not build it understand it? The linear, one-trigger tool
+  wins.
+- **Portability** — can the artefact leave the account it lives in? The exportable tool wins.
+
+The one-trigger constraint solves the author-leaves problem only for people who have access to the
+same account. It does nothing about the account itself, and it arguably deepens lock-in, since the
+flow cannot be taken anywhere else. Neither property is the whole answer, and the choice between
+tools is partly a choice about which kind of dependency you would rather carry: on a person who can
+read the thing, or on a vendor who holds it.
+
 ## Related
 
 - [When to automate](when-to-automate.md) — the decision this one comes after

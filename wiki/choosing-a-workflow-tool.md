@@ -101,9 +101,11 @@ your own time — a cost that appears on no invoice and so goes uncounted. Per-t
 in absolute terms and better in legibility: you can forecast it, expense it, and hand it to someone
 else.
 
-One more row belongs in the table though neither comparison printed it: **retrying a failed run.**
-On the self-hosted tool it is a free checkbox; on the hosted one it is a paid tier. Same capability,
-different commercial position.
+Two more rows belong in the table though neither comparison printed them. **Retrying a failed
+run**: on the self-hosted tool it is a free checkbox; on the hosted one it is a paid tier — same
+capability, different commercial position. And **portability**: the self-hosted tool's flows export
+as JSON, the hosted tool's cannot be exported at all, which splits the maintainability row into
+readability (the hosted tool wins) and portability (the self-hosted tool wins).
 
 ## Reconciling the two rules
 
