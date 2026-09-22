@@ -50,6 +50,13 @@ thousands, the platform becomes expensive and you are trading its breadth of con
 per-task cost. Past that, it still works if the budget is there — but at genuinely large volume you
 are building a product rather than sending messages from an automation tool.
 
+**Volume means events, not bytes.** A thousand rows is a thousand runs is a thousand tasks, whatever
+each row carries — a one-line row and a paragraph-long one cost the same. That runs against the
+cloud-pricing instinct of paying by the amount of data; what is metered here is how many times
+something happens. Size limits, where they exist, come from the destination rather than the
+platform — a chat service's message cap, not the automation tool's — and the workaround is to write
+a large payload somewhere that takes it, such as a sheet. **Limits live in the integrations.**
+
 ## Related
 
 - [Where the filter goes](filter-placement.md) — the cheapest optimisation on a metered platform
