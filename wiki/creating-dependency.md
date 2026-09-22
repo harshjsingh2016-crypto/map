@@ -47,6 +47,25 @@ the screen. You trade expressiveness for maintainability, and the trade is only 
 somebody other than you will have to read the result — which is more often than it feels like at
 the time.
 
+## The other dependency
+
+The same question applies to data rather than people, and it has a tidier answer. Every automation
+built on a shared spreadsheet is **borrowing somebody's file**: there are two parties involved, so
+the file's API, the network between them, and the other provider itself are all surfaces that can
+fail. Rarely — but they exist, and they are outside your reach when they do.
+
+Platforms answer this with a store of their own — a lightweight table living in the same
+infrastructure as the automations, which can also act as a trigger. The pitch is that your
+automation then owns its data instead of borrowing it, and that the inner connection does not break
+when the outer one does.
+
+What makes the argument usable is the boundary its author put on it: **this is not a reason to move
+everything off shared drives.** It is a reason to use the internal store where reliability and speed
+matter. A failure surface existing is not by itself a reason to eliminate a dependency, because a
+shared file is doing a job an internal table cannot — being something people can open and edit. The
+question is per-integration: does *this* dependency carry risk worth removing? That is the same
+discipline as evaluating a trigger's suitability rather than the platform's.
+
 ## Related
 
 - [When to automate](when-to-automate.md) — the decision this one comes after

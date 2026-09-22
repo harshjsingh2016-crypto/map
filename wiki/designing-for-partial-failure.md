@@ -1,6 +1,6 @@
 ---
-boards: [scalar/n8n-automation]
-updated: 2026-09-20
+boards: [scalar/n8n-automation, scalar/zapier-automation]
+updated: 2026-09-22
 ---
 
 # Designing for partial failure
@@ -42,6 +42,28 @@ what makes failure visible.** Everything else handles failure inside the flow; t
 being gone. Without it the failure mode is silence, and you learn about it when somebody asks why
 they stopped receiving something. That is the same shape as a workflow left unpublished or an email
 sitting in a spam folder: nothing reports a problem, because nothing is there to do the reporting.
+
+## The failure that does not alert
+
+Run statuses on a hosted platform are worth reading as a list of *who gets told*, not just a list of
+what happened. A step that throws produces an **error**, and the platform emails the owner. A run
+stopped by a filter is recorded as **filtered**, deliberately, and nobody needs telling. A run that
+is queued and never executed is **held** — and nothing errors, nothing emails.
+
+Now notice which of those is most likely on a metered plan. An allowance of a thousand actions, nine
+hundred spent, another hundred and twenty requests arriving: around two hundred runs sit held.
+**"My workflow will not fail. My workflow will get stuck."** The most probable failure is the one
+with no alert attached, and the symptom is output quietly ceasing.
+
+A related distinction stops you misreading the quiet: **an automation is never idle.** It polls and
+waits. "If nothing is happening, nothing is happening, but the workflow will continue running." So a
+history with no recent runs may be a perfectly healthy automation with nothing to do — while a
+history full of held runs is everything starting and nothing being allowed to proceed, and an
+*empty* history means the trigger never fired at all. Three different states, none of them an error.
+
+The rule that falls out, and it generalises past any one platform: **the absence of an error is not
+evidence of health.** Where the resource is metered, monitor the meter rather than the error
+channel, because the error channel is silent precisely when the meter is the problem.
 
 ## Related
 
