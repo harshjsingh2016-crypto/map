@@ -79,6 +79,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Creating dependency](creating-dependency.md) — a workflow can be correct, efficient and still a liability nobody dares touch
 - [Tasks, and what an automation actually costs](tasks-as-the-billing-unit.md) — cost scales with steps times runs, and a wasted step bills the same
 - [Observing what did not happen](observing-what-did-not-happen.md) — correct silence and broken silence look identical from the destination
+- [Where the filter goes](filter-placement.md) — a filter is worth what sits after it, so moving it down costs money
+- [Batching to decouple cost from volume](batching-to-decouple-cost.md) — accumulate and release, and the bill follows a number you pick
 
 ## AI for content creation
 

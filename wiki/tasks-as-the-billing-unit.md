@@ -28,7 +28,31 @@ reason a filtering step is taught as a **shield** rather than as a neutral gate 
 express a condition, it is to stop tasks being spent. Read as a gate it is plumbing; read as a
 shield, where you put it becomes the most consequential decision in the flow.
 
+## What is free, and why
+
+The split is clean once you see what it tracks. **Triggers, filters and branching steps are free.**
+Polling is not paid for "simply because this does not have a tangible output" — how many times the
+system opens its eyes does not matter. **Actions cost a task**, because an action "actually does
+something."
+
+So the billing boundary is the **edge of the platform**: deliberation inside it is free, and
+anything reaching outside is billed. "Anything that is doing something tangible outside Zapier is a
+task."
+
+One consequence catches people out. A model step is an action, so it costs a task — *and* the model
+provider bills you separately for the same call. A flow of sheet, then model, then email is two
+tasks per run, with two meters running on the middle one. A free API key hides this; a paid one does
+not.
+
+The plan sizing that follows is worth knowing in shape rather than in figures. A monthly allowance
+of tasks, not hours and not unlimited use, comfortably covers a few hundred messages a month. At
+thousands, the platform becomes expensive and you are trading its breadth of connectivity against
+per-task cost. Past that, it still works if the budget is there — but at genuinely large volume you
+are building a product rather than sending messages from an automation tool.
+
 ## Related
 
+- [Where the filter goes](filter-placement.md) — the cheapest optimisation on a metered platform
+- [Batching to decouple cost from volume](batching-to-decouple-cost.md) — making the bill follow a number you choose
 - [Free-tier arithmetic](free-tier-arithmetic.md) — the same sizing discipline applied to model usage
 - [The item model](the-item-model.md) — the other platform's multiplier, where a node runs once per item
