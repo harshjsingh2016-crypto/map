@@ -81,6 +81,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Observing what did not happen](observing-what-did-not-happen.md) — correct silence and broken silence look identical from the destination
 - [Where the filter goes](filter-placement.md) — a filter is worth what sits after it, so moving it down costs money
 - [Batching to decouple cost from volume](batching-to-decouple-cost.md) — accumulate and release, and the bill follows a number you pick
+- [Branches are not else-if](branches-are-not-else-if.md) — independent conditions, so two matching rules both run in full
 
 ## AI for content creation
 
