@@ -1,6 +1,6 @@
 ---
-boards: [scalar/n8n-automation]
-updated: 2026-09-20
+boards: [scalar/n8n-automation, scalar/zapier-automation]
+updated: 2026-09-22
 ---
 
 # Debugging a workflow
@@ -41,6 +41,22 @@ That last habit is worth defending, because it looks like a shortcut and is not.
 compounds is recognising a symptom and knowing which layer owns it. Expression syntax does not
 compound, and treating both as things to memorise spends attention on the half that does not pay it
 back.
+
+Two additions from a second build, both about absence.
+
+**An empty list may mean "not permitted", not "not created".** A destination dropdown showed only an
+old entry; the new one had been created and refreshing changed nothing. The cause was that the new
+destination had not been set to allow the integration's app, so it existed and was invisible.
+Several minutes went into looking for a thing that was already there. The general form: when
+something you just made does not appear, check authorisation before you check existence — absence
+with no error attached is more often a permission than a mistake.
+
+**A demo that works better than reality is a problem, not a result.** The first run of that build
+delivered almost instantly, because the row had been pasted in a way that a poll caught mid-edit.
+The normal path takes minutes. Whoever is watching now has an expectation the system will not meet,
+and the correction — made on the spot — is the right instinct: **a happy path you cannot reproduce
+is worse than a slow one you understand.** The same applies to your own testing, where a lucky first
+run quietly becomes the baseline you later debug against.
 
 ## Related
 

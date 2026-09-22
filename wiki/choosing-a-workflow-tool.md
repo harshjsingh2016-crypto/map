@@ -1,6 +1,6 @@
 ---
-boards: [scalar/workflow-automation]
-updated: 2026-09-14
+boards: [scalar/workflow-automation, scalar/zapier-automation]
+updated: 2026-09-22
 ---
 
 # Choosing between workflow tools
@@ -85,6 +85,45 @@ exists, you are back to moving the data yourself, and a sheet is the least cerem
 The deciding rule offered for all of this is unglamorous and right: look for **where the trade-off
 is lowest**.
 
+## A second comparison, with a different headline
+
+A later lecture, taught from the hosted side, laid the same two tools out across eight rows — shape,
+maintainability, data access, integrations, cost model, data location, volume, custom code — and
+named a different row as the one that matters: **who can maintain it.** On one side, anyone in the
+business; on the other, whoever built it. The line that went with it is worth keeping because it
+names the incentive honestly: the builder of an unreadable flow "builds a dependency; the company is
+never firing" them. What is bad for the business is good for the person who owns the flow, which is
+why it keeps happening without anyone intending it.
+
+The cost row got the fairest framing either comparison offered: **"the cost of n8n is your life; the
+cost of Zapier is the actual cost."** Self-hosting is not free. It is paid in servers, upgrades and
+your own time — a cost that appears on no invoice and so goes uncounted. Per-task pricing is worse
+in absolute terms and better in legibility: you can forecast it, expense it, and hand it to someone
+else.
+
+Two more rows belong in the table though neither comparison printed them. **Retrying a failed
+run**: on the self-hosted tool it is a free checkbox; on the hosted one it is a paid tier — same
+capability, different commercial position. And **portability**: the self-hosted tool's flows export
+as JSON, the hosted tool's cannot be exported at all, which splits the maintainability row into
+readability (the hosted tool wins) and portability (the self-hosted tool wins).
+
+## Reconciling the two rules
+
+The earlier rule was *flexible by default, unless a connector is missing*. The later headline is
+*maintainability*, and it points the other way. They are not in conflict so much as answering
+different questions — and the reconciliation below is a reading of the two, not something either
+instructor stated.
+
+**The first rule optimises for the build. The second optimises for the life of the thing
+afterwards.** Which should decide depends on whether the automation stays yours. A personal pipeline
+only you will touch has no dependency problem, so capability wins and the first rule stands.
+Anything handed to a business has one, and then maintainability outranks the connector question —
+because **a missing connector is a problem you find on day one, and an unmaintainable flow is a
+problem you find in year three.**
+
+Above both sits the one row that vetoes: where data must not leave your own network, a hosted-only
+tool has no answer at all.
+
 ## Related
 
 - [The workflow grammar](workflow-grammar.md) — the vocabulary both tools implement; only the nouns change
@@ -92,3 +131,4 @@ is lowest**.
 - [Polling vs webhooks](polling-vs-webhooks.md) — the one mechanical difference underneath the comparison
 - [When to automate](when-to-automate.md) — the decision that comes before any of this
 - [Bolted on, or built for it](bolted-on-or-built-for-it.md) — the sibling rule for judging a tool against a job
+- [Creating dependency](creating-dependency.md) — the cost the maintainability row is pricing

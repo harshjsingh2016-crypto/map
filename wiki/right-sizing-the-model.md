@@ -1,5 +1,5 @@
 ---
-boards: [scalar/n8n-automation]
+boards: [scalar/n8n-automation, scalar/zapier-automation]
 updated: 2026-09-17
 ---
 
@@ -51,6 +51,23 @@ One last framing, which is a reading of the material rather than a line anyone s
 does something else own the answer? If it needs a model, does it need an agent with tools, or does a
 plain chain do it? Only then: how big? Asked in that order, a good deal of the sizing question
 dissolves — the expensive call was never the right shape of call.
+
+## What the number in a model's name tells you
+
+A model name like *GPT-OSS-20B* decomposes cleanly: a family, a company, an open-weight release, and
+a count of learned weights. The count is the part people over-read, and it is worth sorting what it
+does and does not tell you.
+
+It tells you, **reliably, what hardware the model needs.** Anything beyond fifteen to twenty billion
+parameters will not run on a general laptop — which agrees with the thresholds above.
+
+It does **not** reliably tell you capability. More weights generally means more capable, but smaller
+recent models have matched much larger older ones, so the count is a weak proxy for how good a model
+is and a strong one for how heavy it is.
+
+And it does not tell you price, which depends on age as much as size: a four-year-old large model
+can cost less than a new smaller one. **Size, capability and price are three separate axes**, and
+the parameter count sits squarely on only the first of them.
 
 ## Related
 

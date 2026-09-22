@@ -11,14 +11,14 @@ platforms" and §9 of this lecture is the named comparison, so it is the likelie
 rather than duplicate.
 
 - [x] §1 + §2 Why Zapier at all — Wanderline's three complaints, the one-trigger structure — and Zap terminology including action vs task — missed — discussed ✓ — accepted (dependency-argument note keeping the export-versus-ownership distinction precise; terminology table with Filter carrying the shield emphasis; action-vs-task note boarded separately from the table, since filter placement and the cost quiz both attach to it)
-- [ ] §3 Zap 1 — two steps, one published Zap, and what watching it run revealed — missed — pending
-- [ ] §4 + §4.1 Zap 2 — teach it to skip, the Filter; and proving it with Zap History — missed — pending
-- [ ] §5 Tasks — what actually costs money, filter placement, and the Digest aggregation pattern — missed — pending
-- [ ] §6 Zap 3 — make it fork: the AI action, Paths, the run, and when two paths match — missed — pending
-- [ ] §7 + §8 Zapier Tables, and Zap History statuses — missed — pending
-- [ ] §9 Zapier or n8n — the honest comparison — missed — pending
-- [ ] §10 The four quizzes with the instructor's reasoning — missed — pending
-- [ ] §11 + §12 Assignment, and the doubt session — missed — pending
+- [x] §3 Zap 1 — two steps, one published Zap, and what watching it run revealed — missed — discussed ✓ — accepted (Zap 1 flowchart ending on the any-change flaw; the delay accounted stage by stage as a table; Gotchas note opened. The account facts were folded into the trigger node's detail as agreed, with the plan numbers left off as unverified. One wiki correction fell out of this: polling-vs-webhooks said the poll interval was one you set — on this platform it is not, and the article now says so)
+- [x] §4 + §4.1 Zap 2 — teach it to skip, the Filter; and proving it with Zap History — missed — discussed ✓ — accepted (Zap 2 flowchart with the filter as a labelled decision and case-sensitivity in its detail; Zap History note built on "I could very well be lying to you", with Auto Replay being paid marked to revisit at §9). Rejected: the Gotchas appends for the Edit Zap trap and case sensitivity — case sensitivity is already carried in the Zap 2 filter node, and the Edit Zap trap was not wanted
+- [x] §5 Tasks — what actually costs money, filter placement, and the Digest aggregation pattern — missed — discussed ✓ — accepted (what-costs-a-task table with the plan allowance left off as unverified; filter placement as a banded flowchart showing both orders, carrying the student's optimiser misreading and the redraw; Digest as two banded Zaps with the decoupling point, the latency trade, the unconfirmed aggregation billing rule and the corrected arithmetic — 48 tasks a day, not 24)
+- [x] §6 Zap 3 — make it fork: the AI action, Paths, the run, and when two paths match — missed — discussed ✓ — accepted (Zap 3 flowchart with the no-path case drawn explicitly and the run folded into the Groq node's detail, including the "bad prompt from my side" attribution; paths-are-not-else-if note; two-part-defence note. Model name kept as built but the parameter-count aside left off as flagged material)
+- [x] §7 + §8 Zapier Tables, and Zap History statuses — missed — discussed ✓ — accepted (statuses table with a does-it-alert-you column, which is the column that carries the lesson; Held note with Quiz 4's eliminations and the empty-versus-held-versus-quiet distinction; Tables note keeping his proportionate boundary — not a reason to move everything off Drive. The editing-the-sheet-stops-polling claim was raised with its hedge and boarded as unsettled)
+- [x] §9 Zapier or n8n — the honest comparison — missed — discussed ✓ — accepted (eight-row comparison table plus a ninth retry row marked as assembled from both lectures rather than printed on the panel; volume-is-events note with limits-live-in-the-integrations; Day 12 reconciliation note, flagged in its own text as a reading — build versus life of the thing afterwards. choosing-a-workflow-tool deepened with both, since it previously held only the Day 12 rule)
+- [x] §10 The four quizzes with the instructor's reasoning — missed — discussed ✓ — covered in place, not boarded separately (each quiz already sits with its concept: Quiz 1 on the delay table, Quiz 2 on the filter-placement flowchart, Quiz 3 on paths-are-not-else-if, Quiz 4 on the Held note — a separate widget would duplicate them)
+- [x] §11 + §12 Assignment, and the doubt session — missed — discussed ✓ — accepted (readability-versus-portability as a tenth comparison row plus a revision appended to the §1 dependency note, both marked as a reading; reading-a-model-name table with the Qwen figures and the closed-model weight estimate kept off and his efficiency gloss corrected as mine). Rejected: a separate Outstanding note for the homework, and the Jira-to-code answer (the hotel-agent point restated, taken no further)
 
 **Low-confidence material to raise with the caveat attached, never as fact** (file §14): the plan
 numbers (trial length given two ways, task allowance "750 or 1,000" — unverified; only the $20
@@ -46,3 +46,9 @@ the class ended early. Nothing to board from them.
 
 **This lecture has four in-class quizzes**, unlike Day 13 — so §10 is real teaching content and the
 Internal QnA drill later has the instructor's own questions to draw on.
+
+**Walkthrough complete 2026-09-22.** All nine agenda items discussed and ruled on. Status strip advanced: Learning green,
+Class Assignment indigo. Next action: the homework — build an automation on n8n or Zapier for a problem you face daily and
+post it to Discord — plus the Tables self-study and the platform set (7 problems, 3 extra, feedback form). Then the Internal
+QnA drill in Armor. On Day 13 the platform set turned out to be the Scaler QnA stage in practice; check whether that holds
+here before treating them as separate.
