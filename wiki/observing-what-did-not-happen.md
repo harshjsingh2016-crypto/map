@@ -1,5 +1,5 @@
 ---
-boards: [scalar-2/zapier-automation, solutions/meme-drop]
+boards: [scalar/zapier-automation, solutions/meme-drop]
 updated: 2026-09-23
 ---
 
