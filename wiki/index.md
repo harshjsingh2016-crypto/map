@@ -95,6 +95,8 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [The editor's checklist](editors-checklist.md) — five checks before anything ships, and six when the output is not words
 - [Paraphrase is a different failure from invention](paraphrase-failure-mode.md) — a real figure reworded into a different claim, past grounding
 - [Bolted on, or built for it](bolted-on-or-built-for-it.md) — product shape predicts AI quality; convenience is not capability
+- [Generate, then judge](generate-then-judge.md) — ten candidates and a separate editor beat one careful attempt
+- [Taste profile](taste-profile.md) — examples show what you liked; the profile writes down why
 
 ## SQL foundations
 

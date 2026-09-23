@@ -1,6 +1,6 @@
 ---
-boards: [scalar/zapier-automation]
-updated: 2026-09-22
+boards: [scalar/zapier-automation, solutions/meme-drop]
+updated: 2026-09-23
 ---
 
 # Observing what did not happen
@@ -33,8 +33,19 @@ send that was suppressed — needs a positive statement somewhere that the decis
 that way. If your setup cannot produce that statement, you have no way to tell correct silence from
 broken silence, and you will eventually meet both.
 
+The meme workflow met the harder version of this, where even the run record lies. For a week every
+run ended in a green WhatsApp send step and Meta's reply **"accepted"** — and nothing arrived. Two
+causes, found one after the other: plain image messages outside the 24-hour window, and then a
+Marketing-category template, which Meta quietly declines to deliver to Indian numbers. Neither
+produced an error anywhere the workflow could see. "Accepted" means the request was well-formed, not
+that a message reached a phone; the delivered-or-failed verdict comes back later, asynchronously, to
+a webhook that did not exist. The only detector was a person noticing an empty chat. When the last
+step hands off to someone else's system, the run log ends at the handoff, and a positive statement
+of the outcome has to be subscribed to separately.
+
 ## Related
 
+- [Generate, then judge](generate-then-judge.md) — the workflow where the accepted-but-undelivered case came up
 - [Debugging a workflow](debugging-a-workflow.md) — the companion failure, where a step succeeds and the outcome still does not happen
 - [Designing for partial failure](designing-for-partial-failure.md) — making failure visible, which is the same argument applied to breakage rather than to skips
 - [Tasks, and what an automation actually costs](tasks-as-the-billing-unit.md) — why a stopped run is worth having a record of: it is also a task you did not spend
