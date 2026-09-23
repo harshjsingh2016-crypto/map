@@ -1,5 +1,5 @@
 ---
-boards: [scalar/workflow-automation, scalar-2/zapier-automation]
+boards: [scalar/workflow-automation, scalar/zapier-automation]
 updated: 2026-09-22
 ---
 

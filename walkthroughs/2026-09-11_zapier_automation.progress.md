@@ -1,5 +1,5 @@
 # Walkthrough — 2026-09-11_zapier_automation.md
-Board: scalar-2/zapier-automation
+Board: scalar/zapier-automation
 Source: Armor/Output/2026-09-11_zapier_automation.md
 Updated: 2026-09-22
 Agenda confirmed: 2026-09-22 (summary + glossary presented 2026-09-21)

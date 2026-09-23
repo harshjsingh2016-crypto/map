@@ -149,10 +149,10 @@ Delete it.)
 
 The GenAI course runs across two folders, split by segment (decided 2026-09-23):
 
-- **`scalar/`** — Days 1–13, the first segment. Closed; nothing new lands here.
-- **`scalar-2/`** — **Day 14 onwards**, the current segment. `zapier-automation` was moved here
-  when the split was made, so the Day 14 walkthrough's wiki links and progress sidecar point at
-  `scalar-2/`.
+- **`scalar/`** — Days 1–14, the first segment. Closed; nothing new lands here. Day 14
+  (`zapier-automation`) belongs here as the close of the automation block; it was briefly moved to
+  `scalar-2/` and moved back on 2026-09-23.
+- **`scalar-2/`** — **Day 15 onwards**, the current segment.
 - **`scalar-primers/`** — SQL/Python skill lectures, either segment; unaffected by the split.
 
 Armor's `**Board:**` line in the context file is always authoritative — read the folder from there

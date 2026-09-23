@@ -1,5 +1,5 @@
 ---
-boards: [scalar-2/zapier-automation]
+boards: [scalar/zapier-automation]
 updated: 2026-09-22
 ---
 
