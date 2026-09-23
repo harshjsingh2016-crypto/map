@@ -40,7 +40,47 @@ export function listFolders(root) {
     .sort()
 }
 
-/** All boards as { id, folder, name }, folder-major then name. */
+/**
+ * Creation time of a board: the `ts` of its first batch. Read from the head of
+ * the file so this stays cheap on long logs. Deliberately not the file's mtime
+ * or birthtime — those reset on every git clone, and this repo is cloned onto
+ * more than one machine. Returns 0 when the log is empty or unreadable, which
+ * sorts such boards last.
+ */
+function boardCreatedAt(file) {
+  let fd
+  try {
+    fd = fs.openSync(file, 'r')
+    // A first batch can be far larger than one chunk — a board seeded with many
+    // widgets writes it all on line one — so keep reading until the newline.
+    const CHUNK = 64 * 1024
+    const CAP = 8 * 1024 * 1024
+    const buf = Buffer.alloc(CHUNK)
+    let head = ''
+    let pos = 0
+    for (;;) {
+      const read = fs.readSync(fd, buf, 0, CHUNK, pos)
+      if (read <= 0) break
+      pos += read
+      head += buf.toString('utf8', 0, read)
+      const nl = head.indexOf('\n')
+      if (nl !== -1) { head = head.slice(0, nl); break }
+      if (head.length > CAP) return 0
+    }
+    const ts = JSON.parse(head).ts
+    return Number.isFinite(ts) ? ts : 0
+  } catch {
+    return 0
+  } finally {
+    if (fd !== undefined) try { fs.closeSync(fd) } catch { /* already gone */ }
+  }
+}
+
+/**
+ * All boards as { id, folder, name, createdAt }, folder-major then name.
+ * The alphabetical order is what scripts print in their "existing boards"
+ * errors; the app's board picker re-sorts by `createdAt`, newest first.
+ */
 export function listBoards(root) {
   const dir = boardsDir(root)
   if (!fs.existsSync(dir)) return []
@@ -49,14 +89,19 @@ export function listBoards(root) {
   for (const f of fs.readdirSync(dir)) {
     if (f.endsWith(BOARD_EXT)) {
       const name = f.slice(0, -BOARD_EXT.length)
-      out.push({ id: name, folder: null, name })
+      out.push({ id: name, folder: null, name, createdAt: boardCreatedAt(path.join(dir, f)) })
     }
   }
   for (const folder of listFolders(root)) {
     for (const f of fs.readdirSync(path.join(dir, folder))) {
       if (!f.endsWith(BOARD_EXT)) continue
       const name = f.slice(0, -BOARD_EXT.length)
-      out.push({ id: boardId(folder, name), folder, name })
+      out.push({
+        id: boardId(folder, name),
+        folder,
+        name,
+        createdAt: boardCreatedAt(path.join(dir, folder, f)),
+      })
     }
   }
   return out.sort((a, b) =>

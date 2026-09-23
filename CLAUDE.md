@@ -25,6 +25,8 @@ A genuinely new topic gets a new board **in the current working folder**; only s
 
 `boards/.active` holds the write target as `<folder>/<name>`; `boards/.folder` holds the working folder. The app follows both automatically. Its header has a folder picker and a board picker (the board list is scoped to the picked folder), but those only change **what is on screen** — the write target still moves only through the commands above, in conversation. A `●` marks the folder and board Claude is writing to.
 
+The board picker lists **newest board first**, so the one you just made sits at the top. "Newest" is the `ts` of the board's first batch — carried in the file, so it survives a clone onto the other laptop, which a filesystem timestamp would not. The folder picker stays alphabetical.
+
 `--board` accepts `folder/name`, or a bare `name` when it is unique across folders.
 
 **2. Draw first, talk second.** Emit ops *before* composing your reply. Then keep the reply to 1–2 lines: "Mapped the escalation flow — added a suggested penalty branch as ghost nodes." Never narrate what you drew node by node; the user can see it. The one exception is **walkthrough mode** (below), which inverts this deliberately.
@@ -142,6 +144,19 @@ reconstruction. (One-off: a machine that predates this split still has a stale l
 Delete it.)
 
 **Resuming:** read the progress file, outline the board, open with a ≤2-line "where we left off" ("Walkthrough of RAG in practice: §1–2 discussed and boarded, 3 accepted 1 rejected — next: §3, the three tools."), then wait for direction.
+
+### Which folder a lecture board belongs in
+
+The GenAI course runs across two folders, split by segment (decided 2026-09-23):
+
+- **`scalar/`** — Days 1–13, the first segment. Closed; nothing new lands here.
+- **`scalar-2/`** — **Day 14 onwards**, the current segment. `zapier-automation` was moved here
+  when the split was made, so the Day 14 walkthrough's wiki links and progress sidecar point at
+  `scalar-2/`.
+- **`scalar-primers/`** — SQL/Python skill lectures, either segment; unaffected by the split.
+
+Armor's `**Board:**` line in the context file is always authoritative — read the folder from there
+rather than inferring it.
 
 ### Primer express walk (`scalar-primers/` boards)
 

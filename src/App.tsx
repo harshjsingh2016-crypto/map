@@ -584,14 +584,22 @@ export default function App() {
   const shownFolder = boards.find((b) => b.id === selected)?.folder || folder
   const folders = [...new Set(boards.map((b) => b.folder || NO_FOLDER))]
   const viewFolder = shownFolder || NO_FOLDER
-  // The board picker is scoped to the folder on screen.
-  const folderBoards = boards.filter((b) => (b.folder || NO_FOLDER) === viewFolder)
+  // The board picker is scoped to the folder on screen, newest board first —
+  // the one you just made is the one you want, and it is at the top.
+  const folderBoards = boards
+    .filter((b) => (b.folder || NO_FOLDER) === viewFolder)
+    .slice()
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0) || a.name.localeCompare(b.name))
   const activeFolder = boards.find((b) => b.id === active)?.folder || NO_FOLDER
 
   // Switching folder is a view change, not a write-target change: land on
   // Claude's active board when it lives here, otherwise the first one.
   const selectFolder = (f: string) => {
-    const inFolder = boards.filter((b) => (b.folder || NO_FOLDER) === f)
+    const inFolder = boards
+      .filter((b) => (b.folder || NO_FOLDER) === f)
+      .slice()
+      .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0) || a.name.localeCompare(b.name))
+    // Same order as the picker, so the fallback is the board sitting at its top.
     const target = inFolder.find((b) => b.id === active) || inFolder[0]
     if (target) selectBoard(target.id)
   }

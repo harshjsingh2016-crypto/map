@@ -25,6 +25,7 @@ export interface BoardRef {
   id: string        // "<folder>/<name>"
   folder: string | null
   name: string
+  createdAt: number // ts of the board's first batch; 0 when unknown
 }
 
 interface MapStore {
