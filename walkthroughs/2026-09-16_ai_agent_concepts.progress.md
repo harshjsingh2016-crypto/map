@@ -1,8 +1,8 @@
 # Walkthrough — 2026-09-16_ai_agent_concepts.md
 Board: scalar-2/ai-agent-concepts
 Source: Armor/Output/2026-09-16_ai_agent_concepts.md
-Updated: 2026-09-23
-Agenda confirmed: pending (summary + glossary presented 2026-09-23)
+Updated: 2026-09-24
+Agenda confirmed: 2026-09-24 (summary + glossary presented 2026-09-23)
 
 Board created empty this session, so every item is **missed** by definition. No wiki article cites
 this board yet. Existing articles this lecture will **refine** rather than duplicate:
@@ -15,7 +15,7 @@ guardrails — this lecture restates both), `llm-chain-vs-agent` (the n8n node-l
 whose concept they test (Q1 in §3, Q2 in §4, Q3 in §5, Q4 in §6, Q5 in §7). Decided on the Day 14
 walkthrough, where a separate quiz section only duplicated what was already boarded.
 
-- [ ] §1 + §2 The Groundwire scenario and the Kessler mill tip; reactive vs proactive AI — missed — pending
+- [x] §1 + §2 The Groundwire scenario and the Kessler mill tip; reactive vs proactive AI — missed — discussed ✓ — accepted (scenario note carrying the four roles, the eyewitness-is-a-perspective point and the two reasons the assistant's reply fails; reactive-vs-proactive table with proactive-is-not-smarter and the endless-loop corollary highlighted)
 - [ ] §3 + §3.1 Chatbot vs agent (with Quiz 1), and the cost and latency of agents — missed — pending
 - [ ] §4 + §4.1 + §4.2 The Think → Act → Observe loop (with Quiz 2), the library simulation, and why step 3 is a trap — missed — pending
 - [ ] §5 + §5.1 + §5.2 The three pillars (with Quiz 3), MCP as a bridge, and the red-team article — missed — pending
