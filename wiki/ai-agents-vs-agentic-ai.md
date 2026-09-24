@@ -1,11 +1,11 @@
 ---
-boards: [scalar/gen-ai-fundamentals]
-updated: 2026-08-21
+boards: [scalar/gen-ai-fundamentals, scalar-2/ai-agent-concepts]
+updated: 2026-09-24
 ---
 
 # AI agents vs Agentic AI
 
-An AI agent is a system that completes tasks on its own: an LLM brain that reasons and decides, tools it can use (email, calendar), memory of the conversation, and guardrails that constrain what it may do. Its defining loop is plan, act, check — without human intervention.
+An AI agent is a system that completes tasks on its own: an LLM brain that reasons and decides, tools it can use (email, calendar), memory of the conversation, and guardrails that constrain what it may do. Its defining loop is plan, act, check — without human intervention; the later concepts lecture names the phases Think, Act and Observe and works through what each one owes the next ([The agent loop](the-agent-loop.md)).
 
 Agentic AI is the layer above: a manager agent that breaks a request down, delegates to AI agents and tools, checks the flow, and fixes and reworks until the result looks right. The key part is not the delegation but the loop of checking and reworking.
 
@@ -15,4 +15,5 @@ The Zomato example walks one agent end to end. Trigger: a "food is cold" complai
 
 ## Related
 
+- [The agent loop](the-agent-loop.md) — the plan, act, check loop taken apart phase by phase
 - [Next-word prediction](next-word-prediction.md) — the LLM brain inside every agent

@@ -17,7 +17,7 @@ walkthrough, where a separate quiz section only duplicated what was already boar
 
 - [x] §1 + §2 The Groundwire scenario and the Kessler mill tip; reactive vs proactive AI — missed — discussed ✓ — accepted (scenario note carrying the four roles, the eyewitness-is-a-perspective point and the two reasons the assistant's reply fails; reactive-vs-proactive table with proactive-is-not-smarter and the endless-loop corollary highlighted)
 - [x] §3 + §3.1 Chatbot vs agent (with Quiz 1), and the cost and latency of agents — missed — discussed ✓ — accepted (chatbot-vs-agent table with the workflow trade folded in as rows; "agent is a mode" note; cost note — Deep Research step cap boarded as "a handful", no number)
-- [ ] §4 + §4.1 + §4.2 The Think → Act → Observe loop (with Quiz 2), the library simulation, and why step 3 is a trap — missed — pending
+- [x] §4 + §4.1 + §4.2 Think → Act → Observe (with Quiz 2), the library simulation, the step-3 trap — missed — discussed ✓ — accepted (loop flowchart + n8n-analogy note; library timeline; loop-traps note; new wiki article the-agent-loop)
 - [ ] §5 + §5.1 + §5.2 The three pillars (with Quiz 3), MCP as a bridge, and the red-team article — missed — pending
 - [ ] §6 + §6.1 + §6.2 Three ways agents fail (with Quiz 4), why the model is often the cause, two real-world blow-ups — missed — pending
 - [ ] §7 Three tools, same loop — Deep Research, Claude connectors, the n8n AI Agent node (with Quiz 5) — missed — pending
