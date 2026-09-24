@@ -16,7 +16,7 @@ whose concept they test (Q1 in §3, Q2 in §4, Q3 in §5, Q4 in §6, Q5 in §7).
 walkthrough, where a separate quiz section only duplicated what was already boarded.
 
 - [x] §1 + §2 The Groundwire scenario and the Kessler mill tip; reactive vs proactive AI — missed — discussed ✓ — accepted (scenario note carrying the four roles, the eyewitness-is-a-perspective point and the two reasons the assistant's reply fails; reactive-vs-proactive table with proactive-is-not-smarter and the endless-loop corollary highlighted)
-- [ ] §3 + §3.1 Chatbot vs agent (with Quiz 1), and the cost and latency of agents — missed — pending
+- [x] §3 + §3.1 Chatbot vs agent (with Quiz 1), and the cost and latency of agents — missed — discussed ✓ — accepted (chatbot-vs-agent table with the workflow trade folded in as rows; "agent is a mode" note; cost note — Deep Research step cap boarded as "a handful", no number)
 - [ ] §4 + §4.1 + §4.2 The Think → Act → Observe loop (with Quiz 2), the library simulation, and why step 3 is a trap — missed — pending
 - [ ] §5 + §5.1 + §5.2 The three pillars (with Quiz 3), MCP as a bridge, and the red-team article — missed — pending
 - [ ] §6 + §6.1 + §6.2 Three ways agents fail (with Quiz 4), why the model is often the cause, two real-world blow-ups — missed — pending
