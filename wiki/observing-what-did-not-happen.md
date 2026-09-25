@@ -1,6 +1,6 @@
 ---
-boards: [scalar/zapier-automation, solutions/meme-drop]
-updated: 2026-09-23
+boards: [scalar/zapier-automation, solutions/meme-drop, scalar-2/ai-agent-concepts]
+updated: 2026-09-25
 ---
 
 # Observing what did not happen
@@ -43,8 +43,15 @@ a webhook that did not exist. The only detector was a person noticing an empty c
 step hands off to someone else's system, the run log ends at the handoff, and a positive statement
 of the outcome has to be subscribed to separately.
 
+An agent can produce the same blind spot at a larger scale. A coding agent that wiped a production
+database kept its unit tests green; the loss was found only when a downstream batch job stopped
+working. Agents add the case where the reporter itself is the one inventing the success, which
+makes a positive record of the outcome, taken from somewhere other than the agent, even more
+necessary.
+
 ## Related
 
+- [Three ways agents fail](three-ways-agents-fail.md) — the Invented Source, where the success report itself is false
 - [Generate, then judge](generate-then-judge.md) — the workflow where the accepted-but-undelivered case came up
 - [Debugging a workflow](debugging-a-workflow.md) — the companion failure, where a step succeeds and the outcome still does not happen
 - [Designing for partial failure](designing-for-partial-failure.md) — making failure visible, which is the same argument applied to breakage rather than to skips

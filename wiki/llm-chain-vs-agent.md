@@ -1,6 +1,6 @@
 ---
-boards: [scalar/n8n-automation]
-updated: 2026-09-20
+boards: [scalar/n8n-automation, scalar-2/ai-agent-concepts]
+updated: 2026-09-25
 ---
 
 # The LLM chain and the agent node
@@ -53,9 +53,36 @@ systems emit is frequently a **commitment** — a checkout time, a discount, a p
 customer in the company's name. "Now you cannot take that word back." A hallucination in a draft is
 an editing problem; a hallucination in a reply is something somebody now has to honour or retract.
 
+## What makes something an agent, and what it costs
+
+The concepts lecture put the same boundary in general terms. A chatbot answers the one thing asked,
+from what it already knows, in a single turn, and waits. An agent takes a goal, works out its own
+steps, acts to check its work, and keeps going until the goal is met. What separates them is not
+the quality or length of the output: a long, detailed answer is still one turn. *An agent is
+defined by its repetitive nature* — the loop is the whole difference.
+
+That makes "agent" a mode rather than a product. ChatGPT is reactive by default and becomes an
+agent when Deep Research or connectors are switched on. And no system prompt can promote a chain
+into an agent on its own: the model can propose steps, but repeating on them needs tooling and a
+loop around the model. Without tools the loop has nothing to act with — an agent is only as good
+as its tools, which is the lookup problem above from the other side.
+
+The agent is also a different thing from a workflow, even one with a model in it. A workflow is
+guaranteed: the millionth run still sends the email. An agent re-decides on every run and may take
+a different route next time; a well-structured prompt narrows that variance but does not remove it.
+The choice is predictability against adaptability, and most automation wants the first.
+
+The loop has a price in both currencies: more calls means more money, and every extra pass means a
+slower answer. Adding an agent everywhere does not make a system smarter, which is why well-built
+agents cap their own steps. The case where the loop earns its cost is work like coding, where a
+chatbot would have to ask permission for every name and signature and an agent can show its plan
+once and proceed.
+
 ## Related
 
+- [Chatbot, workflow or agent](chatbot-workflow-or-agent.md) — the general form of this choice, including when neither model step belongs
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — what the agent node is a packaged instance of
+- [Reactive vs proactive AI](reactive-vs-proactive-ai.md) — the loop that separates the two, stated as waiting versus pursuing a goal
 - [Chain of thought](chain-of-thought.md) — the reasoning behaviour the chain node deliberately lacks
 - [Building a workflow three nodes at a time](iterative-workflow-building.md) — the AI step in the starting three is usually the chain
 - [Use the model for what only a model can do](what-only-an-llm-can-do.md) — the decision above this one: whether a model belongs here at all

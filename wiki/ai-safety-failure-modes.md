@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/no-code-ai-bot]
-updated: 2026-09-06
+boards: [scalar/ai-reliability, scalar/no-code-ai-bot, scalar-2/ai-agent-concepts]
+updated: 2026-09-25
 ---
 
 # AI safety failure modes
@@ -34,12 +34,13 @@ Older models showed a blunt version of it: asked for restricted information in a
 
 The classic older-model version is a pretext that makes the refused request sound legitimate: asking outright for pirated movie links fails, but framing it as wanting to block those links on a home router for family safety, and then asking for them, got them out. Note that this is the same lever as the injection example above — a plausible cover story — pointed at a different target.
 
-Injection and jailbreaking are easy to conflate, and the cleanest line between them is whose rules are being broken: yours in the first case, the provider's in the second. That also tells you who can fix it — an injection is yours to defend against, a jailbreak is the provider's to harden.
+Injection and jailbreaking are easy to conflate, and the cleanest line between them is whose rules are being broken: yours in the first case, the provider's in the second. That also tells you who can fix it — an injection is yours to defend against, a jailbreak is the provider's to harden. The agents lecture drew the practical consequence: a system prompt can resist a jailbreak only to a degree, so some failures belong to the model layer and no amount of prompt work removes them. That is part of why models differ, closely on basic questions and sometimes widely on specific ones.
 
 **Output bias** is the model reproducing the prejudices present in its training data. Unlike the other three it needs no attacker and no adversarial input; it surfaces in ordinary use, which is what makes it easy to miss.
 
 ## Related
 
+- [Three ways agents fail](three-ways-agents-fail.md) — the agent-level failures, and where the model layer ends the prompt's reach
 - [Grounding](grounding.md) — the control that narrows the room for hallucination
 - [The control dial](control-dial.md) — the structural lever on the same failure: fewer places the model speaks, fewer places it can invent
 - [The prompt stack](prompt-stack.md) — the system-prompt layer injection displaces

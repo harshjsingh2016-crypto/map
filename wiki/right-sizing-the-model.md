@@ -1,6 +1,6 @@
 ---
-boards: [scalar/n8n-automation, scalar/zapier-automation]
-updated: 2026-09-17
+boards: [scalar/n8n-automation, scalar/zapier-automation, scalar-2/ai-agent-concepts]
+updated: 2026-09-25
 ---
 
 # Right-sizing the model
@@ -52,6 +52,12 @@ does something else own the answer? If it needs a model, does it need an agent w
 plain chain do it? Only then: how big? Asked in that order, a good deal of the sizing question
 dissolves — the expensive call was never the right shape of call.
 
+The middle decision was later stated outright rather than inferred. An agent costs more money per
+run, because it makes several calls before it answers, and more time, because every pass is
+latency. Adding an agent everywhere does not make a system smarter; knowing where an agent is
+needed and where a chatbot will do is the skill. The same instinct that reaches for the biggest
+model reaches for the agent, and both are the truck in the bike race.
+
 ## What the number in a model's name tells you
 
 A model name like *GPT-OSS-20B* decomposes cleanly: a family, a company, an open-weight release, and
@@ -71,6 +77,8 @@ the parameter count sits squarely on only the first of them.
 
 ## Related
 
+- [Chatbot, workflow or agent](chatbot-workflow-or-agent.md) — the middle question of the stack, worked through with its signals
 - [Model cards](model-cards.md) — the spec sheet where capability and training data are meant to be stated
 - [Prompt costs](prompt-costs.md) — the other half of the same trade-off, priced per token
+- [The LLM chain and the agent node](llm-chain-vs-agent.md) — the second of the three decisions, and what the agent loop costs
 - [Hosted or on your own machine](self-hosting-tradeoffs.md) — where the hardware ceiling on local models actually bites

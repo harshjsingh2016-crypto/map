@@ -1,6 +1,6 @@
 ---
-boards: [scalar/workflow-automation, scalar/zapier-automation]
-updated: 2026-09-22
+boards: [scalar/workflow-automation, scalar/zapier-automation, scalar-2/ai-agent-concepts]
+updated: 2026-09-25
 ---
 
 # Choosing between workflow tools
@@ -126,6 +126,7 @@ tool has no answer at all.
 
 ## Related
 
+- [Chatbot, workflow or agent](chatbot-workflow-or-agent.md) — the decision before this one: whether the job is a workflow at all
 - [The workflow grammar](workflow-grammar.md) — the vocabulary both tools implement; only the nouns change
 - [Fair-code](fair-code.md) — the licence that makes the self-hosting row possible
 - [Polling vs webhooks](polling-vs-webhooks.md) — the one mechanical difference underneath the comparison
