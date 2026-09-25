@@ -1,6 +1,6 @@
 ---
 boards: [scalar/n8n-automation, scalar/zapier-automation, scalar-2/ai-agent-concepts]
-updated: 2026-09-24
+updated: 2026-09-25
 ---
 
 # Right-sizing the model
@@ -77,6 +77,7 @@ the parameter count sits squarely on only the first of them.
 
 ## Related
 
+- [Chatbot, workflow or agent](chatbot-workflow-or-agent.md) — the middle question of the stack, worked through with its signals
 - [Model cards](model-cards.md) — the spec sheet where capability and training data are meant to be stated
 - [Prompt costs](prompt-costs.md) — the other half of the same trade-off, priced per token
 - [The LLM chain and the agent node](llm-chain-vs-agent.md) — the second of the three decisions, and what the agent loop costs

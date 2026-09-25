@@ -8,6 +8,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Next-word prediction](next-word-prediction.md) — tokens, confidence scores, and patterns stored as weights
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the chef, the restaurant, and the plan–act–check loop
 - [The three pillars of an agent](three-pillars-of-an-agent.md) — tools, memory, autonomy: can't act, repeats itself, asks you
+- [Chatbot, workflow or agent](chatbot-workflow-or-agent.md) — the path written down in advance or not, and five signals against an agent
 - [Three ways agents fail](three-ways-agents-fail.md) — endless loop, invented source, early stop, and why success reports are not evidence
 - [The agent loop](the-agent-loop.md) — Think, Act, Observe, what done looks like, and the repeat that means it forgot
 - [Reactive vs proactive AI](reactive-vs-proactive-ai.md) — waiting to be asked versus pursuing a goal, and why proactive is not smarter

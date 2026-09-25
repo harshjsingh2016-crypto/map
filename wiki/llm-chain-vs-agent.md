@@ -1,6 +1,6 @@
 ---
 boards: [scalar/n8n-automation, scalar-2/ai-agent-concepts]
-updated: 2026-09-24
+updated: 2026-09-25
 ---
 
 # The LLM chain and the agent node
@@ -80,6 +80,7 @@ once and proceed.
 
 ## Related
 
+- [Chatbot, workflow or agent](chatbot-workflow-or-agent.md) — the general form of this choice, including when neither model step belongs
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — what the agent node is a packaged instance of
 - [Reactive vs proactive AI](reactive-vs-proactive-ai.md) — the loop that separates the two, stated as waiting versus pursuing a goal
 - [Chain of thought](chain-of-thought.md) — the reasoning behaviour the chain node deliberately lacks
