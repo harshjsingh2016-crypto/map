@@ -1,6 +1,6 @@
 ---
 boards: [scalar-2/ai-agent-concepts]
-updated: 2026-09-24
+updated: 2026-09-25
 ---
 
 # The agent loop: Think, Act, Observe
@@ -45,12 +45,13 @@ The trap sits at the second Think. One option is to call the library again with 
 question. Nothing reasonable does that on purpose; the way a person takes the morning medicine
 twice is by forgetting they took it. An agent without memory of what it already checked repeats
 the action, and with no memory at all it never stops. The library has already said what it knows,
-so each repeat only delays the answer. This is the endless loop, and memory is its most visible
+so each repeat only delays the answer. It is the missing-memory tell of the [three pillars](three-pillars-of-an-agent.md). This is the endless loop, and memory is its most visible
 cause but not its only one: a vague goal handed to an agent with strong autonomy can argue itself
 in circles with its memory intact.
 
 ## Related
 
+- [The three pillars of an agent](three-pillars-of-an-agent.md) — tools, memory and autonomy, and the tell when each is missing
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the components the loop runs on, and the manager layer above it
 - [Reactive vs proactive AI](reactive-vs-proactive-ai.md) — the loop is what makes a system proactive, and why that is not the same as smarter
 - [The LLM chain and the agent node](llm-chain-vs-agent.md) — when a task needs the loop and when one pass is enough

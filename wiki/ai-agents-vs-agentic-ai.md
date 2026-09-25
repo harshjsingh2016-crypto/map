@@ -1,6 +1,6 @@
 ---
 boards: [scalar/gen-ai-fundamentals, scalar-2/ai-agent-concepts]
-updated: 2026-09-24
+updated: 2026-09-25
 ---
 
 # AI agents vs Agentic AI
@@ -15,5 +15,6 @@ The Zomato example walks one agent end to end. Trigger: a "food is cold" complai
 
 ## Related
 
+- [The three pillars of an agent](three-pillars-of-an-agent.md) — tools, memory and autonomy, each with a visible failure when missing
 - [The agent loop](the-agent-loop.md) — the plan, act, check loop taken apart phase by phase
 - [Next-word prediction](next-word-prediction.md) — the LLM brain inside every agent

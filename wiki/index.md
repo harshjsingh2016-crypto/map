@@ -7,6 +7,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Predictive vs Generative AI](predictive-vs-generative-ai.md) — one reads the puppy photo, the other rewrites it
 - [Next-word prediction](next-word-prediction.md) — tokens, confidence scores, and patterns stored as weights
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the chef, the restaurant, and the plan–act–check loop
+- [The three pillars of an agent](three-pillars-of-an-agent.md) — tools, memory, autonomy: can't act, repeats itself, asks you
 - [The agent loop](the-agent-loop.md) — Think, Act, Observe, what done looks like, and the repeat that means it forgot
 - [Reactive vs proactive AI](reactive-vs-proactive-ai.md) — waiting to be asked versus pursuing a goal, and why proactive is not smarter
 - [Diffusion](diffusion.md) — noise carved down everywhere at once, and why that gives you two trunks
