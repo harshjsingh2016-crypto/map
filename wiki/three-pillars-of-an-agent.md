@@ -88,6 +88,12 @@ web search at all and was still unmistakably an agent, because it looped. The sa
 nothing switched on makes no calls and is a chatbot. What changed between the two is not the
 model's intelligence but the architecture around it.
 
+The same holds for a model run locally. A local runtime on its own gives a chat box, a chatbot on
+your own hardware. Point a workflow tool's agent node at that same model, attach memory and tools,
+and it is an agent in the full sense. If the platform offers no memory and no connectors, no model
+can be made into one. The pillars belong to the system that is assembled, not to the model inside
+it.
+
 ## Where MCP fits
 
 Tools reach the agent through connections, and the one that keeps coming up is MCP, the Model

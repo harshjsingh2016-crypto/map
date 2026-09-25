@@ -42,6 +42,13 @@ other side.
 Run as a sequence, the signals become a decision: is there anything to check in the world, can the
 path be written down, is there a clear done, and how costly is a wrong answer.
 
+The same trade appears one layer down, in the frameworks people build with. LangChain runs a fixed
+chain, retrieving, cleaning and producing outputs in the same order every run. LangGraph puts an
+orchestration model in the middle that decides the next step each time, so the order can change
+between runs without a person steering it, and the price is speed: all that orchestration makes it
+markedly slower. One is a workflow, the other an agent, and the choice between them follows the same
+test.
+
 ## Precision is the price of the agent
 
 Agents demand more precise prompts than chatbots. A vague prompt costs a chatbot one poor answer. It

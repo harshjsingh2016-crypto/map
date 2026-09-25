@@ -22,7 +22,7 @@ walkthrough, where a separate quiz section only duplicated what was already boar
 - [x] §6 + §6.1 + §6.2 Three failures (with Quiz 4), model vs prompt, two blow-ups — missed — discussed ✓ — accepted: failures table, model-layer note (tool preferences kept as one person's example), Replit note; new wiki article three-ways-agents-fail. Rejected: vending machine (details from a secondary summary, unverified)
 - [x] §7 Three tools, same loop (with Quiz 5) — missed + refinement — discussed ✓ — accepted: where-the-pillars-live table; Quiz 5 row on the chatbot-vs-agent table (refinement); agent-tasks note (doubles as the homework list); wiki three-pillars-of-an-agent deepened
 - [x] §8 Chatbot, workflow or agent — the decision — missed — discussed ✓ — accepted: decision flowchart, wrong-call signals table (with where-it-comes-from column), choosing-well note; new wiki article chatbot-workflow-or-agent
-- [ ] §10 + §11 Doubt session and homework — missed — pending
+- [x] §10 + §11 Doubt session and homework — missed — discussed ✓ — accepted: doubts table (pillars belong to the assembled system; LangChain vs LangGraph; CPM/PERT carried with its caveat — PERT unconfirmed). Rejected: homework note (user's call — homework runs as the Class Assignment stage, not board content); deferred-topics marker (user's call — not needed on the board)
 
 **Low-confidence material to raise with the caveat attached, never as fact** (file §13): the
 **OpenAI red-team article** (read aloud at speed, transcript fragmentary, a stray chat line that may
@@ -40,3 +40,7 @@ digression, the two blow-ups, the demos and the doubts.
 
 **Deferred by the lecture itself:** agentic AI (many agents), MCP in depth, LangGraph, Sovereign AI.
 Nothing to board on these beyond the one-line pointers the lecture gave.
+
+Walkthrough complete: 2026-09-25. Status strip advanced — Learning green, Class Assignment indigo.
+Next: the Class Assignment (Deep Research run; a Claude connector shared on Discord; the platform set
+of 8 + 4 problems and the feedback form), then the Internal QnA drill in Armor.
