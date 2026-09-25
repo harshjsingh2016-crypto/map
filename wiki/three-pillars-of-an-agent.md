@@ -43,6 +43,12 @@ refuse an instruction to delete an entire repository. Autonomy without that boun
 capable, only less predictable, which is why guardrails are named alongside it rather than after
 it.
 
+The strongest guardrail is one the agent cannot cross rather than one it is asked to respect. The
+instructor's own setup is the example: his coding agent runs with its permission checks skipped,
+free to do whatever it decides, but it is never connected to the production VPN. The free rein only
+ever reaches the development environment, because the boundary lives in what the agent can reach,
+not in an instruction it might reason its way past.
+
 ## Memory is a store, not the prompt
 
 Memory is easy to confuse with the context window, and they are different things. The context
