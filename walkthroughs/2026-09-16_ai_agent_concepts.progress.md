@@ -20,7 +20,7 @@ walkthrough, where a separate quiz section only duplicated what was already boar
 - [x] §4 + §4.1 + §4.2 Think → Act → Observe (with Quiz 2), the library simulation, the step-3 trap — missed — discussed ✓ — accepted (loop flowchart + n8n-analogy note; library timeline; loop-traps note; new wiki article the-agent-loop)
 - [x] §5 + §5.1 + §5.2 Three pillars (with Quiz 3), the MCP bridge, the red-team article — missed — discussed ✓ — accepted: switchboard table, autonomy-and-memory note, MCP intro table; new wiki article three-pillars-of-an-agent. Rejected: red-team article (specifics unverified; the guardrails lesson stands on the escalation example). Added during §6: footnote on the guardrails point — agent never connected to the production VPN (a boundary it can't cross)
 - [x] §6 + §6.1 + §6.2 Three failures (with Quiz 4), model vs prompt, two blow-ups — missed — discussed ✓ — accepted: failures table, model-layer note (tool preferences kept as one person's example), Replit note; new wiki article three-ways-agents-fail. Rejected: vending machine (details from a secondary summary, unverified)
-- [ ] §7 Three tools, same loop — Deep Research, Claude connectors, the n8n AI Agent node (with Quiz 5) — missed — pending
+- [x] §7 Three tools, same loop (with Quiz 5) — missed + refinement — discussed ✓ — accepted: where-the-pillars-live table; Quiz 5 row on the chatbot-vs-agent table (refinement); agent-tasks note (doubles as the homework list); wiki three-pillars-of-an-agent deepened
 - [ ] §8 Chatbot, workflow, or agent — the decision — missed — pending
 - [ ] §10 + §11 Doubt session and homework — missed — pending
 

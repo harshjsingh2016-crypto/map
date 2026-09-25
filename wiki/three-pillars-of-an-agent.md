@@ -49,6 +49,11 @@ free to do whatever it decides, but it is never connected to the production VPN.
 ever reaches the development environment, because the boundary lives in what the agent can reach,
 not in an instruction it might reason its way past.
 
+Well-built agent products go a step further and make the worst action reversible. Asked to tidy a
+cloud drive, an agent can be told to send deletions to the bin rather than delete outright, so it
+keeps its free rein while every mistake stays recoverable for weeks. The alternative lever is to
+have it confirm each deletion, which buys control by giving back some of the autonomy.
+
 ## Memory is a store, not the prompt
 
 Memory is easy to confuse with the context window, and they are different things. The context
@@ -58,6 +63,30 @@ results and standing instructions both: tell it not to call anyone, and that ins
 
 Memory is also not free with the model. The agent writes it, but only where the platform gives it
 somewhere to write; in a workflow tool, an agent with no memory attached has none.
+
+## Where the pillars live in real tools
+
+The same three pillars sit in different places depending on the product, and knowing where each one
+lives is most of knowing how to use it.
+
+In the n8n AI Agent node they are literal: three ports under the node, one each for the chat model,
+the memory and the tools. The chat model is where the judgment comes from, and it decides how well
+the agent performs; a weak model will spoil things however well the rest is wired. The memory port
+takes a simple store to begin with, and left empty, the agent has none. The tools port takes
+connectors and custom calls, and with nothing plugged in the node is just a model with a longer
+name.
+
+In Claude, the agent is Claude and the tools are connectors switched on per chat, and memory can
+arrive with the tool rather than live in the agent. A meal-planning connector held the user's
+preferences; asked directly, Claude knew nothing about them, and asked through the connector, it
+returned the full profile. Memory, in other words, is a property of the whole system, not
+necessarily of the model at its centre.
+
+In ChatGPT's Deep Research, the pillar on show is the thinking: the plan is presented before the run
+and can be edited, and an activity panel lists every step afterwards. One demonstrated run used no
+web search at all and was still unmistakably an agent, because it looped. The same product with
+nothing switched on makes no calls and is a chatbot. What changed between the two is not the
+model's intelligence but the architecture around it.
 
 ## Where MCP fits
 
@@ -76,5 +105,6 @@ later class.
 
 - [The agent loop](the-agent-loop.md) — tools are what Act runs on, memory is what lets Observe build on the last round
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the earlier brain, tools, memory and guardrails framing these pillars refine
+- [Right-sizing the model](right-sizing-the-model.md) — the chat model port is where sizing decides how the agent performs
 - [Context persistence](context-persistence.md) — the prompt-side view of what survives between calls, as against an agent's own memory store
 - [The LLM chain and the agent node](llm-chain-vs-agent.md) — an agent is only as good as its tools, seen from the workflow side
