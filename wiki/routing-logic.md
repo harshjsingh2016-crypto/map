@@ -57,6 +57,7 @@ is the mechanism.
 
 ## Related
 
+- [Model Context Protocol](model-context-protocol.md) — an MCP server is a routing table; its descriptions and order are these rules
 - [The four tool types](four-tool-types.md) — choosing the type of tool, the half of the decision routing then has to reach
 - [Three ways agents fail](three-ways-agents-fail.md) — routing as a third cause of the endless loop, and jugaad's resemblance to an invented success
 - [The agent loop](the-agent-loop.md) — why a failed tool is retried: Observe sends it back to Think, and Think routes the same way

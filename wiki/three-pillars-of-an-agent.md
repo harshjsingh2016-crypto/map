@@ -106,19 +106,13 @@ it.
 
 ## Where MCP fits
 
-Tools reach the agent through connections, and the one that keeps coming up is MCP, the Model
-Context Protocol, introduced here only at the level of what it is. An API is a single ticket:
-request, response, done, and doing many things means one API per operation with authentication for
-each. MCP is a continuous bridge between the agent and a product, over which the agent can perform
-many operations while the bridge holds what is and is not allowed. An agent asked for tax-saving
-ideas over an accountancy product's MCP connection fetches the year's financials, decides that is
-not enough, and goes back for the investments before it answers: the loop, running over one
-connection. An API gateway is unrelated despite the name, a piece of architecture between front end
-and back end that handles rate limiting and data protection. Building MCP connections is left to a
-later class.
+Tools reach an agent through connections, and the standard one is MCP, the Model Context Protocol:
+an agreed plug between agents and tools, whose server lists each tool with a description the agent
+chooses from. It has its own article, [Model Context Protocol](model-context-protocol.md).
 
 ## Related
 
+- [Model Context Protocol](model-context-protocol.md) — how the tools pillar is connected: the agreed plug, and the routing table inside it
 - [Short-term and long-term memory](short-and-long-term-memory.md) — the memory pillar split in two, and how it reaches the model
 - [The four tool types](four-tool-types.md) — what the tools pillar holds, and how a task names its tool
 - [The agent loop](the-agent-loop.md) — tools are what Act runs on, memory is what lets Observe build on the last round
