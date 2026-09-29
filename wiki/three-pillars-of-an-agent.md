@@ -1,6 +1,6 @@
 ---
-boards: [scalar-2/ai-agent-concepts]
-updated: 2026-09-25
+boards: [scalar-2/ai-agent-concepts, scalar-2/agent-building-blocks]
+updated: 2026-09-29
 ---
 
 # The three pillars of an agent
@@ -47,7 +47,10 @@ The strongest guardrail is one the agent cannot cross rather than one it is aske
 instructor's own setup is the example: his coding agent runs with its permission checks skipped,
 free to do whatever it decides, but it is never connected to the production VPN. The free rein only
 ever reaches the development environment, because the boundary lives in what the agent can reach,
-not in an instruction it might reason its way past.
+not in an instruction it might reason its way past. A trading platform's official agent connection makes the
+same choice at the product level: it exposes the portfolio and leaves trading out entirely. A cap
+written into the prompt, never trade more than a small sum, would not stop an agent placing that
+small trade a thousand times. The omission is a boundary; the instruction is not.
 
 Well-built agent products go a step further and make the worst action reversible. Asked to tidy a
 cloud drive, an agent can be told to send deletions to the bin rather than delete outright, so it
@@ -109,6 +112,7 @@ later class.
 
 ## Related
 
+- [The four tool types](four-tool-types.md) — what the tools pillar holds, and how a task names its tool
 - [The agent loop](the-agent-loop.md) — tools are what Act runs on, memory is what lets Observe build on the last round
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the earlier brain, tools, memory and guardrails framing these pillars refine
 - [Right-sizing the model](right-sizing-the-model.md) — the chat model port is where sizing decides how the agent performs

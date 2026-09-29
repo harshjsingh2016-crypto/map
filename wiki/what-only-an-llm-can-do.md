@@ -1,6 +1,6 @@
 ---
-boards: [scalar/n8n-automation]
-updated: 2026-09-18
+boards: [scalar/n8n-automation, scalar-2/agent-building-blocks]
+updated: 2026-09-29
 ---
 
 # Use the model for what only a model can do
@@ -34,8 +34,14 @@ use a stronger one. Both are true, and both are downstream of the real question:
 amount of what gets put in an LLM node is a lookup wearing a costume.** Right-sizing applies only to
 the work that genuinely needs a model; the rest should be a request to whoever owns the answer.
 
+Arithmetic is the plainest instance. A model predicts the next word, so a sum it produces may
+simply not add up, and capable assistants asked to total a column write a script instead of
+answering from the model. In an agent this becomes a tool type of its own: the job is computing,
+and code does it.
+
 ## Related
 
+- [The four tool types](four-tool-types.md) — search, browser, API and code, and reading a task for which it needs
 - [Right-sizing the model](right-sizing-the-model.md) — the sizing question, which only applies once this one is settled
 - [HTTP, for workflow builders](http-for-workflows.md) — how the authoritative source gets called
 - [Grounding](grounding.md) — the same instinct where the model must stay in the loop: hand it the facts rather than trusting its own
