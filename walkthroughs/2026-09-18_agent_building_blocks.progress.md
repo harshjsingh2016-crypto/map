@@ -14,7 +14,7 @@ files as the defence), `what-only-an-llm-can-do` (code over prediction for arith
 
 **Quizzes are taught in place** — Q1 in §3, Q2 in §4, Q3 in §5, Q4 in §6, Q5 in §7.
 
-- [ ] §1 + §2 Recap, and the morning seven (Advait's storm message) — missed — pending
+- [x] §1 + §2 Recap, and the morning seven (Advait's storm message) — missed — discussed ✓ — accepted: morning-seven note (both failures at scale; what carries over; type-not-brand folded in); seven-checks table with a clue column and a Tool type column left for §3. No wiki change (the framing lands with the §3 tools article)
 - [ ] §3 (3.1–3.5) Four tool types — search, browser, API, code; the Zerodha aside; routing the seven (with Quiz 1) — missed — pending
 - [ ] §4 (4.1–4.4) Routing logic — wrench and screwdriver, description vs order, testing, jugaad (with Quiz 2) — missed + refinement (routing Endless Loop) — pending
 - [ ] §5 (5.1–5.3) Short-term vs long-term memory — ChatGPT, the fire example, the n8n demo (with Quiz 3) — missed + refinement — pending
