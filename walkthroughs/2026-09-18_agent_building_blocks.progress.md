@@ -1,8 +1,8 @@
 # Walkthrough — 2026-09-18_agent_building_blocks.md
 Board: scalar-2/agent-building-blocks
 Source: Armor/Output/2026-09-18_agent_building_blocks.md
-Updated: 2026-09-26
-Agenda confirmed: pending (summary + glossary presented 2026-09-26)
+Updated: 2026-09-29
+Agenda confirmed: 2026-09-29 (summary + glossary presented 2026-09-26)
 
 Board created empty this session, so every item is **missed** by definition. No wiki article cites
 this board yet. This lecture extends Day 15 directly, so existing articles it will **refine** rather
