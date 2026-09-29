@@ -51,6 +51,7 @@ should hand to something else, however available the model is.
 
 ## Related
 
+- [Routing logic](routing-logic.md) — the other half of the tool decision: the ordered rules that reach the right type
 - [The three pillars of an agent](three-pillars-of-an-agent.md) — tools are one pillar; this is what that pillar holds
 - [Use the model for what only a model can do](what-only-an-llm-can-do.md) — the same preference for the authoritative source, from the workflow side
 - [HTTP, for workflow builders](http-for-workflows.md) — how an API call is actually made
