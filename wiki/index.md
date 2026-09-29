@@ -7,6 +7,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Predictive vs Generative AI](predictive-vs-generative-ai.md) — one reads the puppy photo, the other rewrites it
 - [Next-word prediction](next-word-prediction.md) — tokens, confidence scores, and patterns stored as weights
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the chef, the restaurant, and the plan–act–check loop
+- [Least privilege](least-privilege.md) — grant a scope only where a verb in the task needs it
 - [Model Context Protocol](model-context-protocol.md) — the agreed plug: N×M to N+M, a routing table inside, and what it is not
 - [Short-term and long-term memory](short-and-long-term-memory.md) — the steps against the conclusion, and which one a repeat says is missing
 - [Routing logic](routing-logic.md) — first match wins; description and order, and what vague rules produce

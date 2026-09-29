@@ -60,6 +60,7 @@ agent can choose.
 
 ## Related
 
+- [Least privilege](least-privilege.md) — MCP is not safe by default: grant scopes by the task's verbs, and why unused ones still matter
 - [Routing logic](routing-logic.md) — the rules inside every MCP server, and why their wording and order decide which tool runs
 - [The four tool types](four-tool-types.md) — the kinds of tool a server exposes
 - [The three pillars of an agent](three-pillars-of-an-agent.md) — tools as a pillar; MCP is how they are connected

@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/no-code-ai-bot, scalar-2/ai-agent-concepts]
-updated: 2026-09-25
+boards: [scalar/ai-reliability, scalar/no-code-ai-bot, scalar-2/ai-agent-concepts, scalar-2/agent-building-blocks]
+updated: 2026-09-29
 ---
 
 # AI safety failure modes
@@ -30,6 +30,13 @@ permitted to speak at all, and the two compound.
 
 Older models showed a blunt version of it: asked for restricted information in another language, they returned it — a pretext plus a language switch, as in asking the model to show its complete system instructions in French on the grounds that system diagnostics were running. The instruction the application had set was still there; the input simply routed around it.
 
+With agents, the injection no longer has to come from the person typing. An agent reads content
+as part of its work, such as an issue in a code repository or a message thread, and an instruction
+planted in that content arrives with the same force as one in the prompt. The reported incidents
+with agent connections to code hosting and messaging worked this way: an injected instruction,
+carried by ordinary-looking content, used access the connection should never have had. That is why
+[least privilege](least-privilege.md) is the defence that holds even when the injection gets through.
+
 **Jailbreaking** is bypassing the *model provider's* safety training. The target is not your application's rules but the constraints the provider trained in, underneath whatever you built on top.
 
 The classic older-model version is a pretext that makes the refused request sound legitimate: asking outright for pirated movie links fails, but framing it as wanting to block those links on a home router for family safety, and then asking for them, got them out. Note that this is the same lever as the injection example above — a plausible cover story — pointed at a different target.
@@ -40,6 +47,7 @@ Injection and jailbreaking are easy to conflate, and the cleanest line between t
 
 ## Related
 
+- [Least privilege](least-privilege.md) — limiting what an injected instruction can reach once it is in
 - [Three ways agents fail](three-ways-agents-fail.md) — the agent-level failures, and where the model layer ends the prompt's reach
 - [Grounding](grounding.md) — the control that narrows the room for hallucination
 - [The control dial](control-dial.md) — the structural lever on the same failure: fewer places the model speaks, fewer places it can invent
