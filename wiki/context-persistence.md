@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/ai-ecosystems]
-updated: 2026-08-24
+boards: [scalar/ai-reliability, scalar/ai-ecosystems, scalar-2/agent-building-blocks]
+updated: 2026-09-29
 ---
 
 # Context persistence
@@ -15,7 +15,17 @@ Products expose this as a first-class feature rather than a prompt field. Claude
 
 The ecosystem board later gave this a name and a shape: [persistent context architecture](persistent-context-architecture.md), which splits the durable material into behaviour (instructions) and facts (KB files) and treats the sandbox as the third, non-portable piece that reattaches both.
 
+A session can also lose context without ending. When a conversation outgrows the model's context
+window, it is compacted: summarised, with the summary replacing the transcript, the way one remembers
+school without remembering the classes. That is serviceable for everyday use and costly for
+anything where the texture matters; in research writing the tone is the first thing to go. Long
+sessions can also cost more than expected, because some models charge a premium once a context
+crosses a threshold. The defence against both is the one this article already points at, done by
+hand: keep your own markdown handover files, so the conclusions that matter are written down by you
+rather than left to a lossy summary. It is long-term memory kept deliberately.
+
 ## Related
 
+- [Short-term and long-term memory](short-and-long-term-memory.md) — the same boundary from the agent side: what survives a session, and how it is fed back in
 - [Persistent context architecture](persistent-context-architecture.md) — the same problem named as the amnesia problem, with its three-part answer
 - [Next-word prediction](next-word-prediction.md) — why nothing persists in the model itself; patterns are frozen in weights

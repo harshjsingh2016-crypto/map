@@ -1,6 +1,6 @@
 ---
-boards: [scalar-2/ai-agent-concepts]
-updated: 2026-09-25
+boards: [scalar-2/ai-agent-concepts, scalar-2/agent-building-blocks]
+updated: 2026-09-29
 ---
 
 # The three pillars of an agent
@@ -47,7 +47,10 @@ The strongest guardrail is one the agent cannot cross rather than one it is aske
 instructor's own setup is the example: his coding agent runs with its permission checks skipped,
 free to do whatever it decides, but it is never connected to the production VPN. The free rein only
 ever reaches the development environment, because the boundary lives in what the agent can reach,
-not in an instruction it might reason its way past.
+not in an instruction it might reason its way past. A trading platform's official agent connection makes the
+same choice at the product level: it exposes the portfolio and leaves trading out entirely. A cap
+written into the prompt, never trade more than a small sum, would not stop an agent placing that
+small trade a thousand times. The omission is a boundary; the instruction is not.
 
 Well-built agent products go a step further and make the worst action reversible. Asked to tidy a
 cloud drive, an agent can be told to send deletions to the bin rather than delete outright, so it
@@ -63,6 +66,13 @@ results and standing instructions both: tell it not to call anyone, and that ins
 
 Memory is also not free with the model. The agent writes it, but only where the platform gives it
 somewhere to write; in a workflow tool, an agent with no memory attached has none.
+
+The two statements, that memory is not the context window and that memory must reach the model,
+fit together through retrieval. The store sits with the platform; for each call the relevant parts
+are pulled out and placed into the prompt, which is the only route into the model. A demonstration
+made the point by swapping one model for another mid-conversation and finding the memory intact:
+it had never been in either model. Memory itself comes in two kinds, a session scratchpad and a
+store that persists, covered in [short-term and long-term memory](short-and-long-term-memory.md).
 
 ## Where the pillars live in real tools
 
@@ -96,19 +106,15 @@ it.
 
 ## Where MCP fits
 
-Tools reach the agent through connections, and the one that keeps coming up is MCP, the Model
-Context Protocol, introduced here only at the level of what it is. An API is a single ticket:
-request, response, done, and doing many things means one API per operation with authentication for
-each. MCP is a continuous bridge between the agent and a product, over which the agent can perform
-many operations while the bridge holds what is and is not allowed. An agent asked for tax-saving
-ideas over an accountancy product's MCP connection fetches the year's financials, decides that is
-not enough, and goes back for the investments before it answers: the loop, running over one
-connection. An API gateway is unrelated despite the name, a piece of architecture between front end
-and back end that handles rate limiting and data protection. Building MCP connections is left to a
-later class.
+Tools reach an agent through connections, and the standard one is MCP, the Model Context Protocol:
+an agreed plug between agents and tools, whose server lists each tool with a description the agent
+chooses from. It has its own article, [Model Context Protocol](model-context-protocol.md).
 
 ## Related
 
+- [Model Context Protocol](model-context-protocol.md) — how the tools pillar is connected: the agreed plug, and the routing table inside it
+- [Short-term and long-term memory](short-and-long-term-memory.md) — the memory pillar split in two, and how it reaches the model
+- [The four tool types](four-tool-types.md) — what the tools pillar holds, and how a task names its tool
 - [The agent loop](the-agent-loop.md) — tools are what Act runs on, memory is what lets Observe build on the last round
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the earlier brain, tools, memory and guardrails framing these pillars refine
 - [Right-sizing the model](right-sizing-the-model.md) — the chat model port is where sizing decides how the agent performs

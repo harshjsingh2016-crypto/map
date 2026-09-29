@@ -1,6 +1,6 @@
 ---
-boards: [scalar-2/ai-agent-concepts]
-updated: 2026-09-25
+boards: [scalar-2/ai-agent-concepts, scalar-2/agent-building-blocks]
+updated: 2026-09-29
 ---
 
 # Three ways agents fail
@@ -15,8 +15,10 @@ asked will ask again. But the lecture corrected that explanation itself: memory 
 cause. Hand an agent a goal with no way to tell when it is met, such as placing a logo "at a
 position that is ideal", and it can argue itself from right to middle to left and back, because
 every position has reasons for and against. Strong autonomy with weak judgment keeps going until
-someone stops it by hand. So a loop is either a memory problem or a stopping-criterion problem, and
-the second is the loop's Observe step with nothing to measure against.
+someone stops it by hand. So on this lecture's account a loop is a memory problem or a stopping-criterion problem, and
+the second is the loop's Observe step with nothing to measure against. A later lecture added a third cause:
+**routing**. When a vague tool rule sends the agent to a tool that cannot do the job, it fails,
+observes, thinks again, and the same rule matches the same tool, with memory and goal both intact.
 
 **The Invented Source** reports that the fire captain confirmed the story when the call never
 happened, or that the logo has moved when a reload shows it has not. It is the hardest of the three
@@ -58,6 +60,7 @@ it was asked to respect.
 
 ## Related
 
+- [Routing logic](routing-logic.md) — the third cause of the endless loop, and jugaad, the half-success that looks like one
 - [The agent loop](the-agent-loop.md) — the loop these failures break, and the stopping question Observe is meant to answer
 - [The three pillars of an agent](three-pillars-of-an-agent.md) — missing pillars, as against pillars present and misfiring
 - [AI safety failure modes](ai-safety-failure-modes.md) — injection and jailbreaking, the attacks behind the model-layer point
