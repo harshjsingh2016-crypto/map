@@ -1,6 +1,6 @@
 ---
-boards: [scalar/ai-reliability, scalar/ai-ecosystems]
-updated: 2026-08-24
+boards: [scalar/ai-reliability, scalar/ai-ecosystems, scalar-2/agent-building-blocks]
+updated: 2026-09-29
 ---
 
 # Context persistence
@@ -17,5 +17,6 @@ The ecosystem board later gave this a name and a shape: [persistent context arch
 
 ## Related
 
+- [Short-term and long-term memory](short-and-long-term-memory.md) — the same boundary from the agent side: what survives a session, and how it is fed back in
 - [Persistent context architecture](persistent-context-architecture.md) — the same problem named as the amnesia problem, with its three-part answer
 - [Next-word prediction](next-word-prediction.md) — why nothing persists in the model itself; patterns are frozen in weights

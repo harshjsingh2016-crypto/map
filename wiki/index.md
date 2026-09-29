@@ -7,6 +7,7 @@ Concept articles distilled from the boards. Each article is a synthesis, not an 
 - [Predictive vs Generative AI](predictive-vs-generative-ai.md) — one reads the puppy photo, the other rewrites it
 - [Next-word prediction](next-word-prediction.md) — tokens, confidence scores, and patterns stored as weights
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the chef, the restaurant, and the plan–act–check loop
+- [Short-term and long-term memory](short-and-long-term-memory.md) — the steps against the conclusion, and which one a repeat says is missing
 - [Routing logic](routing-logic.md) — first match wins; description and order, and what vague rules produce
 - [The four tool types](four-tool-types.md) — search, browser, API, code: reading a task for its tool
 - [The three pillars of an agent](three-pillars-of-an-agent.md) — tools, memory, autonomy: can't act, repeats itself, asks you

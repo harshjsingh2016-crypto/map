@@ -67,6 +67,13 @@ results and standing instructions both: tell it not to call anyone, and that ins
 Memory is also not free with the model. The agent writes it, but only where the platform gives it
 somewhere to write; in a workflow tool, an agent with no memory attached has none.
 
+The two statements, that memory is not the context window and that memory must reach the model,
+fit together through retrieval. The store sits with the platform; for each call the relevant parts
+are pulled out and placed into the prompt, which is the only route into the model. A demonstration
+made the point by swapping one model for another mid-conversation and finding the memory intact:
+it had never been in either model. Memory itself comes in two kinds, a session scratchpad and a
+store that persists, covered in [short-term and long-term memory](short-and-long-term-memory.md).
+
 ## Where the pillars live in real tools
 
 The same three pillars sit in different places depending on the product, and knowing where each one
@@ -112,6 +119,7 @@ later class.
 
 ## Related
 
+- [Short-term and long-term memory](short-and-long-term-memory.md) — the memory pillar split in two, and how it reaches the model
 - [The four tool types](four-tool-types.md) — what the tools pillar holds, and how a task names its tool
 - [The agent loop](the-agent-loop.md) — tools are what Act runs on, memory is what lets Observe build on the last round
 - [AI agents vs Agentic AI](ai-agents-vs-agentic-ai.md) — the earlier brain, tools, memory and guardrails framing these pillars refine
