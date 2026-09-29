@@ -58,6 +58,16 @@ agent can choose.
 - **Not an API gateway,** despite the similar vocabulary. A gateway is architecture between a
   front end and a back end, handling rate limiting and data protection.
 
+## When to use it
+
+Where a vendor offers an MCP server, use it, and prefer the vendor's own over a third party's, which
+may be unsafe. A plain API remains the choice only when it is all that exists: a very small service
+will not stand up a server, because running one is a real cost. The claim sometimes made that APIs go
+out of date and MCP does not is too broad as stated, since a server is maintained by its owner like
+anything else; the sound version is that a vendor's own server tracks that vendor's API changes, so a
+builder is not left holding a hard-coded call that gets retired. The server is also where the tool
+descriptions and their order live, written by whoever runs it.
+
 ## Related
 
 - [Least privilege](least-privilege.md) — MCP is not safe by default: grant scopes by the task's verbs, and why unused ones still matter

@@ -44,7 +44,10 @@ The lesson runs in two directions. Whoever builds a server is responsible for it
 it must, because attackers will reach it through agents carrying injected prompts. Whoever connects to
 one should grant the narrowest access that does the job: if the task needs calendar read access, grant
 calendar read access and nothing else. Everything that was ever true of an API's exposure is true of
-these connections too; the convenience is new, the risk is not.
+these connections too; the convenience is new, the risk is not. And the two sides cannot cover for each other. A client
+controls what it grants; a server controls what it exposes. If a server's tools can reach private
+data, nothing the connecting side does will narrow that, and a careful server cannot stop a client
+granting more than a task needs.
 
 ## Related
 

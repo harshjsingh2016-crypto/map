@@ -20,7 +20,7 @@ files as the defence), `what-only-an-llm-can-do` (code over prediction for arith
 - [x] §5 (5.1–5.3) Short-term vs long-term memory — ChatGPT, the fire example, the n8n demo (with Quiz 3) — missed + refinement — discussed ✓ — accepted: memory table (with Quiz 3 row); how-memory-reaches-the-model note (refines Day 15's memory ≠ context window); long-term-memory-steers note. New wiki article short-and-long-term-memory; three-pillars-of-an-agent and context-persistence refined
 - [x] §6 (6.1–6.3) MCP — USB-C, N×M to N+M, descriptions inside the server, what MCP is not (with Quiz 4) — missed + refinement — discussed ✓ — accepted: N×M vs N+M banded flowchart; MCP-the-agreed-plug note (Quiz 4 folded in); what-MCP-is-not table. New wiki article model-context-protocol (absorbs Day 15's API-vs-MCP and gateway material); three-pillars-of-an-agent MCP section trimmed to a pointer; routing-logic linked
 - [x] §7 + §8 Permissions and least privilege (with Quiz 5); two MCP incidents — missed — discussed ✓ — accepted: consent-screen scopes table; risk-is-reach note (Quiz 5); incidents note carrying the mechanism with the unverified-specifics caveat. New wiki article least-privilege; ai-safety-failure-modes refined (injection through content the agent reads); model-context-protocol linked
-- [ ] §11 + §12 Doubt session and take-home — API vs MCP in practice, compaction, memory promotion — missed + refinement — pending
+- [x] §11 + §12 Doubt session and take-home — missed + refinement — discussed ✓ — accepted: doubts table (MCP vs API, the reframed "won't get outdated" claim, grant vs expose, rules in the server, multi-tool tasks, promotion); compaction-and-handover-files note (no pricing figures). Take-home not boarded (Day 15 ruling: homework runs as the Class Assignment stage). Wiki refined: context-persistence, model-context-protocol, least-privilege, short-and-long-term-memory
 
 **Low-confidence material to raise with the caveat attached, never as fact** (file §14):
 **Invariant Labs incident specifics** (partly read from screen, partly memory — the mechanism,
@@ -35,3 +35,7 @@ for the memory example. Treat as the same fire; the lesson doesn't depend on the
 
 **Deferred by the lecture itself:** n8n MCP Client Tool (to the Monday OpenClaw class), OpenClaw,
 tool chaining in a fixed order, LangChain/LangGraph.
+
+Walkthrough complete: 2026-09-29. Status strip advanced — Learning green, Class Assignment indigo.
+Next: the Class Assignment (platform set of 6 + 4 problems and the feedback form; try n8n's AI
+agents; the caricature prompt shared on Discord), then the Internal QnA drill in Armor.

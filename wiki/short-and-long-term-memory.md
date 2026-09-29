@@ -17,7 +17,8 @@ and to the fire captain are short-term; "the fire is confirmed" is long-term. Tw
 the same question in a new session, an agent with long-term memory answers from the conclusion and
 one without it starts making the calls again. Not every conclusion earns a place, though: a trivial
 sum stays in the scratchpad, and only something that carries weight in later reasoning is kept. The
-agent makes that retention decision itself.
+agent makes that retention decision itself. It can also be made by hand: telling an assistant to remember
+something, or working inside a project that keeps its own memory, promotes a fact deliberately.
 
 The familiar pictures fit. Short-term memory is RAM, quick and volatile; long-term memory is the
 disk. Or the film hero who forgets everything every few hours and tattoos what matters on himself:
