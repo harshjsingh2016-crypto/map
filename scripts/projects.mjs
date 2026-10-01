@@ -3,7 +3,7 @@
 // layout. Map reads them in place (projects.json) and never writes to them.
 //
 //   node scripts/projects.mjs list
-//   node scripts/projects.mjs add <alias> <path> [--folders a,b] [--remote <url>]
+//   node scripts/projects.mjs add <alias> <path> [--folders a,b|none] [--remote <url>]
 //   node scripts/projects.mjs remove <alias>
 //   node scripts/projects.mjs sync [--clone]   fast-forward each checkout (pull only)
 //   node scripts/projects.mjs status           where each project stands
@@ -87,7 +87,9 @@ switch (cmd) {
     if (present && !ownRepo(abs)) {
       die(`${abs} is not the top of its own git repo — its boards could not sync. Run \`git init\` there (and add a remote) first.`)
     }
-    const folders = (flag('folders') || a).split(',').map((s) => s.trim()).filter(Boolean)
+    // `--folders none` registers a project that owns nothing yet — the case where its
+    // folders still sit in this repo and migrate.mjs is about to hand them over.
+    const folders = flag('folders') === 'none' ? [] : (flag('folders') || a).split(',').map((s) => s.trim()).filter(Boolean)
     for (const f of folders) if (!NAME.test(f)) die(`folder name must be kebab-case: "${f}"`)
     // A folder name is the first half of every board id, so it has one owner.
     for (const f of folders) {
@@ -98,7 +100,7 @@ switch (cmd) {
     const remote = flag('remote') || (present ? gitSafe(abs, 'remote', 'get-url', 'origin') : null)
     reg.projects.push({ alias: a, path: abs.replace(/\\/g, '/'), remote: remote || null, folders })
     writeRaw(reg)
-    console.log(`mounted ${a} -> ${abs} (folders: ${folders.join(', ')})${present ? '' : ' — not on this machine yet'}${remote ? '' : ' — no git remote recorded'}`)
+    console.log(`mounted ${a} -> ${abs} (folders: ${folders.join(', ') || 'none yet'})${present ? '' : ' — not on this machine yet'}${remote ? '' : ' — no git remote recorded'}`)
     break
   }
 
