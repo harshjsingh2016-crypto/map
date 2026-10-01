@@ -573,7 +573,7 @@ function Canvas() {
 
 export default function App() {
   const {
-    boards, active, folder, selected, followActive, status, logErrors,
+    boards, active, folder, selected, followActive, status, logErrors, boardErrors,
     boardTitle, selectBoard, setFollowActive, boardStyle,
   } = useMapStore()
 
@@ -591,6 +591,8 @@ export default function App() {
     .slice()
     .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0) || a.name.localeCompare(b.name))
   const activeFolder = boards.find((b) => b.id === active)?.folder || NO_FOLDER
+  // A folder that lives in a mounted project is tagged with that project's alias.
+  const folderSource = (f: string) => boards.find((b) => (b.folder || NO_FOLDER) === f)?.source
 
   // Switching folder is a view change, not a write-target change: land on
   // Claude's active board when it lives here, otherwise the first one.
@@ -617,7 +619,7 @@ export default function App() {
               onChange={(e) => selectFolder(e.target.value)}
             >
               {folders.map((f) => (
-                <option key={f} value={f}>{f}{f === activeFolder ? ' ●' : ''}</option>
+                <option key={f} value={f}>{f}{folderSource(f) ? ` [${folderSource(f)}]` : ''}{f === activeFolder ? ' ●' : ''}</option>
               ))}
             </select>
             <span className="chip-caret">▾</span>
@@ -656,6 +658,12 @@ export default function App() {
       {logErrors.length > 0 && (
         <div className="banner error">
           Board file problem: {logErrors[0]}{logErrors.length > 1 ? ` (+${logErrors.length - 1} more)` : ''}
+        </div>
+      )}
+
+      {boardErrors.length > 0 && (
+        <div className="banner error">
+          Mounted project problem: {boardErrors[0]}{boardErrors.length > 1 ? ` (+${boardErrors.length - 1} more)` : ''}
         </div>
       )}
 

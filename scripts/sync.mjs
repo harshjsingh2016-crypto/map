@@ -8,18 +8,33 @@
 //
 // pull runs before the dev server starts; push runs when it exits (see scripts/dev.mjs).
 // Network failures warn but never block work — the next pull's reconcile catches up.
+//
+// Add --root <dir> to sync another project's boards/wiki through that project's own repo.
+import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
+import { resolveRoot, samePath } from '../shared/root.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const { root: ROOT, argv } = resolveRoot()
 // walkthroughs/ holds only <name>.progress.md sidecars — the lecture context files they
 // point at live in the Armor repo (D:\Projects_D\Armor\Output\) and sync with it.
-const SCOPE = ['boards', 'wiki', 'walkthroughs']
-const cmd = process.argv[2]
+const cmd = argv[0]
 
-const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim()
+const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
 const gitSafe = (...args) => { try { return git(...args) } catch { return null } }
+
+// A directory that is not its own repo resolves to whichever repo contains it,
+// and committing there would land this project's boards in the wrong history.
+{
+  const top = gitSafe('rev-parse', '--show-toplevel')
+  if (!top || !samePath(top, ROOT)) {
+    console.error(`[sync] ERROR: ${ROOT} is not the top of a git repo${top ? ` (git resolves to ${top})` : ''} — nothing synced`)
+    process.exit(1)
+  }
+}
+// A pathspec git has never seen is fatal to `git add`, and a project need not have all three.
+const SCOPE = ['boards', 'wiki', 'walkthroughs']
+  .filter((d) => fs.existsSync(path.join(ROOT, d)) || gitSafe('ls-files', '--', d))
 
 function dirty() {
   const out = gitSafe('status', '--porcelain', '--', ...SCOPE)

@@ -8,3 +8,6 @@ pdfs/
 
 # Machine-local Claude Code settings (launch.json is shared).
 .claude/settings.local.json
+
+# Per-machine path overrides for mounted projects (projects.json is the shared registry).
+projects.local.json

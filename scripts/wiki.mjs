@@ -4,15 +4,19 @@
 //   node scripts/wiki.mjs list    articles with title, boards, updated; orphans flagged
 //   node scripts/wiki.mjs check   dead links, index drift, format errors (exit 1)
 //
+// Add --root <dir> to check another project's wiki. Links never cross repos:
+// one that resolves outside wiki/ is an error, so a reference to an article
+// in another project is written as prose.
+//
 // Articles are hand-authored prose — nothing here generates content.
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { listBoards } from '../shared/log.mjs'
+import { listAllBoards } from '../shared/mounts.mjs'
+import { resolveRoot } from '../shared/root.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const { root: ROOT, argv } = resolveRoot()
 const WIKI = path.join(ROOT, 'wiki')
-const cmd = process.argv[2]
+const cmd = argv[0]
 
 const FILENAME = /^[a-z0-9][a-z0-9-]*\.md$/
 const BOARD_ID = /^[a-z0-9][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/
@@ -60,7 +64,7 @@ const index = pages.get('index.md')
 if (!index) errors.push('wiki/index.md is missing')
 
 let knownBoards = new Set()
-try { knownBoards = new Set(listBoards(ROOT).map((b) => b.id)) } catch { /* no boards dir */ }
+try { knownBoards = new Set(listAllBoards(ROOT).boards.map((b) => b.id)) } catch { /* no boards dir */ }
 
 for (const [file, page] of pages) {
   const isIndex = file === 'index.md'
@@ -69,7 +73,9 @@ for (const [file, page] of pages) {
   for (const target of page.links) {
     if (/^[a-z]+:/.test(target)) continue // http(s) etc.
     const resolved = path.resolve(WIKI, target)
-    if (!fs.existsSync(resolved)) errors.push(`${file}: dead link -> ${target}`)
+    const rel = path.relative(WIKI, resolved)
+    if (rel.startsWith('..') || path.isAbsolute(rel)) errors.push(`${file}: link leaves the wiki -> ${target} (name the other project's article in prose instead)`)
+    else if (!fs.existsSync(resolved)) errors.push(`${file}: dead link -> ${target}`)
   }
   if (isIndex) continue
   if (!page.hasFrontmatter) { errors.push(`${file}: missing frontmatter`); continue }

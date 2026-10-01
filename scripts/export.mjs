@@ -18,11 +18,11 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { spawn } from 'node:child_process'
-import { fileURLToPath } from 'node:url'
-import { getActiveBoard, listBoards, resolveBoardId, parseBoardId } from '../shared/log.mjs'
+import { getActiveBoard, parseBoardId } from '../shared/log.mjs'
+import { listAllBoards, resolveBoard } from '../shared/mounts.mjs'
+import { resolveRoot } from '../shared/root.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const argv = process.argv.slice(2)
+const { root: ROOT, argv } = resolveRoot()
 const arg = (name, def) => {
   const i = argv.indexOf(`--${name}`)
   return i > -1 ? argv[i + 1] : def
@@ -44,13 +44,13 @@ const MAX_IN = 200
 
 let targets = []
 if (has('all')) {
-  targets = listBoards(ROOT).map((b) => b.id)
+  targets = listAllBoards(ROOT).boards.map((b) => b.id)
   if (!targets.length) die('no boards found')
 } else {
   const input = arg('board', null)
   let id = null
   if (input) {
-    const { id: hit, matches } = resolveBoardId(ROOT, input)
+    const { id: hit, matches } = resolveBoard(ROOT, input)
     if (!hit && matches.length > 1) {
       die(`"${input}" is ambiguous — ${matches.map((m) => m.id).join(', ')}`)
     }

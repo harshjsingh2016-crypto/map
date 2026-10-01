@@ -3,6 +3,7 @@
 //   node scripts/apply-ops.mjs --board <name> '<json ops array>'
 //   node scripts/apply-ops.mjs --board <name> --file batch.json
 //   echo '[...]' | node scripts/apply-ops.mjs --board <name>
+//   ... plus [--root <dir>] to write another project's boards (default: Map's own)
 //
 // Input: a JSON array of ops, or {"ops": [...]}. The script adds the
 // envelope (v, ts, batchId). Batches are ATOMIC: shape validation (zod) +
@@ -10,14 +11,14 @@
 // if any op fails, the whole batch is rejected and nothing is appended.
 // On success, prints a one-line board summary.
 import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { opSchema, LOG_VERSION } from '../shared/ops.mjs'
 import { materialize, applyOp } from '../shared/reduce.mjs'
-import { readBoardLog, boardPath, getActiveBoard, setActiveBoard, listBoards, resolveBoardId } from '../shared/log.mjs'
+import { readBoardLog, getActiveBoard, setActiveBoard } from '../shared/log.mjs'
+import { listAllBoards, resolveBoard, mountRefusal } from '../shared/mounts.mjs'
+import { resolveRoot } from '../shared/root.mjs'
 import { summarize } from '../shared/summary.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const { root: ROOT, argv, isHome } = resolveRoot()
 
 function die(msg) {
   console.error(`REJECTED: ${msg}`)
@@ -25,7 +26,6 @@ function die(msg) {
 }
 
 // --- parse args -------------------------------------------------------------
-const argv = process.argv.slice(2)
 let board = null
 let file = null
 let inline = null
@@ -34,17 +34,18 @@ for (let i = 0; i < argv.length; i++) {
   else if (argv[i] === '--file') file = argv[++i]
   else inline = argv[i]
 }
-const allIds = () => listBoards(ROOT).map((b) => b.id).join(', ') || '(none)'
+const allIds = () => listAllBoards(ROOT).boards.map((b) => b.id).join(', ') || '(none)'
 if (!board) board = getActiveBoard(ROOT)
 if (!board) die(`no board specified and no active board set. Use --board <folder/name> or scripts/boards.mjs use <folder/name>. Existing boards: ${allIds()}`)
-{
-  // Accept "folder/name" or a bare unique name.
-  const { id, matches } = resolveBoardId(ROOT, board)
-  if (!id && matches.length > 1) {
-    die(`board "${board}" exists in more than one folder: ${matches.map((m) => m.id).join(', ')}. Use the full folder/name.`)
-  }
-  if (id) board = id
+// Accept "folder/name" or a bare unique name.
+const loc = resolveBoard(ROOT, board)
+if (!loc.id && loc.matches.length > 1) {
+  die(`board "${board}" exists in more than one folder: ${loc.matches.map((m) => m.id).join(', ')}. Use the full folder/name.`)
 }
+if (loc.id) board = loc.id
+// Mounted projects are read-only from here; their own sessions write them.
+if (loc.mounted) die(mountRefusal(`board "${board}"`, loc))
+if (!loc.path) die(`"${board}" is not a valid board id (want folder/name)`)
 
 let raw
 if (file) {
@@ -65,7 +66,7 @@ const ops = Array.isArray(input) ? input : input?.ops
 if (!Array.isArray(ops) || ops.length === 0) die('input must be a non-empty JSON array of ops, or {"ops": [...]}')
 
 // --- load current state -----------------------------------------------------
-const bp = boardPath(ROOT, board)
+const bp = loc.path
 if (!fs.existsSync(bp)) {
   die(`board "${board}" does not exist. Create it first: node scripts/boards.mjs create <name> --folder <folder>. Existing boards: ${allIds()}`)
 }
@@ -99,4 +100,5 @@ fs.appendFileSync(bp, JSON.stringify(batch) + '\n', 'utf8')
 setActiveBoard(ROOT, board)
 
 for (const w of warnings) console.log(`WARNING: ${w}`)
+if (!isHome) console.log(`root: ${ROOT}`)
 console.log(`APPLIED batch ${batch.batchId} (${validated.length} op${validated.length > 1 ? 's' : ''}) → ${summarize(state, board)}`)

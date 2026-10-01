@@ -8,17 +8,20 @@
 //   node scripts/boards.mjs use <folder/name|name>     switch active board
 //   node scripts/boards.mjs move <folder/name|name> <folder>
 //   node scripts/boards.mjs rename <folder/name|name> <newName>
+//
+// Add --root <dir> to manage another project's boards. Without it, folders
+// that belong to a mounted project (projects.json) are listed but read-only.
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import {
   listBoards, listFolders, boardPath, boardsDir, boardId, parseBoardId,
-  resolveBoardId, getActiveBoard, setActiveBoard, getActiveFolder, setActiveFolder,
+  getActiveBoard, setActiveBoard, getActiveFolder, setActiveFolder,
   DEFAULT_FOLDER,
 } from '../shared/log.mjs'
+import { listAllBoards, resolveBoard, assertWritable, readRegistry } from '../shared/mounts.mjs'
+import { resolveRoot } from '../shared/root.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const argv = process.argv.slice(2)
+const { root: ROOT, argv } = resolveRoot()
 const [cmd, a, b] = argv
 const folderFlag = (() => {
   const i = argv.indexOf('--folder')
@@ -29,20 +32,25 @@ const NAME = /^[a-z0-9][a-z0-9-]*$/
 const die = (msg) => { console.error(`ERROR: ${msg}`); process.exit(1) }
 
 function resolveOrDie(input) {
-  const { id, matches } = resolveBoardId(ROOT, input)
+  const { id, matches } = resolveBoard(ROOT, input)
   if (id) return id
   if (matches.length > 1) {
     die(`"${input}" exists in more than one folder: ${matches.map((m) => m.id).join(', ')}. Use the full folder/name.`)
   }
-  die(`board "${input}" does not exist. Existing: ${listBoards(ROOT).map((x) => x.id).join(', ') || '(none)'}`)
+  die(`board "${input}" does not exist. Existing: ${listAllBoards(ROOT).boards.map((x) => x.id).join(', ') || '(none)'}`)
+}
+
+// Mounted projects are read-only from this root; their own sessions write them.
+function writableOrDie(idOrFolder) {
+  try { assertWritable(ROOT, idOrFolder) } catch (e) { die(e.message) }
 }
 
 switch (cmd) {
   case 'list': {
     const active = getActiveBoard(ROOT)
     const workingFolder = getActiveFolder(ROOT)
-    const boards = listBoards(ROOT)
-    if (!boards.length) { console.log('(no boards yet)'); break }
+    const { boards, errors, missing } = listAllBoards(ROOT)
+    if (!boards.length) console.log('(no boards yet)')
     const byFolder = new Map()
     for (const bd of boards) {
       const key = bd.folder || '(no folder)'
@@ -50,9 +58,15 @@ switch (cmd) {
       byFolder.get(key).push(bd)
     }
     for (const [folder, items] of byFolder) {
-      console.log(`${folder}${folder === workingFolder ? '  <- working folder' : ''}`)
+      const source = items[0].source
+      console.log(`${folder}${source ? `  [${source}, read-only here]` : ''}${folder === workingFolder ? '  <- working folder' : ''}`)
       for (const bd of items) console.log(`  ${bd.id === active ? '* ' : '  '}${bd.name}`)
     }
+    for (const alias of missing) {
+      const p = readRegistry(ROOT).find((x) => x.alias === alias)
+      console.log(`(${alias}: not on this machine — ${p.folders.join(', ') || 'no folders declared'})`)
+    }
+    for (const e of errors) console.log(`WARNING: ${e}`)
     break
   }
 
@@ -67,6 +81,7 @@ switch (cmd) {
   case 'folder': {
     if (!a) die('usage: boards.mjs folder <name>')
     if (!NAME.test(a)) die(`folder name must be kebab-case: "${a}"`)
+    writableOrDie(a)
     setActiveFolder(ROOT, a)
     const inFolder = listBoards(ROOT).filter((x) => x.folder === a)
     console.log(`working folder: ${a}${inFolder.length ? ` (${inFolder.map((x) => x.name).join(', ')})` : ' (empty)'}`)
@@ -78,6 +93,7 @@ switch (cmd) {
     if (!NAME.test(a)) die(`board name must be kebab-case (lowercase letters, digits, hyphens): "${a}"`)
     const folder = folderFlag || getActiveFolder(ROOT) || DEFAULT_FOLDER
     if (!NAME.test(folder)) die(`folder name must be kebab-case: "${folder}"`)
+    writableOrDie(folder)
     const id = boardId(folder, a)
     const p = boardPath(ROOT, id)
     if (fs.existsSync(p)) die(`board "${id}" already exists`)
@@ -91,6 +107,7 @@ switch (cmd) {
   case 'use': {
     if (!a) die('usage: boards.mjs use <folder/name|name>')
     const id = resolveOrDie(a)
+    writableOrDie(id)
     setActiveBoard(ROOT, id)
     console.log(`active board: ${id}`)
     break
@@ -100,6 +117,8 @@ switch (cmd) {
     if (!a || !b) die('usage: boards.mjs move <folder/name|name> <folder>')
     if (!NAME.test(b)) die(`folder name must be kebab-case: "${b}"`)
     const id = resolveOrDie(a)
+    writableOrDie(id)
+    writableOrDie(b)
     const { name } = parseBoardId(id)
     const to = boardId(b, name)
     if (fs.existsSync(boardPath(ROOT, to))) die(`board "${to}" already exists`)
@@ -114,6 +133,7 @@ switch (cmd) {
     if (!a || !b) die('usage: boards.mjs rename <folder/name|name> <newName>')
     if (!NAME.test(b)) die(`board name must be kebab-case: "${b}"`)
     const id = resolveOrDie(a)
+    writableOrDie(id)
     const { folder } = parseBoardId(id)
     const to = folder ? boardId(folder, b) : b
     if (fs.existsSync(boardPath(ROOT, to))) die(`board "${to}" already exists`)
@@ -133,5 +153,6 @@ switch (cmd) {
       '  boards.mjs use <folder/name|name>        switch active board',
       '  boards.mjs move <folder/name|name> <folder>',
       '  boards.mjs rename <folder/name|name> <newName>',
+      '  ... plus [--root <dir>] to act on another project (default: Map itself)',
     ].join('\n'))
 }

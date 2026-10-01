@@ -18,6 +18,14 @@ const sync = (mode) => {
 
 sync('pull')
 
+// Mounted projects: fast-forward each checkout so the boards on screen are current.
+// Best effort — a project that is dirty, diverged, offline or absent only warns.
+try {
+  execFileSync('node', [path.join(ROOT, 'scripts', 'projects.mjs'), 'sync'], { cwd: ROOT, stdio: 'inherit' })
+} catch {
+  console.log('[projects] WARN: could not refresh mounted projects — showing them as they are on disk')
+}
+
 const child = spawn('npm', ['run', 'dev:raw'], { cwd: ROOT, stdio: 'inherit', shell: true })
 
 let pushed = false

@@ -11,15 +11,14 @@
 //   node scripts/view.mjs forward
 //   node scripts/view.mjs fit                     # whole board
 //   ... plus [--board <folder/name>] (defaults to the active board)
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { getActiveBoard, resolveBoardId } from '../shared/log.mjs'
+import { getActiveBoard } from '../shared/log.mjs'
+import { resolveBoard } from '../shared/mounts.mjs'
+import { resolveRoot } from '../shared/root.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const { root: ROOT, argv } = resolveRoot()
 const PORT = process.env.MAP_SERVER_PORT || 5175
 const ACTIONS = ['latest', 'back', 'forward', 'fit', 'focus']
 
-const argv = process.argv.slice(2)
 let board = null, count = 1, action = null, target = null
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--board') board = argv[++i]
@@ -44,7 +43,7 @@ if (!Number.isInteger(count) || count < 1) {
 if (!board) board = getActiveBoard(ROOT)
 if (!board) { console.error('ERROR: no board specified and no active board.'); process.exit(1) }
 {
-  const { id, matches } = resolveBoardId(ROOT, board)
+  const { id, matches } = resolveBoard(ROOT, board)
   if (!id && matches.length > 1) {
     console.error(`ERROR: board "${board}" exists in more than one folder: ${matches.map((m) => m.id).join(', ')}`)
     process.exit(1)

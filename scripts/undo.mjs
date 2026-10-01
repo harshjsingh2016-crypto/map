@@ -4,14 +4,13 @@
 // Rewrites the file atomically (temp + rename) so the watcher never reads a
 // partial file; the server detects the shrink and tells clients to reset.
 import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { readBoardLog, boardPath, getActiveBoard, listBoards, splitCompleteLines, resolveBoardId } from '../shared/log.mjs'
+import { readBoardLog, getActiveBoard, splitCompleteLines } from '../shared/log.mjs'
+import { listAllBoards, resolveBoard, mountRefusal } from '../shared/mounts.mjs'
+import { resolveRoot } from '../shared/root.mjs'
 import { materialize } from '../shared/reduce.mjs'
 import { summarize } from '../shared/summary.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const argv = process.argv.slice(2)
+const { root: ROOT, argv } = resolveRoot()
 let board = null, count = 1
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--board') board = argv[++i]
@@ -21,17 +20,16 @@ if (!board) board = getActiveBoard(ROOT)
 if (!board) { console.error('ERROR: no board specified and no active board.'); process.exit(1) }
 if (!Number.isInteger(count) || count < 1) { console.error('ERROR: --count must be a positive integer'); process.exit(1) }
 
-{
-  const { id, matches } = resolveBoardId(ROOT, board)
-  if (!id && matches.length > 1) {
-    console.error(`ERROR: board "${board}" exists in more than one folder: ${matches.map((m) => m.id).join(', ')}`)
-    process.exit(1)
-  }
-  if (id) board = id
+const loc = resolveBoard(ROOT, board)
+if (!loc.id && loc.matches.length > 1) {
+  console.error(`ERROR: board "${board}" exists in more than one folder: ${loc.matches.map((m) => m.id).join(', ')}`)
+  process.exit(1)
 }
-const bp = boardPath(ROOT, board)
-if (!fs.existsSync(bp)) {
-  console.error(`ERROR: board "${board}" does not exist. Existing: ${listBoards(ROOT).map((b) => b.id).join(', ') || '(none)'}`)
+if (loc.id) board = loc.id
+if (loc.mounted) { console.error(`ERROR: ${mountRefusal(`board "${board}"`, loc)}`); process.exit(1) }
+const bp = loc.path
+if (!bp || !fs.existsSync(bp)) {
+  console.error(`ERROR: board "${board}" does not exist. Existing: ${listAllBoards(ROOT).boards.map((b) => b.id).join(', ') || '(none)'}`)
   process.exit(1)
 }
 

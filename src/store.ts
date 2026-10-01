@@ -26,6 +26,8 @@ export interface BoardRef {
   folder: string | null
   name: string
   createdAt: number // ts of the board's first batch; 0 when unknown
+  source?: string | null // alias of the mounted project it lives in; null/absent = this repo
+  readonly?: boolean     // mounted boards are written from their own project, not from here
 }
 
 interface MapStore {
@@ -36,6 +38,7 @@ interface MapStore {
   followActive: boolean
   status: Status
   logErrors: string[]
+  boardErrors: string[]       // folder-name clashes between this repo and mounted projects
 
   nodes: Node[]
   edges: Edge[]
@@ -86,6 +89,7 @@ export const useMapStore = create<MapStore>((set, get) => ({
   followActive: !pinnedBoard,
   status: 'connecting',
   logErrors: [],
+  boardErrors: [],
   nodes: [],
   edges: [],
   boardTitle: '',
@@ -215,7 +219,7 @@ function connect(set: any, get: any) {
     const data = JSON.parse((ev as MessageEvent).data)
     const st = get()
     const ids: string[] = (data.boards as BoardRef[]).map((b) => b.id)
-    set({ boards: data.boards, active: data.active, folder: data.folder })
+    set({ boards: data.boards, active: data.active, folder: data.folder, boardErrors: data.errors || [] })
     if (!ids.length) {
       set({ status: 'no-board', selected: null })
       return

@@ -1,22 +1,29 @@
 // Map server: watches boards/*.board.jsonl and pushes batches to the React
 // client over SSE. Handles truncation (undo) via reset events, board
 // list/active-pointer changes, and Windows-reliable append detection.
+// Also watches the boards/ of every project mounted in projects.json, so a
+// project's blueprint shows up — and updates live — without being copied here.
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import express from 'express'
 import chokidar from 'chokidar'
 import {
-  splitCompleteLines, listBoards, getActiveBoard, getActiveFolder,
-  boardsDir, boardPath, BOARD_EXT,
+  splitCompleteLines, getActiveFolder, parseBoardId, boardsDir, BOARD_EXT,
 } from '../shared/log.mjs'
+import {
+  readRegistry, listAllBoards, resolveBoard, newestActive, REGISTRY_FILE, LOCAL_REGISTRY_FILE,
+} from '../shared/mounts.mjs'
+import { resolveRoot, samePath, MAP_HOME } from '../shared/root.mjs'
 import { parseLogLine } from '../shared/ops.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const { root: ROOT } = resolveRoot()
 const BOARDS = boardsDir(ROOT)
 // Dedicated var: PORT is often set by dev harnesses for the web port, and
 // the API server must not collide with Vite.
 const PORT = process.env.MAP_SERVER_PORT || 5175
+// Unset binds every interface, which is what the Vite proxy and local use
+// expect. Set it (e.g. 127.0.0.1 behind a reverse proxy) when hosting remotely.
+const HOST = process.env.MAP_SERVER_HOST || undefined
 // Heartbeat interval; the client's stall watchdog is a small multiple of this.
 const PING_MS = 4000
 
@@ -106,20 +113,36 @@ const readers = new Map() // board name -> BoardReader
 
 function readerFor(id) {
   if (!readers.has(id)) {
-    const r = new BoardReader(boardPath(ROOT, id))
+    // resolveBoard finds the file wherever the board lives (here or in a
+    // mounted project) and yields no path for an id that could step outside
+    // a boards/ directory — such an id just reads as an empty, missing board.
+    const r = new BoardReader(resolveBoard(ROOT, id).path || path.join(BOARDS, '.invalid'))
     r.consume() // initial full read
     readers.set(id, r)
   }
   return readers.get(id)
 }
 
+/** Every boards/ directory in play: this root's, then each present mount's. */
+function boardDirs() {
+  return [BOARDS, ...readRegistry(ROOT).filter((p) => p.present).map((p) => boardsDir(p.path))]
+}
+
 /** Map a watched file path to its board id ("<folder>/<name>"). */
 function idForFile(file) {
-  const rel = path.relative(BOARDS, file).split(path.sep)
-  const base = rel.pop()
-  if (!base.endsWith(BOARD_EXT)) return null
-  const name = base.slice(0, -BOARD_EXT.length)
-  return rel.length ? `${rel.join('/')}/${name}` : name
+  if (!file.endsWith(BOARD_EXT)) return null
+  for (const dir of boardDirs()) {
+    const relPath = path.relative(dir, file)
+    if (relPath.startsWith('..') || path.isAbsolute(relPath)) continue
+    const rel = relPath.split(path.sep)
+    const name = rel.pop().slice(0, -BOARD_EXT.length)
+    const id = rel.length ? `${rel.join('/')}/${name}` : name
+    // A folder claimed by two roots is served from one of them only; a write
+    // to the shadowed copy must not be fed into the winner's stream.
+    const owner = resolveBoard(ROOT, id).path
+    return owner && samePath(owner, file) ? id : null
+  }
+  return null
 }
 
 // ---------------------------------------------------------------------------
@@ -142,10 +165,17 @@ function broadcast(event, data, boardFilter) {
 }
 
 function boardsPayload() {
+  const { boards, errors, missing } = listAllBoards(ROOT)
+  // The write target a viewer should follow is the most recent one anywhere:
+  // a project session drawing on its own blueprint moves that project's
+  // .active, not this root's.
+  const active = newestActive(ROOT)
   return {
-    boards: listBoards(ROOT),          // [{ id, folder, name }]
-    active: getActiveBoard(ROOT),      // "<folder>/<name>"
-    folder: getActiveFolder(ROOT),     // working folder
+    boards,                            // [{ id, folder, name, createdAt, source, readonly }]
+    active,                            // "<folder>/<name>"
+    folder: (active && parseBoardId(active).folder) || getActiveFolder(ROOT), // working folder
+    errors,                            // folder-name clashes between roots
+    missing,                           // mounted projects not on this machine
   }
 }
 
@@ -153,12 +183,37 @@ function boardsPayload() {
 // Watcher — Windows-tuned: polling fallback keeps append detection reliable;
 // low awaitWriteFinish threshold keeps latency inside the speed goal.
 // ---------------------------------------------------------------------------
-const watcher = chokidar.watch(BOARDS, {
+const watched = new Set(boardDirs().filter((d) => fs.existsSync(d)))
+const watcher = chokidar.watch([...watched], {
   usePolling: process.platform === 'win32' || process.env.MAP_POLL === '1',
   interval: 80,
   awaitWriteFinish: { stabilityThreshold: 60, pollInterval: 20 },
   ignoreInitial: true,
 })
+
+// The set of mounts changes rarely and outside any watched directory: a
+// project is registered, cloned, or gets its first boards/ folder. A slow
+// rescan picks those up without watching whole project trees.
+const registrySig = () => [REGISTRY_FILE, LOCAL_REGISTRY_FILE]
+  .map((f) => { try { return fs.statSync(path.join(ROOT, f)).mtimeMs } catch { return 0 } })
+  .join(':')
+let lastRegistrySig = registrySig()
+setInterval(() => {
+  let changed = false
+  const sig = registrySig()
+  if (sig !== lastRegistrySig) {
+    lastRegistrySig = sig
+    readers.clear() // a board id may now resolve to a different file
+    changed = true
+  }
+  for (const dir of boardDirs()) {
+    if (watched.has(dir) || !fs.existsSync(dir)) continue
+    watched.add(dir)
+    watcher.add(dir)
+    changed = true
+  }
+  if (changed) broadcast('boards', boardsPayload())
+}, 5000).unref()
 
 function handleFileEvent(file) {
   const base = path.basename(file)
@@ -258,12 +313,16 @@ app.get('/api/events', (req, res) => {
 })
 
 // Serve the built app if dist/ exists (production mode).
-const dist = path.join(ROOT, 'dist')
+const dist = path.join(MAP_HOME, 'dist')
 if (fs.existsSync(dist)) {
   app.use(express.static(dist))
   app.get(/^(?!\/api).*/, (req, res) => res.sendFile(path.join(dist, 'index.html')))
 }
 
-app.listen(PORT, () => {
-  console.log(`[map] server on http://localhost:${PORT} — watching ${BOARDS}`)
+app.listen(PORT, HOST, () => {
+  const mounts = readRegistry(ROOT)
+  console.log(`[map] server on http://${HOST || 'localhost'}:${PORT} — watching ${BOARDS}`)
+  for (const p of mounts) {
+    console.log(`[map]   ${p.present ? 'mounted' : 'missing'} ${p.alias} -> ${p.path}`)
+  }
 })

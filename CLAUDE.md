@@ -59,7 +59,63 @@ Then open with a **≤2-line "where we left off"**: open suggestions, flagged qu
 
 ---
 
+## Mounted projects
+
+Map is also the engine for other projects' blueprints. A project that keeps a **blueprint board
+and build wiki** holds them in its own repo, in Map's layout — `<project>/boards/<folder>/`,
+`<project>/wiki/` — and Map **mounts** them: `projects.json` lists each project (alias, path, git
+remote, the folders it owns) and the server and read scripts see those boards in place. Nothing is
+copied here, so nothing drifts. A folder name has exactly one owner across all projects, which
+keeps a board id (`<folder>/<name>`) the same in the project and in Map.
+
+```bash
+node scripts/projects.mjs list
+node scripts/projects.mjs add <alias> <path> [--folders a,b] [--remote <url>]
+node scripts/projects.mjs remove <alias>
+node scripts/projects.mjs sync [--clone]     # fast-forward each checkout; pull only, never fatal
+node scripts/projects.mjs status             # boards, last batch, wiki freshness, git state per project
+```
+
+**Map reads mounted projects; it never writes them.** From here, `apply-ops`, `undo` and
+`boards.mjs` create / use / move / rename / folder refuse a mounted board or folder and name the
+fix. `boards/.active` in this repo never points at a mounted board. A project's boards are
+written by sessions in that project, through the `map-blueprint` skill, which runs these same
+scripts with `--root <project>`. Every script takes `--root <dir>` (or `MAP_ROOT`); the default
+is Map itself.
+
+In the app, a mounted folder is tagged with its project (`qvs-agent [qvs-agent]`), and "follow
+active" follows the most recently written `.active` across Map and every mount — so the board on
+screen is whichever project drew last. A project whose checkout is absent on this machine is
+skipped (`boards.mjs list` and `projects.mjs status` say so). `npm run dev` runs
+`projects sync` after Map's own pull.
+
+**Map's job for a mounted project is the overview.** One synthesized article per project,
+`wiki/project-<alias>.md`, under a "Projects" heading in `wiki/index.md`: where the build stands,
+its direction, what is next — written from `projects.mjs status`, `outline.mjs --board <id>` and
+a read of the project's own `wiki/`. Refresh it when asked where a project stands, or when its
+boards have moved since the article's `updated` date. It cites the project's board ids in
+`boards:` (the checker accepts mounted ids here). **Wiki links never cross repos**: name another
+project's article in prose; `wiki.mjs check` rejects a link that leaves `wiki/`.
+
+**Skills.** `skills/` is the source for `map-blueprint` and `map-walkthrough`;
+`node scripts/install-skills.mjs` writes them to `~/.claude/skills/` with this checkout's path
+filled in. `map-blueprint` is assembled from `skills/map-blueprint/head.md` plus the "Choosing
+the widget type", "Content rules" and "Op reference" sections of this file — after editing any of
+those, or anything under `skills/`, re-run the installer (once per machine).
+
+**Moving boards out to their project** is `scripts/migrate.mjs` (`--boards a/b --project <alias>`
+or `--folders f,g --project <alias>`, `--dry-run` first). It moves the boards, the wiki articles
+whose first-listed board is moving, and matching walkthrough sidecars; rewrites `boards:` ids and
+both `index.md` files; and rewords links that would cross repos, listing each for a human read.
+It commits nothing.
+
+---
+
 ## Walkthrough mode (Armor deliverables)
+
+> Until the `scalar*` folders are migrated into Armor (it has to run on the laptop that has the
+> Armor checkout), walkthroughs still run from here as written below. After that move this
+> section is retired in favour of the `map-walkthrough` skill, run from Armor.
 
 The condensed context files — one `.md` per board, produced by the Armor project's extraction
 pipeline — live **only** in `D:\Projects_D\Armor\Output\<slug>.md` and are read from there in
@@ -377,13 +433,16 @@ Append-only op log → chokidar watcher → SSE → React Flow client.
 
 - `shared/ops.mjs` — zod op schemas, the vocabulary's source of truth
 - `shared/reduce.mjs` — ops → board state; strict mode is the referential-validation gate for `apply-ops.mjs`, tolerant mode drives the client
-- `shared/log.mjs` — board files, complete-line reading (a watch event can fire mid-write)
+- `shared/log.mjs` — board files, complete-line reading (a watch event can fire mid-write); every helper takes `root`
+- `shared/root.mjs` — which root a script acts on: `--root` > `MAP_ROOT` > Map itself
+- `shared/mounts.mjs` — `projects.json` registry, cross-root board listing and resolution, the write guard
 - `shared/summary.mjs` — summary / outline / markdown rendering
-- `server/index.mjs` — watcher, truncation detection, SSE fan-out
+- `server/index.mjs` — watcher over this repo's `boards/` and every mount's, truncation detection, SSE fan-out (`MAP_SERVER_PORT`, `MAP_SERVER_HOST`)
 - `src/layout.ts` — elkjs per widget + bottom-left-fill board packing (`w-status` always packs first)
 - `src/store.ts` — SSE client, staggered op application (~50ms/op, ≤1.5s/batch)
 - `scripts/wiki.mjs` — wiki link/index checker (`list`, `check`)
 - `scripts/sync.mjs` + `scripts/dev.mjs` — two-laptop git sync (pull on start, push on exit)
+- `scripts/projects.mjs`, `scripts/migrate.mjs`, `scripts/install-skills.mjs` — mounted projects (above)
 
 **elk lays out nodes; React Flow lays out edges.** Only elk's node coordinates survive into the client — its edge routing (`sections`, bend points) and its edge-label coordinates are discarded, because React Flow re-routes every edge itself with `getSmoothStepPath` and drops the label at *its own* path midpoint. So elk layout options can buy an edge label clearance but never placement: `layoutGraphWidget` passes `labels: [{text, width, height}]` so elk reserves room and the widget frame grows, yet the label still lands wherever React Flow's midpoint falls inside that room. This is why long labels on feedback edges can end up drawn over a node (edges render *below* nodes, so the text is occluded rather than clipped), and why the two branches off a `decision` node can print side by side mid-frame instead of beside their own lines. Fixing placement, not just clearance, means reading `g.edges[i].labels[0].x/y` back out of the elk result, offsetting it by the group container and the frame's packed position, and rendering it from a custom edge component via `EdgeLabelRenderer` — not more elk options.
 

@@ -3,6 +3,7 @@
 // handling, and the markdown-export golden file. Pure Node, no deps.
 //   node tests/run.mjs [--update-golden]
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
@@ -10,6 +11,7 @@ import { opSchema, parseLogLine, LOG_VERSION } from '../shared/ops.mjs'
 import { createEmptyBoard, applyOp, materialize, OpError } from '../shared/reduce.mjs'
 import { readBoardLog, boardPath, splitCompleteLines, getActiveBoard, setActiveBoard } from '../shared/log.mjs'
 import { toMarkdown, summarize } from '../shared/summary.mjs'
+import { listAllBoards, resolveBoard, assertWritable } from '../shared/mounts.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const UPDATE = process.argv.includes('--update-golden')
@@ -228,33 +230,140 @@ check('tolerant materialize skips bad ops instead of throwing', () => {
   assert(warnings.some((w) => w.includes('skipped bad op')), 'should warn about the skipped op')
 })
 
-console.log('\n--- CLI: atomicity on a real board ---')
-const TMP = 'qa/test-atomicity'
-check('rejected batch appends nothing', () => {
-  // apply-ops sets the active pointer as a side effect; put it back so the
-  // suite doesn't leave the app pointed at a board it is about to delete.
-  const activeBefore = getActiveBoard(ROOT)
-  const bp = boardPath(ROOT, TMP)
-  try { fs.unlinkSync(bp) } catch { /* absent */ }
-  execFileSync('node', [path.join('scripts', 'boards.mjs'), 'create', 'test-atomicity', '--folder', 'qa'], { cwd: ROOT })
-  execFileSync('node', [path.join('scripts', 'apply-ops.mjs'), '--board', TMP,
-    JSON.stringify([{ op: 'widget_create', id: 'w', type: 'flowchart', title: 'W' }])], { cwd: ROOT })
-  const sizeBefore = fs.statSync(bp).size
-  let rejected = false
+// ---------------------------------------------------------------------------
+// CLI tests run against a throwaway root (--root), never the real boards/.
+// The layout: a "home" with a projects.json that mounts two fake projects.
+// ---------------------------------------------------------------------------
+const SANDBOX = fs.mkdtempSync(path.join(os.tmpdir(), 'map-test-'))
+const HOME = path.join(SANDBOX, 'home')
+const P1 = path.join(SANDBOX, 'p1')
+const P2 = path.join(SANDBOX, 'p2')
+for (const d of [HOME, P1, P2]) fs.mkdirSync(path.join(d, 'boards'), { recursive: true })
+const cliEnv = { ...process.env }
+delete cliEnv.MAP_ROOT
+/** Run a script; returns { ok, out } instead of throwing on a non-zero exit. */
+function cli(script, ...args) {
   try {
-    execFileSync('node', [path.join('scripts', 'apply-ops.mjs'), '--board', TMP,
-      JSON.stringify([
-        { op: 'node_add', widgetId: 'w', id: 'good', label: 'Valid' },
-        { op: 'edge_add', widgetId: 'w', source: 'good', target: 'missing' },
-      ])], { cwd: ROOT, stdio: 'pipe' })
-  } catch { rejected = true }
-  assert(rejected, 'invalid batch should exit non-zero')
+    const out = execFileSync('node', [path.join(ROOT, 'scripts', script), ...args],
+      { cwd: ROOT, env: cliEnv, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
+    return { ok: true, out }
+  } catch (e) {
+    return { ok: false, out: `${e.stdout || ''}${e.stderr || ''}` }
+  }
+}
+const W = JSON.stringify([{ op: 'widget_create', id: 'w', type: 'flowchart', title: 'W' }])
+
+console.log('\n--- CLI: atomicity (throwaway root) ---')
+check('rejected batch appends nothing', () => {
+  assert(cli('boards.mjs', '--root', HOME, 'create', 'test-atomicity', '--folder', 'qa').ok, 'create failed')
+  const bp = boardPath(HOME, 'qa/test-atomicity')
+  assert(cli('apply-ops.mjs', '--root', HOME, '--board', 'qa/test-atomicity', W).ok, 'first batch failed')
+  const sizeBefore = fs.statSync(bp).size
+  const bad = cli('apply-ops.mjs', '--root', HOME, '--board', 'qa/test-atomicity', JSON.stringify([
+    { op: 'node_add', widgetId: 'w', id: 'good', label: 'Valid' },
+    { op: 'edge_add', widgetId: 'w', source: 'good', target: 'missing' },
+  ]))
+  assert(!bad.ok, 'invalid batch should exit non-zero')
   assert(fs.statSync(bp).size === sizeBefore, 'file must be unchanged after a rejected batch')
   const { state } = materialize(readBoardLog(bp).entries, { strict: false })
   assert(!state.widgets.w.nodes.good, 'the valid first op must not have been applied')
-  fs.unlinkSync(bp)
-  if (activeBefore) setActiveBoard(ROOT, activeBefore)
 })
+
+console.log('\n--- --root and mounted projects ---')
+check('--root writes the project and leaves this repo\'s .active alone', () => {
+  const mapActive = path.join(ROOT, 'boards', '.active')
+  const before = fs.existsSync(mapActive) ? fs.readFileSync(mapActive) : null
+  // --root ahead of the positionals: it must not be read as the subcommand or the JSON.
+  assert(cli('boards.mjs', '--root', P1, 'create', 'plan', '--folder', 'p1').ok, 'create in project failed')
+  const r = cli('apply-ops.mjs', '--root', P1, '--board', 'p1/plan', W)
+  assert(r.ok, `apply in project failed: ${r.out}`)
+  assert(readBoardLog(boardPath(P1, 'p1/plan')).entries.length === 1, 'batch should land in the project')
+  assert(getActiveBoard(P1) === 'p1/plan', 'the project\'s own .active should move')
+  const after = fs.existsSync(mapActive) ? fs.readFileSync(mapActive) : null
+  assert(before === null ? after === null : before.equals(after), 'this repo\'s .active must be untouched')
+  assert(cli('boards.mjs', '--root', P1, 'list').out.includes('plan'), 'list --root should show the project board')
+})
+
+check('a mounted board resolves in place and is read-only from the home root', () => {
+  fs.writeFileSync(path.join(HOME, 'projects.json'), JSON.stringify({ version: 1, projects: [
+    { alias: 'p1', path: P1, folders: ['p1'] },
+    { alias: 'gone', path: path.join(SANDBOX, 'nowhere'), folders: ['gone'] },
+  ] }))
+  const loc = resolveBoard(HOME, 'p1/plan')
+  assert(loc.mounted && loc.alias === 'p1', 'p1/plan should resolve as mounted')
+  assert(loc.path === boardPath(P1, 'p1/plan'), 'path should point into the project')
+  assert(resolveBoard(HOME, 'plan').id === 'p1/plan', 'a bare unique name should resolve across mounts')
+  let msg = ''
+  try { assertWritable(HOME, 'p1/plan') } catch (e) { msg = e.message }
+  assert(msg.includes('--root'), `guard should name --root, got "${msg}"`)
+  const size = fs.statSync(loc.path).size
+  for (const args of [
+    ['apply-ops.mjs', '--root', HOME, '--board', 'p1/plan', W],
+    ['undo.mjs', '--root', HOME, '--board', 'p1/plan'],
+    ['boards.mjs', '--root', HOME, 'create', 'x', '--folder', 'p1'],
+    ['boards.mjs', '--root', HOME, 'folder', 'p1'],
+    ['boards.mjs', '--root', HOME, 'use', 'p1/plan'],
+    ['boards.mjs', '--root', HOME, 'folder', 'gone'],
+  ]) {
+    const r = cli(...args)
+    assert(!r.ok && r.out.includes('mounted project'), `${args[0]} ${args.slice(3).join(' ')} should be refused, got: ${r.out}`)
+  }
+  assert(fs.statSync(loc.path).size === size, 'the mounted board must be unchanged')
+  assert(!fs.existsSync(path.join(HOME, 'boards', 'p1')), 'no shadow folder may be created in the home root')
+  assert(cli('outline.mjs', '--root', HOME, '--board', 'p1/plan').ok, 'reading a mounted board should work')
+})
+
+check('a project missing on this machine is reported, not fatal', () => {
+  const { boards, missing } = listAllBoards(HOME)
+  assert(missing.includes('gone'), 'missing project should be listed')
+  assert(boards.some((b) => b.id === 'p1/plan' && b.source === 'p1' && b.readonly), 'present mount still listed')
+  const r = cli('projects.mjs', '--root', HOME, 'status')
+  assert(r.ok && /gone: missing/.test(r.out), `status should print missing, got: ${r.out}`)
+})
+
+check('a folder claimed twice goes to the first owner and is reported', () => {
+  for (const [dir, tag] of [[P1, 'one'], [P2, 'two']]) {
+    assert(cli('boards.mjs', '--root', dir, 'create', tag, '--folder', 'dup').ok, 'create dup failed')
+  }
+  fs.writeFileSync(path.join(HOME, 'projects.json'), JSON.stringify({ version: 1, projects: [
+    { alias: 'p1', path: P1, folders: ['p1'] },
+    { alias: 'p2', path: P2, folders: [] },
+  ] }))
+  const { boards, errors } = listAllBoards(HOME)
+  assert(errors.length === 1 && errors[0].includes('p1') && errors[0].includes('p2'), `want one clash naming both, got ${JSON.stringify(errors)}`)
+  const dup = boards.filter((b) => b.folder === 'dup')
+  assert(dup.length === 1 && dup[0].source === 'p1', 'dup boards should come from the first project only')
+})
+
+check('an id cannot step outside boards/', () => {
+  assert(resolveBoard(HOME, '../x').path === null, '"../x" must not resolve to a path')
+  assert(resolveBoard(HOME, 'qa/..').path === null, '"qa/.." must not resolve to a path')
+})
+
+check('wiki check --root: own ids pass, foreign ids warn, links may not leave the wiki', () => {
+  const wiki = path.join(P1, 'wiki')
+  fs.mkdirSync(wiki, { recursive: true })
+  const page = (boards, body) => `---\nboards: [${boards}]\nupdated: 2026-01-01\n---\n\n# Title\n\n${body}\n`
+  fs.writeFileSync(path.join(wiki, 'index.md'), '# Index\n\n- [A](a.md)\n- [B](b.md)\n')
+  fs.writeFileSync(path.join(wiki, 'a.md'), page('p1/plan', 'See [B](b.md).'))
+  fs.writeFileSync(path.join(wiki, 'b.md'), page('solutions/elsewhere', 'Text.'))
+  const ok = cli('wiki.mjs', '--root', P1, 'check')
+  assert(ok.ok, `check should pass: ${ok.out}`)
+  assert(ok.out.includes('"solutions/elsewhere" not on this machine'), 'a foreign board id should warn')
+  assert(!ok.out.includes('"p1/plan"'), 'the project\'s own id should not warn')
+  fs.mkdirSync(path.join(P2, 'wiki'), { recursive: true })
+  fs.writeFileSync(path.join(P2, 'wiki', 'far.md'), '# Far\n')
+  fs.writeFileSync(path.join(wiki, 'a.md'), page('p1/plan', 'See [far](../../p2/wiki/far.md).'))
+  const bad = cli('wiki.mjs', '--root', P1, 'check')
+  assert(!bad.ok && bad.out.includes('link leaves the wiki'), `cross-repo link should be an error: ${bad.out}`)
+})
+
+check('sync refuses a root that is not the top of its own repo', () => {
+  const r = cli('sync.mjs', '--root', P1, 'status')
+  assert(!r.ok && r.out.includes('not the top of a git repo'), `expected a refusal, got: ${r.out}`)
+})
+
+fs.rmSync(SANDBOX, { recursive: true, force: true })
 
 console.log('\n--- markdown export golden ---')
 check('logistics-escalations markdown matches golden', () => {
