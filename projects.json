@@ -26,6 +26,14 @@
         "scalar-2",
         "scalar-primers"
       ]
+    },
+    {
+      "alias": "n8n",
+      "path": "D:/Projects_D/n8n",
+      "remote": null,
+      "folders": [
+        "n8n"
+      ]
     }
   ]
 }
