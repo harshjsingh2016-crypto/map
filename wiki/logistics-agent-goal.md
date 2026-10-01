@@ -74,4 +74,4 @@ without a number is an intention.
 ## Related
 
 - [Problem discovery frame](problem-discovery-frame.md) — the structure this goal was poured into
-- [GRN-to-payment cycle](grn-to-payment-cycle.md) — the same order-to-money closing loop, seen from procurement
+- GRN-to-payment cycle (in the qvs-fin-mod wiki) — the same order-to-money closing loop, seen from procurement
