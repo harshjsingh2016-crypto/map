@@ -3,7 +3,7 @@
 // layout. Map reads them in place (projects.json) and never writes to them.
 //
 //   node scripts/projects.mjs list
-//   node scripts/projects.mjs add <alias> <path> [--folders a,b|none] [--remote <url>]
+//   node scripts/projects.mjs add <alias> <path> [--folders a,b|none] [--remote <url>] [--no-git]
 //   node scripts/projects.mjs remove <alias>
 //   node scripts/projects.mjs sync [--clone]   fast-forward each checkout (pull only)
 //   node scripts/projects.mjs status           where each project stands
@@ -84,8 +84,11 @@ switch (cmd) {
     if (reg.projects.some((p) => p.alias === a)) die(`project "${a}" is already registered`)
     if (samePath(abs, ROOT)) die('that is this repo — a project cannot mount itself')
     const present = fs.existsSync(abs)
-    if (present && !ownRepo(abs)) {
-      die(`${abs} is not the top of its own git repo — its boards could not sync. Run \`git init\` there (and add a remote) first.`)
+    // A project with no repo of its own can still be mounted, on request: its boards are
+    // drawn and shown like any other, they just stay on this machine until it gets one.
+    const local = present && !ownRepo(abs)
+    if (local && !argv.includes('--no-git')) {
+      die(`${abs} is not the top of its own git repo — its boards could not sync. Run \`git init\` there (and add a remote) first, or pass --no-git to mount it local-only for now.`)
     }
     // `--folders none` registers a project that owns nothing yet — the case where its
     // folders still sit in this repo and migrate.mjs is about to hand them over.
@@ -97,10 +100,11 @@ switch (cmd) {
       const other = readRegistry(ROOT).find((p) => p.folders.includes(f))
       if (other) die(`folder "${f}" already belongs to project ${other.alias}`)
     }
-    const remote = flag('remote') || (present ? gitSafe(abs, 'remote', 'get-url', 'origin') : null)
+    // Not from a local-only directory: git there answers for whichever repo contains it.
+    const remote = flag('remote') || (present && !local ? gitSafe(abs, 'remote', 'get-url', 'origin') : null)
     reg.projects.push({ alias: a, path: abs.replace(/\\/g, '/'), remote: remote || null, folders })
     writeRaw(reg)
-    console.log(`mounted ${a} -> ${abs} (folders: ${folders.join(', ') || 'none yet'})${present ? '' : ' — not on this machine yet'}${remote ? '' : ' — no git remote recorded'}`)
+    console.log(`mounted ${a} -> ${abs} (folders: ${folders.join(', ') || 'none yet'})${present ? '' : ' — not on this machine yet'}${local ? ' — local-only: no git repo, so nothing in it syncs yet' : remote ? '' : ' — no git remote recorded'}`)
     break
   }
 

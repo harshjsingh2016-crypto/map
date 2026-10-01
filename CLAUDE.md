@@ -70,7 +70,7 @@ keeps a board id (`<folder>/<name>`) the same in the project and in Map.
 
 ```bash
 node scripts/projects.mjs list
-node scripts/projects.mjs add <alias> <path> [--folders a,b] [--remote <url>]
+node scripts/projects.mjs add <alias> <path> [--folders a,b|none] [--remote <url>] [--no-git]
 node scripts/projects.mjs remove <alias>
 node scripts/projects.mjs sync [--clone]     # fast-forward each checkout; pull only, never fatal
 node scripts/projects.mjs status             # boards, last batch, wiki freshness, git state per project

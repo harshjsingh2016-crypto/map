@@ -34,6 +34,14 @@
       "folders": [
         "n8n"
       ]
+    },
+    {
+      "alias": "lvs-logistics",
+      "path": "D:/Claude/Projects/LVS_Logistics",
+      "remote": null,
+      "folders": [
+        "lvs-logistics"
+      ]
     }
   ]
 }
