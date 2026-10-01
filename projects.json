@@ -16,6 +16,16 @@
       "folders": [
         "qvs-fin-mod"
       ]
+    },
+    {
+      "alias": "armor",
+      "path": "D:/Projects_D/Armor",
+      "remote": "https://github.com/harshjsingh2016-crypto/armor.git",
+      "folders": [
+        "scalar",
+        "scalar-2",
+        "scalar-primers"
+      ]
     }
   ]
 }
