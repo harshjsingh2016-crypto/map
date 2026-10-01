@@ -22,6 +22,6 @@ What it costs is a second call per run and a larger first one. What it buys is t
 ## Related
 
 - [Taste profile](taste-profile.md) — the bar both the writer and the judge are working against
-- [Designing for partial failure](designing-for-partial-failure.md) — the ship-anyway rule is the same argument: decide what degraded output looks like
-- [Make the answer a field, not a substring](structured-output-for-branching.md) — scores and the winning index come back as schema fields, so the gate can branch on them
-- [Meta prompting](meta-prompting.md) — the other way to put a model in a reviewing role, aimed at the prompt rather than the output
+- Designing for partial failure (in the armor wiki) — the ship-anyway rule is the same argument: decide what degraded output looks like
+- Make the answer a field, not a substring (in the armor wiki) — scores and the winning index come back as schema fields, so the gate can branch on them
+- Meta prompting (in the armor wiki) — the other way to put a model in a reviewing role, aimed at the prompt rather than the output

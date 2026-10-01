@@ -18,5 +18,5 @@ The profile does not replace examples. Two of them still go to the writer on eve
 ## Related
 
 - [Generate, then judge](generate-then-judge.md) — the profile is read by the writer as its brief and implicitly by the judge as its standard
-- [Zero-shot and few-shot prompting](zero-and-few-shot-prompting.md) — the examples-as-spec problem this sits on top of
-- [Voice is per channel, not per brand](voice-is-per-channel.md) — the same idea applied to writing: a voice is a set of named rules, not a vibe
+- Zero-shot and few-shot prompting (in the armor wiki) — the examples-as-spec problem this sits on top of
+- Voice is per channel, not per brand (in the armor wiki) — the same idea applied to writing: a voice is a set of named rules, not a vibe

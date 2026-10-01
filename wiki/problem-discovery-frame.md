@@ -23,4 +23,4 @@ shape of the reasoning is settled before any specific problem is poured into it.
 ## Related
 
 - [Base 1 — the year's plan](base-1-years-plan.md) — the first goal poured into this frame
-- [RCTFC Framework](rctfc-framework.md) — the same move applied to prompts: fix the structure first so content can't wander
+- RCTFC Framework (in the armor wiki) — the same move applied to prompts: fix the structure first so content can't wander
