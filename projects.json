@@ -28,11 +28,11 @@
       ]
     },
     {
-      "alias": "n8n",
-      "path": "D:/Projects_D/n8n",
-      "remote": null,
+      "alias": "meme-generator",
+      "path": "D:/Projects_D/meme-generator",
+      "remote": "https://github.com/harshjsingh2016-crypto/meme-generator.git",
       "folders": [
-        "n8n"
+        "meme-generator"
       ]
     },
     {
