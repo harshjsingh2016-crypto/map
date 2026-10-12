@@ -38,7 +38,7 @@
     {
       "alias": "lvs-logistics",
       "path": "D:/Claude/Projects/LVS_Logistics",
-      "remote": null,
+      "remote": "https://github.com/harshjsingh2016-crypto/damensch-lvs-logistics.git",
       "folders": [
         "lvs-logistics"
       ]
@@ -49,6 +49,38 @@
       "remote": "https://github.com/harshjsingh2016-crypto/n8n-kit.git",
       "folders": [
         "n8n-kit"
+      ]
+    },
+    {
+      "alias": "control-tower",
+      "path": "D:/Claude/Projects/Control_Tower",
+      "remote": "https://github.com/harshjsingh2016-crypto/damensch-control-tower.git",
+      "folders": [
+        "control-tower"
+      ]
+    },
+    {
+      "alias": "google-connect",
+      "path": "D:/Claude/Projects/Google_Connect",
+      "remote": "https://github.com/harshjsingh2016-crypto/damensch-google-connect.git",
+      "folders": [
+        "google-connect"
+      ]
+    },
+    {
+      "alias": "ingest-automation",
+      "path": "D:/Claude/Projects/Ingest_Automation",
+      "remote": "https://github.com/harshjsingh2016-crypto/damensch-ingest-automation.git",
+      "folders": [
+        "ingest-automation"
+      ]
+    },
+    {
+      "alias": "inward-compiler",
+      "path": "D:/Claude/Projects/Inward_Compiler",
+      "remote": "https://github.com/harshjsingh2016-crypto/damensch-inward-compiler.git",
+      "folders": [
+        "inward-compiler"
       ]
     }
   ]
