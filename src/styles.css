@@ -126,6 +126,24 @@ body {
   transition: transform 340ms cubic-bezier(0.22, 0.8, 0.3, 1);
 }
 .react-flow__node.dragging { transition: none; }
+
+/* Flowchart edge labels placed at elk's coordinates (nodes/ElkEdge.tsx). The box is
+   the size elk reserved for it, so the text is centred inside that space. React Flow
+   stacks this layer under the nodes, where a group box would hide every label inside
+   it; elk keeps labels clear of nodes, so lifting the layer covers nothing. */
+.react-flow__edgelabel-renderer { z-index: 1000; }
+.elk-edge-label {
+  position: absolute;
+  top: 0; left: 0;
+  box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center;
+  padding: 3px 5px;
+  font-size: 11px; font-weight: 600; line-height: 1;
+  white-space: nowrap;
+  border-radius: 4px;
+  opacity: 0.92;
+  pointer-events: none;
+}
 /* Sprite-style entry: stepped, not tweened */
 @keyframes node-enter {
   from { opacity: 0; transform: scale(0.94); }

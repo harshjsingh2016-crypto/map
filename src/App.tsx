@@ -13,6 +13,7 @@ import NoteCard from './nodes/NoteCard'
 import TableCard from './nodes/TableCard'
 import TimelineCard from './nodes/TimelineCard'
 import QuadrantCard from './nodes/QuadrantCard'
+import ElkEdge from './nodes/ElkEdge'
 
 /** Label for boards that sit outside any folder. */
 const NO_FOLDER = '(no folder)'
@@ -61,6 +62,8 @@ const nodeTypes = {
   timelineCard: TimelineCard,
   quadrantCard: QuadrantCard,
 }
+
+const edgeTypes = { elk: ElkEdge }
 
 /** Absolute position of a node, walking the parent chain. */
 function absPos(node: Node, byId: Map<string, Node>): { x: number; y: number } {
@@ -491,6 +494,7 @@ function Canvas() {
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={true}

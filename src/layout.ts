@@ -52,10 +52,10 @@ function elkEdgeLabels(label: string | undefined) {
   }
 }
 
-// React Flow draws the label centred on its own path midpoint, so ask elk to
-// reserve the space the same way. Note this buys clearance, not placement: RF
-// re-routes every edge itself and ignores elk's label coordinates, so a label
-// still lands wherever RF's midpoint falls inside the space elk opened up.
+// Labels sit centred on their edge. In the hierarchical flowchart pass both the
+// route and the label box are read back from elk and drawn by ElkEdge; everywhere
+// else React Flow re-routes the edge itself and drops the label at its own path
+// midpoint, so there this buys clearance, not placement.
 const EDGE_LABEL_OPTS = {
   'elk.edgeLabels.placement': 'CENTER',
   'elk.edgeLabels.inline': 'true',
@@ -69,7 +69,12 @@ function flowNodeSize(n: any) {
   }
   const wantsWide = n.detail ? Math.max(textW(n.label) + 36, 210) : textW(n.label) + 36
   const base = Math.min(Math.max(wantsWide, 130), 260)
-  if (n.shape === 'start' || n.shape === 'end') return { width: Math.max(base * 0.8, 110), height: 42 }
+  if (n.shape === 'start' || n.shape === 'end') {
+    // Pills set their label bold with letter-spacing and lose width to the round ends,
+    // so wrap against a wider padding than boxes do.
+    const width = Math.max(base * 0.8, 110)
+    return { width, height: 42 + (labelLines(n.label, width, 40) - 1) * 16 }
+  }
   const labelH = (labelLines(n.label, base, 26) - 1) * 16
   return { width: base, height: 40 + labelH + detailHeight(n.detail, base) || 46 }
 }
@@ -324,6 +329,17 @@ async function layoutGraphWidget(w: any, theme: ThemeName, viewCollapsed: Record
       }
     }
 
+    // elk reports an edge's route relative to the container it is declared in, so an
+    // edge between two nodes of one group goes in that group and every other edge at
+    // the root — then the offset back to the frame is just that container's position.
+    const elkEdge = (eid: string) => ({
+      id: eid, sources: [w.edges[eid].source], targets: [w.edges[eid].target],
+      ...elkEdgeLabels(w.edges[eid].label),
+    })
+    const edgeGroup = (eid: string) => {
+      const gs = w.nodes[w.edges[eid].source]?.groupId
+      return gs && grouped[gs] && gs === w.nodes[w.edges[eid].target]?.groupId ? gs : null
+    }
     const children: any[] = [
       ...Object.entries(grouped).map(([gid, nids]) => ({
         id: `grp_${gid}`,
@@ -331,6 +347,7 @@ async function layoutGraphWidget(w: any, theme: ThemeName, viewCollapsed: Record
           'elk.padding': '[top=44,left=18,bottom=18,right=18]',
         },
         children: nids.map((nid) => ({ id: nid, ...sizeOf(nid) })),
+        edges: w.edgeOrder.filter((eid: string) => edgeGroup(eid) === gid).map(elkEdge),
       })),
       ...ungrouped.map((nid) => ({ id: nid, ...sizeOf(nid) })),
     ]
@@ -346,10 +363,36 @@ async function layoutGraphWidget(w: any, theme: ThemeName, viewCollapsed: Record
         ...EDGE_LABEL_OPTS,
       },
       children,
-      edges: w.edgeOrder.map((eid: string) => ({
-        id: eid, sources: [w.edges[eid].source], targets: [w.edges[eid].target],
-        ...elkEdgeLabels(w.edges[eid].label),
-      })),
+      edges: w.edgeOrder.filter((eid: string) => edgeGroup(eid) === null).map(elkEdge),
+    })
+
+    // Routes and label boxes, shifted into the frame's coordinate space.
+    const routes: Record<string, { points: { x: number; y: number }[]; label?: any }> = {}
+    const collect = (edges: any[] | undefined, ox: number, oy: number) => {
+      for (const e of edges || []) {
+        const s = e.sections?.[0]
+        if (!s) continue
+        const shift = (p: any) => ({ x: p.x + ox, y: p.y + oy })
+        const l = e.labels?.[0]
+        routes[e.id] = {
+          points: [s.startPoint, ...(s.bendPoints || []), s.endPoint].map(shift),
+          label: l && l.x != null ? { text: l.text, ...shift(l), width: l.width, height: l.height } : undefined,
+        }
+      }
+    }
+    collect(g.edges, FRAME_PAD, FRAME_PAD + FRAME_TITLE)
+    for (const c of g.children || []) {
+      if (c.id.startsWith('grp_')) collect(c.edges, c.x + FRAME_PAD, c.y + FRAME_PAD + FRAME_TITLE)
+    }
+    const routedEdges = (): Edge[] => flowEdges().map((e) => {
+      const r = routes[e.id.slice(`e:${w.id}:`.length)]
+      if (!r) return e // no route (e.g. a self-loop): keep React Flow's smoothstep
+      return {
+        ...e,
+        label: undefined, // ElkEdge draws it at elk's position
+        type: 'elk',
+        data: { frameId, points: r.points, label: r.label, labelColors: { text: td.text, bg: td.cardBg } },
+      }
     })
 
     const nodes: Node[] = []
@@ -385,7 +428,7 @@ async function layoutGraphWidget(w: any, theme: ThemeName, viewCollapsed: Record
     }
     for (const c of g.children || []) place(c, frameId, FRAME_PAD, FRAME_PAD + FRAME_TITLE)
 
-    return { size: { width: (g.width || 200) + FRAME_PAD * 2, height: (g.height || 100) + FRAME_PAD * 2 + FRAME_TITLE }, nodes, edges: flowEdges() }
+    return { size: { width: (g.width || 200) + FRAME_PAD * 2, height: (g.height || 100) + FRAME_PAD * 2 + FRAME_TITLE }, nodes, edges: routedEdges() }
   }
 
   // schema
