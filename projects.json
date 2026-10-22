@@ -90,6 +90,14 @@
       "folders": [
         "gauntlet"
       ]
+    },
+    {
+      "alias": "interview-bot",
+      "path": "D:/Projects_D/Interview_Bot",
+      "remote": "https://github.com/harshjsingh2016-crypto/interview-bot.git",
+      "folders": [
+        "interview-bot"
+      ]
     }
   ]
 }
