@@ -82,6 +82,22 @@
       "folders": [
         "interview-bot"
       ]
+    },
+    {
+      "alias": "greaves",
+      "path": "D:/Projects_D/Greaves",
+      "remote": null,
+      "folders": [
+        "greaves"
+      ]
+    },
+    {
+      "alias": "spear",
+      "path": "D:/Projects_D/Spear",
+      "remote": null,
+      "folders": [
+        "spear"
+      ]
     }
   ]
 }
