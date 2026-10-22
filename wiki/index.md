@@ -2,6 +2,10 @@
 
 Concept articles distilled from the boards. Each article is a synthesis, not an export — the board holds the raw thinking, the wiki holds what it settled into.
 
+## Projects
+
+- [Project portfolio](project-portfolio.md) — the Damensch build end to end: plumbing, four engines, shared rules
+
 ## Solutioning
 
 - [Problem discovery frame](problem-discovery-frame.md) — starting point, goal, paths between, constraints below
