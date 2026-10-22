@@ -82,6 +82,14 @@
       "folders": [
         "inward-compiler"
       ]
+    },
+    {
+      "alias": "gauntlet",
+      "path": "D:/Projects_D/Gauntlet",
+      "remote": "https://github.com/harshjsingh2016-crypto/gauntlet.git",
+      "folders": [
+        "gauntlet"
+      ]
     }
   ]
 }
