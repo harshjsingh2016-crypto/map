@@ -27,7 +27,7 @@ A genuinely new topic gets a new board **in the current working folder**; only s
 
 The board picker lists **newest board first**, so the one you just made sits at the top. "Newest" is the `ts` of the board's first batch — carried in the file, so it survives a clone onto the other laptop, which a filesystem timestamp would not.
 
-**Folder sidebar.** The `☰` button at the far left of the header (or the folder chip beside the logo) opens a drawer listing every folder — Map's and every mount's — as Group › Folder › Board. Groups are collapsible buckets of folders (`Scaler` holds `scalar`, `scalar-2`, `scalar-primers`); folders not in any group sit under **Ungrouped**. Clicking a board there is the same view change as the board picker. The drawer opens over the canvas's left edge, and the zoom / fit / back / forward controls step out beside it. Groups are edited in the drawer: **+ Group**, double-click (or `✎`) to rename, `×` to delete (its folders fall back to Ungrouped, nothing else changes), and a folder moves by dragging it onto a group or through its `⋯` menu; dragging a group header reorders groups. Membership lives in `boards/.groups.json` (`{version, groups: [{id, label, folders}]}`), so `sync` carries it to the other laptop; a group may name a folder that is absent on this machine and the drawer simply hides it. Which groups and folders are open, and whether the drawer was left open, is per-laptop (localStorage). Asked to regroup folders in conversation, edit that file directly — the app follows it live.
+**Folder sidebar.** The `☰` button at the far left of the header (or the folder chip beside the logo) opens a drawer listing every folder — Map's and every mount's — as Group › Folder › Board. Groups are collapsible buckets of folders (`Scaler` holds `scalar`, `scalar-2`, `scalar-primers`, `scalar-python`); folders not in any group sit under **Ungrouped**. Clicking a board there is the same view change as the board picker. The drawer opens over the canvas's left edge, and the zoom / fit / back / forward controls step out beside it. Groups are edited in the drawer: **+ Group**, double-click (or `✎`) to rename, `×` to delete (its folders fall back to Ungrouped, nothing else changes), and a folder moves by dragging it onto a group or through its `⋯` menu; dragging a group header reorders groups. Membership lives in `boards/.groups.json` (`{version, groups: [{id, label, folders}]}`), so `sync` carries it to the other laptop; a group may name a folder that is absent on this machine and the drawer simply hides it. Which groups and folders are open, and whether the drawer was left open, is per-laptop (localStorage). Asked to regroup folders in conversation, edit that file directly — the app follows it live.
 
 `--board` accepts `folder/name`, or a bare `name` when it is unique across folders.
 
@@ -115,7 +115,7 @@ It commits nothing.
 
 ## Walkthroughs (moved to Armor)
 
-Lecture walkthroughs no longer run from here. The `scalar/`, `scalar-2/` and `scalar-primers/`
+Lecture walkthroughs no longer run from here. The `scalar/`, `scalar-2/`, `scalar-primers/` and `scalar-python/`
 boards, their wiki articles and the `walkthroughs/` progress sidecars moved into the Armor repo on
 2026-10-01 (`projects.json` mounts it as `armor`), next to the context files in `Output/`. Map
 shows those boards read-only and refuses to write them.

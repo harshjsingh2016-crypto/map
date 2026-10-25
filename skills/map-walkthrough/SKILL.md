@@ -104,14 +104,15 @@ The GenAI course runs across two folders, split by segment (decided 2026-09-23):
   (`zapier-automation`) belongs here as the close of the automation block; it was briefly moved to
   `scalar-2/` and moved back on 2026-09-23.
 - **`scalar-2/`** — **Day 15 onwards**, the current segment.
-- **`scalar-primers/`** — SQL/Python skill lectures, either segment; unaffected by the split.
+- **`scalar-primers/`** — SQL skill lectures, either segment; unaffected by the split.
+- **`scalar-python/`** — the *Python Foundations* module, from Day 27 (created 2026-10-26).
 
 The `**Board:**` line in the context file is always authoritative — read the folder from there
 rather than inferring it.
 
-### Primer express walk (`scalar-primers/` boards)
+### Primer express walk (`scalar-primers/` and `scalar-python/` boards)
 
-Boards under `scalar-primers/` (SQL/Python skill lectures) get a compressed Learning stage — one
+Boards under `scalar-primers/` (SQL) and `scalar-python/` (Python) — skill lectures — get a compressed Learning stage — one
 sitting, ~15 minutes — instead of the section-by-section walkthrough. Decided 2026-09-01; this repo's
 CLAUDE.md ("Primer track — the sprint variant") holds the full loop. Everything not named here
 follows the walkthrough rules above.
