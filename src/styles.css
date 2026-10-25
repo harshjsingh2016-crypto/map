@@ -40,29 +40,18 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 2px 8px; font-size: 11px; font-weight: 700;
   letter-spacing: 1px; text-transform: uppercase; border: 2px solid;
-  cursor: pointer;
+  cursor: pointer; font-family: inherit; white-space: nowrap;
 }
 .theme-light .folder-chip { background: #eef2f7; border-color: #d3d9e3; color: #475569; }
 .theme-dark .folder-chip { background: #262c49; border-color: #3a4066; color: #9aa3c7; }
 .theme-dark .folder-chip:hover { border-color: #45e0e6; color: #e8ecff; }
 .theme-light .folder-chip:hover { border-color: #0891b2; color: #1f2937; }
-.theme-dark .folder-chip:focus-within {
-  border-color: #45e0e6; color: #e8ecff;
+.theme-dark .folder-chip:focus-visible {
+  outline: none; border-color: #45e0e6; color: #e8ecff;
   box-shadow: 0 0 8px rgba(69, 224, 230, 0.4);
 }
-.theme-light .folder-chip:focus-within { border-color: #0891b2; color: #1f2937; }
+.theme-light .folder-chip:focus-visible { outline: none; border-color: #0891b2; color: #1f2937; }
 
-/* Bare select inside the chip — the chip itself is the visible control */
-.folder-select {
-  font: inherit; font-size: 11px; font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase;
-  color: inherit; background: transparent;
-  border: 0; padding: 0; margin: 0; cursor: pointer;
-  appearance: none; -webkit-appearance: none;
-}
-.folder-select:focus { outline: none; }
-.theme-dark .folder-select option { background: #1b2038; color: #e8ecff; }
-.chip-caret { font-size: 9px; opacity: 0.7; }
 .folder-pixel { width: 4px; height: 4px; flex: 0 0 auto; }
 .theme-dark .folder-pixel { background: #52e05c; }
 .theme-light .folder-pixel { background: #16a34a; }
@@ -94,7 +83,10 @@ body {
 .theme-dark .banner.warn { background: #1b2038; color: #ffb347; border-color: #ffb347; }
 .theme-dark .banner.error { background: #1b2038; color: #ff5449; border-color: #ff5449; }
 
-.workspace { flex: 1 1 auto; position: relative; min-height: 0; display: flex; flex-direction: column; }
+.workspace {
+  flex: 1 1 auto; position: relative; min-height: 0; display: flex; flex-direction: column;
+  --sb-w: min(300px, calc(100vw - 32px)); /* drawer width, shared with the controls offset */
+}
 .canvas-wrap { flex: 1 1 auto; position: relative; min-height: 0; }
 
 /* ---------- folder sidebar (src/Sidebar.tsx) ----------
@@ -112,7 +104,7 @@ body {
 
 .sidebar {
   position: absolute; top: 0; bottom: 0; left: 0; z-index: 20;
-  width: min(300px, calc(100% - 32px));
+  width: var(--sb-w);
   display: flex; flex-direction: column;
   border-right: 2px solid; font-size: 12px;
   transform: translateX(calc(-100% - 8px)); visibility: hidden;
@@ -457,7 +449,10 @@ body {
 .flag-badge:hover .flag-pop { display: block; }
 
 /* ---------- React Flow chrome (controls, minimap) ---------- */
-.react-flow__controls { box-shadow: none; }
+.react-flow__controls { box-shadow: none; transition: left 120ms steps(4); }
+/* The drawer opens over the canvas's left edge; the zoom / fit / back / forward stack
+   steps out beside it rather than hiding under it. */
+.workspace.sb-open .react-flow__controls { left: min(var(--sb-w), calc(100vw - 64px)); }
 .react-flow__controls button { border-radius: 0; }
 .theme-dark .react-flow__controls button {
   background: #1b2038; color: #e8ecff; border-bottom: 2px solid #3a4066;

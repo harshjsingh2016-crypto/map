@@ -593,7 +593,6 @@ export default function App() {
   const theme = boardStyle.theme === 'light' ? 'light' : 'dark'
   // Folder of the board on screen, which is what the picker should reflect.
   const shownFolder = boards.find((b) => b.id === selected)?.folder || folder
-  const folders = [...new Set(boards.map((b) => b.folder || NO_FOLDER))]
   const viewFolder = shownFolder || NO_FOLDER
   // The board picker is scoped to the folder on screen, newest board first —
   // the one you just made is the one you want, and it is at the top.
@@ -601,21 +600,8 @@ export default function App() {
     .filter((b) => (b.folder || NO_FOLDER) === viewFolder)
     .slice()
     .sort(byNewest)
-  const activeFolder = boards.find((b) => b.id === active)?.folder || NO_FOLDER
   // A folder that lives in a mounted project is tagged with that project's alias.
-  const folderSource = (f: string) => boards.find((b) => (b.folder || NO_FOLDER) === f)?.source
-
-  // Switching folder is a view change, not a write-target change: land on
-  // Claude's active board when it lives here, otherwise the first one.
-  const selectFolder = (f: string) => {
-    const inFolder = boards
-      .filter((b) => (b.folder || NO_FOLDER) === f)
-      .slice()
-      .sort(byNewest)
-    // Same order as the picker, so the fallback is the board sitting at its top.
-    const target = inFolder.find((b) => b.id === active) || inFolder[0]
-    if (target) selectBoard(target.id)
-  }
+  const viewSource = boards.find((b) => (b.folder || NO_FOLDER) === viewFolder)?.source
 
   return (
     <div className={`app theme-${theme}`}>
@@ -634,20 +620,16 @@ export default function App() {
           </button>
         )}
         <span className="logo">Map</span>
-        {folders.length > 0 && (
-          <label className="folder-chip" title="Folder — scopes the board list below">
+        {boards.length > 0 && (
+          // Folders are chosen in the sidebar; the chip names the one on screen and opens it.
+          <button
+            className="folder-chip"
+            onClick={() => toggleSidebar()}
+            title="Folder on screen — open the folder sidebar to switch"
+          >
             <span className="folder-pixel" />
-            <select
-              className="folder-select"
-              value={viewFolder}
-              onChange={(e) => selectFolder(e.target.value)}
-            >
-              {folders.map((f) => (
-                <option key={f} value={f}>{f}{folderSource(f) ? ` [${folderSource(f)}]` : ''}{f === activeFolder ? ' ●' : ''}</option>
-              ))}
-            </select>
-            <span className="chip-caret">▾</span>
-          </label>
+            {viewFolder}{viewSource ? ` [${viewSource}]` : ''}
+          </button>
         )}
         <span className="board-title">{boardTitle || selected || ''}</span>
         <div className="topbar-right">
@@ -691,7 +673,7 @@ export default function App() {
         </div>
       )}
 
-      <div className="workspace">
+      <div className={`workspace${sidebarOpen ? ' sb-open' : ''}`}>
       {boards.length > 0 && <Sidebar open={sidebarOpen} onClose={() => toggleSidebar(false)} />}
       {status === 'no-board' ? (
         <div className="overlay-state static">
