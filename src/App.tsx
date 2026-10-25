@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   ReactFlow, ReactFlowProvider, Background, MiniMap, Controls, ControlButton,
   useReactFlow, useUpdateNodeInternals, PanOnScrollMode, type Node,
@@ -14,9 +14,7 @@ import TableCard from './nodes/TableCard'
 import TimelineCard from './nodes/TimelineCard'
 import QuadrantCard from './nodes/QuadrantCard'
 import ElkEdge from './nodes/ElkEdge'
-
-/** Label for boards that sit outside any folder. */
-const NO_FOLDER = '(no folder)'
+import { Sidebar, NO_FOLDER, byNewest } from './Sidebar'
 
 /** Camera limits. Shared by React Flow and the button-held wheel zoom below. */
 const MIN_ZOOM = 0.08
@@ -583,6 +581,15 @@ export default function App() {
 
   useEffect(() => { startConnection() }, [])
 
+  // The folder drawer remembers whether it was left open, per laptop.
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    try { return localStorage.getItem('map.sidebar.open') === '1' } catch { return false }
+  })
+  const toggleSidebar = (v = !sidebarOpen) => {
+    setSidebarOpen(v)
+    try { localStorage.setItem('map.sidebar.open', v ? '1' : '0') } catch { /* private window */ }
+  }
+
   const theme = boardStyle.theme === 'light' ? 'light' : 'dark'
   // Folder of the board on screen, which is what the picker should reflect.
   const shownFolder = boards.find((b) => b.id === selected)?.folder || folder
@@ -593,7 +600,7 @@ export default function App() {
   const folderBoards = boards
     .filter((b) => (b.folder || NO_FOLDER) === viewFolder)
     .slice()
-    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0) || a.name.localeCompare(b.name))
+    .sort(byNewest)
   const activeFolder = boards.find((b) => b.id === active)?.folder || NO_FOLDER
   // A folder that lives in a mounted project is tagged with that project's alias.
   const folderSource = (f: string) => boards.find((b) => (b.folder || NO_FOLDER) === f)?.source
@@ -604,7 +611,7 @@ export default function App() {
     const inFolder = boards
       .filter((b) => (b.folder || NO_FOLDER) === f)
       .slice()
-      .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0) || a.name.localeCompare(b.name))
+      .sort(byNewest)
     // Same order as the picker, so the fallback is the board sitting at its top.
     const target = inFolder.find((b) => b.id === active) || inFolder[0]
     if (target) selectBoard(target.id)
@@ -613,6 +620,19 @@ export default function App() {
   return (
     <div className={`app theme-${theme}`}>
       <header className="topbar">
+        {boards.length > 0 && (
+          <button
+            className={`sb-launch${sidebarOpen ? ' on' : ''}`}
+            onClick={() => toggleSidebar()}
+            title="Folders"
+            aria-expanded={sidebarOpen}
+            aria-label="Toggle the folder sidebar"
+          >
+            <svg viewBox="0 0 12 12" width="12" height="12" shapeRendering="crispEdges" aria-hidden="true">
+              <rect x="0" y="1" width="12" height="2" /><rect x="0" y="5" width="12" height="2" /><rect x="0" y="9" width="12" height="2" />
+            </svg>
+          </button>
+        )}
         <span className="logo">Map</span>
         {folders.length > 0 && (
           <label className="folder-chip" title="Folder — scopes the board list below">
@@ -667,10 +687,12 @@ export default function App() {
 
       {boardErrors.length > 0 && (
         <div className="banner error">
-          Mounted project problem: {boardErrors[0]}{boardErrors.length > 1 ? ` (+${boardErrors.length - 1} more)` : ''}
+          Board list problem: {boardErrors[0]}{boardErrors.length > 1 ? ` (+${boardErrors.length - 1} more)` : ''}
         </div>
       )}
 
+      <div className="workspace">
+      {boards.length > 0 && <Sidebar open={sidebarOpen} onClose={() => toggleSidebar(false)} />}
       {status === 'no-board' ? (
         <div className="overlay-state static">
           <div className="overlay-card">
@@ -684,6 +706,7 @@ export default function App() {
           <Canvas />
         </ReactFlowProvider>
       )}
+      </div>
     </div>
   )
 }

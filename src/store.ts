@@ -30,6 +30,13 @@ export interface BoardRef {
   readonly?: boolean     // mounted boards are written from their own project, not from here
 }
 
+/** A sidebar bucket of folders (boards/.groups.json). View configuration only. */
+export interface FolderGroup {
+  id: string
+  label: string
+  folders: string[]
+}
+
 interface MapStore {
   boards: BoardRef[]
   active: string | null      // Claude's write target (boards/.active)
@@ -39,6 +46,8 @@ interface MapStore {
   status: Status
   logErrors: string[]
   boardErrors: string[]       // folder-name clashes between this repo and mounted projects
+  groups: FolderGroup[]
+  groupsError: string | null  // last failed save, shown in the sidebar
 
   nodes: Node[]
   edges: Edge[]
@@ -52,6 +61,7 @@ interface MapStore {
   toggleCollapsed: (rfNodeId: string, current: boolean) => void
   selectBoard: (name: string) => void
   setFollowActive: (v: boolean) => void
+  saveGroups: (groups: FolderGroup[]) => void
 }
 
 // `?board=<folder>/<name>` pins the view to one board instead of following
@@ -90,6 +100,8 @@ export const useMapStore = create<MapStore>((set, get) => ({
   status: 'connecting',
   logErrors: [],
   boardErrors: [],
+  groups: [],
+  groupsError: null,
   nodes: [],
   edges: [],
   boardTitle: '',
@@ -114,6 +126,23 @@ export const useMapStore = create<MapStore>((set, get) => ({
       set({ selected: active, viewCollapsed: {}, logErrors: [] })
       connect(set, get)
     }
+  },
+  saveGroups: (groups) => {
+    // Optimistic: the sidebar moves now, and the server's broadcast confirms it. A
+    // rejected save restores the last list the server sent.
+    const previous = get().groups
+    set({ groups, groupsError: null })
+    fetch('/api/groups', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ groups }),
+    })
+      .then(async (r) => {
+        if (r.ok) return
+        const body = await r.json().catch(() => ({}))
+        throw new Error(body.error || `HTTP ${r.status}`)
+      })
+      .catch((e) => set({ groups: previous, groupsError: `Group change not saved: ${e.message}` }))
   },
 }))
 
@@ -219,7 +248,10 @@ function connect(set: any, get: any) {
     const data = JSON.parse((ev as MessageEvent).data)
     const st = get()
     const ids: string[] = (data.boards as BoardRef[]).map((b) => b.id)
-    set({ boards: data.boards, active: data.active, folder: data.folder, boardErrors: data.errors || [] })
+    set({
+      boards: data.boards, active: data.active, folder: data.folder,
+      boardErrors: data.errors || [], groups: data.groups || [],
+    })
     if (!ids.length) {
       set({ status: 'no-board', selected: null })
       return

@@ -7,7 +7,8 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5175',
+        // Follows the API server's own port var, so a second instance can run beside the first.
+        target: `http://localhost:${process.env.MAP_SERVER_PORT || 5175}`,
         changeOrigin: true,
       },
     },

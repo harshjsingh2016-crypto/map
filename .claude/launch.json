@@ -4,8 +4,27 @@
     {
       "name": "map",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 5173
+    },
+    {
+      "name": "map-verify",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "concurrently",
+        "-k",
+        "-n",
+        "server,vite",
+        "node server/index.mjs",
+        "vite --port 5180 --strictPort"
+      ],
+      "env": {
+        "MAP_SERVER_PORT": "5181"
+      },
+      "port": 5180
     }
   ]
 }

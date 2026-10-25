@@ -12,6 +12,7 @@ import { createEmptyBoard, applyOp, materialize, OpError } from '../shared/reduc
 import { readBoardLog, boardPath, splitCompleteLines, getActiveBoard, setActiveBoard } from '../shared/log.mjs'
 import { toMarkdown, summarize } from '../shared/summary.mjs'
 import { listAllBoards, resolveBoard, assertWritable } from '../shared/mounts.mjs'
+import { normalizeGroups, readGroups, writeGroups, groupsPath } from '../shared/groups.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const UPDATE = process.argv.includes('--update-golden')
@@ -388,6 +389,40 @@ check('logistics-escalations markdown matches golden', () => {
   }
   assert(md.includes('> [question]'), 'flags should render as [question]')
   assert(md.includes('[suggestion]'), 'suggestions should be marked')
+})
+
+console.log('\n--- folder groups ---')
+check('groups: a folder sits in one group only, first claim wins', () => {
+  const g = normalizeGroups([
+    { id: 'scaler', label: ' Scaler ', folders: ['scalar', 'scalar-2', 'scalar'] },
+    { id: 'other', label: 'Other', folders: ['scalar-2', 'test'] },
+  ])
+  assert(g[0].label === 'Scaler', 'label is trimmed')
+  assert(g[0].folders.join() === 'scalar,scalar-2', 'duplicate folder dropped inside a group')
+  assert(g[1].folders.join() === 'test', 'folder claimed earlier is dropped from a later group')
+})
+check('groups: bad ids, duplicate ids and empty labels are rejected', () => {
+  const rejects = (input, substr) => {
+    try { normalizeGroups(input) } catch (e) { assert(e.message.includes(substr), e.message); return }
+    throw new Error(`expected a rejection containing "${substr}"`)
+  }
+  rejects({}, 'must be an array')
+  rejects([{ id: 'Bad Id', label: 'x', folders: [] }], 'kebab-case')
+  rejects([{ id: 'a', label: 'x', folders: [] }, { id: 'a', label: 'y', folders: [] }], 'duplicate id')
+  rejects([{ id: 'a', label: '  ', folders: [] }], 'label')
+  rejects([{ id: 'a', label: 'x', folders: [''] }], 'bad folder')
+})
+check('groups: file round-trips; missing is empty; broken is reported, not thrown', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'map-groups-'))
+  fs.mkdirSync(path.join(root, 'boards'))
+  assert(readGroups(root).groups.length === 0 && !readGroups(root).error, 'missing file reads as no groups')
+  writeGroups(root, [{ id: 'scaler', label: 'Scaler', folders: ['scalar'] }])
+  assert(readGroups(root).groups[0].folders[0] === 'scalar', 'written groups read back')
+  assert(!fs.existsSync(groupsPath(root) + '.tmp'), 'temp file renamed away')
+  fs.writeFileSync(groupsPath(root), '{ not json')
+  const r = readGroups(root)
+  assert(r.groups.length === 0 && r.error.includes('.groups.json'), 'broken file yields an error message')
+  fs.rmSync(root, { recursive: true, force: true })
 })
 
 console.log('\n--- wiki ---')

@@ -27,6 +27,8 @@ A genuinely new topic gets a new board **in the current working folder**; only s
 
 The board picker lists **newest board first**, so the one you just made sits at the top. "Newest" is the `ts` of the board's first batch — carried in the file, so it survives a clone onto the other laptop, which a filesystem timestamp would not. The folder picker stays alphabetical.
 
+**Folder sidebar.** The `☰` button at the far left of the header opens a drawer listing every folder — Map's and every mount's — as Group › Folder › Board. Groups are collapsible buckets of folders (`Scaler` holds `scalar`, `scalar-2`, `scalar-primers`); folders not in any group sit under **Ungrouped**. Clicking a board there is the same view change as the board picker. Groups are edited in the drawer: **+ Group**, double-click (or `✎`) to rename, `×` to delete (its folders fall back to Ungrouped, nothing else changes), and a folder moves by dragging it onto a group or through its `⋯` menu; dragging a group header reorders groups. Membership lives in `boards/.groups.json` (`{version, groups: [{id, label, folders}]}`), so `sync` carries it to the other laptop; a group may name a folder that is absent on this machine and the drawer simply hides it. Which groups and folders are open, and whether the drawer was left open, is per-laptop (localStorage). Asked to regroup folders in conversation, edit that file directly — the app follows it live.
+
 `--board` accepts `folder/name`, or a bare `name` when it is unique across folders.
 
 **2. Draw first, talk second.** Emit ops *before* composing your reply. Then keep the reply to 1–2 lines: "Mapped the escalation flow — added a suggested penalty branch as ghost nodes." Never narrate what you drew node by node; the user can see it. The one exception is a lecture walkthrough, which inverts this deliberately — and now runs from Armor (see "Walkthroughs" below).
@@ -324,6 +326,8 @@ Append-only op log → chokidar watcher → SSE → React Flow client.
 - `server/index.mjs` — watcher over this repo's `boards/` and every mount's, truncation detection, SSE fan-out (`MAP_SERVER_PORT`, `MAP_SERVER_HOST`)
 - `src/layout.ts` — elkjs per widget + bottom-left-fill board packing (`w-status` always packs first)
 - `src/store.ts` — SSE client, staggered op application (~50ms/op, ≤1.5s/batch)
+- `src/Sidebar.tsx` + `shared/groups.mjs` — folder drawer; group validation and the atomic `boards/.groups.json` write behind `POST /api/groups` (the list rides along in the `boards` SSE payload)
+- `.claude/launch.json` `map-verify` — a second server pair on 5180/5181 with no git sync, for checking a client change while the main `npm run dev` keeps 5173/5175 (`vite.config.ts` proxies to `MAP_SERVER_PORT`)
 - `scripts/wiki.mjs` — wiki link/index checker (`list`, `check`)
 - `scripts/sync.mjs` + `scripts/dev.mjs` — two-laptop git sync (pull on start, push on exit)
 - `scripts/projects.mjs`, `scripts/migrate.mjs`, `scripts/install-skills.mjs` — mounted projects (above)

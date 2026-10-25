@@ -15,6 +15,7 @@ import {
 } from '../shared/mounts.mjs'
 import { resolveRoot, samePath, MAP_HOME } from '../shared/root.mjs'
 import { parseLogLine } from '../shared/ops.mjs'
+import { readGroups, writeGroups, GROUPS_FILE } from '../shared/groups.mjs'
 
 const { root: ROOT } = resolveRoot()
 const BOARDS = boardsDir(ROOT)
@@ -170,11 +171,13 @@ function boardsPayload() {
   // a project session drawing on its own blueprint moves that project's
   // .active, not this root's.
   const active = newestActive(ROOT)
+  const { groups, error: groupsError } = readGroups(ROOT)
   return {
     boards,                            // [{ id, folder, name, createdAt, source, readonly }]
     active,                            // "<folder>/<name>"
     folder: (active && parseBoardId(active).folder) || getActiveFolder(ROOT), // working folder
-    errors,                            // folder-name clashes between roots
+    errors: groupsError ? [...errors, groupsError] : errors, // folder clashes, a broken groups file
+    groups,                            // sidebar buckets: [{ id, label, folders }]
     missing,                           // mounted projects not on this machine
   }
 }
@@ -217,7 +220,7 @@ setInterval(() => {
 
 function handleFileEvent(file) {
   const base = path.basename(file)
-  if (base === '.active' || base === '.folder') {
+  if (base === '.active' || base === '.folder' || (base === GROUPS_FILE && samePath(path.dirname(file), BOARDS))) {
     broadcast('boards', boardsPayload())
     return
   }
@@ -257,6 +260,19 @@ app.use(express.json({ limit: '8kb' }))
 
 app.get('/api/boards', (req, res) => {
   res.json(boardsPayload())
+})
+
+// Sidebar folder groups. View configuration, not board content: it lives beside the
+// boards (so sync.mjs carries it) but is never written to a log. The client sends the
+// whole list; the watcher would re-broadcast it too, this just does it without the lag.
+app.post('/api/groups', (req, res) => {
+  try {
+    const groups = writeGroups(ROOT, req.body?.groups)
+    broadcast('boards', boardsPayload())
+    res.json({ ok: true, groups })
+  } catch (e) {
+    res.status(400).json({ ok: false, error: e.message })
+  }
 })
 
 // Camera control, deliberately NOT an op. The board log is append-only
