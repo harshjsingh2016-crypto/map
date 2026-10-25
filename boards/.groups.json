@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "scaler",
+      "label": "Scaler",
+      "folders": [
+        "scalar",
+        "scalar-2",
+        "scalar-primers"
+      ]
+    }
+  ]
+}
