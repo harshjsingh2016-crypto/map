@@ -44,11 +44,16 @@ function dirty() {
 function commitAndPush(label) {
   git('add', '--', ...SCOPE)
   const staged = gitSafe('diff', '--cached', '--name-only')
-  if (!staged) { console.log('[sync] nothing to commit'); return true }
-  const files = staged.split('\n').filter(Boolean)
-  const date = new Date().toISOString().slice(0, 10)
-  git('commit', '-m', `sync: ${date} ${label} (${files.length} file${files.length === 1 ? '' : 's'})`)
-  console.log(`[sync] committed ${files.length} file(s)`)
+  if (staged) {
+    const files = staged.split('\n').filter(Boolean)
+    const date = new Date().toISOString().slice(0, 10)
+    git('commit', '-m', `sync: ${date} ${label} (${files.length} file${files.length === 1 ? '' : 's'})`)
+    console.log(`[sync] committed ${files.length} file(s)`)
+  } else {
+    console.log('[sync] nothing to commit')
+    // Commits made outside sync (a mount, an app change) still need to go up.
+    if (!gitSafe('log', '@{u}..', '--oneline')) return true
+  }
   try {
     git('push')
     console.log('[sync] pushed to origin')
